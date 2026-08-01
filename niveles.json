@@ -1,0 +1,41 @@
+{
+"1": [
+	[4, 1, 0, "lata_aluminio"],
+	[5, 1, 0, "lata_aluminio"],
+	[6, 1, 0, "lata_aluminio"],
+	
+	[4, 1, 1, "lata_aluminio"],
+	[5, 1, 1, "lata_aluminio"],
+	[6, 1, 1, "lata_aluminio"],
+	
+	[4, 1, 2, "lata_aluminio"],
+	[5, 1, 2, "lata_aluminio"],
+	[6, 1, 2, "lata_aluminio"],
+
+	[4.5, 2, 0.5, "lata_aluminio"],
+	[5.5, 2, 0.5, "lata_aluminio"],
+	[4.5, 2, 1.5, "lata_aluminio"],
+	[5.5, 2, 1.5, "lata_aluminio"],
+
+	[5, 3, 1, "lata_aluminio"],
+
+  ],
+  "3": [
+	[4, 1, 1, "lata_aluminio"],
+	[5, 1, 1, "lata_aluminio"],
+	[6, 1, 1, "lata_aluminio"],
+	
+	[4.5, 2, 1, "lata_aluminio"],
+	[5.5, 2, 1, "lata_aluminio"],
+
+	[5, 3, 1, "lata_aluminio"]
+  ],
+  "2": [
+	[4.0, 1, 1, "caja_madera"],
+	[5.0, 1, 1, "lata_aluminio"],
+	[6.0, 1, 1, "caja_madera"],
+	[4.5, 2, 1, "lata_aluminio"],
+	[5.5, 2, 1, "lata_aluminio"],
+	[5.0, 3, 1, "caja_madera"]
+  ]
+}

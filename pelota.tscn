@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c6l8gsmux112o"]
+
+[ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://ball.png" id="1_sha3n"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7dm0k"]
+bounce = 0.03
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kyv4s"]
+radius = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+albedo_texture = ExtResource("1_sha3n")
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8dl7b"]
+material = SubResource("StandardMaterial3D_7mycd")
+radius = 0.15
+height = 0.3
+
+[node name="Pelota" type="RigidBody3D" unique_id=2131689663]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_7dm0k")
+continuous_cd = true
+angular_damp = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1862335249]
+shape = SubResource("SphereShape3D_kyv4s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=439839242]
+transform = Transform3D(-0.98059136, 0, -0.19606273, 0, 1, 0, 0.19606273, 0, -0.98059136, 0, 0, 0)
+mesh = SubResource("SphereMesh_8dl7b")
