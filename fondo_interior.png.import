@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dubt7x6c7qage"
-path.s3tc="res://.godot/imported/fondo.png-ba70bfea8a1397320d702391fbab30ab.s3tc.ctex"
+uid="uid://c74yd6r8b1ld0"
+path.s3tc="res://.godot/imported/fondo_interior.png-49ec73631ac3f83fe53e41d59124d417.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://fondo.png"
-dest_files=["res://.godot/imported/fondo.png-ba70bfea8a1397320d702391fbab30ab.s3tc.ctex"]
+source_file="res://fondo_interior.png"
+dest_files=["res://.godot/imported/fondo_interior.png-49ec73631ac3f83fe53e41d59124d417.s3tc.ctex"]
 
 [params]
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dxxd5ylth4as3" path="res://table.glb" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://4mcoileoa8mj" path="res://floor.png" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://p3a5wgryk5aw" path="res://table.png" id="3_lquwl"]
-[ext_resource type="Texture2D" uid="uid://dubt7x6c7qage" path="res://fondo.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://fondo_interior.png" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bq2lqgvxh0582" path="res://tryagain.png" id="6_7mycd"]
 [ext_resource type="Texture2D" uid="uid://djr0l0a0yl01h" path="res://meter_bar.png" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://bwrusua8ipysl" path="res://meter_circle.png" id="8_5vw27"]
@@ -25,7 +25,7 @@ albedo_texture = ExtResource("3_h2yge")
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
-albedo_texture = ExtResource("4_1bvp3")
+albedo_texture = ExtResource("5_5vw27")
 
 [node name="Main" type="Node3D" unique_id=1912148217]
 script = ExtResource("1_1bvp3")
@@ -58,7 +58,7 @@ size = Vector3(6, 0.1, 6)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Fondo" type="CSGBox3D" parent="." unique_id=831173389]
-transform = Transform3D(3.2481653e-15, 4.3711385e-08, 0.80999994, 1.7, -4.3711385e-08, 0, 7.430936e-08, 0.99999994, -3.5406224e-08, -0.06686401, 0.33909607, -5.659729)
+transform = Transform3D(1.9959188e-15, 4.3711385e-08, 0.8542683, 1.044609, -4.3711385e-08, 0, 4.5661306e-08, 0.99999994, -3.7341255e-08, -0.008993864, 2.2794666, -5.659729)
 use_collision = true
 size = Vector3(6, 0.2, 6)
 material = SubResource("StandardMaterial3D_1bvp3")
