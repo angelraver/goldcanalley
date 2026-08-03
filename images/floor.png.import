@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://05rbh6bdb3tw"
-path.s3tc="res://.godot/imported/ball.png-9a4ca347acb7532f6ae347744a6b04f7.s3tc.ctex"
+uid="uid://4mcoileoa8mj"
+path.s3tc="res://.godot/imported/floor.png-0cf85dd8e2b8cac82d47c4b2e6fc097b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://ball.png"
-dest_files=["res://.godot/imported/ball.png-9a4ca347acb7532f6ae347744a6b04f7.s3tc.ctex"]
+source_file="res://images/floor.png"
+dest_files=["res://.godot/imported/floor.png-0cf85dd8e2b8cac82d47c4b2e6fc097b.s3tc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djr0l0a0yl01h"
-path="res://.godot/imported/meter_bar.png-cd50158b9b30c7ee01b5ee57d4e49a2f.ctex"
+uid="uid://bjbq77a3cyby"
+path="res://.godot/imported/ribbon_red.png-9215f91d74711d7c88b5076dcbca7dd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://meter_bar.png"
-dest_files=["res://.godot/imported/meter_bar.png-cd50158b9b30c7ee01b5ee57d4e49a2f.ctex"]
+source_file="res://images/ribbon_red.png"
+dest_files=["res://.godot/imported/ribbon_red.png-9215f91d74711d7c88b5076dcbca7dd4.ctex"]
 
 [params]
 

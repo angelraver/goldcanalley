@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwrusua8ipysl"
-path="res://.godot/imported/meter_circle.png-f84b3b06d56cc33a78f1e34fb1c5b6bd.ctex"
+uid="uid://d0mkgw33r214a"
+path="res://.godot/imported/arrow.png-c10f174082a3fbfbe1894477bdb33238.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://meter_circle.png"
-dest_files=["res://.godot/imported/meter_circle.png-f84b3b06d56cc33a78f1e34fb1c5b6bd.ctex"]
+source_file="res://images/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-c10f174082a3fbfbe1894477bdb33238.ctex"]
 
 [params]
 

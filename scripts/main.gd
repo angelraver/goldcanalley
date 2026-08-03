@@ -1,16 +1,16 @@
 extends Node3D
 
 # Escenas exportadas
-@export var escena_pelota: PackedScene = preload("res://Pelota.tscn")
+@export var escena_pelota: PackedScene = preload("res://scenes/pelota.tscn")
 
 # 1. CATÁLOGO DE OBJETOS: Mapeamos los textos del JSON a sus archivos .tscn
 @export var catalogo_objetos: Dictionary = {
-	"lata_aluminio": preload("res://lata.tscn"),
-	"caja_madera": preload("res://caja_madera.tscn")
+	"lata_aluminio": preload("res://scenes/lata.tscn"),
+	"caja_madera": preload("res://scenes/caja_madera.tscn")
 }
 
 # Gestión de niveles mediante JSON
-@export_file("*.json") var ruta_niveles_json: String = "res://niveles.json"
+@export_file("*.json") var ruta_niveles_json: String = "res://data/niveles.json"
 @export var nivel_actual: int = 1
 
 # Configuración de la grilla imaginaria sobre la mesa
