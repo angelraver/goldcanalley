@@ -1,8 +1,7 @@
 {
-  "lata_aluminio": {
-	"pts": 100
-  },
-  "caja_madera": {
-	"pts": 250
+"lata_aluminio": {
+	"pts": 100,
+	"masa": 5,
+	"escala": 1.3
   }
 }

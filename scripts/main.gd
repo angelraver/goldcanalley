@@ -83,11 +83,11 @@ func cargar_valores() -> void:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
-	# Reiniciar puntaje
+	# 1. Reiniciar puntaje
 	puntaje_nivel = 0
 	actualizar_ui_puntaje()
-	
-	# Limpiar objetos anteriores
+
+	# 2. Limpiar objetos del nivel anterior
 	for obj in contenedor_latas.get_children():
 		obj.queue_free()
 
@@ -104,6 +104,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	var lista_objetos = datos_niveles[str(numero_nivel)]
 
+	# 3. Recorrer la lista de objetos del nivel
 	for item in lista_objetos:
 		var grid_x: float = float(item[0])
 		var grid_y: float = float(item[1])
@@ -112,13 +113,27 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var clave_tipo: String = item[3] if item.size() > 3 else "lata_aluminio"
 		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, catalogo_objetos["lata_aluminio"])
 
-		var pos_x = origen_mesa.x + (grid_x - 5.0) * tamano_celda.x
-		var pos_y = origen_mesa.y + (grid_y - 0.5) * tamano_celda.y
-		var pos_z = origen_mesa.z - (grid_z - 1.0) * tamano_celda.z
+		# --- LEER PROPIEDADES DINÁMICAS DESDE valores.json ---
+		var datos_tipo: Dictionary = valores_objetos.get(clave_tipo, {})
+		var factor_escala: float = float(datos_tipo.get("escala", 1.0))
+		var masa_objeto: float = float(datos_tipo.get("masa", 1.0))
 
+		# El tamaño de la celda se ajusta dinámicamente según la escala
+		var paso_celda: Vector3 = tamano_celda * factor_escala
+
+		# Calculamos la posición 3D usando la celda adaptada
+		var pos_x = origen_mesa.x + (grid_x - 5.0) * paso_celda.x
+		var pos_y = origen_mesa.y + (grid_y - 0.5) * paso_celda.y
+		var pos_z = origen_mesa.z - (grid_z - 1.0) * paso_celda.z
+
+		# Instanciar la lata/objeto
 		var nuevo_objeto = escena_objetivo.instantiate() as RigidBody3D
 		
-		# Guardamos metadatos en el objeto para saber su tipo y si ya sumó puntos
+		# APLICAR ESCALA Y MASA AL RAGDOLL / RIGIDBODY
+		nuevo_objeto.scale = Vector3.ONE * factor_escala
+		nuevo_objeto.mass = masa_objeto
+
+		# Guardar metadatos para el puntaje
 		nuevo_objeto.set_meta("tipo", clave_tipo)
 		nuevo_objeto.set_meta("derribado", false)
 
