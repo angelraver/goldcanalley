@@ -41,6 +41,14 @@ var contenedor_pelotas: Node3D
 @onready var indicador_circulo: Control = $UI/BarraEnergia/IndicadorCirculo
 var tiempo_barra: float = 0.0
 
+# --- CONFIGURACIÓN DE PELOTAS ---
+@export var pelotas_maximas: int = 3
+var pelotas_restantes: int = 3
+
+# Referencias a la UI de la pelota 3D y el contador
+@onready var label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
+@onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
+
 # --- CONFIGURACIÓN DE CÁMARA CINEMÁTICA ---
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
 var rot_final_camara: Vector3 = Vector3(deg_to_rad(-0.5), 0.0, 0.0)
@@ -64,6 +72,8 @@ func _ready() -> void:
 
 	# 2. Cargar el nivel configurado al iniciar el juego
 	cargar_nivel(nivel_actual)
+	
+	
 
 func _physics_process(_delta: float) -> void:
 	# Verificamos el estado físico de las latas en cada frame de física
@@ -83,7 +93,8 @@ func cargar_valores() -> void:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
-	# 1. Reiniciar puntaje
+	pelotas_restantes = pelotas_maximas
+	actualizar_ui_pelotas()
 	puntaje_nivel = 0
 	actualizar_ui_puntaje()
 
@@ -206,13 +217,22 @@ func _process(delta: float) -> void:
 		var margen_horizontal: float = barra_energia.size.x - indicador_circulo.size.x
 		indicador_circulo.position.x = progreso * margen_horizontal
 
+	if pelota_ui_3d:
+		pelota_ui_3d.rotate_y(delta * 1.5)
+
 func obtener_fuerza_actual() -> float:
 	var progreso: float = pingpong(tiempo_barra, 1.0)
 	return lerp(fuerza_minima, fuerza_maxima, progreso)
 
 func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
+	if pelotas_restantes <= 0:
+		return
+
 	if not camara or not escena_pelota or not raycast_apuntado:
 		return
+
+	pelotas_restantes -= 1
+	actualizar_ui_pelotas()
 
 	var fuerza_calculada: float = obtener_fuerza_actual()
 
@@ -245,13 +265,17 @@ func reiniciar_nivel() -> void:
 
 	cargar_nivel(nivel_actual)
 
+func actualizar_ui_pelotas() -> void:
+	if label_pelotas:
+		label_pelotas.text = "x %d" % pelotas_restantes
+
 func _on_boton_try_again_pressed() -> void:
 	reiniciar_nivel()
 
 func actualizar_ui_puntaje() -> void:
 	if label_puntaje:
 		# Formato de 4 dígitos (ej: SCORE: 0100)
-		label_puntaje.text = "SCORE: %04d" % puntaje_nivel
+		label_puntaje.text = "SCORE: " + str(puntaje_nivel)
 		
 func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 	if not camara or not escena_puntos_flotantes or not barra_energia: # barra_energia está en UI

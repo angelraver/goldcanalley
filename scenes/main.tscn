@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bq2lqgvxh0582" path="res://images/tryagain.png" id="6_trceg"]
 [ext_resource type="Texture2D" uid="uid://djr0l0a0yl01h" path="res://images/meter_bar.png" id="7_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://bwrusua8ipysl" path="res://images/meter_circle.png" id="8_jkv2x"]
+[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://fonts/CarnivaleeFreakshow-DLrm.ttf" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://images/ball.png" id="10_choun"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 
@@ -26,6 +28,14 @@ uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_texture = ExtResource("5_eb6dy")
+
+[sub_resource type="World3D" id="World3D_choun"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4ey"]
+albedo_texture = ExtResource("10_choun")
+
+[sub_resource type="SphereMesh" id="SphereMesh_85g3d"]
+material = SubResource("StandardMaterial3D_ya4ey")
 
 [node name="Main" type="Node3D" unique_id=1912148217]
 script = ExtResource("1_tipki")
@@ -66,10 +76,10 @@ material = SubResource("StandardMaterial3D_1bvp3")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1818975818]
 
 [node name="BotonTryAgain" type="TextureButton" parent="UI" unique_id=1262156898]
-offset_left = 477.0
-offset_top = 17.0
-offset_right = 1239.0
-offset_bottom = 261.0
+offset_left = 231.0
+offset_top = 1199.0
+offset_right = 993.0
+offset_bottom = 1443.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("6_trceg")
 
@@ -98,7 +108,49 @@ offset_left = 36.0
 offset_top = 27.0
 offset_right = 132.0
 offset_bottom = 50.0
-text = "SCORE: 0000"
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_85g3d")
+theme_override_font_sizes/font_size = 64
+text = "SCORE 0000"
+
+[node name="ContenedorPelotasUI" type="HBoxContainer" parent="UI" unique_id=242437922]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -239.99997
+offset_top = 6.0
+offset_right = -127.0
+offset_bottom = 70.0
+grow_horizontal = 0
+scale = Vector2(1.8, 1.933)
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/ContenedorPelotasUI" unique_id=1622193704]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/ContenedorPelotasUI/SubViewportContainer" unique_id=1632455393]
+world_3d = SubResource("World3D_choun")
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="Camera3D" type="Camera3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=1336926298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=498705906]
+
+[node name="PelotaUI" type="MeshInstance3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=964568841]
+mesh = SubResource("SphereMesh_85g3d")
+
+[node name="LabelPelotas" type="Label" parent="UI/ContenedorPelotasUI" unique_id=252265532]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_85g3d")
+theme_override_font_sizes/font_size = 40
+text = "x 3"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=1736940172]
 
