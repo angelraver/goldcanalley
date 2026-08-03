@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://p3a5wgryk5aw" path="res://table.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://dubt7x6c7qage" path="res://fondo.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bq2lqgvxh0582" path="res://tryagain.png" id="6_7mycd"]
+[ext_resource type="Texture2D" uid="uid://djr0l0a0yl01h" path="res://meter_bar.png" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://bwrusua8ipysl" path="res://meter_circle.png" id="8_5vw27"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 
@@ -40,7 +42,7 @@ environment = SubResource("Environment_8dl7b")
 [node name="table" parent="." unique_id=2089883142 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6931398, 0.022, 0.68844604, -3.9946957)
 
-[node name="Cube_005" parent="table" index="0" unique_id=1719166873]
+[node name="Cube_005" parent="table" index="0" unique_id=51028484]
 surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 surface_material_override/1 = SubResource("StandardMaterial3D_7mycd")
 
@@ -70,6 +72,26 @@ offset_right = 1239.0
 offset_bottom = 261.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("6_7mycd")
+
+[node name="BarraEnergia" type="TextureRect" parent="UI" unique_id=1472784550]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.5
+offset_top = -137.0
+offset_right = 239.5
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("7_272bh")
+
+[node name="IndicadorCirculo" type="TextureRect" parent="UI/BarraEnergia" unique_id=1043655966]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_5vw27")
 
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=1736940172]
 

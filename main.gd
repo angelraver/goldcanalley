@@ -2,7 +2,6 @@ extends Node3D
 
 # Escenas exportadas
 @export var escena_pelota: PackedScene = preload("res://Pelota.tscn")
-@export var fuerza_lanzamiento: float = 12.0
 
 # 1. CATÁLOGO DE OBJETOS: Mapeamos los textos del JSON a sus archivos .tscn
 @export var catalogo_objetos: Dictionary = {
@@ -28,10 +27,23 @@ var contenedor_pelotas: Node3D
 
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
 
+# Configuración de la barra de fuerza
+@export var fuerza_minima: float = 5.0
+@export var fuerza_maxima: float = 30.0
+@export var velocidad_oscilacion: float = 0.8 # Ajusta qué tan rápido va y viene el indicador
+
+@onready var barra_energia: Control = $UI/BarraEnergia
+@onready var indicador_circulo: Control = $UI/BarraEnergia/IndicadorCirculo
+var tiempo_barra: float = 0.0
+
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch and event.pressed) or \
 	   (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		lanzar_nueva_pelota(event.position)
+
+
 
 func _ready() -> void:
 	contenedor_latas = Node3D.new()
@@ -45,7 +57,23 @@ func _ready() -> void:
 	# Cargar el nivel configurado al iniciar el juego
 	cargar_nivel(nivel_actual)
 	
+func _process(delta: float) -> void:
+	# Animación del vaivén horizontal
+	if barra_energia and indicador_circulo:
+		tiempo_barra += delta * velocidad_oscilacion
+		
+		# pingpong(tiempo, 1.0) genera un valor que va de 0.0 a 1.0 y regresa a 0.0 de forma continua
+		var progreso: float = pingpong(tiempo_barra, 1.0)
+		
+		# Calculamos el límite máximo horizontal descontando el ancho del círculo
+		var margen_horizontal: float = barra_energia.size.x - indicador_circulo.size.x
+		indicador_circulo.position.x = progreso * margen_horizontal
 
+# Devuelve la fuerza calculada en el instante del disparo
+func obtener_fuerza_actual() -> float:
+	var progreso: float = pingpong(tiempo_barra, 1.0) # 0.0 = Izquierda (Verde), 1.0 = Derecha (Rojo)
+	return lerp(fuerza_minima, fuerza_maxima, progreso)
+	
 func cargar_nivel(numero_nivel: int) -> void:
 	# Limpiar objetos anteriores
 	for obj in contenedor_latas.get_children():
@@ -89,51 +117,34 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	if not camara or not escena_pelota or not raycast_apuntado:
 		return
 
-	# 1. Crear la pelota
-	var nueva_pelota = escena_pelota.instantiate() as RigidBody3D
-	add_child(nueva_pelota)
+	# 1. Obtener la fuerza calculada de la barra en este preciso milisegundo
+	var fuerza_calculada: float = obtener_fuerza_actual()
 
-	# 2. Posicionar la pelota (un poco delante de la cámara)
+	# 2. Instanciar pelota
+	var nueva_pelota = escena_pelota.instantiate() as RigidBody3D
+	contenedor_pelotas.add_child(nueva_pelota)
+
 	var punto_salida = camara.global_position - camara.global_transform.basis.z * 1.0
 	nueva_pelota.global_position = punto_salida
-	nueva_pelota.freeze = false # Asegurarse de que las físicas estén activas
+	nueva_pelota.freeze = false
 
-	# --- NUEVA LÓGICA DE APUNTADO USANDO RAYCAST ---
-
-	# 3. Configurar el RayCast3D para que vaya del origen de la cámara hacia el punto de clic
-	# Calculamos el origen y la dirección del rayo en el espacio 3D
+	# 3. Raycast para calcular trayectoria hacia la posición del toque
 	var origen_rayo = camara.project_ray_origin(posicion_pantalla)
 	var direccion_rayo = camara.project_ray_normal(posicion_pantalla)
 
-	# El RayCast debe tener su origen en la cámara
 	raycast_apuntado.global_position = origen_rayo
-	
-	# El RayCast debe extenderse hacia la dirección calculada (una distancia muy grande, ej: 100 metros)
-	# No usamos la posición global final del objetivo, sino la dirección * distancia
 	raycast_apuntado.target_position = direccion_rayo * 100.0
-
-	# 4. Actualizar el RayCast para que verifique las colisiones inmediatamente
 	raycast_apuntado.force_raycast_update()
 
-	var punto_objetivo_real: Vector3
-
-	# 5. Si el RayCast chocó contra algo (mesa, pared de fondo, latas), usamos ese punto de impacto.
+	var punto_objetivo_real: Vector3 = origen_rayo + direccion_rayo * 100.0
 	if raycast_apuntado.is_colliding():
 		punto_objetivo_real = raycast_apuntado.get_collision_point()
-	else:
-		# Si no choca con nada (hiciste clic en el cielo vacío), usamos el punto final del RayCast como respaldo
-		punto_objetivo_real = origen_rayo + direccion_rayo * 100.0
 
-	# 6. Calcular la dirección final: Vector que va desde la pelota al PUNTO DE IMPACTO REAL
-	# (IMPORTANTE: Debe ser normalized())
 	var direccion_final = (punto_objetivo_real - nueva_pelota.global_position).normalized()
 
-	# 7. Aplicar el impulso
-	# Como ajustamos la masa de la pelota anteriormente (recuerda multiplicar por .mass),
-	# este impulso será consistente.
-	nueva_pelota.apply_central_impulse(direccion_final * fuerza_lanzamiento * nueva_pelota.mass)
+	# 4. Impulso proporcional a la masa y a la fuerza de la barra
+	nueva_pelota.apply_central_impulse(direccion_final * fuerza_calculada * nueva_pelota.mass)
 	
-	# 8. Opcional: Autolimitación para evitar saturar
 	get_tree().create_timer(6.0).timeout.connect(nueva_pelota.queue_free)
 
 func reiniciar_nivel() -> void:
