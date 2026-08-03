@@ -36,14 +36,48 @@ var contenedor_pelotas: Node3D
 @onready var indicador_circulo: Control = $UI/BarraEnergia/IndicadorCirculo
 var tiempo_barra: float = 0.0
 
+# --- CONFIGURACIÓN DE CÁMARA CINEMÁTICA ---
+# Posición y rotación finales (Tomadas directamente de tu Inspector)
+var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
+var rot_final_camara: Vector3 = Vector3(deg_to_rad(-0.5), 0.0, 0.0)
 
+# Posición y rotación iniciales (Cenital: sobre la mesa mirando hacia abajo)
+var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8) 
+var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
+
+# Control para no disparar mientras la cámara se está moviendo
+var controles_activos: bool = false
+
+func animar_camara_entrada() -> void:
+	controles_activos = false # Bloqueamos el disparo
+	
+	# 1. Colocamos la cámara en su punto inicial (arriba)
+	camara.global_position = pos_inicial_camara
+	camara.global_rotation = rot_inicial_camara
+
+	# 2. Creamos el Tween (el parámetro set_parallel hace que mueva posición y rotación a la vez)
+	var tween = create_tween().set_parallel(true)
+
+	# 3. Animación de posición y rotación en 2 segundos con curva suave (EASE_OUT)
+	tween.tween_property(camara, "global_position", pos_final_camara, 2.0)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(camara, "global_rotation", rot_final_camara, 2.0)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	# 4. Al finalizar la animación, activamos los controles del jugador
+	tween.chain().tween_callback(func(): controles_activos = true)
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Si la cámara se está moviendo, ignoramos los toques en pantalla
+	if not controles_activos:
+		return
+
 	if (event is InputEventScreenTouch and event.pressed) or \
 	   (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		lanzar_nueva_pelota(event.position)
-
-
 
 func _ready() -> void:
 	contenedor_latas = Node3D.new()
@@ -112,6 +146,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var nuevo_objeto = escena_objetivo.instantiate() as RigidBody3D
 		contenedor_latas.add_child(nuevo_objeto)
 		nuevo_objeto.global_position = Vector3(pos_x, pos_y, pos_z)
+	animar_camara_entrada()
 
 func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	if not camara or not escena_pelota or not raycast_apuntado:
@@ -154,7 +189,7 @@ func reiniciar_nivel() -> void:
 
 	# 2. Volver a instanciar todas las latas/cajas en sus posiciones iniciales
 	cargar_nivel(nivel_actual)
-
+	animar_camara_entrada()
 
 
 func _on_boton_try_again_pressed() -> void:
