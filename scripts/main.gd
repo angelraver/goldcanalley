@@ -11,14 +11,17 @@ extends Node3D
 
 # Gestión de niveles mediante JSON
 @export_file("*.json") var ruta_niveles_json: String = "res://data/niveles.json"
+@export_file("*.json") var ruta_valores_json: String = "res://data/valores.json"
 @export var nivel_actual: int = 1
 
-# Configuración de la grilla imaginaria sobre la mesa
-# Ajusta origen_mesa en el Inspector a la posición del centro de la superficie de tu mesa 3D
-@export var origen_mesa: Vector3 = Vector3(0.0, 0.8, -4.0)
+@export var escena_puntos_flotantes: PackedScene = preload("res://scenes/puntos_flotantes.tscn")
 
-# Tamaño de paso de cada casillero [Ancho, Alto, Profundidad]
-# (Ligeramente superior a las dimensiones de la lata para evitar solapamientos al arrancar)
+# Configuración del puntaje y datos de valores
+var valores_objetos: Dictionary = {}
+var puntaje_nivel: int = 0
+
+# Configuración de la grilla imaginaria sobre la mesa
+@export var origen_mesa: Vector3 = Vector3(0.0, 0.8, -4.0)
 @export var tamano_celda: Vector3 = Vector3(0.22, 0.31, 0.22)
 
 @onready var camara: Camera3D = $Camera3D
@@ -27,57 +30,25 @@ var contenedor_pelotas: Node3D
 
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
 
+@onready var label_puntaje: Label = $UI/LabelPuntaje
+
 # Configuración de la barra de fuerza
 @export var fuerza_minima: float = 5.0
 @export var fuerza_maxima: float = 30.0
-@export var velocidad_oscilacion: float = 0.8 # Ajusta qué tan rápido va y viene el indicador
+@export var velocidad_oscilacion: float = 0.8
 
 @onready var barra_energia: Control = $UI/BarraEnergia
 @onready var indicador_circulo: Control = $UI/BarraEnergia/IndicadorCirculo
 var tiempo_barra: float = 0.0
 
 # --- CONFIGURACIÓN DE CÁMARA CINEMÁTICA ---
-# Posición y rotación finales (Tomadas directamente de tu Inspector)
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
 var rot_final_camara: Vector3 = Vector3(deg_to_rad(-0.5), 0.0, 0.0)
 
-# Posición y rotación iniciales (Cenital: sobre la mesa mirando hacia abajo)
 var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8) 
 var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
 
-# Control para no disparar mientras la cámara se está moviendo
 var controles_activos: bool = false
-
-func animar_camara_entrada() -> void:
-	controles_activos = false # Bloqueamos el disparo
-	
-	# 1. Colocamos la cámara en su punto inicial (arriba)
-	camara.global_position = pos_inicial_camara
-	camara.global_rotation = rot_inicial_camara
-
-	# 2. Creamos el Tween (el parámetro set_parallel hace que mueva posición y rotación a la vez)
-	var tween = create_tween().set_parallel(true)
-
-	# 3. Animación de posición y rotación en 2 segundos con curva suave (EASE_OUT)
-	tween.tween_property(camara, "global_position", pos_final_camara, 2.0)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.tween_property(camara, "global_rotation", rot_final_camara, 2.0)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_OUT)
-
-	# 4. Al finalizar la animación, activamos los controles del jugador
-	tween.chain().tween_callback(func(): controles_activos = true)
-
-func _unhandled_input(event: InputEvent) -> void:
-	# Si la cámara se está moviendo, ignoramos los toques en pantalla
-	if not controles_activos:
-		return
-
-	if (event is InputEventScreenTouch and event.pressed) or \
-	   (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
-		lanzar_nueva_pelota(event.position)
 
 func _ready() -> void:
 	contenedor_latas = Node3D.new()
@@ -88,27 +59,34 @@ func _ready() -> void:
 	contenedor_pelotas.name = "ContenedorPelotas"
 	add_child(contenedor_pelotas)
 
-	# Cargar el nivel configurado al iniciar el juego
-	cargar_nivel(nivel_actual)
-	
-func _process(delta: float) -> void:
-	# Animación del vaivén horizontal
-	if barra_energia and indicador_circulo:
-		tiempo_barra += delta * velocidad_oscilacion
-		
-		# pingpong(tiempo, 1.0) genera un valor que va de 0.0 a 1.0 y regresa a 0.0 de forma continua
-		var progreso: float = pingpong(tiempo_barra, 1.0)
-		
-		# Calculamos el límite máximo horizontal descontando el ancho del círculo
-		var margen_horizontal: float = barra_energia.size.x - indicador_circulo.size.x
-		indicador_circulo.position.x = progreso * margen_horizontal
+	# 1. Cargar la tabla de valores de objetos
+	cargar_valores()
 
-# Devuelve la fuerza calculada en el instante del disparo
-func obtener_fuerza_actual() -> float:
-	var progreso: float = pingpong(tiempo_barra, 1.0) # 0.0 = Izquierda (Verde), 1.0 = Derecha (Rojo)
-	return lerp(fuerza_minima, fuerza_maxima, progreso)
-	
+	# 2. Cargar el nivel configurado al iniciar el juego
+	cargar_nivel(nivel_actual)
+
+func _physics_process(_delta: float) -> void:
+	# Verificamos el estado físico de las latas en cada frame de física
+	verificar_latas_derribadas()
+
+func cargar_valores() -> void:
+	if not FileAccess.file_exists(ruta_valores_json):
+		print("ERROR: No existe el archivo de valores en: ", ruta_valores_json)
+		return
+
+	var texto_json = FileAccess.get_file_as_string(ruta_valores_json)
+	var datos = JSON.parse_string(texto_json)
+
+	if datos is Dictionary:
+		valores_objetos = datos
+	else:
+		print("ERROR: Formato inválido en valores.json")
+
 func cargar_nivel(numero_nivel: int) -> void:
+	# Reiniciar puntaje
+	puntaje_nivel = 0
+	actualizar_ui_puntaje()
+	
 	# Limpiar objetos anteriores
 	for obj in contenedor_latas.get_children():
 		obj.queue_free()
@@ -131,31 +109,98 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var grid_y: float = float(item[1])
 		var grid_z: float = float(item[2])
 		
-		# Leer la clave del tipo de objeto (o usar lata_aluminio como respaldo si se omite)
 		var clave_tipo: String = item[3] if item.size() > 3 else "lata_aluminio"
-
-		# Buscar la escena correspondiente en el catálogo
 		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, catalogo_objetos["lata_aluminio"])
 
-		# Posicionamiento en coordenadas 3D reales
 		var pos_x = origen_mesa.x + (grid_x - 5.0) * tamano_celda.x
 		var pos_y = origen_mesa.y + (grid_y - 0.5) * tamano_celda.y
 		var pos_z = origen_mesa.z - (grid_z - 1.0) * tamano_celda.z
 
-		# Instanciar e insertar en la escena
 		var nuevo_objeto = escena_objetivo.instantiate() as RigidBody3D
+		
+		# Guardamos metadatos en el objeto para saber su tipo y si ya sumó puntos
+		nuevo_objeto.set_meta("tipo", clave_tipo)
+		nuevo_objeto.set_meta("derribado", false)
+
 		contenedor_latas.add_child(nuevo_objeto)
 		nuevo_objeto.global_position = Vector3(pos_x, pos_y, pos_z)
+
 	animar_camara_entrada()
+
+func verificar_latas_derribadas() -> void:
+	for obj in contenedor_latas.get_children():
+		if not (obj is RigidBody3D):
+			continue
+
+		if obj.get_meta("derribado", false):
+			continue
+
+		var tipo: String = obj.get_meta("tipo", "lata_aluminio")
+		var esta_derribada: bool = false
+
+		if obj.global_position.y < (origen_mesa.y - 0.15):
+			esta_derribada = true
+		else:
+			var vector_arriba_lata = obj.global_transform.basis.y
+			var inclinacion = vector_arriba_lata.dot(Vector3.UP)
+			var esta_tumbada = inclinacion < 0.8
+			var esta_quieta = obj.linear_velocity.length() < 0.08 and obj.angular_velocity.length() < 0.08
+
+			if esta_tumbada and esta_quieta:
+				esta_derribada = true
+
+		if esta_derribada:
+			obj.set_meta("derribado", true)
+
+			var datos_tipo = valores_objetos.get(tipo, {})
+			var puntos_ganados: int = int(datos_tipo.get("pts", 0))
+
+			puntaje_nivel += puntos_ganados
+			actualizar_ui_puntaje()
+			crear_efecto_puntos(obj.global_position, puntos_ganados)
+			#	print("💥 ¡Objeto Derribado! Tipo: ", tipo, " | +", puntos_ganados, " pts | Puntaje Nivel: ", puntaje_nivel)
+
+func animar_camara_entrada() -> void:
+	controles_activos = false
+	camara.global_position = pos_inicial_camara
+	camara.global_rotation = rot_inicial_camara
+
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(camara, "global_position", pos_final_camara, 2.0)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(camara, "global_rotation", rot_final_camara, 2.0)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	tween.chain().tween_callback(func(): controles_activos = true)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not controles_activos:
+		return
+
+	if (event is InputEventScreenTouch and event.pressed) or \
+	   (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		lanzar_nueva_pelota(event.position)
+
+func _process(delta: float) -> void:
+	if barra_energia and indicador_circulo:
+		tiempo_barra += delta * velocidad_oscilacion
+		var progreso: float = pingpong(tiempo_barra, 1.0)
+		var margen_horizontal: float = barra_energia.size.x - indicador_circulo.size.x
+		indicador_circulo.position.x = progreso * margen_horizontal
+
+func obtener_fuerza_actual() -> float:
+	var progreso: float = pingpong(tiempo_barra, 1.0)
+	return lerp(fuerza_minima, fuerza_maxima, progreso)
 
 func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	if not camara or not escena_pelota or not raycast_apuntado:
 		return
 
-	# 1. Obtener la fuerza calculada de la barra en este preciso milisegundo
 	var fuerza_calculada: float = obtener_fuerza_actual()
 
-	# 2. Instanciar pelota
 	var nueva_pelota = escena_pelota.instantiate() as RigidBody3D
 	contenedor_pelotas.add_child(nueva_pelota)
 
@@ -163,7 +208,6 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	nueva_pelota.global_position = punto_salida
 	nueva_pelota.freeze = false
 
-	# 3. Raycast para calcular trayectoria hacia la posición del toque
 	var origen_rayo = camara.project_ray_origin(posicion_pantalla)
 	var direccion_rayo = camara.project_ray_normal(posicion_pantalla)
 
@@ -177,20 +221,61 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 
 	var direccion_final = (punto_objetivo_real - nueva_pelota.global_position).normalized()
 
-	# 4. Impulso proporcional a la masa y a la fuerza de la barra
 	nueva_pelota.apply_central_impulse(direccion_final * fuerza_calculada * nueva_pelota.mass)
-	
 	get_tree().create_timer(6.0).timeout.connect(nueva_pelota.queue_free)
 
 func reiniciar_nivel() -> void:
-	# 1. Eliminar todas las pelotas que estén en pantalla
 	for pelota in contenedor_pelotas.get_children():
 		pelota.queue_free()
 
-	# 2. Volver a instanciar todas las latas/cajas en sus posiciones iniciales
 	cargar_nivel(nivel_actual)
-	animar_camara_entrada()
-
 
 func _on_boton_try_again_pressed() -> void:
 	reiniciar_nivel()
+
+func actualizar_ui_puntaje() -> void:
+	if label_puntaje:
+		# Formato de 4 dígitos (ej: SCORE: 0100)
+		label_puntaje.text = "SCORE: %04d" % puntaje_nivel
+		
+func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
+	if not camara or not escena_puntos_flotantes or not barra_energia: # barra_energia está en UI
+		return
+
+	# A. Instanciar la escena y agregarla al CanvasLayer UI
+	var efecto = escena_puntos_flotantes.instantiate()
+	var ui_node = barra_energia.get_parent() # UI (CanvasLayer) es el padre de barra_energia
+	ui_node.add_child(efecto)
+
+	# B. Configurar el texto
+	var label = efecto.get_node("Label") as Label
+	label.text = "+%d" % valor_puntos
+	
+	# Opcional: Cambiar color según puntos (ej: amarillo para > 100)
+	if valor_puntos > 100:
+		label.modulate = Color(1.0, 0.9, 0.0) # Amarillo/Dorado
+
+	# C. Calcular la posición inicial en pantalla
+	# Tomamos la posición de la lata e inclinamos el punto inicial un poco hacia arriba en 3D
+	var posicion_3d_objetivo = posicion_lata_3d + Vector3(0.0, 0.3, 0.0)
+	var posicion_pantalla = camara.unproject_position(posicion_3d_objetivo)
+	efecto.position = posicion_pantalla
+
+	# D. CREAR LA ANIMACIÓN CON TWEEN
+	# Usamos un solo Tween que se auto-destruye al terminar
+	var tween = create_tween()
+	
+	# Animación 1: Mover hacia arriba (reducir position.y) en 1.5 segundos
+	var posicion_final_y = posicion_pantalla.y - 60.0
+	tween.tween_property(efecto, "position:y", posicion_final_y, 1.5)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	# Animación 2 (en paralelo): Desvanecer (modulate.a -> 0)
+	# set_parallel(true) hace que las siguientes animaciones ocurran simultáneamente
+	tween.set_parallel(true)
+	tween.tween_property(efecto, "modulate:a", 0.0, 1.5)\
+		.set_trans(Tween.TRANS_LINEAR)
+
+	# E. Eliminar el nodo de la interfaz cuando la animación termine
+	tween.chain().tween_callback(efecto.queue_free)

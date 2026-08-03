@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://neu1avqif3tr"]
+
+[node name="PuntosFlotantes" type="Control" unique_id=1359377036]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="." unique_id=943595716]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "+100"
+horizontal_alignment = 1
+vertical_alignment = 1
