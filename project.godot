@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="tapball"
-run/main_scene="uid://cohptcyi3103x"
+run/main_scene="uid://blfnudq81val2"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SaveManager="*uid://cots0gs8v334y"
 
 [display]
 

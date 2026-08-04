@@ -72,6 +72,7 @@ func _ready() -> void:
 	contenedor_pelotas.name = "ContenedorPelotas"
 	add_child(contenedor_pelotas)
 	cargar_valores()
+	nivel_actual = SaveManager.nivel_actual_seleccionado
 	cargar_nivel(nivel_actual)
 
 func _physics_process(_delta: float) -> void:
@@ -271,7 +272,7 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	if pelotas_restantes == 0:
 		esperando_fin_nivel = true
 		# Esperar 5 segundos exactos desde el lanzamiento de la última pelota
-		get_tree().create_timer(5.0).timeout.connect(_on_tiempo_fin_nivel_agotado)
+		get_tree().create_timer(3.0).timeout.connect(_on_tiempo_fin_nivel_agotado)
 
 func _on_tiempo_fin_nivel_agotado() -> void:
 	# Solo mostramos el panel si seguimos en el mismo intento/nivel (por si el jugador reinició antes)
@@ -332,7 +333,7 @@ func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 	# E. Eliminar el nodo de la interfaz cuando la animación termine
 	tween.chain().tween_callback(efecto.queue_free)
 
-func mostrar_panel_resultados() -> void:
+func mostrar_panel_resultados() -> void:		
 	# 1. Ocultar los elementos de la interfaz de juego (HUD)
 	if barra_energia: barra_energia.visible = false
 	if label_puntaje: label_puntaje.visible = false
@@ -354,6 +355,8 @@ func mostrar_panel_resultados() -> void:
 	if ribbon_azul:
 		ribbon_azul.visible = (puntaje_nivel >= umbral_3)
 	
+	SaveManager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+	
 	if panel_resultados: panel_resultados.visible = true
 
 func _on_boton_reiniciar_pressed() -> void:
@@ -366,3 +369,7 @@ func _on_boton_reiniciar_pressed() -> void:
 	
 	# 3. Recargar el nivel (esto limpia pelotas, repone latas y resetea el contador a 3)
 	cargar_nivel(nivel_actual)
+
+func _on_boton_home_pressed() -> void:
+	# Regresa a la pantalla de selección de niveles
+	get_tree().change_scene_to_file("res://scenes/SeleccionNiveles.tscn")
