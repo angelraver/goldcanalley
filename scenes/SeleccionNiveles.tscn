@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://images/fondodia.jpeg" id="2_s4ugi"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://scenes/desenfoque.gdshader" id="3_si3ov"]
 [ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://images/logo.png" id="6_wfcpm"]
+[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://images/button_home.png" id="7_h3y88"]
+[ext_resource type="Texture2D" uid="uid://d0mkgw33r214a" path="res://images/arrow.png" id="8_opu22"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfcpm"]
 shader = ExtResource("3_si3ov")
@@ -130,3 +132,29 @@ offset_right = 994.77246
 offset_bottom = 643.5135
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_wfcpm")
+
+[node name="BotonHome" type="TextureButton" parent="." unique_id=344918832]
+layout_mode = 0
+offset_left = 332.594
+offset_top = 867.9334
+offset_right = 455.594
+offset_bottom = 989.9334
+texture_normal = ExtResource("7_h3y88")
+
+[node name="BotonPrev" type="TextureButton" parent="." unique_id=437050340]
+layout_mode = 0
+offset_left = 138.96054
+offset_top = 889.57495
+offset_right = 261.96057
+offset_bottom = 1012.57495
+scale = Vector2(0.5317008, 0.5317008)
+texture_normal = ExtResource("8_opu22")
+
+[node name="BotonNext" type="TextureButton" parent="." unique_id=157912576]
+layout_mode = 0
+offset_left = 654.9366
+offset_top = 954.4988
+offset_right = 777.93665
+offset_bottom = 1077.4988
+scale = Vector2(-0.532, -0.532)
+texture_normal = ExtResource("8_opu22")

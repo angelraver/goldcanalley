@@ -13,25 +13,49 @@ var nivel_id: int = 1
 
 func _ready() -> void:
 	if boton_nivel:
-		boton_nivel.pressed.connect(func(): nivel_seleccionado.emit(nivel_id))
+		boton_nivel.pressed.connect(func():
+			if not boton_nivel.disabled:
+				nivel_seleccionado.emit(nivel_id)
+		)
 
 
 func configurar(numero_nivel: int) -> void:
 	nivel_id = numero_nivel
 	var desbloqueado = SaveManager.es_nivel_desbloqueado(numero_nivel)
 
+	# El slot completo siempre debe estar visible si el nivel existe en el JSON
+	visible = true
+
 	if not desbloqueado:
-		# Si está bloqueado: ocultamos el botón y los ribbons
-		visible = true
-		boton_nivel.visible = false
+		# --- NIVEL BLOQUEADO (MODO SOMBRA) ---
+		# 1. Mostrar el botón pero desactivar interacción
+		boton_nivel.visible = true
+		boton_nivel.disabled = true
+		boton_nivel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+		# 2. Aplicar tinte oscuro y semi-transparente
+		boton_nivel.modulate = Color(0.35, 0.35, 0.35, 0.9)
+
+		# 3. Mostrar el número del nivel en tono sombra/atenuado
+		label_numero.text = str(numero_nivel)
+		label_numero.modulate = Color(0.7, 0.7, 0.7, 0.9)
+
+		# 4. Ocultar las ribbons
 		ocultar_ribbons()
 		return
 
-	# Si está desbloqueado: mostramos botón y texto
+	# --- NIVEL DESBLOQUEADO ---
+	# 1. Habilitar botón e interacciones
 	boton_nivel.visible = true
+	boton_nivel.disabled = false
+	boton_nivel.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	# 2. Restablecer color brillante original (sin sombras)
+	boton_nivel.modulate = Color.WHITE
+	label_numero.modulate = Color.WHITE
 	label_numero.text = str(numero_nivel)
 
-	# Leer los datos de guardado para este nivel
+	# 3. Leer datos de puntaje y activar las ribbons ganadas
 	var puntaje = SaveManager.obtener_puntaje_nivel(numero_nivel)
 	var maximo = SaveManager.obtener_maximo_nivel(numero_nivel)
 

@@ -17,25 +17,28 @@
 	[4.5, 2, 1.5, "lata_aluminio"],
 	[5.5, 2, 1.5, "lata_aluminio"],
 
-	[5, 3, 1, "lata_aluminio"],
-
-  ],
-  "3": [
-	[4, 1, 1, "lata_aluminio"],
-	[5, 1, 1, "lata_aluminio"],
-	[6, 1, 1, "lata_aluminio"],
-	
-	[4.5, 2, 1, "lata_aluminio"],
-	[5.5, 2, 1, "lata_aluminio"],
-
 	[5, 3, 1, "lata_aluminio"]
+
   ],
-  "2": [
-	[4.0, 1, 1, "caja_madera"],
-	[5.0, 1, 1, "lata_aluminio"],
-	[6.0, 1, 1, "caja_madera"],
-	[4.5, 2, 1, "lata_aluminio"],
-	[5.5, 2, 1, "lata_aluminio"],
-	[5.0, 3, 1, "caja_madera"]
-  ]
+"2": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"3": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"4": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"5": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"6": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"7": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"8": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"9": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"10": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"11": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"12": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"13": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"14": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"15": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"16": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"17": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"18": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"19": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+"20": [[4, 1, 1, "lata_aluminio"], [5, 1, 1, "lata_aluminio"], [6, 1, 1, "lata_aluminio"]],
+
+
 }
