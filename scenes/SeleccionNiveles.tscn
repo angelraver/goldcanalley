@@ -158,3 +158,5 @@ offset_right = 777.93665
 offset_bottom = 1077.4988
 scale = Vector2(-0.532, -0.532)
 texture_normal = ExtResource("8_opu22")
+
+[connection signal="pressed" from="BotonHome" to="." method="_on_boton_home_pressed"]

@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bcd1ofetag504"]
+
+[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://images/fondodia.jpeg" id="1_agd63"]
+[ext_resource type="Script" uid="uid://c0x8sp71taj7u" path="res://scripts/Title.gd" id="1_mh4yb"]
+[ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://scenes/desenfoque.gdshader" id="2_mh4yb"]
+[ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://images/logo.png" id="3_wq2ky"]
+[ext_resource type="Texture2D" uid="uid://bgnt5kfxvb4o8" path="res://images/button_start.png" id="4_uth7j"]
+[ext_resource type="Texture2D" uid="uid://beo3pfrblphcv" path="res://images/button_prizes.png" id="5_af2l1"]
+[ext_resource type="Texture2D" uid="uid://dj80kcallsdvp" path="res://images/button_options.png" id="6_wiaur"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
+shader = ExtResource("2_mh4yb")
+shader_parameter/nivel_desenfoque = 2.5
+shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
+
+[node name="Title" type="Control" unique_id=942844040]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mh4yb")
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=1930174974]
+layout_mode = 0
+offset_left = -220.00002
+offset_top = -2.0
+offset_right = 573.0
+offset_bottom = 1022.0
+scale = Vector2(1.4634976, 1.4634976)
+texture = ExtResource("1_agd63")
+
+[node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=718747323]
+material = SubResource("ShaderMaterial_tydxx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.3348694
+offset_top = 0.77826405
+offset_right = -2.3348389
+offset_bottom = 0.77819824
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="." unique_id=2120168976]
+layout_mode = 0
+offset_left = 133.99998
+offset_top = 33.0
+offset_right = 734.0
+offset_bottom = 933.0
+scale = Vector2(0.79431736, 0.79431736)
+texture = ExtResource("3_wq2ky")
+
+[node name="Start" type="TextureButton" parent="." unique_id=256854180]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 733.0
+offset_right = 524.0
+offset_bottom = 981.0
+scale = Vector2(1.1, 1.1)
+texture_normal = ExtResource("4_uth7j")
+
+[node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
+layout_mode = 0
+offset_left = 400.00003
+offset_top = 1032.0
+offset_right = 732.0
+offset_bottom = 1280.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("5_af2l1")
+
+[node name="Options" type="TextureButton" parent="." unique_id=110325157]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 1035.0
+offset_right = 365.0
+offset_bottom = 1282.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("6_wiaur")
+
+[connection signal="pressed" from="Start" to="." method="_on_boton_home_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_boton_start_pressed"]
