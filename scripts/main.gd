@@ -26,7 +26,7 @@ var puntaje_nivel: int = 0
 @onready var camara: Camera3D = $Camera3D
 var contenedor_latas: Node3D
 var contenedor_pelotas: Node3D
-
+@onready var label_puntaje_final: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
 
 @onready var label_puntaje: Label = $UI/LabelPuntaje
@@ -337,7 +337,10 @@ func mostrar_panel_resultados() -> void:
 	if barra_energia: barra_energia.visible = false
 	if label_puntaje: label_puntaje.visible = false
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
-	
+
+	if label_puntaje_final:
+		label_puntaje_final.text = "%d / %d" % [puntaje_nivel, puntaje_maximo_nivel]
+
 	var umbral_1: float = puntaje_maximo_nivel * (1.0 / 3.0) # 33.3%
 	var umbral_2: float = puntaje_maximo_nivel * (2.0 / 3.0) # 66.6%
 	var umbral_3: float = float(puntaje_maximo_nivel)        # 100%
