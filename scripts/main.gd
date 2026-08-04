@@ -16,7 +16,6 @@ extends Node3D
 
 @export var escena_puntos_flotantes: PackedScene = preload("res://scenes/puntos_flotantes.tscn")
 
-# Configuración del puntaje y datos de valores
 var valores_objetos: Dictionary = {}
 var puntaje_nivel: int = 0
 
@@ -32,7 +31,6 @@ var contenedor_pelotas: Node3D
 
 @onready var label_puntaje: Label = $UI/LabelPuntaje
 
-# Configuración de la barra de fuerza
 @export var fuerza_minima: float = 5.0
 @export var fuerza_maxima: float = 30.0
 @export var velocidad_oscilacion: float = 0.8
@@ -44,10 +42,17 @@ var tiempo_barra: float = 0.0
 # --- CONFIGURACIÓN DE PELOTAS ---
 @export var pelotas_maximas: int = 3
 var pelotas_restantes: int = 3
+var esperando_fin_nivel: bool = false
 
 # Referencias a la UI de la pelota 3D y el contador
 @onready var label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
 @onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
+@onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
+@onready var panel_resultados: Control = $UI/PanelResultados
+@onready var ribbon_amarilla: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAmarilla
+@onready var ribbon_roja: TextureRect = $UI/PanelResultados/FondoPanel/RibbonRoja
+@onready var ribbon_azul: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAzul
+var puntaje_maximo_nivel: int = 0
 
 # --- CONFIGURACIÓN DE CÁMARA CINEMÁTICA ---
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
@@ -66,14 +71,8 @@ func _ready() -> void:
 	contenedor_pelotas = Node3D.new()
 	contenedor_pelotas.name = "ContenedorPelotas"
 	add_child(contenedor_pelotas)
-
-	# 1. Cargar la tabla de valores de objetos
 	cargar_valores()
-
-	# 2. Cargar el nivel configurado al iniciar el juego
 	cargar_nivel(nivel_actual)
-	
-	
 
 func _physics_process(_delta: float) -> void:
 	# Verificamos el estado físico de las latas en cada frame de física
@@ -93,12 +92,20 @@ func cargar_valores() -> void:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
+	esperando_fin_nivel = false	
 	pelotas_restantes = pelotas_maximas
 	actualizar_ui_pelotas()
 	puntaje_nivel = 0
+	puntaje_maximo_nivel = 0
 	actualizar_ui_puntaje()
 
-	# 2. Limpiar objetos del nivel anterior
+	if ribbon_amarilla: ribbon_amarilla.visible = false
+	if ribbon_roja: ribbon_roja.visible = false
+	if ribbon_azul: ribbon_azul.visible = false
+
+	for pelota in contenedor_pelotas.get_children():
+		pelota.queue_free()
+
 	for obj in contenedor_latas.get_children():
 		obj.queue_free()
 
@@ -113,24 +120,22 @@ func cargar_nivel(numero_nivel: int) -> void:
 		print("ERROR: No existe el nivel ", numero_nivel)
 		return
 
+	var clave_por_defecto: String = catalogo_objetos.keys()[0] if not catalogo_objetos.is_empty() else ""
+	var escena_por_defecto: PackedScene = catalogo_objetos.get(clave_por_defecto, null)
 	var lista_objetos = datos_niveles[str(numero_nivel)]
-
-	# 3. Recorrer la lista de objetos del nivel
 	for item in lista_objetos:
 		var grid_x: float = float(item[0])
 		var grid_y: float = float(item[1])
 		var grid_z: float = float(item[2])
-		
-		var clave_tipo: String = item[3] if item.size() > 3 else "lata_aluminio"
-		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, catalogo_objetos["lata_aluminio"])
-
-		# --- LEER PROPIEDADES DINÁMICAS DESDE valores.json ---
+		var clave_tipo: String = item[3] if item.size() > 3 else clave_por_defecto
+		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, escena_por_defecto)
 		var datos_tipo: Dictionary = valores_objetos.get(clave_tipo, {})
 		var factor_escala: float = float(datos_tipo.get("escala", 1.0))
 		var masa_objeto: float = float(datos_tipo.get("masa", 1.0))
-
-		# El tamaño de la celda se ajusta dinámicamente según la escala
+		var puntos_objeto: int = int(datos_tipo.get("pts", 100))
 		var paso_celda: Vector3 = tamano_celda * factor_escala
+		
+		puntaje_maximo_nivel += puntos_objeto
 
 		# Calculamos la posición 3D usando la celda adaptada
 		var pos_x = origen_mesa.x + (grid_x - 5.0) * paso_celda.x
@@ -187,6 +192,7 @@ func verificar_latas_derribadas() -> void:
 			#	print("💥 ¡Objeto Derribado! Tipo: ", tipo, " | +", puntos_ganados, " pts | Puntaje Nivel: ", puntaje_nivel)
 
 func animar_camara_entrada() -> void:
+	if barra_energia: barra_energia.visible = false
 	controles_activos = false
 	camara.global_position = pos_inicial_camara
 	camara.global_rotation = rot_inicial_camara
@@ -200,7 +206,10 @@ func animar_camara_entrada() -> void:
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
 
-	tween.chain().tween_callback(func(): controles_activos = true)
+	tween.chain().tween_callback(func(): 
+		controles_activos = true
+		if barra_energia: barra_energia.visible = true
+	)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not controles_activos:
@@ -258,19 +267,23 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 
 	nueva_pelota.apply_central_impulse(direccion_final * fuerza_calculada * nueva_pelota.mass)
 	get_tree().create_timer(6.0).timeout.connect(nueva_pelota.queue_free)
+	
+	if pelotas_restantes == 0:
+		esperando_fin_nivel = true
+		# Esperar 5 segundos exactos desde el lanzamiento de la última pelota
+		get_tree().create_timer(5.0).timeout.connect(_on_tiempo_fin_nivel_agotado)
+
+func _on_tiempo_fin_nivel_agotado() -> void:
+	# Solo mostramos el panel si seguimos en el mismo intento/nivel (por si el jugador reinició antes)
+	if esperando_fin_nivel and pelotas_restantes == 0:
+		mostrar_panel_resultados()
 
 func reiniciar_nivel() -> void:
-	for pelota in contenedor_pelotas.get_children():
-		pelota.queue_free()
-
 	cargar_nivel(nivel_actual)
 
 func actualizar_ui_pelotas() -> void:
 	if label_pelotas:
 		label_pelotas.text = "x %d" % pelotas_restantes
-
-func _on_boton_try_again_pressed() -> void:
-	reiniciar_nivel()
 
 func actualizar_ui_puntaje() -> void:
 	if label_puntaje:
@@ -278,12 +291,12 @@ func actualizar_ui_puntaje() -> void:
 		label_puntaje.text = "SCORE: " + str(puntaje_nivel)
 		
 func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
-	if not camara or not escena_puntos_flotantes or not barra_energia: # barra_energia está en UI
+	if not camara or not escena_puntos_flotantes or not barra_energia:
 		return
 
 	# A. Instanciar la escena y agregarla al CanvasLayer UI
 	var efecto = escena_puntos_flotantes.instantiate()
-	var ui_node = barra_energia.get_parent() # UI (CanvasLayer) es el padre de barra_energia
+	var ui_node = barra_energia.get_parent()
 	ui_node.add_child(efecto)
 
 	# B. Configurar el texto
@@ -318,3 +331,35 @@ func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 
 	# E. Eliminar el nodo de la interfaz cuando la animación termine
 	tween.chain().tween_callback(efecto.queue_free)
+
+func mostrar_panel_resultados() -> void:
+	# 1. Ocultar los elementos de la interfaz de juego (HUD)
+	if barra_energia: barra_energia.visible = false
+	if label_puntaje: label_puntaje.visible = false
+	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
+	
+	var umbral_1: float = puntaje_maximo_nivel * (1.0 / 3.0) # 33.3%
+	var umbral_2: float = puntaje_maximo_nivel * (2.0 / 3.0) # 66.6%
+	var umbral_3: float = float(puntaje_maximo_nivel)        # 100%
+	
+	if ribbon_amarilla:
+		ribbon_amarilla.visible = (puntaje_nivel >= umbral_1)
+
+	if ribbon_roja:
+		ribbon_roja.visible = (puntaje_nivel >= umbral_2)
+
+	if ribbon_azul:
+		ribbon_azul.visible = (puntaje_nivel >= umbral_3)
+	
+	if panel_resultados: panel_resultados.visible = true
+
+func _on_boton_reiniciar_pressed() -> void:
+	# 1. Ocultar el panel de resultados
+	if panel_resultados:
+		panel_resultados.visible = false
+	
+	# 2. Resetear la bandera
+	esperando_fin_nivel = false
+	
+	# 3. Recargar el nivel (esto limpia pelotas, repone latas y resetea el contador a 3)
+	cargar_nivel(nivel_actual)
