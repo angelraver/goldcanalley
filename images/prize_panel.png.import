@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2h3pfbdcj71b"
-path="res://.godot/imported/drumb.png-4eef997798f76ccd7eb1dffeb8b1dd8d.ctex"
+uid="uid://cv874ogk2418f"
+path="res://.godot/imported/prize_panel.png-4b1238e3269c4a8d22ea739406779517.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/prizes/drumb.png"
-dest_files=["res://.godot/imported/drumb.png-4eef997798f76ccd7eb1dffeb8b1dd8d.ctex"]
+source_file="res://images/prize_panel.png"
+dest_files=["res://.godot/imported/prize_panel.png-4b1238e3269c4a8d22ea739406779517.ctex"]
 
 [params]
 
