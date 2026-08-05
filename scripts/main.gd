@@ -28,7 +28,6 @@ var contenedor_latas: Node3D
 var contenedor_pelotas: Node3D
 @onready var label_puntaje_final: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
-
 @onready var label_puntaje: Label = $UI/LabelPuntaje
 
 @export var fuerza_minima: float = 5.0
@@ -49,10 +48,18 @@ var esperando_fin_nivel: bool = false
 @onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
 @onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
 @onready var panel_resultados: Control = $UI/PanelResultados
+@onready var fondo_desenfoque: Control = $UI/PanelResultados/FondoDesenfoque
+@onready var fondo_panel: TextureRect = $UI/PanelResultados/FondoPanel
 @onready var ribbon_amarilla: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAmarilla
 @onready var ribbon_roja: TextureRect = $UI/PanelResultados/FondoPanel/RibbonRoja
 @onready var ribbon_azul: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAzul
 var puntaje_maximo_nivel: int = 0
+var gano_ribbon_amarilla: bool = false 
+var gano_ribbon_roja: bool = false 
+var gano_ribbon_azul: bool = false 
+var escala_orig_amarilla: Vector2
+var escala_orig_roja: Vector2
+var escala_orig_azul: Vector2
 
 # --- CONFIGURACIÓN DE CÁMARA CINEMÁTICA ---
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
@@ -73,6 +80,16 @@ func _ready() -> void:
 	add_child(contenedor_pelotas)
 	cargar_valores()
 	nivel_actual = SaveManager.nivel_actual_seleccionado
+	
+	ribbon_amarilla.pivot_offset = ribbon_amarilla.size / 2
+	escala_orig_amarilla = ribbon_amarilla.scale
+
+	ribbon_roja.pivot_offset = ribbon_roja.size / 2
+	escala_orig_roja = ribbon_roja.scale
+
+	ribbon_azul.pivot_offset = ribbon_azul.size / 2
+	escala_orig_azul = ribbon_azul.scale
+
 	cargar_nivel(nivel_actual)
 
 func _physics_process(_delta: float) -> void:
@@ -99,10 +116,6 @@ func cargar_nivel(numero_nivel: int) -> void:
 	puntaje_nivel = 0
 	puntaje_maximo_nivel = 0
 	actualizar_ui_puntaje()
-
-	if ribbon_amarilla: ribbon_amarilla.visible = false
-	if ribbon_roja: ribbon_roja.visible = false
-	if ribbon_azul: ribbon_azul.visible = false
 
 	for pelota in contenedor_pelotas.get_children():
 		pelota.queue_free()
@@ -210,6 +223,8 @@ func animar_camara_entrada() -> void:
 	tween.chain().tween_callback(func(): 
 		controles_activos = true
 		if barra_energia: barra_energia.visible = true
+		if label_puntaje: label_puntaje.visible = true
+		if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = true
 	)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -346,18 +361,20 @@ func mostrar_panel_resultados() -> void:
 	var umbral_2: float = puntaje_maximo_nivel * (2.0 / 3.0) # 66.6%
 	var umbral_3: float = float(puntaje_maximo_nivel)        # 100%
 	
-	if ribbon_amarilla:
-		ribbon_amarilla.visible = (puntaje_nivel >= umbral_1)
+	gano_ribbon_amarilla = (puntaje_nivel >= umbral_1)
+	gano_ribbon_roja = (puntaje_nivel >= umbral_2)
+	gano_ribbon_azul = (puntaje_nivel >= umbral_3)
 
-	if ribbon_roja:
-		ribbon_roja.visible = (puntaje_nivel >= umbral_2)
-
-	if ribbon_azul:
-		ribbon_azul.visible = (puntaje_nivel >= umbral_3)
+	ribbon_amarilla.visible = gano_ribbon_amarilla
+	ribbon_roja.visible = gano_ribbon_roja
+	ribbon_azul.visible = gano_ribbon_azul
 	
 	SaveManager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 	
-	if panel_resultados: panel_resultados.visible = true
+	if panel_resultados: 
+		panel_resultados.visible = true
+		animar_aparicion_panel(panel_resultados)
+
 
 func _on_boton_reiniciar_pressed() -> void:
 	# 1. Ocultar el panel de resultados
@@ -377,3 +394,65 @@ func _on_boton_home_pressed() -> void:
 	else:
 		# Si no hay premio, va directamente a la pantalla de niveles
 		get_tree().change_scene_to_file("res://scenes/SeleccionNiveles.tscn")
+
+
+func animar_aparicion_panel(panel: Control) -> void:
+	ribbon_amarilla.scale = Vector2.ZERO
+	ribbon_roja.scale = Vector2.ZERO
+	ribbon_azul.scale = Vector2.ZERO
+	
+# 1. Animar FondoDesenfoque (Fade-in simple)
+	fondo_desenfoque.modulate.a = 0.0
+	var tween_desenfoque = create_tween()
+	tween_desenfoque.tween_property(fondo_desenfoque, "modulate:a", 1.0, 0.2)
+
+	# --- ANIMACIÓN DE FONDOPANEL ---
+	# Esperar 1 frame para que Godot calcule el tamaño y posición exactos del panel
+	await get_tree().process_frame
+
+	# Guardar la escala real que configuraste en el editor
+	var escala_original = fondo_panel.scale
+
+	# Fijar el pivote en el centro exacto
+	fondo_panel.pivot_offset = fondo_panel.size / 2
+
+	# Iniciar al 80% de SU escala original
+	fondo_panel.scale = escala_original * 0.8
+	fondo_panel.modulate.a = 0.0
+
+	# Animar hacia SU escala original
+	var tween_panel = create_tween().set_parallel(true)
+	tween_panel.set_trans(Tween.TRANS_BACK) # Rebote sutil
+	tween_panel.set_ease(Tween.EASE_OUT)
+
+	tween_panel.tween_property(fondo_panel, "scale", escala_original, 1)
+	tween_panel.tween_property(fondo_panel, "modulate:a", 1, 1)
+	
+	await tween_panel.finished # Espera a que el panel termine de crecer
+
+	if gano_ribbon_amarilla:
+		animar_pop_ribbon(ribbon_amarilla, escala_orig_amarilla)
+		await get_tree().create_timer(0.12).timeout # Pequeño delay entre ribbons
+		
+	if gano_ribbon_roja:
+		animar_pop_ribbon(ribbon_roja, escala_orig_roja)
+		await get_tree().create_timer(0.12).timeout
+		
+	if gano_ribbon_azul:
+		animar_pop_ribbon(ribbon_azul, escala_orig_azul)
+
+func animar_pop_ribbon(ribbon: Control, escala_objetivo: Vector2) -> void:
+	# Restablecer posición y asegurar estado inicial
+	ribbon.scale = Vector2.ZERO
+	ribbon.visible = true
+	var tween = create_tween()
+
+	# Paso A: Crece del 0% al 110% de su escala guardada
+	tween.tween_property(ribbon, "scale", escala_objetivo * 1.1, 0.18)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+
+	# Paso B: Se asienta exactamente en su escala guardada (100%)
+	tween.tween_property(ribbon, "scale", escala_objetivo, 0.10)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_IN_OUT)
