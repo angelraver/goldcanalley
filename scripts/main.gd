@@ -290,7 +290,7 @@ func actualizar_ui_puntaje() -> void:
 	if label_puntaje:
 		# Formato de 4 dígitos (ej: SCORE: 0100)
 		label_puntaje.text = "SCORE: " + str(puntaje_nivel)
-		
+
 func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 	if not camara or not escena_puntos_flotantes or not barra_energia:
 		return
@@ -371,5 +371,9 @@ func _on_boton_reiniciar_pressed() -> void:
 	cargar_nivel(nivel_actual)
 
 func _on_boton_home_pressed() -> void:
-	# Regresa a la pantalla de selección de niveles
-	get_tree().change_scene_to_file("res://scenes/SeleccionNiveles.tscn")
+	# Si hay un premio recien desbloqueado, mostramos la pantalla de premio primero
+	if SaveManager.premio_recien_desbloqueado != "":
+		get_tree().change_scene_to_file("res://scenes/PremioDesbloqueado.tscn")
+	else:
+		# Si no hay premio, va directamente a la pantalla de niveles
+		get_tree().change_scene_to_file("res://scenes/SeleccionNiveles.tscn")

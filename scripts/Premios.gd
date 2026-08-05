@@ -1,15 +1,5 @@
 extends Control
 
-# Lista fija de los 18 premios en el orden especificado
-const LISTA_PREMIOS: Array[String] = [
-	"aros", "dino", "drum",
-	"doll", "robot", "duck",
-	"auto2", "tricep", "horse",
-	"bunny", "plane", "train",
-	"rocket", "robot2", "teddy",
-	"auto", "astro", "rex"
-]
-
 const CARPETA_PREMIOS = "res://images/prizes/"
 const RUTA_NIVELES_JSON = "res://data/niveles.json" # Ajusta tu ruta
 
@@ -25,15 +15,13 @@ func refrescar_estanteria() -> void:
 		child.queue_free()
 
 	# 2. Calcular datos del usuario y del juego
-	var total_niveles = obtener_total_niveles()
-	var ribbons_azules_obtenidas = contar_ribbons_azules()
-
-	print("🏆 Ribbons Azules: ", ribbons_azules_obtenidas, " / Total Niveles: ", total_niveles)
+	var total_niveles = SaveManager.obtener_total_niveles()
+	var ribbons_azules_obtenidas = SaveManager.contar_ribbons_azules()
 
 	# 3. Generar dinámicamente los 18 premios
-	for i in range(LISTA_PREMIOS.size()):
+	for i in range(SaveManager.LISTA_PREMIOS.size()):
 		var numero_premio = i + 1 # De 1 a 18
-		var nombre_premio = LISTA_PREMIOS[i]
+		var nombre_premio = SaveManager.LISTA_PREMIOS[i]
 
 		# Calcular cuántas ribbons exige este premio específico
 		var ribbons_necesarias: int = 1
@@ -45,34 +33,6 @@ func refrescar_estanteria() -> void:
 		# Crear el contenedor del premio
 		var slot_premio = crear_slot_premio(nombre_premio, desbloqueado, ribbons_azules_obtenidas, ribbons_necesarias)
 		grid_premios.add_child(slot_premio)
-
-
-func contar_ribbons_azules() -> int:
-	var conteo: int = 0
-	var datos = SaveManager.datos_progreso
-
-	for clave_nivel in datos.keys():
-		var info = datos[clave_nivel]
-		var score = int(info.get("score", 0))
-		var max_score = int(info.get("max", 0))
-
-		# Ribbon azul = Nivel completado con el 100% de los puntos
-		if max_score > 0 and score >= max_score:
-			conteo += 1
-
-	return conteo
-
-
-func obtener_total_niveles() -> int:
-	if not FileAccess.file_exists(RUTA_NIVELES_JSON):
-		return 18 # Valor de respaldo si no encuentra el JSON
-
-	var texto = FileAccess.get_file_as_string(RUTA_NIVELES_JSON)
-	var datos = JSON.parse_string(texto)
-	if datos is Dictionary:
-		return datos.keys().size()
-
-	return 18
 
 const RUTA_RIBBON_AZUL = "res://images/ribbon_tiny_blue.png"
 func crear_slot_premio(nombre_png: String, desbloqueado: bool, actuales: int, requeridas: int) -> Control:

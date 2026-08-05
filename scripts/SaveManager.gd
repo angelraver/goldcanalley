@@ -1,10 +1,24 @@
 extends Node
 
 const RUTA_GUARDADO = "user://progreso.json"
+const RUTA_NIVELES_JSON = "res://data/niveles.json" # Ajusta tu ruta de niveles.json
 
-# Estructura interna: {"1": {"score": 90, "max": 90}, "2": {"score": 40, "max": 100}}
+# Lista global única de premios en el orden correcto
+const LISTA_PREMIOS: Array[String] = [
+	"aros", "dino", "drum",
+	"doll", "robot", "duck",
+	"auto2", "tricep", "horse",
+	"bunny", "plane", "train",
+	"rocket", "robot2", "teddy",
+	"auto", "astro", "rex"
+]
+
 var datos_progreso: Dictionary = {}
 var nivel_actual_seleccionado: int = 1
+
+# Guardará el nombre del premio si se desbloqueó uno nuevo en esta partida
+var premio_recien_desbloqueado: String = ""
+
 
 func _ready() -> void:
 	cargar_progreso()
@@ -37,6 +51,8 @@ func guardar_a_disco() -> void:
 func registrar_puntaje_nivel(numero_nivel: int, nuevo_puntaje: int, puntaje_maximo: int) -> bool:
 	var clave = str(numero_nivel)
 	var puntaje_previo = obtener_puntaje_nivel(numero_nivel)
+	# 1. Contar premios desbloqueados ANTES de actualizar
+	var premios_antes = calcular_cantidad_premios_desbloqueados()
 
 	if nuevo_puntaje > puntaje_previo:
 		datos_progreso[clave] = {
@@ -44,8 +60,16 @@ func registrar_puntaje_nivel(numero_nivel: int, nuevo_puntaje: int, puntaje_maxi
 			"max": puntaje_maximo
 		}
 		guardar_a_disco()
-		return true # Indica que se superó el récord
-	
+
+		# 2. Contar premios desbloqueados DESPUÉS de actualizar
+		var premios_despues = calcular_cantidad_premios_desbloqueados()
+
+		# 3. Si incrementó la cantidad, guardamos cuál fue el nuevo premio desbloqueado
+		if premios_despues > premios_antes and premios_despues <= LISTA_PREMIOS.size():
+			premio_recien_desbloqueado = LISTA_PREMIOS[premios_despues - 1]
+
+		return true
+
 	return false
 
 
@@ -78,3 +102,37 @@ func es_nivel_desbloqueado(numero_nivel: int) -> bool:
 
 	# 1/3 (33.3%) equivale a conseguir al menos la Ribbon Amarilla
 	return (score_prev / max_prev) >= (1.0 / 3.0)
+
+
+func contar_ribbons_azules() -> int:
+	var conteo: int = 0
+	for clave in datos_progreso.keys():
+		var info = datos_progreso[clave]
+		var score = int(info.get("score", 0))
+		var max_score = int(info.get("max", 0))
+		if max_score > 0 and score >= max_score:
+			conteo += 1
+	return conteo
+
+
+func obtener_total_niveles() -> int:
+	if FileAccess.file_exists(RUTA_NIVELES_JSON):
+		var texto = FileAccess.get_file_as_string(RUTA_NIVELES_JSON)
+		var datos = JSON.parse_string(texto)
+		if datos is Dictionary:
+			return datos.keys().size()
+	return 18
+
+
+func calcular_cantidad_premios_desbloqueados() -> int:
+	var azules = contar_ribbons_azules()
+	var total_niveles = obtener_total_niveles()
+	var cantidad_desbloqueada: int = 0
+
+	for i in range(LISTA_PREMIOS.size()):
+		var numero_premio = i + 1
+		var requeridas: int = int(ceil(float(numero_premio) * float(total_niveles) / 18.0))
+		if azules >= requeridas:
+			cantidad_desbloqueada += 1
+
+	return cantidad_desbloqueada
