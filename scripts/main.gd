@@ -198,16 +198,16 @@ func verificar_latas_derribadas() -> void:
 		var tipo: String = obj.get_meta("tipo", "lata_aluminio")
 		var esta_derribada: bool = false
 
-		if obj.global_position.y < (origen_mesa.y - 0.15):
-			esta_derribada = true
-		else:
-			var vector_arriba_lata = obj.global_transform.basis.y
-			var inclinacion = vector_arriba_lata.dot(Vector3.UP)
-			var esta_tumbada = inclinacion < 0.8
-			var esta_quieta = obj.linear_velocity.length() < 0.08 and obj.angular_velocity.length() < 0.08
+		# 1. Verificación por caída de la mesa
+		var esta_caida: bool = obj.global_position.y < (origen_mesa.y - 0.15)
 
-			if esta_tumbada and esta_quieta:
-				esta_derribada = true
+		# 2. Verificación por inclinación inmediata (sin esperar a que se detenga)
+		var vector_arriba_lata = obj.global_transform.basis.y
+		var inclinacion = vector_arriba_lata.dot(Vector3.UP)
+		var esta_tumbada: bool = inclinacion < 0.707 # 0.707 equivale a más de 45° de inclinación
+
+		if esta_caida or esta_tumbada:
+			esta_derribada = true
 
 		if esta_derribada:
 			obj.set_meta("derribado", true)
@@ -218,7 +218,7 @@ func verificar_latas_derribadas() -> void:
 			puntaje_nivel += puntos_ganados
 			actualizar_ui_puntaje()
 			crear_efecto_puntos(obj.global_position, puntos_ganados)
-			#	print("💥 ¡Objeto Derribado! Tipo: ", tipo, " | +", puntos_ganados, " pts | Puntaje Nivel: ", puntaje_nivel)
+			# print("💥 ¡Objeto Derribado! Tipo: ", tipo, " | +", puntos_ganados, " pts | Puntaje Nivel: ", puntaje_nivel)
 
 func animar_camara_entrada() -> void:
 	if barra_energia: barra_energia.visible = false

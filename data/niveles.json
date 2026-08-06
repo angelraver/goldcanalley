@@ -1,5 +1,10 @@
 {
-"1": [
+"1":[
+	[4, 1, 0, "manaos_cola"], [5, 1, 0, "manaos_cola"], [6, 1, 0, "manaos_cola"],
+	[4.5, 2, 0, "manaos_cola"], [5.5, 2, 0, "manaos_cola"],
+	[5, 3, 0, "manaos_cola"]
+],
+"21": [
 	[4, 1, 0, "manaos_cola"],
 	[5, 1, 0, "manaos_naranja"],
 	[6, 1, 0, "manaos_cola"],
@@ -18,7 +23,6 @@
 	[5.5, 2, 1.5, "manaos_naranja"],
 
 	[5, 3, 1, "manaos_cola"]
-
   ],
 "2": [[4, 1, 1, "manaos_cola"], [5, 1, 1, "manaos_cola"], [6, 1, 1, "manaos_cola"]],
 "3": [[4, 1, 1, "manaos_cola"], [5, 1, 1, "manaos_cola"], [6, 1, 1, "manaos_cola"]],
