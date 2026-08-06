@@ -12,6 +12,7 @@ extends Node3D
 # Gestión de niveles mediante JSON
 @export_file("*.json") var ruta_niveles_json: String = "res://data/niveles.json"
 @export_file("*.json") var ruta_valores_json: String = "res://data/valores.json"
+const CARPETA_CANS = "res://images/cans/"
 @export var nivel_actual: int = 1
 
 @export var escena_puntos_flotantes: PackedScene = preload("res://scenes/puntos_flotantes.tscn")
@@ -129,7 +130,6 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	var texto_json = FileAccess.get_file_as_string(ruta_niveles_json)
 	var datos_niveles = JSON.parse_string(texto_json)
-
 	if not datos_niveles or not datos_niveles.has(str(numero_nivel)):
 		print("ERROR: No existe el nivel ", numero_nivel)
 		return
@@ -137,6 +137,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	var clave_por_defecto: String = catalogo_objetos.keys()[0] if not catalogo_objetos.is_empty() else ""
 	var escena_por_defecto: PackedScene = catalogo_objetos.get(clave_por_defecto, null)
 	var lista_objetos = datos_niveles[str(numero_nivel)]
+
 	for item in lista_objetos:
 		var grid_x: float = float(item[0])
 		var grid_y: float = float(item[1])
@@ -144,28 +145,42 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var clave_tipo: String = item[3] if item.size() > 3 else clave_por_defecto
 		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, escena_por_defecto)
 		var datos_tipo: Dictionary = valores_objetos.get(clave_tipo, {})
+
+		# 1. Lectura de variables desde valores.json
 		var factor_escala: float = float(datos_tipo.get("escala", 1.0))
+		var factor_ancho: float = float(datos_tipo.get("ancho", 1.0))
+		var factor_alto: float = float(datos_tipo.get("alto", 1.0))
 		var masa_objeto: float = float(datos_tipo.get("masa", 1.0))
 		var puntos_objeto: int = int(datos_tipo.get("pts", 100))
-		var paso_celda: Vector3 = tamano_celda * factor_escala
-		
-		puntaje_maximo_nivel += puntos_objeto
 
-		# Calculamos la posición 3D usando la celda adaptada
+		# 2. Cálculo de escala tridimensional final (X, Z = Ancho / Y = Alto)
+		var escala_vector = Vector3(
+			factor_ancho * factor_escala,
+			factor_alto * factor_escala,
+			factor_ancho * factor_escala
+		)
+
+		# 3. Cálculo de posición en la grilla
+		var paso_celda = Vector3(
+			tamano_celda.x * escala_vector.x,
+			tamano_celda.y * escala_vector.y,
+			tamano_celda.z * escala_vector.z
+		)
+
+		puntaje_maximo_nivel += puntos_objeto
 		var pos_x = origen_mesa.x + (grid_x - 5.0) * paso_celda.x
 		var pos_y = origen_mesa.y + (grid_y - 0.5) * paso_celda.y
 		var pos_z = origen_mesa.z - (grid_z - 1.0) * paso_celda.z
 
-		# Instanciar la lata/objeto
+		# 4. Instanciación y personalización de la lata
 		var nuevo_objeto = escena_objetivo.instantiate() as RigidBody3D
-		
-		# APLICAR ESCALA Y MASA AL RAGDOLL / RIGIDBODY
-		nuevo_objeto.scale = Vector3.ONE * factor_escala
+		nuevo_objeto.scale = escala_vector
 		nuevo_objeto.mass = masa_objeto
-
-		# Guardar metadatos para el puntaje
 		nuevo_objeto.set_meta("tipo", clave_tipo)
 		nuevo_objeto.set_meta("derribado", false)
+
+		# 5. Aplicar texturas y shader desde valores.json
+		aplicar_material_lata(nuevo_objeto, datos_tipo)
 
 		contenedor_latas.add_child(nuevo_objeto)
 		nuevo_objeto.global_position = Vector3(pos_x, pos_y, pos_z)
@@ -375,7 +390,6 @@ func mostrar_panel_resultados() -> void:
 		panel_resultados.visible = true
 		animar_aparicion_panel(panel_resultados)
 
-
 func _on_boton_reiniciar_pressed() -> void:
 	# 1. Ocultar el panel de resultados
 	if panel_resultados:
@@ -394,7 +408,6 @@ func _on_boton_home_pressed() -> void:
 	else:
 		# Si no hay premio, va directamente a la pantalla de niveles
 		get_tree().change_scene_to_file("res://scenes/SeleccionNiveles.tscn")
-
 
 func animar_aparicion_panel(panel: Control) -> void:
 	ribbon_amarilla.scale = Vector2.ZERO
@@ -456,3 +469,58 @@ func animar_pop_ribbon(ribbon: Control, escala_objetivo: Vector2) -> void:
 	tween.tween_property(ribbon, "scale", escala_objetivo, 0.10)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_IN_OUT)
+
+func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void:
+	var mesh_instance = nuevo_objeto.get_node_or_null("MeshInstance3D") as MeshInstance3D
+	if not mesh_instance or not mesh_instance.mesh:
+		return
+		
+	# 1. Obtener los radios reales de la malla del objeto (ej. CylinderMesh)
+	var cylinder_mesh = mesh_instance.mesh as CylinderMesh
+	var r_top: float = 0.5
+	var r_bottom: float = 0.5
+	
+	if cylinder_mesh:
+		r_top = cylinder_mesh.top_radius
+		r_bottom = cylinder_mesh.bottom_radius
+
+	# 2. Obtener el material Shader
+	var mat_base = mesh_instance.get_active_material(0)
+	if not mat_base:
+		mat_base = mesh_instance.material_override
+		
+	if mat_base is ShaderMaterial:
+		# Duplicar material para que cada lata mantenga sus parámetros independientes
+		var mat_instancia = mat_base.duplicate() as ShaderMaterial
+		
+		# 3. Asignar radios al Shader para centrado perfecto de tapas
+		mat_instancia.set_shader_parameter("top_radius", r_top)
+		mat_instancia.set_shader_parameter("bottom_radius", r_bottom)
+		
+		# 4. Cargar tapas globales (PNG o JPG según disponibilidad)
+		var ruta_top = CARPETA_CANS + "can_top.png"
+		var ruta_bottom = CARPETA_CANS + "can_bottom.png"
+		
+		if not ResourceLoader.exists(ruta_bottom):
+			ruta_bottom = CARPETA_CANS + "can_bottom.jpg"
+			
+		if ResourceLoader.exists(ruta_top):
+			mat_instancia.set_shader_parameter("tex_top", load(ruta_top))
+		if ResourceLoader.exists(ruta_bottom):
+			mat_instancia.set_shader_parameter("tex_bottom", load(ruta_bottom))
+			
+		# 5. Cargar la textura lateral configurada en valores.json
+		var nombre_textura = datos_tipo.get("textura", "")
+		if nombre_textura != "":
+			var ruta_cuerpo = CARPETA_CANS + nombre_textura
+			if ResourceLoader.exists(ruta_cuerpo):
+				mat_instancia.set_shader_parameter("tex_side", load(ruta_cuerpo))
+		
+		# 6. Mapear escala y desfase lateral desde valores.json
+		var scale_arr = datos_tipo.get("uv_scale_side", [1.0, 1.0])
+		var offset_arr = datos_tipo.get("uv_offset_side", [0.0, 0.0])
+		
+		mat_instancia.set_shader_parameter("uv_scale_side", Vector2(scale_arr[0], scale_arr[1]))
+		mat_instancia.set_shader_parameter("uv_offset_side", Vector2(offset_arr[0], offset_arr[1]))
+		
+		mesh_instance.material_override = mat_instancia
