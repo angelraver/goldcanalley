@@ -71,6 +71,16 @@ var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
 
 var controles_activos: bool = false
 
+const ESCENA_FLOR_LUZ_UI = preload("res://scenes/EfectoFlorLuzUI.tscn")
+func mostrar_con_efecto_2d(elemento_ui: Control) -> void:
+	elemento_ui.visible = true
+	var efecto = ESCENA_FLOR_LUZ_UI.instantiate() as Control
+	elemento_ui.get_parent().add_child(efecto)
+	await get_tree().process_frame
+	#var centro_objetivo = elemento_ui.global_position + (elemento_ui.size / 2.0)
+	#efecto.global_position = centro_objetivo - (efecto.size / 2.0)
+	efecto.arrancar_efecto()
+
 func _ready() -> void:
 	contenedor_latas = Node3D.new()
 	contenedor_latas.name = "ContenedorLatas"
@@ -383,9 +393,13 @@ func mostrar_panel_resultados() -> void:
 	gano_ribbon_roja = (puntaje_nivel >= umbral_2)
 	gano_ribbon_azul = (puntaje_nivel >= umbral_3)
 
-	ribbon_amarilla.visible = gano_ribbon_amarilla
+	if gano_ribbon_amarilla:
+		ribbon_amarilla.visible = true
+		mostrar_con_efecto_2d(ribbon_amarilla)
+
 	ribbon_roja.visible = gano_ribbon_roja
 	ribbon_azul.visible = gano_ribbon_azul
+
 	
 	SaveManager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 	

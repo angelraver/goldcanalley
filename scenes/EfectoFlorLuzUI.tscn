@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bmat7blfd3oa3"]
+
+[ext_resource type="Script" uid="uid://bh3cf7k3stylu" path="res://scripts/efecto_flor_luz_ui.gd" id="1_jib3j"]
+[ext_resource type="Texture2D" uid="uid://dm46u8ri5lipk" path="res://images/star.png" id="2_flkox"]
+
+[node name="EfectoFlorLuzUi" type="Control" unique_id=630155743]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_jib3j")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1562238439]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_flkox")
