@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://kka34qmlhs2y"]
+
+[ext_resource type="Script" uid="uid://cxotf84avwi3v" path="res://scripts/AudioManager.gd" id="1_3dgps"]
+[ext_resource type="AudioStream" uid="uid://mxyckkkyksrw" path="res://sounds/ok.wav" id="1_4tesi"]
+[ext_resource type="AudioStream" uid="uid://7otrthylxnrn" path="res://sounds/shot1.wav" id="2_3dgps"]
+[ext_resource type="AudioStream" uid="uid://c0t5jnd5v6gjg" path="res://sounds/welldone1.wav" id="3_151wy"]
+
+[node name="AudioManager" type="Node" unique_id=1655563066]
+script = ExtResource("1_3dgps")
+
+[node name="Start" type="AudioStreamPlayer" parent="." unique_id=457850939]
+stream = ExtResource("1_4tesi")
+
+[node name="Shot" type="AudioStreamPlayer" parent="." unique_id=2054983087]
+stream = ExtResource("2_3dgps")
+
+[node name="Welldone" type="AudioStreamPlayer" parent="." unique_id=595892715]
+stream = ExtResource("3_151wy")

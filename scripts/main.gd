@@ -271,6 +271,9 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	if not camara or not escena_pelota or not raycast_apuntado:
 		return
 
+	if pelotas_restantes > 0:
+		AudioManager.play_shot()
+
 	pelotas_restantes -= 1
 	actualizar_ui_pelotas()
 
@@ -386,7 +389,8 @@ func mostrar_panel_resultados() -> void:
 	
 	SaveManager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 	
-	if panel_resultados: 
+	if panel_resultados:
+		AudioManager.play_welldone()
 		panel_resultados.visible = true
 		animar_aparicion_panel(panel_resultados)
 
