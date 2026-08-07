@@ -5,7 +5,7 @@
 	"escala":1.30,
 	"ancho":1.0,
 	"alto":1.0,
-	"textura":"manos_cola.png",
+	"textura":"a.png",
 	"uv_scale_side": [1.0, 2],
 	"uv_offset_side": [0.0, 0.0]
   },
@@ -15,7 +15,7 @@
 	"escala":1.30,
 	"ancho":1.0,
 	"alto":1.0,
-	"textura": "manaos_naranja.png",
+	"textura": "b.png",
 	"uv_scale_side": [1.0, 2],
 	"uv_offset_side": [0.0, 0.0]
   },
