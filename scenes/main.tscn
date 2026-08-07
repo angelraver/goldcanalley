@@ -63,7 +63,7 @@ environment = SubResource("Environment_8dl7b")
 [node name="table" parent="." unique_id=2089883142 instance=ExtResource("2_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6931398, 0.022, 0.68844604, -3.9946957)
 
-[node name="Cube_005" parent="table" index="0" unique_id=550216315]
+[node name="Cube_005" parent="table" index="0" unique_id=490867569]
 surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 surface_material_override/1 = SubResource("StandardMaterial3D_7mycd")
 
