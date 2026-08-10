@@ -27,9 +27,12 @@ var puntaje_nivel: int = 0
 @onready var camara: Camera3D = $Camera3D
 var contenedor_latas: Node3D
 var contenedor_pelotas: Node3D
-@onready var label_puntaje_final: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
+@onready var ui_puntaje_final_label: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
-@onready var label_puntaje: Label = $UI/LabelPuntaje
+@onready var ui_puntaje: Control = $UI/Puntaje
+@onready var ui_puntaje_label: Label = $UI/Puntaje/Label
+@onready var ui_level_number: Label = $UI/LevelNumber
+@onready var ui_level_number_label: Label = $UI/LevelNumber/Label
 
 @export var fuerza_minima: float = 5.0
 @export var fuerza_maxima: float = 30.0
@@ -45,7 +48,7 @@ var pelotas_restantes: int = 3
 var esperando_fin_nivel: bool = false
 
 # Referencias a la UI de la pelota 3D y el contador
-@onready var label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
+@onready var ui_label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
 @onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
 @onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
 @onready var panel_resultados: Control = $UI/PanelResultados
@@ -117,6 +120,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	puntaje_nivel = 0
 	puntaje_maximo_nivel = 0
 	actualizar_ui_puntaje()
+	actualizar_ui_level()
 
 	for pelota in contenedor_pelotas.get_children():
 		pelota.queue_free()
@@ -218,10 +222,12 @@ func verificar_latas_derribadas() -> void:
 			puntaje_nivel += puntos_ganados
 			actualizar_ui_puntaje()
 			crear_efecto_puntos(obj.global_position, puntos_ganados)
-			# print("💥 ¡Objeto Derribado! Tipo: ", tipo, " | +", puntos_ganados, " pts | Puntaje Nivel: ", puntaje_nivel)
 
 func animar_camara_entrada() -> void:
 	if barra_energia: barra_energia.visible = false
+	if ui_puntaje: ui_puntaje.visible = false
+	if ui_level_number: ui_level_number.visible = true
+	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
 	controles_activos = false
 	camara.global_position = pos_inicial_camara
 	camara.global_rotation = rot_inicial_camara
@@ -238,7 +244,8 @@ func animar_camara_entrada() -> void:
 	tween.chain().tween_callback(func(): 
 		controles_activos = true
 		if barra_energia: barra_energia.visible = true
-		if label_puntaje: label_puntaje.visible = true
+		if ui_puntaje: ui_puntaje.visible = true
+		if ui_level_number: ui_level_number.visible = true
 		if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = true
 	)
 
@@ -316,13 +323,16 @@ func reiniciar_nivel() -> void:
 	cargar_nivel(nivel_actual)
 
 func actualizar_ui_pelotas() -> void:
-	if label_pelotas:
-		label_pelotas.text = "x %d" % pelotas_restantes
+	if ui_label_pelotas:
+		ui_label_pelotas.text = "x %d" % pelotas_restantes
 
 func actualizar_ui_puntaje() -> void:
-	if label_puntaje:
-		# Formato de 4 dígitos (ej: SCORE: 0100)
-		label_puntaje.text = "SCORE: " + str(puntaje_nivel)
+	if ui_puntaje_label:
+		ui_puntaje_label.text = str(puntaje_nivel)
+
+func actualizar_ui_level() -> void:
+	if ui_level_number_label:
+		ui_level_number_label.text = str(nivel_actual)
 
 func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 	if not camara or not escena_puntos_flotantes or not barra_energia:
@@ -369,11 +379,12 @@ func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 func mostrar_panel_resultados() -> void:		
 	# 1. Ocultar los elementos de la interfaz de juego (HUD)
 	if barra_energia: barra_energia.visible = false
-	if label_puntaje: label_puntaje.visible = false
+	if ui_puntaje: ui_puntaje.visible = false
+	if ui_level_number: ui_level_number.visible = false
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
 
-	if label_puntaje_final:
-		label_puntaje_final.text = "%d / %d" % [puntaje_nivel, puntaje_maximo_nivel]
+	if ui_puntaje_final_label:
+		ui_puntaje_final_label.text = "%d / %d" % [puntaje_nivel, puntaje_maximo_nivel]
 
 	var umbral_1: float = puntaje_maximo_nivel * (1.0 / 3.0) # 33.3%
 	var umbral_2: float = puntaje_maximo_nivel * (2.0 / 3.0) # 66.6%

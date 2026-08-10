@@ -50,6 +50,7 @@ shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
 
 [node name="Main" type="Node3D" unique_id=1912148217]
 script = ExtResource("1_tipki")
+metadata/_edit_horizontal_guides_ = [66.0, 24.0]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=328257172]
 transform = Transform3D(1, 0, 0, 0, 0.99995744, 0.0092289895, 0, -0.0092289895, 0.99995744, 0, 1.4426732, -0.87311673)
@@ -63,7 +64,7 @@ environment = SubResource("Environment_8dl7b")
 [node name="table" parent="." unique_id=2089883142 instance=ExtResource("2_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6931398, 0.022, 0.68844604, -3.9946957)
 
-[node name="Cube_005" parent="table" index="0" unique_id=550216315]
+[node name="Cube_005" parent="table" index="0" unique_id=490867569]
 surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 surface_material_override/1 = SubResource("StandardMaterial3D_7mycd")
 
@@ -106,24 +107,63 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_jkv2x")
 
-[node name="LabelPuntaje" type="Label" parent="UI" unique_id=1725192428]
+[node name="Puntaje" type="Label" parent="UI" unique_id=1725192428]
 offset_left = 36.0
-offset_top = 27.0
-offset_right = 132.0
-offset_bottom = 50.0
+offset_top = 5.0
+offset_right = 180.0
+offset_bottom = 77.0
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("9_85g3d")
 theme_override_font_sizes/font_size = 64
-text = "SCORE 0000"
+text = "score"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI/Puntaje" unique_id=1593139156]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 41.0
+offset_right = 121.0
+offset_bottom = 113.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_85g3d")
+theme_override_font_sizes/font_size = 64
+text = "0000"
+horizontal_alignment = 1
+
+[node name="LevelNumber" type="Label" parent="UI" unique_id=650980694]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -129.0
+offset_top = 5.0
+offset_right = 129.0
+offset_bottom = 77.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_85g3d")
+theme_override_font_sizes/font_size = 64
+text = "lvl"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI/LevelNumber" unique_id=1063573414]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 42.0
+offset_right = 177.0
+offset_bottom = 114.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_85g3d")
+theme_override_font_sizes/font_size = 64
+text = "1"
+horizontal_alignment = 1
 
 [node name="ContenedorPelotasUI" type="HBoxContainer" parent="UI" unique_id=242437922]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -239.99997
-offset_top = 6.0
+offset_left = -240.0
 offset_right = -127.0
-offset_bottom = 70.0
+offset_bottom = 64.0
 grow_horizontal = 0
 scale = Vector2(1.8, 1.933)
 theme_override_constants/separation = 0
