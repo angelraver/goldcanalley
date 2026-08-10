@@ -42,7 +42,7 @@
   "E":{
 	"pts":250,
 	"masa":1.20,
-	"escala":1.60,
+	"escala":1.10,
 	"ancho":1.2,
 	"alto":1.2,
 	"textura":"e.png",
@@ -52,8 +52,8 @@
   "F":{
 	"pts":80,
 	"masa":0.20,
-	"escala":0.90,
-	"ancho":0.7,
+	"escala":1.2,
+	"ancho":1,
 	"alto":1,
 	"textura":"f.png",
 	"uv_scale_side": [1.0, 2],
@@ -91,10 +91,12 @@
   },
   "J":{
 	"pts":1000,
-	"masa":2.50,
+	"masa":22.50,
 	"escala":1.40,
 	"ancho":1.1,
 	"alto":1.1,
-	"textura":"j.png"
+	"textura":"j.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   }
 }
