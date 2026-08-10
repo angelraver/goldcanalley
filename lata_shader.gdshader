@@ -3,15 +3,8 @@ shader_type spatial;
 uniform sampler2D tex_side : source_color, filter_linear_mipmap;
 uniform sampler2D tex_top : source_color, filter_linear_mipmap;
 uniform sampler2D tex_bottom : source_color, filter_linear_mipmap;
-
-// Radios dinámicos pasados desde GDScript según la malla real
 uniform float top_radius = 0.5;
 uniform float bottom_radius = 0.5;
-
-// Ajustes exclusivos para la cara lateral (vienen desde valores.json)
-uniform vec2 uv_scale_side = vec2(1.0, 1.0);
-uniform vec2 uv_offset_side = vec2(0.0, 0.0);
-
 varying vec3 local_pos;
 varying vec3 local_normal;
 
@@ -31,7 +24,7 @@ void fragment() {
 		ALBEDO = texture(tex_bottom, uv_bottom).rgb;
 	} else {
 		// Cara Lateral: UVs nativas + escala y offset de valores.json
-		vec2 uv_side = (UV * uv_scale_side) + uv_offset_side;
+		vec2 uv_side = (UV * vec2(1, 2)) + vec2(0, 0);
 		ALBEDO = texture(tex_side, uv_side).rgb;
 	}
 }
