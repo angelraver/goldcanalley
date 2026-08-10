@@ -25,7 +25,9 @@
 	"escala":1.00,
 	"ancho":1.0,
 	"alto":1.40,
-	"textura":"c.png"
+	"textura":"c.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "D":{
 	"pts":170,
@@ -33,7 +35,9 @@
 	"escala":1.20,
 	"ancho":1.25,
 	"alto":0.90,
-	"textura":"d.png"
+	"textura":"d.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "E":{
 	"pts":250,
@@ -41,15 +45,19 @@
 	"escala":1.60,
 	"ancho":1.2,
 	"alto":1.2,
-	"textura":"e.png"
+	"textura":"e.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "F":{
 	"pts":80,
 	"masa":0.20,
-	"escala":0.70,
+	"escala":0.90,
 	"ancho":0.7,
-	"alto":0.7,
-	"textura":"f.png"
+	"alto":1,
+	"textura":"f.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "G":{
 	"pts":350,
@@ -57,15 +65,19 @@
 	"escala":1.30,
 	"ancho":1.0,
 	"alto":1.0,
-	"textura":"g.png"
+	"textura":"g.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "H":{
 	"pts":500,
-	"masa":3.20,
-	"escala":2.00,
-	"ancho":1.5,
-	"alto":1.6,
-	"textura":"h.png"
+	"masa":10,
+	"escala":1.1,
+	"ancho":1.2,
+	"alto":1.2,
+	"textura":"h.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "I":{
 	"pts":700,
@@ -73,7 +85,9 @@
 	"escala":1.10,
 	"ancho":1.0,
 	"alto":1.0,
-	"textura":"i.png"
+	"textura":"i.png",
+	"uv_scale_side": [1.0, 2],
+	"uv_offset_side": [0.0, 0.0]
   },
   "J":{
 	"pts":1000,
