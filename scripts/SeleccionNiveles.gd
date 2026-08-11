@@ -104,7 +104,6 @@ func _on_boton_next_pressed() -> void:
 
 
 func _on_nivel_seleccionado(numero_nivel: int) -> void:
-	print("Cargando Nivel: ", numero_nivel)
 	SaveManager.nivel_actual_seleccionado = numero_nivel
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 

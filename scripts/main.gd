@@ -1,54 +1,33 @@
 extends Node3D
 
-# Escenas exportadas
-@export var escena_pelota: PackedScene = preload("res://scenes/pelota.tscn")
 
-# 1. CATÁLOGO DE OBJETOS: Mapeamos los textos del JSON a sus archivos .tscn
-@export var catalogo_objetos: Dictionary = {
-	"lata_aluminio": preload("res://scenes/lata.tscn"),
-	"caja_madera": preload("res://scenes/caja_madera.tscn")
-}
-
-# Gestión de niveles mediante JSON
 @export_file("*.json") var ruta_niveles_json: String = "res://data/niveles.json"
 @export_file("*.json") var ruta_valores_json: String = "res://data/valores.json"
-const CARPETA_CANS = "res://images/cans/"
+@export var catalogo_objetos: Dictionary = {
+	"lata_aluminio": preload("res://scenes/lata.tscn")
+}
+@export var escena_pelota: PackedScene = preload("res://scenes/pelota.tscn")
 @export var nivel_actual: int = 1
-
 @export var escena_puntos_flotantes: PackedScene = preload("res://scenes/puntos_flotantes.tscn")
-
-var valores_objetos: Dictionary = {}
-var puntaje_nivel: int = 0
-
-# Configuración de la grilla imaginaria sobre la mesa
 @export var origen_mesa: Vector3 = Vector3(0.0, 0.8, -4.0)
 @export var tamano_celda: Vector3 = Vector3(0.22, 0.31, 0.22)
-
-@onready var camara: Camera3D = $Camera3D
-var contenedor_latas: Node3D
-var contenedor_pelotas: Node3D
-@onready var ui_puntaje_final_label: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
-@onready var raycast_apuntado: RayCast3D = $RayCastApuntado
-@onready var ui_puntaje: Control = $UI/Puntaje
-@onready var ui_puntaje_label: Label = $UI/Puntaje/Label
-@onready var ui_level_number: Label = $UI/LevelNumber
-@onready var ui_level_number_label: Label = $UI/LevelNumber/Label
-
 @export var fuerza_minima: float = 5.0
 @export var fuerza_maxima: float = 30.0
 @export var velocidad_oscilacion: float = 0.8
+@export var pelotas_maximas: int = 3
 
+@onready var camara: Camera3D = $Camera3D
+@onready var raycast_apuntado: RayCast3D = $RayCastApuntado
+@onready var ui_puntaje: Control = $UI/Puntaje
+@onready var ui_puntaje_final_label: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
+@onready var ui_puntaje_label: Label = $UI/Puntaje/Label
+@onready var ui_level_number: Label = $UI/LevelNumber
+@onready var ui_level_number_label: Label = $UI/LevelNumber/Label
+@onready var ui_level_title: Label = $UI/LevelTitle
+@onready var ui_level_title_resultados: Label = $UI/PanelResultados/FondoPanel/LevelTitle
+@onready var ui_label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
 @onready var barra_energia: Control = $UI/BarraEnergia
 @onready var indicador_circulo: Control = $UI/BarraEnergia/IndicadorCirculo
-var tiempo_barra: float = 0.0
-
-# --- CONFIGURACIÓN DE PELOTAS ---
-@export var pelotas_maximas: int = 3
-var pelotas_restantes: int = 3
-var esperando_fin_nivel: bool = false
-
-# Referencias a la UI de la pelota 3D y el contador
-@onready var ui_label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
 @onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
 @onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
 @onready var panel_resultados: Control = $UI/PanelResultados
@@ -57,6 +36,15 @@ var esperando_fin_nivel: bool = false
 @onready var ribbon_amarilla: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAmarilla
 @onready var ribbon_roja: TextureRect = $UI/PanelResultados/FondoPanel/RibbonRoja
 @onready var ribbon_azul: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAzul
+
+const CARPETA_CANS = "res://images/cans/"
+var valores_objetos: Dictionary = {}
+var puntaje_nivel: int = 0
+var contenedor_latas: Node3D
+var contenedor_pelotas: Node3D
+var tiempo_barra: float = 0.0
+var pelotas_restantes: int = 3
+var esperando_fin_nivel: bool = false
 var puntaje_maximo_nivel: int = 0
 var gano_ribbon_amarilla: bool = false 
 var gano_ribbon_roja: bool = false 
@@ -64,14 +52,10 @@ var gano_ribbon_azul: bool = false
 var escala_orig_amarilla: Vector2
 var escala_orig_roja: Vector2
 var escala_orig_azul: Vector2
-
-# --- CONFIGURACIÓN DE CÁMARA CINEMÁTICA ---
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
 var rot_final_camara: Vector3 = Vector3(deg_to_rad(-0.5), 0.0, 0.0)
-
 var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8) 
 var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
-
 var controles_activos: bool = false
 
 func _ready() -> void:
@@ -184,6 +168,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 		contenedor_latas.add_child(nuevo_objeto)
 		nuevo_objeto.global_position = Vector3(pos_x, pos_y, pos_z)
 
+	anunciar_nivel(numero_nivel)
 	animar_camara_entrada()
 
 func verificar_latas_derribadas() -> void:
@@ -378,6 +363,9 @@ func mostrar_panel_resultados() -> void:
 	if ui_level_number: ui_level_number.visible = false
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
 
+	if ui_level_title_resultados:
+		ui_level_title_resultados.text = "Nivel " + str(nivel_actual) + "\n" + GameManager.obtener_titulo_nivel(str(nivel_actual))
+
 	if ui_puntaje_final_label:
 		ui_puntaje_final_label.text = "%d / %d" % [puntaje_nivel, puntaje_maximo_nivel]
 
@@ -534,3 +522,12 @@ func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void
 		mat_instancia.set_shader_parameter("uv_offset_side", Vector2(offset_arr[0], offset_arr[1]))
 		
 		mesh_instance.material_override = mat_instancia
+
+func anunciar_nivel(numero_nivel: int) -> void:
+	ui_level_title.text = GameManager.obtener_titulo_nivel(str(numero_nivel))
+	ui_level_title.modulate.a = 1.0
+	# Animación de desvanecimiento tras 1.5 segundos
+	var tween = create_tween()
+	tween.tween_interval(1.5) # Espera visible en pantalla
+	tween.tween_property(ui_level_title, "modulate:a", 0.0, 0.5) # Se desvanece en 0.5s
+	tween.tween_callback(func(): ui_level_title.visible = false)

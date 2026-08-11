@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cjfrgb4i7ka14" path="res://images/ribbon_yellow.png" id="14_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bjbq77a3cyby" path="res://images/ribbon_red.png" id="15_muem4"]
 [ext_resource type="Texture2D" uid="uid://crj3mfi0j4w71" path="res://images/ribbon_blue.png" id="16_dp3eg"]
+[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://fonts/Evereast.ttf" id="17_muem4"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 
@@ -198,7 +199,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PanelResultados" type="Control" parent="UI" unique_id=2117455105]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,6 +279,31 @@ offset_bottom = 620.0
 scale = Vector2(0.87268454, 0.87268454)
 texture = ExtResource("16_dp3eg")
 
+[node name="LevelTitle" type="Label" parent="UI/PanelResultados/FondoPanel" unique_id=729768500]
+custom_minimum_size = Vector2(550, 0)
+custom_maximum_size = Vector2(-1, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -211.25
+offset_right = 300.0
+offset_bottom = -76.25
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0061463, 1)
+theme_override_colors/font_color = Color(0.2, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_muem4")
+theme_override_font_sizes/font_size = 32
+text = "Nivel 1
+Texto largo para confirmar el corte de linea automático"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="LabelPuntajeFinal" type="Label" parent="UI/PanelResultados/FondoPanel" unique_id=1722946763]
 layout_mode = 0
 offset_left = 308.872
@@ -291,6 +316,30 @@ theme_override_font_sizes/font_size = 60
 text = "0 / 0000"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LevelTitle" type="Label" parent="UI" unique_id=1507659899]
+visible = false
+custom_minimum_size = Vector2(600, 0)
+custom_maximum_size = Vector2(-1, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -394.5
+offset_right = 0.5
+offset_bottom = 394.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0061463, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("17_muem4")
+theme_override_font_sizes/font_size = 64
+text = "Texto largo para confirmar el corte de linea automático"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=1736940172]
 
