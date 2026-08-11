@@ -199,6 +199,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PanelResultados" type="Control" parent="UI" unique_id=2117455105]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -318,7 +319,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelTitle" type="Label" parent="UI" unique_id=1507659899]
-visible = false
 custom_minimum_size = Vector2(600, 0)
 custom_maximum_size = Vector2(-1, 400)
 anchors_preset = 8
