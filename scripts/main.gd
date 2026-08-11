@@ -151,18 +151,13 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var datos_tipo: Dictionary = valores_objetos.get(clave_tipo, {})
 
 		# 1. Lectura de variables desde valores.json
-		var factor_escala: float = float(datos_tipo.get("escala", 1.0))
 		var factor_ancho: float = float(datos_tipo.get("ancho", 1.0))
 		var factor_alto: float = float(datos_tipo.get("alto", 1.0))
 		var masa_objeto: float = float(datos_tipo.get("masa", 1.0))
 		var puntos_objeto: int = int(datos_tipo.get("pts", 100))
 
 		# 2. Cálculo de escala tridimensional final (X, Z = Ancho / Y = Alto)
-		var escala_vector = Vector3(
-			factor_ancho * factor_escala,
-			factor_alto * factor_escala,
-			factor_ancho * factor_escala
-		)
+		var escala_vector = Vector3(factor_ancho, factor_alto, factor_ancho)
 
 		# 3. Cálculo de posición en la grilla
 		var paso_celda = Vector3(

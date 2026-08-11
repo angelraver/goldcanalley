@@ -23,7 +23,6 @@ void fragment() {
 		vec2 uv_bottom = (vec2(-local_pos.x, local_pos.z) / (2.0 * bottom_radius)) + vec2(0.5);
 		ALBEDO = texture(tex_bottom, uv_bottom).rgb;
 	} else {
-		// Cara Lateral: UVs nativas + escala y offset de valores.json
 		vec2 uv_side = (UV * vec2(1, 2)) + vec2(0, 0);
 		ALBEDO = texture(tex_side, uv_side).rgb;
 	}
