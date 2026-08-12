@@ -213,13 +213,13 @@ grow_vertical = 2
 scale = Vector2(0.44000125, 0.44000125)
 texture_normal = ExtResource("5_qa6uu")
 
-[node name="Português" type="Control" parent="Frente/Idioma" unique_id=2093017625]
+[node name="Portugues" type="Control" parent="Frente/Idioma" unique_id=2093017625]
 anchors_preset = 0
 offset_top = 130.0
 offset_right = 40.0
 offset_bottom = 170.0
 
-[node name="Label" type="Label" parent="Frente/Idioma/Português" unique_id=966144532]
+[node name="Label" type="Label" parent="Frente/Idioma/Portugues" unique_id=966144532]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -228,7 +228,7 @@ theme_override_fonts/font = ExtResource("4_b4pvv")
 theme_override_font_sizes/font_size = 32
 text = "Português"
 
-[node name="Button" type="TextureButton" parent="Frente/Idioma/Português" unique_id=2073825482]
+[node name="Button" type="TextureButton" parent="Frente/Idioma/Portugues" unique_id=2073825482]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -7,6 +7,9 @@ const BTN_OFF = preload("res://images/icon_check_off.png")
 # Referencias a los TextureButton según tu árbol de escena
 @onready var music_button: TextureButton = $Frente/Music/Button
 @onready var sfx_button: TextureButton = $Frente/SoundEffects/Button
+@onready var btn_es: TextureButton = $Frente/Idioma/Castellano/Button
+@onready var btn_en: TextureButton = $Frente/Idioma/English/Button
+@onready var btn_pt: TextureButton = $Frente/Idioma/Portugues/Button
 
 func _ready() -> void:
 	# Conectamos las señales por código si no las conectaste en el editor
@@ -16,9 +19,15 @@ func _ready() -> void:
 	if not sfx_button.is_connected("pressed", _on_sfx_button_pressed):
 		sfx_button.connect("pressed", _on_sfx_button_pressed)
 
+	btn_es.pressed.connect(func(): _seleccionar_idioma("es"))
+	btn_en.pressed.connect(func(): _seleccionar_idioma("en"))
+	btn_pt.pressed.connect(func(): _seleccionar_idioma("pt"))
+
+
 	# Refrescamos la apariencia según los valores guardados en AudioManager
 	_actualizar_boton_musica()
 	_actualizar_boton_sfx()
+	_actualizar_botones_idioma()
 
 # --- MÚSICA ---
 func _on_music_button_pressed() -> void:
@@ -47,6 +56,29 @@ func _actualizar_boton_sfx() -> void:
 	else:
 		sfx_button.texture_normal = BTN_OFF
 		sfx_button.texture_pressed = BTN_OFF
+
+# ==========================================
+# IDIOMA (MUTUA EXCLUSIÓN)
+# ==========================================
+func _seleccionar_idioma(nuevo_codigo: String) -> void:
+	GameManager.cambiar_idioma(nuevo_codigo)
+	_actualizar_botones_idioma()
+	# Opcional: Si tienes textos traducibles en la misma pantalla de opciones, 
+	# puedes llamar aquí a una función actualizar_textos_ui()
+
+func _actualizar_botones_idioma() -> void:
+	var idioma = GameManager.idioma_actual
+	
+	# Evaluamos cada botón individualmente según el idioma seleccionado
+	_set_texture_check(btn_es, idioma == "es")
+	_set_texture_check(btn_en, idioma == "en")
+	_set_texture_check(btn_pt, idioma == "pt")
+
+# Función auxiliar para aplicar la textura según el estado booleano
+func _set_texture_check(button: TextureButton, activo: bool) -> void:
+	var tex = BTN_ON if activo else BTN_OFF
+	button.texture_normal = tex
+	button.texture_pressed = tex
 
 func _on_boton_options_pressed() -> void:
 	AudioManager.play_start()

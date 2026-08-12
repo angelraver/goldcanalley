@@ -152,3 +152,17 @@ func guardar_opcion_audio(clave: String, valor: bool) -> void:
 		
 	datos_progreso["opciones"][clave] = valor
 	guardar_a_disco()
+
+# Obtenemos el idioma guardado ("es" por defecto)
+func obtener_idioma_guardado() -> String:
+	if datos_progreso.has("opciones") and datos_progreso["opciones"] is Dictionary:
+		return datos_progreso["opciones"].get("idioma", "es")
+	return "es"
+
+# Guardamos el idioma en disco
+func guardar_idioma(nuevo_idioma: String) -> void:
+	if not datos_progreso.has("opciones") or not (datos_progreso["opciones"] is Dictionary):
+		datos_progreso["opciones"] = {}
+		
+	datos_progreso["opciones"]["idioma"] = nuevo_idioma
+	guardar_a_disco()

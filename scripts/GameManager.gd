@@ -7,7 +7,12 @@ var idioma_actual: String = "es"
 var titulos_niveles: Dictionary = {}
 
 func _ready() -> void:
+	idioma_actual = SaveManager.obtener_idioma_guardado()
 	cargar_titulos()
+
+func cambiar_idioma(nuevo_idioma: String) -> void:
+	idioma_actual = nuevo_idioma
+	SaveManager.guardar_idioma(nuevo_idioma)
 
 func cargar_titulos() -> void:
 	# Carga del JSON con las traducciones de títulos
