@@ -67,7 +67,7 @@ func _ready() -> void:
 	contenedor_pelotas.name = "ContenedorPelotas"
 	add_child(contenedor_pelotas)
 	cargar_valores()
-	nivel_actual = SaveManager.nivel_actual_seleccionado
+	nivel_actual = save_manager.nivel_actual_seleccionado
 	
 	ribbon_amarilla.pivot_offset = ribbon_amarilla.size / 2
 	escala_orig_amarilla = ribbon_amarilla.scale
@@ -259,7 +259,7 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 		return
 
 	if pelotas_restantes > 0:
-		AudioManager.play_shot()
+		audio_manager.play_shot()
 
 	pelotas_restantes -= 1
 	actualizar_ui_pelotas()
@@ -364,7 +364,7 @@ func mostrar_panel_resultados() -> void:
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
 
 	if ui_level_title_resultados:
-		ui_level_title_resultados.text = "Nivel " + str(nivel_actual) + "\n" + GameManager.obtener_titulo_nivel(str(nivel_actual))
+		ui_level_title_resultados.text = "Nivel " + str(nivel_actual) + "\n" + game_manager.obtener_titulo_nivel(str(nivel_actual))
 
 	if ui_puntaje_final_label:
 		ui_puntaje_final_label.text = "%d / %d" % [puntaje_nivel, puntaje_maximo_nivel]
@@ -381,10 +381,10 @@ func mostrar_panel_resultados() -> void:
 	ribbon_roja.visible = gano_ribbon_roja
 	ribbon_azul.visible = gano_ribbon_azul
 	
-	SaveManager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+	save_manager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 	
 	if panel_resultados:
-		AudioManager.play_welldone()
+		audio_manager.play_welldone()
 		panel_resultados.visible = true
 		animar_aparicion_panel(panel_resultados)
 
@@ -401,11 +401,11 @@ func _on_boton_reiniciar_pressed() -> void:
 
 func _on_boton_home_pressed() -> void:
 	# Si hay un premio recien desbloqueado, mostramos la pantalla de premio primero
-	if SaveManager.premio_recien_desbloqueado != "":
-		get_tree().change_scene_to_file("res://scenes/PremioDesbloqueado.tscn")
+	if save_manager.premio_recien_desbloqueado != "":
+		get_tree().change_scene_to_file("res://scenes/premio_desbloqueado.tscn")
 	else:
 		# Si no hay premio, va directamente a la pantalla de niveles
-		get_tree().change_scene_to_file("res://scenes/SeleccionNiveles.tscn")
+		get_tree().change_scene_to_file("res://scenes/seleccion_niveles.tscn")
 
 func animar_aparicion_panel(panel: Control) -> void:
 	ribbon_amarilla.scale = Vector2.ZERO
@@ -524,7 +524,7 @@ func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void
 		mesh_instance.material_override = mat_instancia
 
 func anunciar_nivel(numero_nivel: int) -> void:
-	ui_level_title.text = GameManager.obtener_titulo_nivel(str(numero_nivel))
+	ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel))
 	ui_level_title.modulate.a = 1.0
 	# Animación de desvanecimiento tras 1.5 segundos
 	var tween = create_tween()

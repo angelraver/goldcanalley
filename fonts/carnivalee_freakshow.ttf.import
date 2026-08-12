@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b3nlbqd0gqnvc"
-path="res://.godot/imported/evereast.ttf-dceab182ff1af7beed0d04eab0d7c383.fontdata"
+uid="uid://dgwigp7mj2t6i"
+path="res://.godot/imported/carnivalee_freakshow.ttf-7da87ecedf130c3a633a0b50e56238ca.fontdata"
 
 [deps]
 
-source_file="res://fonts/evereast.ttf"
-dest_files=["res://.godot/imported/evereast.ttf-dceab182ff1af7beed0d04eab0d7c383.fontdata"]
+source_file="res://fonts/carnivalee_freakshow.ttf"
+dest_files=["res://.godot/imported/carnivalee_freakshow.ttf-7da87ecedf130c3a633a0b50e56238ca.fontdata"]
 
 [params]
 

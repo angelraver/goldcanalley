@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SaveManager="*uid://cots0gs8v334y"
-AudioManager="*uid://kka34qmlhs2y"
-GameManager="*uid://dj08o70wsge1m"
+save_manager="*uid://cots0gs8v334y"
+audio_manager="*uid://kka34qmlhs2y"
+game_manager="*uid://dj08o70wsge1m"
 
 [display]
 
@@ -36,3 +36,4 @@ window/stretch/aspect="expand"
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

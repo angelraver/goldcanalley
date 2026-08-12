@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqew0nso28ouq"
-path.s3tc="res://.godot/imported/lata_tapa.png-92b54e6578f66678552ba75361cd5900.s3tc.ctex"
-path.etc2="res://.godot/imported/lata_tapa.png-92b54e6578f66678552ba75361cd5900.etc2.ctex"
+uid="uid://p3a5wgryk5aw"
+path.s3tc="res://.godot/imported/table.png-2ca3d7a273774c310dd0a512130d2bd0.s3tc.ctex"
+path.etc2="res://.godot/imported/table.png-2ca3d7a273774c310dd0a512130d2bd0.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://images/cans/lata_tapa.png"
-dest_files=["res://.godot/imported/lata_tapa.png-92b54e6578f66678552ba75361cd5900.s3tc.ctex", "res://.godot/imported/lata_tapa.png-92b54e6578f66678552ba75361cd5900.etc2.ctex"]
+source_file="res://images/world/table.png"
+dest_files=["res://.godot/imported/table.png-2ca3d7a273774c310dd0a512130d2bd0.s3tc.ctex", "res://.godot/imported/table.png-2ca3d7a273774c310dd0a512130d2bd0.etc2.ctex"]
 
 [params]
 

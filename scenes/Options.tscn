@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://cmx6nlfdepqkt"]
 
-[ext_resource type="Script" uid="uid://smmc3aovjttf" path="res://scripts/Options.gd" id="1_b4pvv"]
-[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://images/fondodia.jpeg" id="1_w238l"]
-[ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://scenes/desenfoque.gdshader" id="2_s26ps"]
-[ext_resource type="Texture2D" uid="uid://b75bxwnikh2ns" path="res://images/options_panel.png" id="3_n5jw5"]
-[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://fonts/Evereast.ttf" id="4_b4pvv"]
-[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://images/button_home.png" id="5_b4pvv"]
-[ext_resource type="Texture2D" uid="uid://b8h11v3yhjcsh" path="res://images/icon_check_off.png" id="5_qa6uu"]
-[ext_resource type="Texture2D" uid="uid://ib7uf2run2xg" path="res://images/icon_music.png" id="6_aq35e"]
-[ext_resource type="Texture2D" uid="uid://c8wbeyw02kibl" path="res://images/icon_sound.png" id="7_pdp8e"]
+[ext_resource type="Script" uid="uid://smmc3aovjttf" path="res://scripts/options.gd" id="1_85aq5"]
+[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://images/world/fondodia.jpeg" id="2_gycth"]
+[ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://shaders/desenfoque.gdshader" id="3_gyu1t"]
+[ext_resource type="Texture2D" uid="uid://b75bxwnikh2ns" path="res://images/ui/panel_options.png" id="4_g5hix"]
+[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://fonts/evereast.ttf" id="5_rftt1"]
+[ext_resource type="Texture2D" uid="uid://ib7uf2run2xg" path="res://images/ui/icon_music.png" id="6_0un6s"]
+[ext_resource type="Texture2D" uid="uid://b8h11v3yhjcsh" path="res://images/ui/icon_check_off.png" id="7_kywri"]
+[ext_resource type="Texture2D" uid="uid://c8wbeyw02kibl" path="res://images/ui/icon_sound.png" id="8_apvty"]
+[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://images/ui/button_home.png" id="9_vhp3b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qa6uu"]
-shader = ExtResource("2_s26ps")
+shader = ExtResource("3_gyu1t")
 shader_parameter/nivel_desenfoque = 2.5
 shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
 
@@ -22,7 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_b4pvv")
+script = ExtResource("1_85aq5")
 metadata/_edit_horizontal_guides_ = [1284.0, 0.0]
 metadata/_edit_vertical_guides_ = [1.0, 721.0]
 
@@ -33,7 +33,7 @@ offset_top = -2.0
 offset_right = 573.0
 offset_bottom = 1022.0
 scale = Vector2(1.4634976, 1.4634976)
-texture = ExtResource("1_w238l")
+texture = ExtResource("2_gycth")
 
 [node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=1996656753]
 material = SubResource("ShaderMaterial_qa6uu")
@@ -61,7 +61,7 @@ offset_right = 226.79932
 offset_bottom = 354.71082
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_n5jw5")
+texture = ExtResource("4_g5hix")
 
 [node name="Titulo" type="Label" parent="Frente" unique_id=1494166110]
 layout_mode = 1
@@ -77,7 +77,7 @@ offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.2, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_b4pvv")
+theme_override_fonts/font = ExtResource("5_rftt1")
 theme_override_font_sizes/font_size = 40
 text = "Options"
 horizontal_alignment = 1
@@ -95,7 +95,7 @@ offset_left = 58.999985
 offset_right = 170.99998
 offset_bottom = 139.0
 scale = Vector2(0.56, 0.56)
-texture = ExtResource("6_aq35e")
+texture = ExtResource("6_0un6s")
 
 [node name="Button" type="TextureButton" parent="Frente/Music" unique_id=508480405]
 layout_mode = 1
@@ -111,7 +111,7 @@ offset_bottom = 121.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.56, 0.56)
-texture_normal = ExtResource("5_qa6uu")
+texture_normal = ExtResource("7_kywri")
 
 [node name="SoundEffects" type="Control" parent="Frente" unique_id=1519256309]
 anchors_preset = 0
@@ -126,7 +126,7 @@ offset_left = 58.999985
 offset_right = 196.99998
 offset_bottom = 139.0
 scale = Vector2(0.56, 0.56)
-texture = ExtResource("7_pdp8e")
+texture = ExtResource("8_apvty")
 
 [node name="Button" type="TextureButton" parent="Frente/SoundEffects" unique_id=1004183015]
 layout_mode = 1
@@ -142,7 +142,7 @@ offset_bottom = 121.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.56, 0.56)
-texture_normal = ExtResource("5_qa6uu")
+texture_normal = ExtResource("7_kywri")
 
 [node name="Idioma" type="Control" parent="Frente" unique_id=1399017683]
 anchors_preset = 0
@@ -161,7 +161,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.2, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_b4pvv")
+theme_override_fonts/font = ExtResource("5_rftt1")
 theme_override_font_sizes/font_size = 32
 text = "Castellano"
 
@@ -179,7 +179,7 @@ offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.44000125, 0.44000125)
-texture_normal = ExtResource("5_qa6uu")
+texture_normal = ExtResource("7_kywri")
 
 [node name="English" type="Control" parent="Frente/Idioma" unique_id=661470815]
 anchors_preset = 0
@@ -193,7 +193,7 @@ offset_left = 48.0
 offset_right = 170.0
 offset_bottom = 43.0
 theme_override_colors/font_color = Color(0.2, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_b4pvv")
+theme_override_fonts/font = ExtResource("5_rftt1")
 theme_override_font_sizes/font_size = 32
 text = "English"
 
@@ -211,7 +211,7 @@ offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.44000125, 0.44000125)
-texture_normal = ExtResource("5_qa6uu")
+texture_normal = ExtResource("7_kywri")
 
 [node name="Portugues" type="Control" parent="Frente/Idioma" unique_id=2093017625]
 anchors_preset = 0
@@ -224,7 +224,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.2, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_b4pvv")
+theme_override_fonts/font = ExtResource("5_rftt1")
 theme_override_font_sizes/font_size = 32
 text = "Português"
 
@@ -242,7 +242,7 @@ offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.44000125, 0.44000125)
-texture_normal = ExtResource("5_qa6uu")
+texture_normal = ExtResource("7_kywri")
 
 [node name="BotonHome" type="TextureButton" parent="Frente" unique_id=1031772652]
 layout_mode = 1
@@ -257,6 +257,6 @@ offset_right = 61.5
 offset_bottom = 581.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_b4pvv")
+texture_normal = ExtResource("9_vhp3b")
 
 [connection signal="pressed" from="Frente/BotonHome" to="." method="_on_boton_options_pressed"]

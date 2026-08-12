@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://23765m633c5y"]
 
-[ext_resource type="Texture2D" uid="uid://yp3bmmgyxxvi" path="res://images/shelve.png" id="1_oc1f1"]
-[ext_resource type="Script" uid="uid://damqt1w8i6kv0" path="res://scripts/Premios.gd" id="1_q8nb1"]
-[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://images/button_home.png" id="2_662ax"]
+[ext_resource type="Texture2D" uid="uid://yp3bmmgyxxvi" path="res://images/ui/shelve.png" id="1_oc1f1"]
+[ext_resource type="Script" uid="uid://damqt1w8i6kv0" path="res://scripts/premios.gd" id="1_q8nb1"]
+[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://images/ui/button_home.png" id="2_662ax"]
 
 [node name="Premios" type="Control" unique_id=1024065414]
 layout_mode = 3

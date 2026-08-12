@@ -18,7 +18,7 @@ func _on_body_entered(_cuerpo: Node) -> void:
 		puede_sonar = false
 		
 		# Llamada limpia y directa
-		AudioManager.play_lata()
+		audio_manager.play_lata()
 
 		get_tree().create_timer(tiempo_cooldown).timeout.connect(
 			func(): puede_sonar = true

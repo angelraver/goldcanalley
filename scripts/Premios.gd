@@ -15,13 +15,13 @@ func refrescar_estanteria() -> void:
 		child.queue_free()
 
 	# 2. Calcular datos del usuario y del juego
-	var total_niveles = SaveManager.obtener_total_niveles()
-	var ribbons_azules_obtenidas = SaveManager.contar_ribbons_azules()
+	var total_niveles = save_manager.obtener_total_niveles()
+	var ribbons_azules_obtenidas = save_manager.contar_ribbons_azules()
 
 	# 3. Generar dinámicamente los 18 premios
-	for i in range(SaveManager.LISTA_PREMIOS.size()):
+	for i in range(save_manager.LISTA_PREMIOS.size()):
 		var numero_premio = i + 1 # De 1 a 18
-		var nombre_premio = SaveManager.LISTA_PREMIOS[i]
+		var nombre_premio = save_manager.LISTA_PREMIOS[i]
 
 		# Calcular cuántas ribbons exige este premio específico
 		var ribbons_necesarias: int = 1
@@ -86,4 +86,4 @@ func crear_slot_premio(nombre_png: String, desbloqueado: bool, actuales: int, re
 	return contenedor
 
 func _on_boton_home_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Title.tscn")
+	get_tree().change_scene_to_file("res://scenes/title.tscn")
