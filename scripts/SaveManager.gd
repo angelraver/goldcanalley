@@ -136,3 +136,19 @@ func calcular_cantidad_premios_desbloqueados() -> int:
 			cantidad_desbloqueada += 1
 
 	return cantidad_desbloqueada
+
+# --- GESTIÓN DE CONFIGURACIÓN Y PREFERENCIAS ---
+
+# Retorna la configuración guardada o un valor por defecto si no existe aún
+func obtener_opcion_audio(clave: String, valor_defecto: bool = true) -> bool:
+	if datos_progreso.has("opciones") and datos_progreso["opciones"] is Dictionary:
+		return datos_progreso["opciones"].get(clave, valor_defecto)
+	return valor_defecto
+
+# Guarda una opción específica y escribe inmediatamente a disco
+func guardar_opcion_audio(clave: String, valor: bool) -> void:
+	if not datos_progreso.has("opciones") or not (datos_progreso["opciones"] is Dictionary):
+		datos_progreso["opciones"] = {}
+		
+	datos_progreso["opciones"][clave] = valor
+	guardar_a_disco()

@@ -79,3 +79,4 @@ texture_normal = ExtResource("6_wiaur")
 [connection signal="pressed" from="Start" to="." method="_on_boton_start_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_boton_home_pressed"]
 [connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]
