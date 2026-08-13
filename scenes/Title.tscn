@@ -17,14 +17,15 @@ shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_yql1r")
+metadata/_edit_horizontal_guides_ = [1278.0]
+metadata/_edit_vertical_guides_ = [781.0]
 
 [node name="Fondo" type="TextureRect" parent="." unique_id=1930174974]
 layout_mode = 0
-offset_left = -220.00002
-offset_top = -2.0
-offset_right = 573.0
-offset_bottom = 1022.0
-scale = Vector2(1.4634976, 1.4634976)
+offset_left = -400.0
+offset_right = 393.0
+offset_bottom = 1024.0
+scale = Vector2(2, 2)
 texture = ExtResource("2_ia1n6")
 
 [node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=718747323]
@@ -43,40 +44,40 @@ grow_vertical = 2
 [node name="Logo" type="TextureRect" parent="." unique_id=2120168976]
 layout_mode = 0
 offset_left = 133.99998
-offset_top = 33.0
+offset_top = 130.0
 offset_right = 734.0
-offset_bottom = 933.0
+offset_bottom = 1030.0
 scale = Vector2(0.79431736, 0.79431736)
 texture = ExtResource("4_w65of")
 
 [node name="Start" type="TextureButton" parent="." unique_id=256854180]
 layout_mode = 0
 offset_left = 192.0
-offset_top = 733.0
+offset_top = 830.0
 offset_right = 524.0
-offset_bottom = 981.0
+offset_bottom = 1080.0
 scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("5_ygloa")
 
 [node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
 layout_mode = 0
 offset_left = 400.00003
-offset_top = 1032.0
+offset_top = 1129.0
 offset_right = 732.0
-offset_bottom = 1280.0
+offset_bottom = 1379.0
 scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("6_6civk")
 
 [node name="Options" type="TextureButton" parent="." unique_id=110325157]
 layout_mode = 0
 offset_left = 33.0
-offset_top = 1035.0
+offset_top = 1132.0
 offset_right = 365.0
-offset_bottom = 1282.0
+offset_bottom = 1382.0
 scale = Vector2(0.6, 0.6)
 texture_normal = ExtResource("7_7af2g")
 
-[connection signal="pressed" from="Start" to="." method="_on_boton_home_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_boton_start_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_boton_home_pressed"]
 [connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]

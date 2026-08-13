@@ -1,8 +1,8 @@
 extends Control
 
 # Referencias a los botones de navegación (ajusta las rutas si están dentro de otro nodo)
-@onready var boton_prev: TextureButton = $BotonPrev
-@onready var boton_next: TextureButton = $BotonNext
+@onready var boton_prev: TextureButton = $Frente/BotonPrev
+@onready var boton_next: TextureButton = $Frente/BotonNext
 
 # Variables de paginado
 var pagina_actual: int = 1
@@ -51,12 +51,13 @@ func obtener_total_niveles() -> int:
 func refrescar_pantalla_niveles() -> void:
 	actualizar_visibilidad_botones()
 
+	var contenedor_slots = $Frente/Slots  # O $Slots si Frente fuera transparente
 	# Recorrer los 9 slots físicos en pantalla
 	for i in range(1, NIVELES_POR_PAGINA + 1):
-		var nombre_nodo = "SlotNivel" + str(i)
+		var nombre_nodo = "Slot" + str(i)
 
-		if has_node(nombre_nodo):
-			var slot = get_node(nombre_nodo)
+		if contenedor_slots.has_node(nombre_nodo):
+			var slot = contenedor_slots.get_node(nombre_nodo)
 			# Calcular el número de nivel real para este slot en la página actual
 			var numero_nivel_real = (pagina_actual - 1) * NIVELES_POR_PAGINA + i
 
@@ -72,7 +73,6 @@ func refrescar_pantalla_niveles() -> void:
 				# ocultamos los slots sobrantes (13 a 18)
 				slot.visible = false
 
-
 func actualizar_visibilidad_botones() -> void:
 	# Calcular la cantidad total de páginas necesarias
 	var total_paginas: int = int(ceil(float(total_niveles) / float(NIVELES_POR_PAGINA)))
@@ -86,9 +86,6 @@ func actualizar_visibilidad_botones() -> void:
 	# Regla 2: BotonNext solo es visible si la página actual es menor al total de páginas
 	if boton_next:
 		boton_next.visible = (pagina_actual < total_paginas)
-
-
-# --- EVENTOS DE NAVEGACIÓN ---
 
 func _on_boton_prev_pressed() -> void:
 	if pagina_actual > 1:
