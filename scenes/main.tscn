@@ -257,28 +257,28 @@ texture_normal = ExtResource("12_trceg")
 
 [node name="RibbonAmarilla" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=739370402]
 layout_mode = 0
-offset_left = 182.75003
-offset_top = 390.0
-offset_right = 341.75003
-offset_bottom = 631.0
+offset_left = 170.25003
+offset_top = 375.0
+offset_right = 329.25003
+offset_bottom = 616.0
 scale = Vector2(0.8510344, 0.8510344)
 texture = ExtResource("14_jbj1t")
 
 [node name="RibbonRoja" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=7763624]
 layout_mode = 0
-offset_left = 330.74997
-offset_top = 386.5
-offset_right = 490.74997
-offset_bottom = 627.5
+offset_left = 318.24988
+offset_top = 374.0
+offset_right = 478.24988
+offset_bottom = 615.0
 scale = Vector2(0.87146163, 0.87146163)
 texture = ExtResource("15_muem4")
 
 [node name="RibbonAzul" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=790624423]
 layout_mode = 0
-offset_left = 485.50012
-offset_top = 387.75
-offset_right = 643.5001
-offset_bottom = 628.75
+offset_left = 476.75018
+offset_top = 375.25
+offset_right = 634.7502
+offset_bottom = 616.25
 scale = Vector2(0.87268454, 0.87268454)
 texture = ExtResource("16_dp3eg")
 
