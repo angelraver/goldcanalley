@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://yp3bmmgyxxvi" path="res://images/ui/shelve.png" id="1_oc1f1"]
 [ext_resource type="Script" uid="uid://damqt1w8i6kv0" path="res://scripts/premios.gd" id="1_q8nb1"]
+[ext_resource type="Script" uid="uid://dy6a0mku11h1m" path="res://scripts/scroll_container.gd" id="2_3ci4e"]
 [ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://images/ui/button_home.png" id="2_662ax"]
 
 [node name="Premios" type="Control" unique_id=1024065414]
@@ -20,12 +21,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("2_3ci4e")
 
 [node name="ContenidoEstanteria" type="Control" parent="ScrollContainer" unique_id=2087379828]
-custom_minimum_size = Vector2(926, 1790)
+custom_minimum_size = Vector2(1852, 3580)
 layout_mode = 2
 
 [node name="FondoEstanteria" type="TextureRect" parent="ScrollContainer/ContenidoEstanteria" unique_id=31399679]
+custom_minimum_size = Vector2(926, 1790)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,11 +41,11 @@ texture = ExtResource("1_oc1f1")
 
 [node name="GridPremios" type="GridContainer" parent="ScrollContainer/ContenidoEstanteria" unique_id=523474722]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 272.0
-offset_right = 523.0
-offset_bottom = 1112.0
-scale = Vector2(1.6121544, 1.5026639)
+offset_left = 239.00006
+offset_top = 572.0
+offset_right = 671.00006
+offset_bottom = 1472.0
+scale = Vector2(3.1999984, 2.9826684)
 theme_override_constants/h_separation = 36
 theme_override_constants/v_separation = 36
 columns = 3
