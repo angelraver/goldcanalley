@@ -203,6 +203,14 @@ func verificar_latas_derribadas() -> void:
 			actualizar_ui_puntaje()
 			crear_efecto_puntos(obj.global_position, puntos_ganados)
 
+			if not esperando_fin_nivel and puntaje_nivel >= puntaje_maximo_nivel:
+				esperando_fin_nivel = true
+				get_tree().create_timer(2.0).timeout.connect(_finalizar_por_victoria_perfecta)
+
+func _finalizar_por_victoria_perfecta() -> void:
+	if esperando_fin_nivel:
+		mostrar_panel_resultados()
+
 func animar_camara_entrada() -> void:
 	if barra_energia: barra_energia.visible = false
 	if ui_puntaje: ui_puntaje.visible = false
@@ -291,12 +299,11 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	
 	if pelotas_restantes == 0:
 		esperando_fin_nivel = true
-		# Esperar 5 segundos exactos desde el lanzamiento de la última pelota
 		get_tree().create_timer(3.0).timeout.connect(_on_tiempo_fin_nivel_agotado)
 
 func _on_tiempo_fin_nivel_agotado() -> void:
-	# Solo mostramos el panel si seguimos en el mismo intento/nivel (por si el jugador reinició antes)
-	if esperando_fin_nivel and pelotas_restantes == 0:
+	# Mostramos el panel si estamos esperando el fin del nivel
+	if esperando_fin_nivel:
 		mostrar_panel_resultados()
 
 func reiniciar_nivel() -> void:
@@ -412,7 +419,7 @@ func animar_aparicion_panel(panel: Control) -> void:
 	ribbon_roja.scale = Vector2.ZERO
 	ribbon_azul.scale = Vector2.ZERO
 	
-# 1. Animar FondoDesenfoque (Fade-in simple)
+	# 1. Animar FondoDesenfoque (Fade-in simple)
 	fondo_desenfoque.modulate.a = 0.0
 	var tween_desenfoque = create_tween()
 	tween_desenfoque.tween_property(fondo_desenfoque, "modulate:a", 1.0, 0.2)
