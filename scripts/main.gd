@@ -57,6 +57,7 @@ var rot_final_camara: Vector3 = Vector3(deg_to_rad(-0.5), 0.0, 0.0)
 var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8) 
 var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
 var controles_activos: bool = false
+var panel_resultados_mostrado: bool = false
 
 func _ready() -> void:
 	contenedor_latas = Node3D.new()
@@ -98,6 +99,7 @@ func cargar_valores() -> void:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
+	panel_resultados_mostrado = false
 	esperando_fin_nivel = false	
 	pelotas_restantes = pelotas_maximas
 	actualizar_ui_pelotas()
@@ -152,7 +154,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 		puntaje_maximo_nivel += puntos_objeto
 		var pos_x = origen_mesa.x + (grid_x - 5.0) * paso_celda.x
-		var pos_y = origen_mesa.y + (grid_y - 0.5) * paso_celda.y
+		var pos_y = origen_mesa.y + (grid_y - 0.5) * paso_celda.y + 0.005
 		var pos_z = origen_mesa.z - (grid_z - 1.0) * paso_celda.z
 
 		# 4. Instanciación y personalización de la lata
@@ -363,7 +365,14 @@ func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
 	# E. Eliminar el nodo de la interfaz cuando la animación termine
 	tween.chain().tween_callback(efecto.queue_free)
 
-func mostrar_panel_resultados() -> void:		
+func mostrar_panel_resultados() -> void:
+	# VALIDACIÓN: Si el panel ya se mostró o ya es visible, ignoramos cualquier intento duplicado
+	if panel_resultados_mostrado or (panel_resultados and panel_resultados.visible):
+		return
+	
+	# Marcamos que ya se mostró para bloquear futuras llamadas
+	panel_resultados_mostrado = true
+
 	# 1. Ocultar los elementos de la interfaz de juego (HUD)
 	if barra_energia: barra_energia.visible = false
 	if ui_puntaje: ui_puntaje.visible = false
