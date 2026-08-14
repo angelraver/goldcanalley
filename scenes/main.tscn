@@ -239,46 +239,46 @@ stretch_mode = 5
 
 [node name="BotonOk" type="TextureButton" parent="UI/PanelResultados/FondoPanel" unique_id=1070445000]
 layout_mode = 0
-offset_left = 516.0
-offset_top = 749.5
-offset_right = 669.0
-offset_bottom = 902.5
+offset_left = 501.0
+offset_top = 733.25
+offset_right = 654.0
+offset_bottom = 886.25
 scale = Vector2(0.6, 0.6)
 texture_normal = ExtResource("12_a8y0u")
 
 [node name="BotonReiniciar" type="TextureButton" parent="UI/PanelResultados/FondoPanel" unique_id=115287930]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 747.5
-offset_right = 338.0
-offset_bottom = 900.5
+offset_left = 201.25
+offset_top = 731.25
+offset_right = 354.25
+offset_bottom = 884.25
 scale = Vector2(0.6, 0.6)
 texture_normal = ExtResource("12_trceg")
 
 [node name="RibbonAmarilla" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=739370402]
 layout_mode = 0
-offset_left = 156.49998
-offset_top = 378.75
-offset_right = 315.5
-offset_bottom = 619.75
+offset_left = 182.75003
+offset_top = 390.0
+offset_right = 341.75003
+offset_bottom = 631.0
 scale = Vector2(0.8510344, 0.8510344)
 texture = ExtResource("14_jbj1t")
 
 [node name="RibbonRoja" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=7763624]
 layout_mode = 0
-offset_left = 319.50003
-offset_top = 380.25
-offset_right = 479.50003
-offset_bottom = 621.25
+offset_left = 330.74997
+offset_top = 386.5
+offset_right = 490.74997
+offset_bottom = 627.5
 scale = Vector2(0.87146163, 0.87146163)
 texture = ExtResource("15_muem4")
 
 [node name="RibbonAzul" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=790624423]
 layout_mode = 0
-offset_left = 485.50006
-offset_top = 379.0
-offset_right = 643.50006
-offset_bottom = 620.0
+offset_left = 485.50012
+offset_top = 387.75
+offset_right = 643.5001
+offset_bottom = 628.75
 scale = Vector2(0.87268454, 0.87268454)
 texture = ExtResource("16_dp3eg")
 
@@ -292,9 +292,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -211.25
+offset_top = -203.75
 offset_right = 300.0
-offset_bottom = -76.25
+offset_bottom = -110.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.0061463, 1)
@@ -303,16 +303,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("17_muem4")
 theme_override_font_sizes/font_size = 32
 text = "Nivel 1
-Texto largo para confirmar el corte de linea automático"
+Texto largo para confirmar "
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="LabelPuntajeFinal" type="Label" parent="UI/PanelResultados/FondoPanel" unique_id=1722946763]
 layout_mode = 0
 offset_left = 308.872
-offset_top = 623.72986
+offset_top = 613.72986
 offset_right = 477.87204
-offset_bottom = 691.72986
+offset_bottom = 681.72986
 theme_override_colors/font_color = Color(0.19966345, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_85g3d")
 theme_override_font_sizes/font_size = 60
