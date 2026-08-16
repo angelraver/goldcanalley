@@ -4,6 +4,7 @@ const CARPETA_PREMIOS = "res://images/prizes/"
 const RUTA_NIVELES_JSON = "res://data/niveles.json" # Ajusta tu ruta
 
 @onready var grid_premios: GridContainer = $ScrollContainer/ContenidoEstanteria/GridPremios
+@onready var camara: Camera2D = $Camera2D
 
 func _ready() -> void:
 	refrescar_estanteria()
@@ -78,3 +79,24 @@ func crear_slot_premio(nombre_png: String, desbloqueado: bool, actuales: int, re
 
 func _on_boton_home_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/title.tscn")
+
+
+var arrastrando: bool = false
+var posicion_inicial_dedo: Vector2 = Vector2.ZERO
+var posicion_inicial_camara: Vector2 = Vector2.ZERO
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Manejo de inicio/fin de toque (compatible con iOS, Android y Mouse)
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			arrastrando = true
+			posicion_inicial_dedo = event.position
+			posicion_inicial_camara = camara.position
+		else:
+			arrastrando = false
+
+	# Manejo del arrastre del dedo por la pantalla
+	elif event is InputEventScreenDrag and arrastrando:
+		var delta: Vector2 = event.position - posicion_inicial_dedo
+		# Movemos la cámara en sentido opuesto al arrastre del dedo
+		camara.position = posicion_inicial_camara - delta
