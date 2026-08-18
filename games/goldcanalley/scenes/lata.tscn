@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://pg1r60gkici6"]
+
+[ext_resource type="Texture2D" uid="uid://bcqubfmwg0fhi" path="res://games/goldcanalley/assets/images/cans/manaos_cola.png" id="1_1q6d5"]
+[ext_resource type="Shader" uid="uid://b5bf8myqxfm17" path="res://games/goldcanalley/shaders/lata_shader.gdshader" id="1_bbx7j"]
+[ext_resource type="Script" uid="uid://cy4tuwy5vusee" path="res://games/goldcanalley/scripts/lata.gd" id="1_umjuk"]
+[ext_resource type="Texture2D" uid="uid://cu2y8qaotgbci" path="res://games/goldcanalley/assets/images/cans/lata_base.png" id="2_umjuk"]
+[ext_resource type="Texture2D" uid="uid://cqew0nso28ouq" path="res://games/goldcanalley/assets/images/cans/lata_tapa.png" id="4_eo17b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4lsl"]
+render_priority = 0
+shader = ExtResource("1_bbx7j")
+shader_parameter/tex_side = ExtResource("1_1q6d5")
+shader_parameter/tex_top = ExtResource("4_eo17b")
+shader_parameter/tex_bottom = ExtResource("2_umjuk")
+shader_parameter/top_radius = 0.5
+shader_parameter/bottom_radius = 0.5
+shader_parameter/uv_scale_side = Vector2(1, 2)
+shader_parameter/uv_offset_side = Vector2(0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_feocs"]
+material = SubResource("ShaderMaterial_k4lsl")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sid36"]
+
+[node name="Lata" type="RigidBody3D" unique_id=1750503051]
+mass = 0.2
+script = ExtResource("1_umjuk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2107636658]
+transform = Transform3D(-0.9982319, 0, 0.059441887, 0, 1, 0, -0.059441887, 0, -0.9982319, 0.0039412677, -5.9604645e-08, -0.000970006)
+mesh = SubResource("CylinderMesh_feocs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1821155930]
+transform = Transform3D(0.19991261, -0.0002619893, 0, 0.0003489137, 0.15010867, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_sid36")

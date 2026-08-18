@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bcd1ofetag504"]
+
+[ext_resource type="Script" uid="uid://c0x8sp71taj7u" path="res://core/scripts/title.gd" id="1_2xeeo"]
+[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_bj87q"]
+[ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_2xeeo"]
+[ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://core/assets/images/logo.png" id="4_4e4sy"]
+[ext_resource type="Texture2D" uid="uid://bgnt5kfxvb4o8" path="res://core/assets/images/ui/button_start.png" id="5_xopy8"]
+[ext_resource type="Texture2D" uid="uid://beo3pfrblphcv" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
+[ext_resource type="Texture2D" uid="uid://dj80kcallsdvp" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
+shader = ExtResource("3_2xeeo")
+shader_parameter/nivel_desenfoque = 2.5
+shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
+
+[node name="Title" type="Control" unique_id=942844040]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2xeeo")
+metadata/_edit_horizontal_guides_ = [1278.0]
+metadata/_edit_vertical_guides_ = [781.0]
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=1930174974]
+layout_mode = 0
+offset_left = -400.0
+offset_right = 393.0
+offset_bottom = 1024.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_bj87q")
+
+[node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=718747323]
+material = SubResource("ShaderMaterial_tydxx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.3348694
+offset_top = 0.77826405
+offset_right = -2.3348389
+offset_bottom = 0.77819824
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="." unique_id=2120168976]
+layout_mode = 0
+offset_left = 133.99998
+offset_top = 130.0
+offset_right = 734.0
+offset_bottom = 1030.0
+scale = Vector2(0.79431736, 0.79431736)
+texture = ExtResource("4_4e4sy")
+
+[node name="Start" type="TextureButton" parent="." unique_id=256854180]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 830.0
+offset_right = 524.0
+offset_bottom = 1080.0
+scale = Vector2(1.1, 1.1)
+texture_normal = ExtResource("5_xopy8")
+
+[node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
+layout_mode = 0
+offset_left = 400.00003
+offset_top = 1129.0
+offset_right = 732.0
+offset_bottom = 1379.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("6_ljifs")
+
+[node name="Options" type="TextureButton" parent="." unique_id=110325157]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 1132.0
+offset_right = 365.0
+offset_bottom = 1382.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("7_uj4fn")
+
+[connection signal="pressed" from="Start" to="." method="_on_boton_start_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_boton_home_pressed"]
+[connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]
