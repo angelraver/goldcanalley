@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c0chcp0o741mq"]
+
+[ext_resource type="Script" uid="uid://qp4mxtarf6nj" path="res://games/whackamole/scripts/whack_a_mole.gd" id="1_ea0aq"]
+[ext_resource type="PackedScene" uid="uid://baxy0w3t7imt" path="res://games/whackamole/scenes/topo_hoyo.tscn" id="2_pdr7n"]
+[ext_resource type="PackedScene" uid="uid://cg1lhmy8njufd" path="res://games/whackamole/assets/models/topomesa.glb" id="3_2e741"]
+
+[node name="WhackAMole" type="Node3D" unique_id=2132816320]
+script = ExtResource("1_ea0aq")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=390335783]
+transform = Transform3D(1, 0, 0, 0, 0.26355892, 0.96464336, 0, -0.96464336, 0.26355892, 0, 8.575939, 3.8755112)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1915339222]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=825198424]
+
+[node name="TopoHoyo" parent="." unique_id=1499196878 instance=ExtResource("2_pdr7n")]
+
+[node name="topomesa" parent="." unique_id=1701991058 instance=ExtResource("3_2e741")]
+transform = Transform3D(0.0019227928, -0.00043253403, -1.4491012, 3.5518033e-06, 0.9999999, -0.0006267841, 2.26391, -1.183256e-06, 0.0012307573, 0, -2.8879118, 0)

@@ -1,0 +1,14 @@
+{
+  "topo_rojo": {
+	"textura_path": "topo_rojo.png",
+	"rango_escondido": [3.0, 5.0],
+	"rango_expuesto": [1.0, 2.0],
+	"pts": 50
+  },
+  "topo_verde": {
+	"textura_path": "topo_verde.png",
+	"rango_escondido": [2.0, 4.0],
+	"rango_expuesto": [0.8, 1.5],
+	"pts": 100
+  }
+}

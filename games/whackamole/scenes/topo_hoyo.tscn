@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://baxy0w3t7imt"]
+
+[ext_resource type="Script" uid="uid://dpii45hxyh3x8" path="res://games/whackamole/scripts/topo_hoyo.gd" id="1_ceb3w"]
+[ext_resource type="PackedScene" uid="uid://bcymwnv13dq5b" path="res://games/whackamole/assets/models/hoyo.glb" id="2_s512f"]
+[ext_resource type="PackedScene" uid="uid://dabcfap33q7tg" path="res://games/whackamole/assets/models/topo.glb" id="3_y4oh6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pdr7n"]
+
+[sub_resource type="Animation" id="Animation_ybv1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopoArea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopoArea:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cw7vw"]
+resource_name = "asomar"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopoArea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 1.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h7c0x"]
+resource_name = "esconder"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopoArea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2eg1k"]
+resource_name = "golpeado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopoArea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopoArea:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14982341),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a77qx"]
+_data = {
+&"RESET": SubResource("Animation_ybv1i"),
+&"asomar": SubResource("Animation_cw7vw"),
+&"esconder": SubResource("Animation_h7c0x"),
+&"golpeado": SubResource("Animation_2eg1k")
+}
+
+[node name="TopoHoyo" type="Node3D" unique_id=1499196878]
+script = ExtResource("1_ceb3w")
+
+[node name="MeshHoyo" parent="." unique_id=917003262 instance=ExtResource("2_s512f")]
+
+[node name="TopoArea" type="Area3D" parent="." unique_id=211519658]
+
+[node name="MeshTopo" parent="TopoArea" unique_id=545282258 instance=ExtResource("3_y4oh6")]
+transform = Transform3D(-0.35000002, 0, 0.60621774, 0, 0.7, 0, -0.60621774, 0, -0.35000002, 0, -0.9632648, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopoArea" unique_id=1979257405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0033392906, -0.51991653, -0.0013602972)
+shape = SubResource("CapsuleShape3D_pdr7n")
+debug_color = Color(17.624435, 0, 12.905694, 0.99215686)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2145034550]
+libraries/ = SubResource("AnimationLibrary_a77qx")
