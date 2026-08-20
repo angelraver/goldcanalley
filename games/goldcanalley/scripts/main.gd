@@ -8,7 +8,6 @@ extends Node3D
 }
 @export var escena_pelota: PackedScene = preload("res://games/goldcanalley/scenes/pelota.tscn")
 @export var nivel_actual: int = 1
-@export var escena_puntos_flotantes: PackedScene = preload("res://games/goldcanalley/scenes/puntos_flotantes.tscn")
 @export var origen_mesa: Vector3 = Vector3(0.0, 0.8, -4.0)
 @export var tamano_celda: Vector3 = Vector3(0.22, 0.31, 0.22)
 @export var fuerza_minima: float = 5.0
@@ -203,7 +202,7 @@ func verificar_latas_derribadas() -> void:
 
 			puntaje_nivel += puntos_ganados
 			actualizar_ui_puntaje()
-			crear_efecto_puntos(obj.global_position, puntos_ganados)
+			EfectosUI.crear_efecto_puntos(obj.global_position, puntos_ganados)
 
 			if not esperando_fin_nivel and puntaje_nivel >= puntaje_maximo_nivel:
 				esperando_fin_nivel = true
@@ -322,48 +321,6 @@ func actualizar_ui_puntaje() -> void:
 func actualizar_ui_level() -> void:
 	if ui_level_number_label:
 		ui_level_number_label.text = str(nivel_actual)
-
-func crear_efecto_puntos(posicion_lata_3d: Vector3, valor_puntos: int) -> void:
-	if not camara or not escena_puntos_flotantes or not barra_energia:
-		return
-
-	# A. Instanciar la escena y agregarla al CanvasLayer UI
-	var efecto = escena_puntos_flotantes.instantiate()
-	var ui_node = barra_energia.get_parent()
-	ui_node.add_child(efecto)
-
-	# B. Configurar el texto
-	var label = efecto.get_node("Label") as Label
-	label.text = "+%d" % valor_puntos
-	
-	# Opcional: Cambiar color según puntos (ej: amarillo para > 100)
-	if valor_puntos > 100:
-		label.modulate = Color(1.0, 0.9, 0.0) # Amarillo/Dorado
-
-	# C. Calcular la posición inicial en pantalla
-	# Tomamos la posición de la lata e inclinamos el punto inicial un poco hacia arriba en 3D
-	var posicion_3d_objetivo = posicion_lata_3d + Vector3(0.0, 0.3, 0.0)
-	var posicion_pantalla = camara.unproject_position(posicion_3d_objetivo)
-	efecto.position = posicion_pantalla
-
-	# D. CREAR LA ANIMACIÓN CON TWEEN
-	# Usamos un solo Tween que se auto-destruye al terminar
-	var tween = create_tween()
-	
-	# Animación 1: Mover hacia arriba (reducir position.y) en 1.5 segundos
-	var posicion_final_y = posicion_pantalla.y - 60.0
-	tween.tween_property(efecto, "position:y", posicion_final_y, 1.5)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_OUT)
-
-	# Animación 2 (en paralelo): Desvanecer (modulate.a -> 0)
-	# set_parallel(true) hace que las siguientes animaciones ocurran simultáneamente
-	tween.set_parallel(true)
-	tween.tween_property(efecto, "modulate:a", 0.0, 1.5)\
-		.set_trans(Tween.TRANS_LINEAR)
-
-	# E. Eliminar el nodo de la interfaz cuando la animación termine
-	tween.chain().tween_callback(efecto.queue_free)
 
 func mostrar_panel_resultados() -> void:
 	# VALIDACIÓN: Si el panel ya se mostró o ya es visible, ignoramos cualquier intento duplicado

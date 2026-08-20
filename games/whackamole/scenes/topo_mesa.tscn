@@ -12,24 +12,14 @@ render_priority = 0
 shader = ExtResource("2_ejsg7")
 shader_parameter/color_fondo = Color(0.75686276, 0.32941177, 0, 1)
 shader_parameter/textura_png = ExtResource("3_ktkn8")
-shader_parameter/escala_cuadro = Vector2(0.5, 0.6)
+shader_parameter/escala_cuadro = Vector2(0.4, 0.6)
 shader_parameter/posicion_cuadro = Vector2(0, 0)
 shader_parameter/rotacion_grados = 90.000012825
 shader_parameter/espejar_horizontal = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_83kvb"]
-render_priority = 0
-shader = ExtResource("2_ejsg7")
-shader_parameter/color_fondo = Color(0.75686276, 0.32941177, 0, 1)
-shader_parameter/textura_png = ExtResource("3_ktkn8")
-shader_parameter/escala_cuadro = Vector2(0.4, 0.5)
-shader_parameter/posicion_cuadro = Vector2(0, 0)
-shader_parameter/rotacion_grados = 90.000012825
-shader_parameter/espejar_horizontal = false
+shader_parameter/umbral_corte_alpha = 0.05
 
 [node name="mesa_mole" unique_id=563385611 instance=ExtResource("1_vkwij")]
 
 [node name="Cube" parent="." index="0" unique_id=215698480]
 surface_material_override/1 = SubResource("StandardMaterial3D_omhoq")
 surface_material_override/2 = SubResource("ShaderMaterial_2e741")
-surface_material_override/3 = SubResource("ShaderMaterial_83kvb")

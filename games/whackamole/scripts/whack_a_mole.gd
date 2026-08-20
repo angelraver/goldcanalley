@@ -8,6 +8,7 @@ extends Node3D
 
 @onready var mazo: Node3D = $Mazo
 @onready var camara: Camera3D = $CamaraPivote/Camera3D
+@export var escena_puntos_flotantes: PackedScene = preload("res://core/scenes/puntos_flotantes.tscn")
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
@@ -85,6 +86,7 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 		
 	if fue_acierto:
 		puntaje_total += puntos
+		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
 		print("¡Golpe certero! Puntos:", puntos, " | Total:", puntaje_total)
 	else:
 		print("¡Golpe en falso! Sin puntos.")
