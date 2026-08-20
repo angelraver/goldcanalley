@@ -1,21 +1,129 @@
 [gd_scene format=3 uid="uid://c0chcp0o741mq"]
 
 [ext_resource type="Script" uid="uid://qp4mxtarf6nj" path="res://games/whackamole/scripts/whack_a_mole.gd" id="1_ea0aq"]
-[ext_resource type="PackedScene" uid="uid://baxy0w3t7imt" path="res://games/whackamole/scenes/topo_hoyo.tscn" id="2_pdr7n"]
-[ext_resource type="PackedScene" uid="uid://cg1lhmy8njufd" path="res://games/whackamole/assets/models/topomesa.glb" id="3_2e741"]
+[ext_resource type="PackedScene" uid="uid://bxbf368xxj3j7" path="res://games/whackamole/scenes/topo_mesa.tscn" id="2_pdr7n"]
+[ext_resource type="Texture2D" uid="uid://dxfwak5xnuwm2" path="res://games/whackamole/assets/images/floor.jpg" id="3_2e741"]
+[ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="3_83kvb"]
+[ext_resource type="Shader" uid="uid://bimhglhopdu7l" path="res://games/whackamole/shaders/topo_mesa_front.gdshader" id="3_ac78l"]
+[ext_resource type="Texture2D" uid="uid://du254petg5bme" path="res://games/whackamole/assets/images/logo.png" id="4_3xui8"]
+[ext_resource type="PackedScene" uid="uid://u24t0soce4yc" path="res://games/whackamole/scenes/mazo.tscn" id="7_3xui8"]
+
+[sub_resource type="Animation" id="Animation_pdr7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamaraPivote:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CamaraPivote/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 4.175001, 5.9677243)]
+}
+
+[sub_resource type="Animation" id="Animation_2e741"]
+resource_name = "inicio_camara"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamaraPivote:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.0471976, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CamaraPivote/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 7), Vector3(0, 5.491841, 7.699433)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83kvb"]
+_data = {
+&"RESET": SubResource("Animation_pdr7n"),
+&"inicio_camara": SubResource("Animation_2e741")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8dl7b"]
+render_priority = 0
+shader = ExtResource("3_ac78l")
+shader_parameter/color_fondo = Color(0.75686276, 0.32941177, 0, 1)
+shader_parameter/textura_png = ExtResource("4_3xui8")
+shader_parameter/escala_cuadro = Vector2(0.8, 0.8)
+shader_parameter/posicion_cuadro = Vector2(0, 0)
+shader_parameter/rotacion_grados = 0.0
+shader_parameter/espejar_horizontal = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2ngb"]
+albedo_texture = ExtResource("3_83kvb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83kvb"]
+albedo_texture = ExtResource("3_2e741")
+uv1_triplanar = true
 
 [node name="WhackAMole" type="Node3D" unique_id=2132816320]
 script = ExtResource("1_ea0aq")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=390335783]
-transform = Transform3D(1, 0, 0, 0, 0.26355892, 0.96464336, 0, -0.96464336, 0.26355892, 0, 8.575939, 3.8755112)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1915339222]
-transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.5600552, 0.8284553, 0, -0.8284553, 0.5600552, 0, 10.969155, 13.810493)
 
 [node name="Timer" type="Timer" parent="." unique_id=825198424]
 
-[node name="TopoHoyo" parent="." unique_id=1499196878 instance=ExtResource("2_pdr7n")]
+[node name="CamaraPivote" type="Node3D" parent="." unique_id=379929959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2707937, 6.220879)
 
-[node name="topomesa" parent="." unique_id=1701991058 instance=ExtResource("3_2e741")]
-transform = Transform3D(0.0019227928, -0.00043253403, -1.4491012, 3.5518033e-06, 0.9999999, -0.0006267841, 2.26391, -1.183256e-06, 0.0012307573, 0, -2.8879118, 0)
+[node name="Camera3D" type="Camera3D" parent="CamaraPivote" unique_id=390335783]
+transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 4.175001, 5.9677243)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1023546756]
+libraries/ = SubResource("AnimationLibrary_83kvb")
+
+[node name="Mesa" type="Node3D" parent="." unique_id=1418956787]
+
+[node name="Respaldo" type="CSGBox3D" parent="Mesa" unique_id=149099879]
+transform = Transform3D(6.0433598, 0, 0, 0, 6.348606, 0, 0, 0, 3.5010982, 0, 2.4391694, -6.542646)
+size = Vector3(1, 1, 0.1)
+material = SubResource("ShaderMaterial_8dl7b")
+
+[node name="mesa_mole" parent="Mesa" unique_id=563385611 instance=ExtResource("2_pdr7n")]
+transform = Transform3D(3.666181, 0, 0, 0, 3.8513575, 0, 0, 0, 3.5010982, 0, -1.7189153, -0.12015772)
+
+[node name="Fondo" type="CSGBox3D" parent="." unique_id=1980782163]
+transform = Transform3D(9.9697735e-15, 4.3711385e-08, 4.267138, 5.2179046, -4.3711385e-08, 0, 2.2808186e-07, 0.99999994, -1.8652254e-07, -0.008993864, 7.5379667, -11.998903)
+use_collision = true
+size = Vector3(6, 0.2, 6)
+material = SubResource("StandardMaterial3D_a2ngb")
+
+[node name="Piso" type="CSGBox3D" parent="." unique_id=471324108]
+transform = Transform3D(5.4368944, 0, 0, 0, 1, 0, 0, 0, 5.4368944, 0.258152, -3.271343, -3)
+use_collision = true
+size = Vector3(6, 0.1, 6)
+material = SubResource("StandardMaterial3D_83kvb")
+
+[node name="Mazo" parent="." unique_id=171984208 instance=ExtResource("7_3xui8")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -3.2077813, 1.3662457, 10.190411)

@@ -4,6 +4,10 @@ extends Node3D
 
 # Separación entre celdas (X: horizontal, Y: vertical a lo largo de Z)
 @export var separacion_grilla: Vector2 = Vector2(2.3, 2.3)
+@onready var anim_camara: AnimationPlayer = $AnimationPlayer
+
+@onready var mazo: Node3D = $Mazo
+@onready var camara: Camera3D = $CamaraPivote/Camera3D
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
@@ -14,7 +18,9 @@ var puntaje_total: int = 0
 func _ready() -> void:
 	cargar_archivos_json()
 	cargar_nivel("1")
-
+	anim_camara.play("inicio_camara")
+	await anim_camara.animation_finished
+	
 func cargar_archivos_json() -> void:
 	if FileAccess.file_exists("res://games/whackamole/data/valores.json"):
 		var raw = FileAccess.get_file_as_string("res://games/whackamole/data/valores.json")
@@ -55,7 +61,8 @@ func cargar_nivel(id_nivel: String) -> void:
 		if datos_topos.has(tipo_topo):
 			hoyo_instancia.aplicar_configuracion(datos_topos[tipo_topo])
 		
-		hoyo_instancia.topo_golpeado.connect(_on_topo_golpeado)
+		# Escuchar clics directos sobre el hoyo (con o sin topo)
+		hoyo_instancia.hoyo_cliqueado.connect(_on_hoyo_cliqueado)
 		hoyos_activos.append(hoyo_instancia)
 	
 	iniciar_spawner()
@@ -71,6 +78,13 @@ func iniciar_spawner() -> void:
 		if hoyo_elegido.estado_actual == hoyo_elegido.Estado.ESCONDIDO:
 			hoyo_elegido.emerger()
 
-func _on_topo_golpeado(_topo_node, puntos: int) -> void:
-	puntaje_total += puntos
-	print("¡Golpe! Puntos:", puntos, " | Total:", puntaje_total)
+func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> void:
+	# El mazo siempre viaja a la posición del hoyo cliqueado
+	if mazo != null and hoyo_node != null:
+		mazo.golpear_en(hoyo_node.global_position, camara.global_position)
+		
+	if fue_acierto:
+		puntaje_total += puntos
+		print("¡Golpe certero! Puntos:", puntos, " | Total:", puntaje_total)
+	else:
+		print("¡Golpe en falso! Sin puntos.")

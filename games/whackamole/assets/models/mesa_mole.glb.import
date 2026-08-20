@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cg1lhmy8njufd"
-path="res://.godot/imported/topomesa.glb-297283244fcba4105c7d8004ecc5bf10.scn"
+uid="uid://dbwhk13wqylin"
+path="res://.godot/imported/mesa_mole.glb-1094d0764bccc837ae697b950195c745.scn"
 
 [deps]
 
-source_file="res://games/whackamole/assets/models/topomesa.glb"
-dest_files=["res://.godot/imported/topomesa.glb-297283244fcba4105c7d8004ecc5bf10.scn"]
+source_file="res://games/whackamole/assets/models/mesa_mole.glb"
+dest_files=["res://.godot/imported/mesa_mole.glb-1094d0764bccc837ae697b950195c745.scn"]
 
 [params]
 

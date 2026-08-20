@@ -1,6 +1,7 @@
 extends Node3D
 
-signal topo_golpeado(topo_node, puntos)
+# Señal para avisar a whack_a_mole.gd: (nodo, si acertó al topo, puntos)
+signal hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int)
 
 enum Estado { ESCONDIDO, ASOMANDOSE, AFUERA, GOLPEADO }
 
@@ -59,10 +60,13 @@ func esconder_topo() -> void:
 func recibir_golpe() -> void:
 	if estado_actual == Estado.AFUERA or estado_actual == Estado.ASOMANDOSE:
 		estado_actual = Estado.GOLPEADO
+		hoyo_cliqueado.emit(self, true, puntos_actuales)
 		anim_player.play("golpeado")
-		topo_golpeado.emit(self, puntos_actuales)
 		await anim_player.animation_finished
 		estado_actual = Estado.ESCONDIDO
+	elif estado_actual == Estado.ESCONDIDO:
+		# Golpe en falso sobre el hoyo vacío
+		hoyo_cliqueado.emit(self, false, 0)
 
 func _on_topo_input_event(_camera: Node, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):
