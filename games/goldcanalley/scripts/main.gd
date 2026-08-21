@@ -1,6 +1,5 @@
 extends Node3D
 
-
 @export_file("*.json") var ruta_niveles_json: String = "res://games/goldcanalley/data/niveles.json"
 @export_file("*.json") var ruta_valores_json: String = "res://games/goldcanalley/data/valores.json"
 @export var catalogo_objetos: Dictionary = {
@@ -14,14 +13,11 @@ extends Node3D
 @export var fuerza_maxima: float = 30.0
 @export var velocidad_oscilacion: float = 0.8
 @export var pelotas_maximas: int = 3
-
 @onready var camara: Camera3D = $Camera3D
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
-@onready var ui_puntaje: Control = $UI/Puntaje
 @onready var ui_puntaje_final_label: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
-@onready var ui_puntaje_label: Label = $UI/Puntaje/Label
-@onready var ui_level_number: Label = $UI/LevelNumber
-@onready var ui_level_number_label: Label = $UI/LevelNumber/Label
+@onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
+@onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var ui_level_title: Label = $UI/LevelTitle
 @onready var ui_level_title_resultados: Label = $UI/PanelResultados/FondoPanel/LevelTitle
 @onready var ui_label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
@@ -103,7 +99,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	pelotas_restantes = pelotas_maximas
 	actualizar_ui_pelotas()
 	puntaje_nivel = 0
-	puntaje_maximo_nivel = 0
+	puntaje_maximo_nivel = 0	
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
 
@@ -315,12 +311,12 @@ func actualizar_ui_pelotas() -> void:
 		ui_label_pelotas.text = "x %d" % pelotas_restantes
 
 func actualizar_ui_puntaje() -> void:
-	if ui_puntaje_label:
-		ui_puntaje_label.text = str(puntaje_nivel)
+	if ui_puntaje:
+		ui_puntaje.establecer_puntaje(puntaje_nivel)
 
 func actualizar_ui_level() -> void:
-	if ui_level_number_label:
-		ui_level_number_label.text = str(nivel_actual)
+	if ui_level_number:
+		ui_level_number.establecer_nivel(nivel_actual)
 
 func mostrar_panel_resultados() -> void:
 	# VALIDACIÓN: Si el panel ya se mostró o ya es visible, ignoramos cualquier intento duplicado
@@ -378,7 +374,7 @@ func _on_boton_home_pressed() -> void:
 		get_tree().change_scene_to_file("res://core/scenes/premio_desbloqueado.tscn")
 	else:
 		# Si no hay premio, va directamente a la pantalla de niveles
-		get_tree().change_scene_to_file("res://games/goldcanalley/scenes/seleccion_niveles.tscn")
+		get_tree().change_scene_to_file("res://core/scenes/seleccion_niveles.tscn")
 
 func animar_aparicion_panel(panel: Control) -> void:
 	ribbon_amarilla.scale = Vector2.ZERO

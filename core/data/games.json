@@ -1,0 +1,18 @@
+{
+	"goldcanalley": {
+		"escena_juego": "res://games/goldcanalley/scenes/main.tscn",
+		"ruta_niveles_json": "res://games/goldcanalley/data/niveles.json",
+		"textos_json": "res://games/goldcanalley/data/textos.json",
+		"textura_fondo": "res://games/goldcanalley/assets/images/fondo_selector.png",
+		"textura_logo": "res://games/goldcanalley/assets/images/logo.png",
+		"prefijo_texto": "goldcanalley_"
+	},
+	"whackamole": {
+		"escena_juego": "res://games/whackamole/scenes/main.tscn",
+		"ruta_niveles_json": "res://games/whackamole/data/niveles.json",
+		"textos_json": "res://games/whackamole/data/textos.json",
+		"textura_fondo": "res://games/whackamole/assets/images/fondo_selector.png",
+		"textura_logo": "res://games/whackamole/assets/images/logo.png",
+		"prefijo_texto": "whackamole_"
+	}
+}

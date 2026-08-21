@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_gqmmt"]
 [ext_resource type="Texture2D" uid="uid://djr0l0a0yl01h" path="res://games/goldcanalley/assets/images/ui/meter_bar.png" id="7_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://bwrusua8ipysl" path="res://games/goldcanalley/assets/images/ui/meter_circle.png" id="8_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_v3hq5"]
 [ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_a3jnv"]
 [ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://games/goldcanalley/assets/images/world/ball.png" id="10_choun"]
 [ext_resource type="Texture2D" uid="uid://ce45aexd81vyl" path="res://core/assets/images/ui/panel_level.png" id="11_eb6dy"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="11_muem4"]
@@ -109,55 +111,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_jkv2x")
 
-[node name="Puntaje" type="Label" parent="UI" unique_id=1725192428]
-offset_left = 36.0
-offset_top = 66.0
-offset_right = 180.0
-offset_bottom = 138.0
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("9_85g3d")
-theme_override_font_sizes/font_size = 64
-text = "score"
-horizontal_alignment = 1
+[node name="Puntaje" parent="UI" unique_id=626633466 instance=ExtResource("8_v3hq5")]
 
-[node name="Label" type="Label" parent="UI/Puntaje" unique_id=1593139156]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 41.0
-offset_right = 121.0
-offset_bottom = 113.0
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("9_85g3d")
-theme_override_font_sizes/font_size = 64
-text = "0000"
-horizontal_alignment = 1
-
-[node name="LevelNumber" type="Label" parent="UI" unique_id=650980694]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -129.0
-offset_top = 66.0
-offset_right = 129.0
-offset_bottom = 138.0
-grow_horizontal = 2
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("9_85g3d")
-theme_override_font_sizes/font_size = 64
-text = "lvl"
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="UI/LevelNumber" unique_id=1063573414]
-layout_mode = 0
-offset_left = 81.0
-offset_top = 42.0
-offset_right = 177.0
-offset_bottom = 114.0
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("9_85g3d")
-theme_override_font_sizes/font_size = 64
-text = "1"
-horizontal_alignment = 1
+[node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("9_a3jnv")]
 
 [node name="ContenedorPelotasUI" type="HBoxContainer" parent="UI" unique_id=242437922]
 anchors_preset = 1

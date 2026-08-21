@@ -5,16 +5,18 @@ extends Node3D
 # Separación entre celdas (X: horizontal, Y: vertical a lo largo de Z)
 @export var separacion_grilla: Vector2 = Vector2(2.3, 2.3)
 @onready var anim_camara: AnimationPlayer = $AnimationPlayer
-
 @onready var mazo: Node3D = $Mazo
 @onready var camara: Camera3D = $CamaraPivote/Camera3D
 @export var escena_puntos_flotantes: PackedScene = preload("res://core/scenes/puntos_flotantes.tscn")
+@onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
+@onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
+
+@export var nivel_actual: int = 1
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
-
 var hoyos_activos: Array[Node3D] = []
-var puntaje_total: int = 0
+var puntaje_nivel: int = 0
 
 func _ready() -> void:
 	cargar_archivos_json()
@@ -37,7 +39,8 @@ func cargar_nivel(id_nivel: String) -> void:
 		
 	var config_nivel = datos_niveles[id_nivel]
 	var lista_hoyos: Array = config_nivel.get("hoyos", [])
-	
+	actualizar_ui_level()
+
 	for hoyo in hoyos_activos:
 		hoyo.queue_free()
 	hoyos_activos.clear()
@@ -68,6 +71,10 @@ func cargar_nivel(id_nivel: String) -> void:
 	
 	iniciar_spawner()
 
+func actualizar_ui_level() -> void:
+	if ui_level_number:
+		ui_level_number.establecer_nivel(nivel_actual)
+
 func iniciar_spawner() -> void:
 	while true:
 		await get_tree().create_timer(randf_range(0.8, 1.8)).timeout
@@ -85,8 +92,8 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 		mazo.golpear_en(hoyo_node.global_position, camara.global_position)
 		
 	if fue_acierto:
-		puntaje_total += puntos
 		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
-		print("¡Golpe certero! Puntos:", puntos, " | Total:", puntaje_total)
+		puntaje_nivel += puntos
+		ui_puntaje.establecer_puntaje(puntaje_nivel)
 	else:
 		print("¡Golpe en falso! Sin puntos.")

@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://c0chcp0o741mq"]
 
-[ext_resource type="Script" uid="uid://qp4mxtarf6nj" path="res://games/whackamole/scripts/whack_a_mole.gd" id="1_ea0aq"]
+[ext_resource type="Script" uid="uid://qp4mxtarf6nj" path="res://games/whackamole/scripts/main.gd" id="1_ea0aq"]
 [ext_resource type="PackedScene" uid="uid://bxbf368xxj3j7" path="res://games/whackamole/scenes/topo_mesa.tscn" id="2_pdr7n"]
 [ext_resource type="Texture2D" uid="uid://dxfwak5xnuwm2" path="res://games/whackamole/assets/images/floor.jpg" id="3_2e741"]
 [ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="3_83kvb"]
 [ext_resource type="Shader" uid="uid://bimhglhopdu7l" path="res://games/whackamole/shaders/topo_mesa_front.gdshader" id="3_ac78l"]
 [ext_resource type="Texture2D" uid="uid://du254petg5bme" path="res://games/whackamole/assets/images/logo.png" id="4_3xui8"]
 [ext_resource type="PackedScene" uid="uid://u24t0soce4yc" path="res://games/whackamole/scenes/mazo.tscn" id="7_3xui8"]
+[ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_tndlh"]
+[ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
 
 [sub_resource type="Animation" id="Animation_pdr7n"]
 length = 0.001
@@ -128,3 +130,28 @@ material = SubResource("StandardMaterial3D_83kvb")
 
 [node name="Mazo" parent="." unique_id=171984208 instance=ExtResource("7_3xui8")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -3.2077813, 1.3662457, 10.190411)
+
+[node name="UI" type="Control" parent="." unique_id=316716257]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("8_vxqm4")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -574.0
+offset_bottom = -502.0
+grow_vertical = 2
+
+[node name="Puntaje" parent="UI" unique_id=626633466 instance=ExtResource("8_tndlh")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 144.0
+offset_bottom = 72.0

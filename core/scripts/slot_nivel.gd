@@ -21,7 +21,10 @@ func _ready() -> void:
 
 func configurar(numero_nivel: int) -> void:
 	nivel_id = numero_nivel
-	var desbloqueado = save_manager.es_nivel_desbloqueado(numero_nivel)
+	
+	# Consultamos el estado usando el ID del juego actualmente activo
+	var id_juego: String = save_manager.juego_actual_seleccionado
+	var desbloqueado = save_manager.es_nivel_desbloqueado(numero_nivel, id_juego)
 
 	# El slot completo siempre debe estar visible si el nivel existe en el JSON
 	visible = true
@@ -55,18 +58,18 @@ func configurar(numero_nivel: int) -> void:
 	label_numero.modulate = Color.WHITE
 	label_numero.text = str(numero_nivel)
 
-	# 3. Leer datos de puntaje y activar las ribbons ganadas
-	var puntaje = save_manager.obtener_puntaje_nivel(numero_nivel)
-	var maximo = save_manager.obtener_maximo_nivel(numero_nivel)
+	# 3. Leer datos de puntaje del juego activo y activar las ribbons ganadas
+	var puntaje = save_manager.obtener_puntaje_nivel(numero_nivel, id_juego)
+	var maximo = save_manager.obtener_maximo_nivel(numero_nivel, id_juego)
 
 	if maximo > 0 and puntaje > 0:
 		var umbral_1 = maximo * (1.0 / 3.0)
 		var umbral_2 = maximo * (2.0 / 3.0)
 		var umbral_3 = float(maximo)
 
-		ribbon_amarilla.visible = (puntaje >= umbral_1)
-		ribbon_roja.visible = (puntaje >= umbral_2)
-		ribbon_azul.visible = (puntaje >= umbral_3)
+		if ribbon_amarilla: ribbon_amarilla.visible = (puntaje >= umbral_1)
+		if ribbon_roja: ribbon_roja.visible = (puntaje >= umbral_2)
+		if ribbon_azul: ribbon_azul.visible = (puntaje >= umbral_3)
 	else:
 		ocultar_ribbons()
 

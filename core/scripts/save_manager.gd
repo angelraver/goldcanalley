@@ -2,12 +2,6 @@ extends Node
 
 const RUTA_GUARDADO = "user://progreso.json"
 
-# Registro centralizado de games y la ruta a sus archivos de niveles
-const RUTAS_NIVELES_games: Dictionary = {
-	"latas": "res://games/goldcanalley/data/niveles.json"
-	# "topos": "res://games/topos/data/niveles.json"
-}
-
 const LISTA_PREMIOS: Array[String] = [
 	"aros", "dino", "drum",
 	"doll", "robot", "duck",
@@ -18,7 +12,7 @@ const LISTA_PREMIOS: Array[String] = [
 ]
 
 var datos_progreso: Dictionary = {}
-var juego_actual_seleccionado: String = "latas"
+var juego_actual_seleccionado: String = "goldcanalley"
 var nivel_actual_seleccionado: int = 1
 var premio_recien_desbloqueado: String = ""
 
@@ -38,7 +32,6 @@ func cargar_progreso() -> void:
 		var resultado = JSON.parse_string(texto)
 		if resultado is Dictionary:
 			datos_progreso = resultado
-			_migrar_formato_antiguo_si_es_necesario()
 		else:
 			_inicializar_estructura_vacia()
 	else:
@@ -51,25 +44,8 @@ func _inicializar_estructura_vacia() -> void:
 			"sfx": true,
 			"idioma": "es"
 		},
-		"games": {
-			"latas": {}
-		}
+		"games": {}
 	}
-
-func _migrar_formato_antiguo_si_es_necesario() -> void:
-	if not datos_progreso.has("games"):
-		datos_progreso["games"] = {"latas": {}}
-		
-	var claves_a_mover: Array = []
-	for clave in datos_progreso.keys():
-		if clave.is_valid_int():
-			claves_a_mover.append(clave)
-			
-	if claves_a_mover.size() > 0:
-		for clave in claves_a_mover:
-			datos_progreso["games"]["latas"][clave] = datos_progreso[clave]
-			datos_progreso.erase(clave)
-		guardar_a_disco()
 
 func guardar_a_disco() -> void:
 	var archivo = FileAccess.open(RUTA_GUARDADO, FileAccess.WRITE)
@@ -80,7 +56,9 @@ func guardar_a_disco() -> void:
 
 # --- REGISTRO Y CONSULTA DE PROGRESO DE NIVELES ---
 
-func registrar_puntaje_nivel(numero_nivel: int, nuevo_puntaje: int, puntaje_maximo: int, id_game: String = "latas") -> bool:
+func registrar_puntaje_nivel(numero_nivel: int, nuevo_puntaje: int, puntaje_maximo: int, id_game: String = "") -> bool:
+	if id_game == "": id_game = juego_actual_seleccionado
+	
 	var clave = str(numero_nivel)
 	var puntaje_previo = obtener_puntaje_nivel(numero_nivel, id_game)
 	var premios_antes = calcular_cantidad_premios_desbloqueados()
@@ -101,21 +79,24 @@ func registrar_puntaje_nivel(numero_nivel: int, nuevo_puntaje: int, puntaje_maxi
 		return true
 	return false
 
-func obtener_puntaje_nivel(numero_nivel: int, id_game: String = "latas") -> int:
+func obtener_puntaje_nivel(numero_nivel: int, id_game: String = "") -> int:
+	if id_game == "": id_game = juego_actual_seleccionado
 	var clave = str(numero_nivel)
 	var dict_juego = _obtener_dict_game(id_game)
 	if dict_juego.has(clave):
 		return int(dict_juego[clave].get("score", 0))
 	return 0
 
-func obtener_maximo_nivel(numero_nivel: int, id_game: String = "latas") -> int:
+func obtener_maximo_nivel(numero_nivel: int, id_game: String = "") -> int:
+	if id_game == "": id_game = juego_actual_seleccionado
 	var clave = str(numero_nivel)
 	var dict_juego = _obtener_dict_game(id_game)
 	if dict_juego.has(clave):
 		return int(dict_juego[clave].get("max", 0))
 	return 0
 
-func es_nivel_desbloqueado(numero_nivel: int, id_game: String = "latas") -> bool:
+func es_nivel_desbloqueado(numero_nivel: int, id_game: String = "") -> bool:
+	if id_game == "": id_game = juego_actual_seleccionado
 	if numero_nivel == 1:
 		return true
 
@@ -155,21 +136,19 @@ func contar_ribbons_azules() -> int:
 					conteo += 1
 	return conteo
 
-# Obtiene la suma total de niveles de UN game en particular
 func obtener_total_niveles_game(id_game: String) -> int:
-	if RUTAS_NIVELES_games.has(id_game):
-		var ruta = RUTAS_NIVELES_games[id_game]
-		if FileAccess.file_exists(ruta):
-			var texto = FileAccess.get_file_as_string(ruta)
-			var datos = JSON.parse_string(texto)
-			if datos is Dictionary:
-				return datos.keys().size()
+	var config = game_manager.configuracion_juegos.get(id_game, {})
+	var ruta = config.get("ruta_niveles_json", "")
+	if ruta != "" and FileAccess.file_exists(ruta):
+		var texto = FileAccess.get_file_as_string(ruta)
+		var datos = JSON.parse_string(texto)
+		if datos is Dictionary:
+			return datos.keys().size()
 	return 0
 
-# Obtiene la suma acumulada de niveles de TODOS los games registrados
 func obtener_total_niveles_globales() -> int:
 	var total_acumulado: int = 0
-	for id_juego in RUTAS_NIVELES_games.keys():
+	for id_juego in game_manager.configuracion_juegos.keys():
 		total_acumulado += obtener_total_niveles_game(id_juego)
 		
 	return max(total_acumulado, 18)
