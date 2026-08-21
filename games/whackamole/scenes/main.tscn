@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://bimhglhopdu7l" path="res://games/whackamole/shaders/topo_mesa_front.gdshader" id="3_ac78l"]
 [ext_resource type="Texture2D" uid="uid://du254petg5bme" path="res://games/whackamole/assets/images/logo.png" id="4_3xui8"]
 [ext_resource type="PackedScene" uid="uid://u24t0soce4yc" path="res://games/whackamole/scenes/mazo.tscn" id="7_3xui8"]
+[ext_resource type="PackedScene" uid="uid://vht4nu1hd71f" path="res://core/scenes/ui_timer.tscn" id="8_irein"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_tndlh"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
 
@@ -91,6 +92,7 @@ uv1_triplanar = true
 
 [node name="WhackAMole" type="Node3D" unique_id=2132816320]
 script = ExtResource("1_ea0aq")
+metadata/_edit_horizontal_guides_ = [59.0]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1915339222]
 transform = Transform3D(1, 0, 0, 0, 0.5600552, 0.8284553, 0, -0.8284553, 0.5600552, 0, 10.969155, 13.810493)
@@ -139,6 +141,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Timer" parent="UI" unique_id=269459003 instance=ExtResource("8_irein")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = 58.0
+offset_right = -66.0
+offset_bottom = 58.0
+grow_horizontal = 0
 
 [node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("8_vxqm4")]
 layout_mode = 1
