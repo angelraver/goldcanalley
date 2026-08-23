@@ -13,24 +13,18 @@ extends Node3D
 @export var fuerza_maxima: float = 30.0
 @export var velocidad_oscilacion: float = 0.8
 @export var pelotas_maximas: int = 3
+
 @onready var camara: Camera3D = $Camera3D
 @onready var raycast_apuntado: RayCast3D = $RayCastApuntado
-@onready var ui_puntaje_final_label: Label = $UI/PanelResultados/FondoPanel/LabelPuntajeFinal
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var ui_level_title: Label = $UI/LevelTitle
-@onready var ui_level_title_resultados: Label = $UI/PanelResultados/FondoPanel/LevelTitle
 @onready var ui_label_pelotas: Label = $UI/ContenedorPelotasUI/LabelPelotas
 @onready var barra_energia: Control = $UI/BarraEnergia
 @onready var indicador_circulo: Control = $UI/BarraEnergia/IndicadorCirculo
 @onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
 @onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
-@onready var panel_resultados: Control = $UI/PanelResultados
-@onready var fondo_desenfoque: Control = $UI/PanelResultados/FondoDesenfoque
-@onready var fondo_panel: TextureRect = $UI/PanelResultados/FondoPanel
-@onready var ribbon_amarilla: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAmarilla
-@onready var ribbon_roja: TextureRect = $UI/PanelResultados/FondoPanel/RibbonRoja
-@onready var ribbon_azul: TextureRect = $UI/PanelResultados/FondoPanel/RibbonAzul
+@onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 
 const CARPETA_CANS = "res://games/goldcanalley/assets/images/cans/"
 var valores_objetos: Dictionary = {}
@@ -41,15 +35,9 @@ var tiempo_barra: float = 0.0
 var pelotas_restantes: int = 3
 var esperando_fin_nivel: bool = false
 var puntaje_maximo_nivel: int = 0
-var gano_ribbon_amarilla: bool = false 
-var gano_ribbon_roja: bool = false 
-var gano_ribbon_azul: bool = false 
-var escala_orig_amarilla: Vector2
-var escala_orig_roja: Vector2
-var escala_orig_azul: Vector2
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
 var rot_final_camara: Vector3 = Vector3(deg_to_rad(-0.5), 0.0, 0.0)
-var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8) 
+var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8)
 var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
 var controles_activos: bool = false
 var panel_resultados_mostrado: bool = false
@@ -62,22 +50,16 @@ func _ready() -> void:
 	contenedor_pelotas = Node3D.new()
 	contenedor_pelotas.name = "ContenedorPelotas"
 	add_child(contenedor_pelotas)
+	
 	cargar_valores()
 	nivel_actual = save_manager.nivel_actual_seleccionado
-	
-	ribbon_amarilla.pivot_offset = ribbon_amarilla.size / 2
-	escala_orig_amarilla = ribbon_amarilla.scale
 
-	ribbon_roja.pivot_offset = ribbon_roja.size / 2
-	escala_orig_roja = ribbon_roja.scale
-
-	ribbon_azul.pivot_offset = ribbon_azul.size / 2
-	escala_orig_azul = ribbon_azul.scale
+	if panel_resultados:
+		panel_resultados.reiniciar_solicitado.connect(reiniciar_nivel)
 
 	cargar_nivel(nivel_actual)
 
 func _physics_process(_delta: float) -> void:
-	# Verificamos el estado físico de las latas en cada frame de física
 	verificar_latas_derribadas()
 
 func cargar_valores() -> void:
@@ -95,11 +77,11 @@ func cargar_valores() -> void:
 
 func cargar_nivel(numero_nivel: int) -> void:
 	panel_resultados_mostrado = false
-	esperando_fin_nivel = false	
+	esperando_fin_nivel = false
 	pelotas_restantes = pelotas_maximas
 	actualizar_ui_pelotas()
 	puntaje_nivel = 0
-	puntaje_maximo_nivel = 0	
+	puntaje_maximo_nivel = 0
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
 
@@ -131,16 +113,13 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, escena_por_defecto)
 		var datos_tipo: Dictionary = valores_objetos.get(clave_tipo, {})
 
-		# 1. Lectura de variables desde valores.json
 		var factor_ancho: float = float(datos_tipo.get("ancho", 1.0))
 		var factor_alto: float = float(datos_tipo.get("alto", 1.0))
 		var masa_objeto: float = float(datos_tipo.get("masa", 1.0))
 		var puntos_objeto: int = int(datos_tipo.get("pts", 100))
 
-		# 2. Cálculo de escala tridimensional final (X, Z = Ancho / Y = Alto)
 		var escala_vector = Vector3(factor_ancho, factor_alto, factor_ancho)
 
-		# 3. Cálculo de posición en la grilla
 		var paso_celda = Vector3(
 			tamano_celda.x * escala_vector.x,
 			tamano_celda.y * escala_vector.y,
@@ -152,14 +131,12 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var pos_y = origen_mesa.y + (grid_y - 0.5) * paso_celda.y + 0.005
 		var pos_z = origen_mesa.z - (grid_z - 1.0) * paso_celda.z
 
-		# 4. Instanciación y personalización de la lata
 		var nuevo_objeto = escena_objetivo.instantiate() as RigidBody3D
 		nuevo_objeto.scale = escala_vector
 		nuevo_objeto.mass = masa_objeto
 		nuevo_objeto.set_meta("tipo", clave_tipo)
 		nuevo_objeto.set_meta("derribado", false)
 
-		# 5. Aplicar texturas y shader desde valores.json
 		aplicar_material_lata(nuevo_objeto, datos_tipo)
 
 		contenedor_latas.add_child(nuevo_objeto)
@@ -179,13 +156,11 @@ func verificar_latas_derribadas() -> void:
 		var tipo: String = obj.get_meta("tipo", "lata_aluminio")
 		var esta_derribada: bool = false
 
-		# 1. Verificación por caída de la mesa
 		var esta_caida: bool = obj.global_position.y < (origen_mesa.y - 0.15)
 
-		# 2. Verificación por inclinación inmediata (sin esperar a que se detenga)
 		var vector_arriba_lata = obj.global_transform.basis.y
 		var inclinacion = vector_arriba_lata.dot(Vector3.UP)
-		var esta_tumbada: bool = inclinacion < 0.707 # 0.707 equivale a más de 45° de inclinación
+		var esta_tumbada: bool = inclinacion < 0.707
 
 		if esta_caida or esta_tumbada:
 			esta_derribada = true
@@ -226,7 +201,7 @@ func animar_camara_entrada() -> void:
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
 
-	tween.chain().tween_callback(func(): 
+	tween.chain().tween_callback(func():
 		controles_activos = true
 		if barra_energia: barra_energia.visible = true
 		if ui_puntaje: ui_puntaje.visible = true
@@ -299,7 +274,6 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 		get_tree().create_timer(3.0).timeout.connect(_on_tiempo_fin_nivel_agotado)
 
 func _on_tiempo_fin_nivel_agotado() -> void:
-	# Mostramos el panel si estamos esperando el fin del nivel
 	if esperando_fin_nivel:
 		mostrar_panel_resultados()
 
@@ -319,130 +293,23 @@ func actualizar_ui_level() -> void:
 		ui_level_number.establecer_nivel(nivel_actual)
 
 func mostrar_panel_resultados() -> void:
-	# VALIDACIÓN: Si el panel ya se mostró o ya es visible, ignoramos cualquier intento duplicado
-	if panel_resultados_mostrado or (panel_resultados and panel_resultados.visible):
+	if panel_resultados_mostrado:
 		return
-	
-	# Marcamos que ya se mostró para bloquear futuras llamadas
 	panel_resultados_mostrado = true
 
-	# 1. Ocultar los elementos de la interfaz de juego (HUD)
 	if barra_energia: barra_energia.visible = false
 	if ui_puntaje: ui_puntaje.visible = false
 	if ui_level_number: ui_level_number.visible = false
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
 
-	if ui_level_title_resultados:
-		ui_level_title_resultados.text = "Nivel " + str(nivel_actual) + "\n" + game_manager.obtener_titulo_nivel(str(nivel_actual))
-
-	if ui_puntaje_final_label:
-		ui_puntaje_final_label.text = "%d / %d" % [puntaje_nivel, puntaje_maximo_nivel]
-
-	var umbral_1: float = puntaje_maximo_nivel * (1.0 / 3.0) # 33.3%
-	var umbral_2: float = puntaje_maximo_nivel * (2.0 / 3.0) # 66.6%
-	var umbral_3: float = float(puntaje_maximo_nivel)        # 100%
-	
-	gano_ribbon_amarilla = (puntaje_nivel >= umbral_1)
-	gano_ribbon_roja = (puntaje_nivel >= umbral_2)
-	gano_ribbon_azul = (puntaje_nivel >= umbral_3)
-
-	ribbon_amarilla.visible = gano_ribbon_amarilla
-	ribbon_roja.visible = gano_ribbon_roja
-	ribbon_azul.visible = gano_ribbon_azul
-	
-	save_manager.registrar_puntaje_nivel(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
-	
 	if panel_resultados:
-		audio_manager.play_welldone()
-		panel_resultados.visible = true
-		animar_aparicion_panel(panel_resultados)
-
-func _on_boton_reiniciar_pressed() -> void:
-	# 1. Ocultar el panel de resultados
-	if panel_resultados:
-		panel_resultados.visible = false
-	
-	# 2. Resetear la bandera
-	esperando_fin_nivel = false
-	
-	# 3. Recargar el nivel (esto limpia pelotas, repone latas y resetea el contador a 3)
-	cargar_nivel(nivel_actual)
-
-func _on_boton_home_pressed() -> void:
-	# Si hay un premio recien desbloqueado, mostramos la pantalla de premio primero
-	if save_manager.premio_recien_desbloqueado != "":
-		get_tree().change_scene_to_file("res://core/scenes/premio_desbloqueado.tscn")
-	else:
-		# Si no hay premio, va directamente a la pantalla de niveles
-		get_tree().change_scene_to_file("res://core/scenes/seleccion_niveles.tscn")
-
-func animar_aparicion_panel(panel: Control) -> void:
-	ribbon_amarilla.scale = Vector2.ZERO
-	ribbon_roja.scale = Vector2.ZERO
-	ribbon_azul.scale = Vector2.ZERO
-	
-	# 1. Animar FondoDesenfoque (Fade-in simple)
-	fondo_desenfoque.modulate.a = 0.0
-	var tween_desenfoque = create_tween()
-	tween_desenfoque.tween_property(fondo_desenfoque, "modulate:a", 1.0, 0.2)
-
-	# --- ANIMACIÓN DE FONDOPANEL ---
-	# Esperar 1 frame para que Godot calcule el tamaño y posición exactos del panel
-	await get_tree().process_frame
-
-	# Guardar la escala real que configuraste en el editor
-	var escala_original = fondo_panel.scale
-
-	# Fijar el pivote en el centro exacto
-	fondo_panel.pivot_offset = fondo_panel.size / 2
-
-	# Iniciar al 80% de SU escala original
-	fondo_panel.scale = escala_original * 0.8
-	fondo_panel.modulate.a = 0.0
-
-	# Animar hacia SU escala original
-	var tween_panel = create_tween().set_parallel(true)
-	tween_panel.set_trans(Tween.TRANS_BACK) # Rebote sutil
-	tween_panel.set_ease(Tween.EASE_OUT)
-
-	tween_panel.tween_property(fondo_panel, "scale", escala_original, 1)
-	tween_panel.tween_property(fondo_panel, "modulate:a", 1, 1)
-	
-	await tween_panel.finished # Espera a que el panel termine de crecer
-
-	if gano_ribbon_amarilla:
-		animar_pop_ribbon(ribbon_amarilla, escala_orig_amarilla)
-		await get_tree().create_timer(0.12).timeout # Pequeño delay entre ribbons
-		
-	if gano_ribbon_roja:
-		animar_pop_ribbon(ribbon_roja, escala_orig_roja)
-		await get_tree().create_timer(0.12).timeout
-		
-	if gano_ribbon_azul:
-		animar_pop_ribbon(ribbon_azul, escala_orig_azul)
-
-func animar_pop_ribbon(ribbon: Control, escala_objetivo: Vector2) -> void:
-	# Restablecer posición y asegurar estado inicial
-	ribbon.scale = Vector2.ZERO
-	ribbon.visible = true
-	var tween = create_tween()
-
-	# Paso A: Crece del 0% al 110% de su escala guardada
-	tween.tween_property(ribbon, "scale", escala_objetivo * 1.1, 0.18)\
-		.set_trans(Tween.TRANS_QUAD)\
-		.set_ease(Tween.EASE_OUT)
-
-	# Paso B: Se asienta exactamente en su escala guardada (100%)
-	tween.tween_property(ribbon, "scale", escala_objetivo, 0.10)\
-		.set_trans(Tween.TRANS_QUAD)\
-		.set_ease(Tween.EASE_IN_OUT)
+		panel_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void:
 	var mesh_instance = nuevo_objeto.get_node_or_null("MeshInstance3D") as MeshInstance3D
 	if not mesh_instance or not mesh_instance.mesh:
 		return
 		
-	# 1. Obtener los radios reales de la malla del objeto (ej. CylinderMesh)
 	var cylinder_mesh = mesh_instance.mesh as CylinderMesh
 	var r_top: float = 0.5
 	var r_bottom: float = 0.5
@@ -451,20 +318,16 @@ func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void
 		r_top = cylinder_mesh.top_radius
 		r_bottom = cylinder_mesh.bottom_radius
 
-	# 2. Obtener el material Shader
 	var mat_base = mesh_instance.get_active_material(0)
 	if not mat_base:
 		mat_base = mesh_instance.material_override
 		
 	if mat_base is ShaderMaterial:
-		# Duplicar material para que cada lata mantenga sus parámetros independientes
 		var mat_instancia = mat_base.duplicate() as ShaderMaterial
 		
-		# 3. Asignar radios al Shader para centrado perfecto de tapas
 		mat_instancia.set_shader_parameter("top_radius", r_top)
 		mat_instancia.set_shader_parameter("bottom_radius", r_bottom)
 		
-		# 4. Cargar tapas globales (PNG o JPG según disponibilidad)
 		var ruta_top = CARPETA_CANS + "can_top.png"
 		var ruta_bottom = CARPETA_CANS + "can_bottom.png"
 		
@@ -476,14 +339,12 @@ func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void
 		if ResourceLoader.exists(ruta_bottom):
 			mat_instancia.set_shader_parameter("tex_bottom", load(ruta_bottom))
 			
-		# 5. Cargar la textura lateral configurada en valores.json
 		var nombre_textura = datos_tipo.get("textura", "")
 		if nombre_textura != "":
 			var ruta_cuerpo = CARPETA_CANS + nombre_textura
 			if ResourceLoader.exists(ruta_cuerpo):
 				mat_instancia.set_shader_parameter("tex_side", load(ruta_cuerpo))
 		
-		# 6. Mapear escala y desfase lateral desde valores.json
 		var scale_arr = datos_tipo.get("uv_scale_side", [1.0, 1.0])
 		var offset_arr = datos_tipo.get("uv_offset_side", [0.0, 0.0])
 		
@@ -495,8 +356,8 @@ func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void
 func anunciar_nivel(numero_nivel: int) -> void:
 	ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel))
 	ui_level_title.modulate.a = 1.0
-	# Animación de desvanecimiento tras 1.5 segundos
+	ui_level_title.visible = true
 	var tween = create_tween()
-	tween.tween_interval(1.5) # Espera visible en pantalla
-	tween.tween_property(ui_level_title, "modulate:a", 0.0, 0.5) # Se desvanece en 0.5s
+	tween.tween_interval(1.5)
+	tween.tween_property(ui_level_title, "modulate:a", 0.0, 0.5)
 	tween.tween_callback(func(): ui_level_title.visible = false)

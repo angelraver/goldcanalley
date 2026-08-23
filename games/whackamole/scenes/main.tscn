@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://u24t0soce4yc" path="res://games/whackamole/scenes/mazo.tscn" id="7_3xui8"]
 [ext_resource type="PackedScene" uid="uid://vht4nu1hd71f" path="res://core/scenes/ui_timer.tscn" id="8_irein"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_tndlh"]
+[ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="8_uxcgu"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
 
 [sub_resource type="Animation" id="Animation_pdr7n"]
@@ -141,6 +142,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="PanelResultados" parent="UI" unique_id=696404095 instance=ExtResource("8_uxcgu")]
+layout_mode = 1
 
 [node name="Timer" parent="UI" unique_id=269459003 instance=ExtResource("8_irein")]
 layout_mode = 1

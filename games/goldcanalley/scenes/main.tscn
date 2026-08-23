@@ -11,13 +11,7 @@
 [ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_a3jnv"]
 [ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://games/goldcanalley/assets/images/world/ball.png" id="10_choun"]
-[ext_resource type="Texture2D" uid="uid://ce45aexd81vyl" path="res://core/assets/images/ui/panel_level.png" id="11_eb6dy"]
-[ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="11_muem4"]
-[ext_resource type="Texture2D" uid="uid://bnd0ijgu2accx" path="res://core/assets/images/ui/button_ok.png" id="12_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://c2ti2rrel70iq" path="res://core/assets/images/ui/button_restart.png" id="12_trceg"]
-[ext_resource type="Texture2D" uid="uid://cjfrgb4i7ka14" path="res://core/assets/images/ui/ribbon_yellow.png" id="14_jbj1t"]
-[ext_resource type="Texture2D" uid="uid://bjbq77a3cyby" path="res://core/assets/images/ui/ribbon_red.png" id="15_muem4"]
-[ext_resource type="Texture2D" uid="uid://crj3mfi0j4w71" path="res://core/assets/images/ui/ribbon_blue.png" id="16_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="12_7r3x3"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="17_muem4"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
@@ -45,11 +39,6 @@ albedo_texture = ExtResource("10_choun")
 
 [sub_resource type="SphereMesh" id="SphereMesh_85g3d"]
 material = SubResource("StandardMaterial3D_ya4ey")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyv4s"]
-shader = ExtResource("11_muem4")
-shader_parameter/nivel_desenfoque = 2.5
-shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
 
 [node name="Main" type="Node3D" unique_id=1912148217]
 script = ExtResource("1_tipki")
@@ -156,125 +145,7 @@ text = "x 3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelResultados" type="Control" parent="UI" unique_id=2117455105]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FondoDesenfoque" type="ColorRect" parent="UI/PanelResultados" unique_id=177262722]
-material = SubResource("ShaderMaterial_kyv4s")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FondoPanel" type="TextureRect" parent="UI/PanelResultados" unique_id=1495678476]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -450.5
-offset_right = 400.0
-offset_bottom = 450.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-pivot_offset = Vector2(400, 450.5)
-texture = ExtResource("11_eb6dy")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="BotonOk" type="TextureButton" parent="UI/PanelResultados/FondoPanel" unique_id=1070445000]
-layout_mode = 0
-offset_left = 501.0
-offset_top = 733.25
-offset_right = 654.0
-offset_bottom = 886.25
-scale = Vector2(0.6, 0.6)
-texture_normal = ExtResource("12_a8y0u")
-
-[node name="BotonReiniciar" type="TextureButton" parent="UI/PanelResultados/FondoPanel" unique_id=115287930]
-layout_mode = 0
-offset_left = 201.25
-offset_top = 731.25
-offset_right = 354.25
-offset_bottom = 884.25
-scale = Vector2(0.6, 0.6)
-texture_normal = ExtResource("12_trceg")
-
-[node name="RibbonAmarilla" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=739370402]
-layout_mode = 0
-offset_left = 170.25003
-offset_top = 375.0
-offset_right = 329.25003
-offset_bottom = 616.0
-scale = Vector2(0.8510344, 0.8510344)
-texture = ExtResource("14_jbj1t")
-
-[node name="RibbonRoja" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=7763624]
-layout_mode = 0
-offset_left = 318.24988
-offset_top = 374.0
-offset_right = 478.24988
-offset_bottom = 615.0
-scale = Vector2(0.87146163, 0.87146163)
-texture = ExtResource("15_muem4")
-
-[node name="RibbonAzul" type="TextureRect" parent="UI/PanelResultados/FondoPanel" unique_id=790624423]
-layout_mode = 0
-offset_left = 476.75018
-offset_top = 375.25
-offset_right = 634.7502
-offset_bottom = 616.25
-scale = Vector2(0.87268454, 0.87268454)
-texture = ExtResource("16_dp3eg")
-
-[node name="LevelTitle" type="Label" parent="UI/PanelResultados/FondoPanel" unique_id=729768500]
-custom_minimum_size = Vector2(550, 0)
-custom_maximum_size = Vector2(-1, 150)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -203.75
-offset_right = 300.0
-offset_bottom = -110.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0061463, 1)
-theme_override_colors/font_color = Color(0.2, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("17_muem4")
-theme_override_font_sizes/font_size = 32
-text = "Nivel 1
-Texto largo para confirmar "
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelPuntajeFinal" type="Label" parent="UI/PanelResultados/FondoPanel" unique_id=1722946763]
-layout_mode = 0
-offset_left = 308.872
-offset_top = 613.72986
-offset_right = 477.87204
-offset_bottom = 681.72986
-theme_override_colors/font_color = Color(0.19966345, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_85g3d")
-theme_override_font_sizes/font_size = 60
-text = "0 / 0000"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="PanelResultados" parent="UI" unique_id=696404095 instance=ExtResource("12_7r3x3")]
 
 [node name="LevelTitle" type="Label" parent="UI" unique_id=1507659899]
 custom_minimum_size = Vector2(600, 0)
@@ -300,8 +171,5 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=535808537]
-
-[connection signal="pressed" from="UI/PanelResultados/FondoPanel/BotonOk" to="." method="_on_boton_home_pressed"]
-[connection signal="pressed" from="UI/PanelResultados/FondoPanel/BotonReiniciar" to="." method="_on_boton_reiniciar_pressed"]
 
 [editable path="table"]

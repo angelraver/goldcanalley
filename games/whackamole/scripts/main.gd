@@ -11,6 +11,7 @@ extends Node3D
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var ui_timer: UITimer = $UI/Timer as UITimer
+@onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
@@ -19,21 +20,28 @@ var puntaje_nivel: int = 0
 var juego_activo: bool = false
 
 func _ready() -> void:
+	nivel_actual = save_manager.nivel_actual_seleccionado
+
 	if ui_timer:
 		ui_timer.tiempo_agotado.connect(_on_tiempo_agotado)
+	if panel_resultados:
+		panel_resultados.reiniciar_solicitado.connect(reiniciar_nivel)
 
 	cargar_archivos_json()
-	cargar_nivel("1")
+	cargar_nivel(str(nivel_actual))
 	
 	anim_camara.play("inicio_camara")
 	await anim_camara.animation_finished
 	
-	# Habilitar el juego e iniciar la cuenta regresiva una vez entra la cámara
+	iniciar_partida()
+
+func iniciar_partida() -> void:
 	juego_activo = true
-	var config_nivel = datos_niveles.get("1", {})
+	var config_nivel = datos_niveles.get(str(nivel_actual), {})
 	var tiempo_limite = float(config_nivel.get("tiempo_limite", 30))
 	
 	if ui_timer:
+		ui_timer.visible = true
 		ui_timer.iniciar(tiempo_limite)
 		
 	iniciar_spawner()
@@ -95,7 +103,6 @@ func iniciar_spawner() -> void:
 			hoyo_elegido.emerger()
 
 func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> void:
-	# Si se acabó el tiempo, no se permiten más acciones
 	if not juego_activo:
 		return
 
@@ -105,10 +112,31 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 	if fue_acierto:
 		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
 		puntaje_nivel += puntos
-		ui_puntaje.establecer_puntaje(puntaje_nivel)
+		if ui_puntaje:
+			ui_puntaje.establecer_puntaje(puntaje_nivel)
 	else:
 		print("¡Golpe en falso! Sin puntos.")
 
 func _on_tiempo_agotado() -> void:
 	juego_activo = false
-	print("time's up")
+	
+	if ui_puntaje: ui_puntaje.visible = false
+	if ui_level_number: ui_level_number.visible = false
+	if ui_timer: ui_timer.visible = false
+
+	var config_nivel = datos_niveles.get(str(nivel_actual), {})
+	var meta_puntos: int = int(config_nivel.get("meta_puntos", 300))
+
+	if panel_resultados:
+		panel_resultados.mostrar(nivel_actual, puntaje_nivel, meta_puntos)
+
+func reiniciar_nivel() -> void:
+	puntaje_nivel = 0
+	if ui_puntaje:
+		ui_puntaje.visible = true
+		ui_puntaje.establecer_puntaje(0)
+	if ui_level_number:
+		ui_level_number.visible = true
+	
+	cargar_nivel(str(nivel_actual))
+	iniciar_partida()

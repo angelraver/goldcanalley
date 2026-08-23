@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbg6qdy5u2qga"
-path="res://.godot/imported/topo_rojo.png-f92239dd6c2e050d76b45473be01f9bb.ctex"
+path="res://.godot/imported/topo_marron.png-947ba4117ce3292242fd6a46c7b05516.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/whackamole/assets/images/topos/topo_rojo.png"
-dest_files=["res://.godot/imported/topo_rojo.png-f92239dd6c2e050d76b45473be01f9bb.ctex"]
+source_file="res://games/whackamole/assets/images/topos/topo_marron.png"
+dest_files=["res://.godot/imported/topo_marron.png-947ba4117ce3292242fd6a46c7b05516.ctex"]
 
 [params]
 
