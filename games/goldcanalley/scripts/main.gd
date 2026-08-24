@@ -25,6 +25,7 @@ extends Node3D
 @onready var pelota_ui_3d: Node3D = $UI/ContenedorPelotasUI/SubViewportContainer/SubViewport/PelotaUI
 @onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
+@onready var audio_juego: GameAudioBase = $AudioJuego
 
 const CARPETA_CANS = "res://games/goldcanalley/assets/images/cans/"
 var valores_objetos: Dictionary = {}
@@ -134,6 +135,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var nuevo_objeto = escena_objetivo.instantiate() as RigidBody3D
 		nuevo_objeto.scale = escala_vector
 		nuevo_objeto.mass = masa_objeto
+		nuevo_objeto.audio = audio_juego
 		nuevo_objeto.set_meta("tipo", clave_tipo)
 		nuevo_objeto.set_meta("derribado", false)
 
@@ -239,7 +241,7 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 		return
 
 	if pelotas_restantes > 0:
-		audio_manager.play_shot()
+		audio_juego.play_shot()
 
 	pelotas_restantes -= 1
 	actualizar_ui_pelotas()

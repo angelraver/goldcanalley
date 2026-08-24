@@ -12,6 +12,7 @@ extends Node3D
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var ui_timer: UITimer = $UI/Timer as UITimer
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
+@onready var audio_juego: GameAudioBase = $AudioJuego
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
@@ -85,6 +86,7 @@ func cargar_nivel(id_nivel: String) -> void:
 			hoyo_instancia.aplicar_configuracion(datos_topos[tipo_topo])
 		
 		hoyo_instancia.hoyo_cliqueado.connect(_on_hoyo_cliqueado)
+		hoyo_instancia.audio = audio_juego
 		hoyos_activos.append(hoyo_instancia)
 
 func actualizar_ui_level() -> void:

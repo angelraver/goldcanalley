@@ -2,10 +2,7 @@ extends Node
 
 # --- NODOS EXISTENTES DE EFECTOS ---
 @onready var start: AudioStreamPlayer = $Start
-@onready var shot: AudioStreamPlayer = $Shot
 @onready var welldone: AudioStreamPlayer = $Welldone
-
-var sonidos_lata: Array = []
 
 # --- CONTROL DE ESTADO GLOBAL ---
 var music_enabled: bool = true
@@ -15,16 +12,11 @@ var sfx_enabled: bool = true
 var bgm_player: AudioStreamPlayer
 
 func _ready() -> void:
-	# 1. Agrupamos los sonidos de lata
-	for hijo in get_children():
-		if hijo.name.begins_with("Lata"):
-			sonidos_lata.append(hijo)
-			
-	# 2. Inicializamos el reproductor de música de fondo
+	# 1. Inicializamos el reproductor de música de fondo
 	bgm_player = AudioStreamPlayer.new()
 	add_child(bgm_player)
 	
-	# 3. Leemos el estado persistente guardado en save_manager
+	# 2. Leemos el estado persistente guardado en save_manager
 	music_enabled = save_manager.obtener_opcion_audio("music_enabled", true)
 	sfx_enabled = save_manager.obtener_opcion_audio("sfx_enabled", true)
 
@@ -63,14 +55,6 @@ func play_start() -> void:
 	if sfx_enabled and start:
 		start.play()
 
-func play_shot() -> void:
-	if sfx_enabled and shot:
-		shot.play()
-
 func play_welldone() -> void:
 	if sfx_enabled and welldone:
 		welldone.play()
-
-func play_lata() -> void:
-	if sfx_enabled and not sonidos_lata.is_empty():
-		sonidos_lata.pick_random().play()

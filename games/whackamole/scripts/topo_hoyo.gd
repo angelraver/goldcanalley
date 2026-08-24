@@ -13,6 +13,7 @@ const PATH_TEXTURES: String = "res://games/whackamole/assets/images/topos/"
 var estado_actual: Estado = Estado.ESCONDIDO
 var puntos_actuales: int = 0
 var rango_expuesto: Array = [1.0, 2.0]
+var audio: GameAudioBase
 
 func _ready() -> void:
 	area_topo.input_event.connect(_on_topo_input_event)
@@ -61,12 +62,16 @@ func recibir_golpe() -> void:
 	if estado_actual == Estado.AFUERA or estado_actual == Estado.ASOMANDOSE:
 		estado_actual = Estado.GOLPEADO
 		hoyo_cliqueado.emit(self, true, puntos_actuales)
+		if audio:
+			audio.play_hit()
 		anim_player.play("golpeado")
 		await anim_player.animation_finished
 		estado_actual = Estado.ESCONDIDO
 	elif estado_actual == Estado.ESCONDIDO:
 		# Golpe en falso sobre el hoyo vacío
 		hoyo_cliqueado.emit(self, false, 0)
+		if audio:
+			audio.play_ouch()
 
 func _on_topo_input_event(_camera: Node, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):

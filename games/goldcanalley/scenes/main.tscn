@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://games/goldcanalley/assets/images/world/ball.png" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="12_7r3x3"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="17_muem4"]
+[ext_resource type="PackedScene" path="res://games/goldcanalley/scenes/audio_manager.tscn" id="18_audio"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 
@@ -171,5 +172,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=535808537]
+
+[node name="AudioJuego" parent="." instance=ExtResource("18_audio")]
 
 [editable path="table"]

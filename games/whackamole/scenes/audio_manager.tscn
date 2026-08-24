@@ -1,0 +1,114 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://games/whackamole/scripts/audio_manager.gd" id="1_am"]
+[ext_resource type="AudioStream" uid="uid://x6nifmvhogvk" path="res://games/whackamole/assets/sounds/hits/3.wav" id="2_hit3"]
+[ext_resource type="AudioStream" uid="uid://cg6okcufowqi3" path="res://games/whackamole/assets/sounds/hits/4.wav" id="3_hit4"]
+[ext_resource type="AudioStream" uid="uid://bu3sneg4hie5o" path="res://games/whackamole/assets/sounds/hits/5.wav" id="4_hit5"]
+[ext_resource type="AudioStream" uid="uid://ddshojod6v2c2" path="res://games/whackamole/assets/sounds/hits/7.wav" id="5_hit7"]
+[ext_resource type="AudioStream" uid="uid://dgghkoogtnoni" path="res://games/whackamole/assets/sounds/hits/10.wav" id="6_hit10"]
+[ext_resource type="AudioStream" uid="uid://bsx0a8n6afqr4" path="res://games/whackamole/assets/sounds/hits/11.wav" id="7_hit11"]
+[ext_resource type="AudioStream" uid="uid://dhkh73sx58fir" path="res://games/whackamole/assets/sounds/hits/14.wav" id="8_hit14"]
+[ext_resource type="AudioStream" uid="uid://da8ge225mvvqe" path="res://games/whackamole/assets/sounds/hits/15.wav" id="9_hit15"]
+[ext_resource type="AudioStream" uid="uid://sxu0yb1l8hb3" path="res://games/whackamole/assets/sounds/hits/16.wav" id="10_hit16"]
+[ext_resource type="AudioStream" uid="uid://bd2e47ky3y15o" path="res://games/whackamole/assets/sounds/hits/28.wav" id="11_hit28"]
+[ext_resource type="AudioStream" uid="uid://bts52menhkqj" path="res://games/whackamole/assets/sounds/hits/29.wav" id="12_hit29"]
+[ext_resource type="AudioStream" uid="uid://ck6siyittaexi" path="res://games/whackamole/assets/sounds/hits/30.wav" id="13_hit30"]
+[ext_resource type="AudioStream" uid="uid://by2t2urkwip0u" path="res://games/whackamole/assets/sounds/hits/31.wav" id="14_hit31"]
+[ext_resource type="AudioStream" uid="uid://dvrkft7upq3s7" path="res://games/whackamole/assets/sounds/hits/32.wav" id="15_hit32"]
+[ext_resource type="AudioStream" uid="uid://f8yt0rkslukq" path="res://games/whackamole/assets/sounds/hits/33.wav" id="16_hit33"]
+[ext_resource type="AudioStream" uid="uid://dboemkye1hsoc" path="res://games/whackamole/assets/sounds/hits/34.wav" id="17_hit34"]
+[ext_resource type="AudioStream" uid="uid://fjlhbilce7mo" path="res://games/whackamole/assets/sounds/risas/risa1.wav" id="18_risa1"]
+[ext_resource type="AudioStream" uid="uid://fb40ehjha3d6" path="res://games/whackamole/assets/sounds/risas/risa2.wav" id="19_risa2"]
+[ext_resource type="AudioStream" uid="uid://na1djh5lc2c7" path="res://games/whackamole/assets/sounds/risas/risa3.wav" id="20_risa3"]
+[ext_resource type="AudioStream" uid="uid://byklofrf4brcf" path="res://games/whackamole/assets/sounds/risas/risa4.wav" id="21_risa4"]
+[ext_resource type="AudioStream" uid="uid://l87yti7nolsr" path="res://games/whackamole/assets/sounds/risas/risa5.wav" id="22_risa5"]
+[ext_resource type="AudioStream" uid="uid://bt0o6vdtowpxy" path="res://games/whackamole/assets/sounds/outchs/ouch1.wav" id="23_ouch1"]
+[ext_resource type="AudioStream" uid="uid://snhbrnwhxmfh" path="res://games/whackamole/assets/sounds/outchs/ouch2.wav" id="24_ouch2"]
+[ext_resource type="AudioStream" uid="uid://ciylxrlt53ckx" path="res://games/whackamole/assets/sounds/outchs/ouch3.wav" id="25_ouch3"]
+[ext_resource type="AudioStream" uid="uid://cqd2x3ekm1fj6" path="res://games/whackamole/assets/sounds/outchs/ouch4.wav" id="26_ouch4"]
+[ext_resource type="AudioStream" uid="uid://ot3wxu1lhcub" path="res://games/whackamole/assets/sounds/outchs/ouch5.wav" id="27_ouch5"]
+[ext_resource type="AudioStream" uid="uid://coxotnp73opeh" path="res://games/whackamole/assets/sounds/outchs/ouch6.wav" id="28_ouch6"]
+
+[node name="AudioJuego" type="Node"]
+script = ExtResource("1_am")
+
+[node name="Hit3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hit3")
+
+[node name="Hit4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hit4")
+
+[node name="Hit5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hit5")
+
+[node name="Hit7" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hit7")
+
+[node name="Hit10" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hit10")
+
+[node name="Hit11" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_hit11")
+
+[node name="Hit14" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_hit14")
+
+[node name="Hit15" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_hit15")
+
+[node name="Hit16" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_hit16")
+
+[node name="Hit28" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_hit28")
+
+[node name="Hit29" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_hit29")
+
+[node name="Hit30" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_hit30")
+
+[node name="Hit31" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_hit31")
+
+[node name="Hit32" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_hit32")
+
+[node name="Hit33" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_hit33")
+
+[node name="Hit34" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_hit34")
+
+[node name="Risa1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_risa1")
+
+[node name="Risa2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_risa2")
+
+[node name="Risa3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_risa3")
+
+[node name="Risa4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_risa4")
+
+[node name="Risa5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_risa5")
+
+[node name="Ouch1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_ouch1")
+
+[node name="Ouch2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_ouch2")
+
+[node name="Ouch3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_ouch3")
+
+[node name="Ouch4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_ouch4")
+
+[node name="Ouch5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_ouch5")
+
+[node name="Ouch6" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_ouch6")

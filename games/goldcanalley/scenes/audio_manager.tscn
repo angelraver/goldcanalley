@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dgj64nmwi6qa4"]
+
+[ext_resource type="Script" uid="uid://byumoicjw613h" path="res://games/goldcanalley/scripts/audio_manager.gd" id="1_am"]
+[ext_resource type="AudioStream" uid="uid://7otrthylxnrn" path="res://games/goldcanalley/assets/sounds/shot1.wav" id="2_shot"]
+[ext_resource type="AudioStream" uid="uid://cx14b72xywk1y" path="res://games/goldcanalley/assets/sounds/lata1.wav" id="3_lata1"]
+[ext_resource type="AudioStream" uid="uid://c6a3vng6xd17i" path="res://games/goldcanalley/assets/sounds/lata2.wav" id="4_lata2"]
+[ext_resource type="AudioStream" uid="uid://by0x6pxoa2pb6" path="res://games/goldcanalley/assets/sounds/lata3.wav" id="5_lata3"]
+[ext_resource type="AudioStream" uid="uid://b6c4a2hk824n6" path="res://games/goldcanalley/assets/sounds/lata4.wav" id="6_lata4"]
+[ext_resource type="AudioStream" uid="uid://c11nspnl52cr0" path="res://games/goldcanalley/assets/sounds/lata5.wav" id="7_lata5"]
+[ext_resource type="AudioStream" uid="uid://c2dopxdbyl4b0" path="res://games/goldcanalley/assets/sounds/lata6.wav" id="8_lata6"]
+[ext_resource type="AudioStream" uid="uid://c3016oc65ift7" path="res://games/goldcanalley/assets/sounds/lata7.wav" id="9_lata7"]
+[ext_resource type="AudioStream" uid="uid://b4xsas7680fso" path="res://games/goldcanalley/assets/sounds/lata8.wav" id="10_lata8"]
+
+[node name="AudioJuego" type="Node" unique_id=497255853]
+script = ExtResource("1_am")
+
+[node name="Shot" type="AudioStreamPlayer" parent="." unique_id=1637812727]
+stream = ExtResource("2_shot")
+
+[node name="Lata1" type="AudioStreamPlayer" parent="." unique_id=1288598511]
+stream = ExtResource("3_lata1")
+
+[node name="Lata2" type="AudioStreamPlayer" parent="." unique_id=117358818]
+stream = ExtResource("4_lata2")
+
+[node name="Lata3" type="AudioStreamPlayer" parent="." unique_id=566187475]
+stream = ExtResource("5_lata3")
+
+[node name="Lata4" type="AudioStreamPlayer" parent="." unique_id=980458128]
+stream = ExtResource("6_lata4")
+
+[node name="Lata5" type="AudioStreamPlayer" parent="." unique_id=648249196]
+stream = ExtResource("7_lata5")
+
+[node name="Lata6" type="AudioStreamPlayer" parent="." unique_id=308247510]
+stream = ExtResource("8_lata6")
+
+[node name="Lata7" type="AudioStreamPlayer" parent="." unique_id=1712153847]
+stream = ExtResource("9_lata7")
+
+[node name="Lata8" type="AudioStreamPlayer" parent="." unique_id=1188770623]
+stream = ExtResource("10_lata8")

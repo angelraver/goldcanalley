@@ -4,6 +4,7 @@ extends RigidBody3D
 @export var tiempo_cooldown: float = 0.1
 
 var puede_sonar: bool = true
+var audio: GameAudioBase
 
 func _ready() -> void:
 	contact_monitor = true
@@ -18,7 +19,8 @@ func _on_body_entered(_cuerpo: Node) -> void:
 		puede_sonar = false
 		
 		# Llamada limpia y directa
-		audio_manager.play_lata()
+		if audio:
+			audio.play_lata()
 
 		get_tree().create_timer(tiempo_cooldown).timeout.connect(
 			func(): puede_sonar = true

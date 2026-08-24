@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_tndlh"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="8_uxcgu"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
+[ext_resource type="PackedScene" path="res://games/whackamole/scenes/audio_manager.tscn" id="9_audio"]
 
 [sub_resource type="Animation" id="Animation_pdr7n"]
 length = 0.001
@@ -172,3 +173,5 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 144.0
 offset_bottom = 72.0
+
+[node name="AudioJuego" parent="." instance=ExtResource("9_audio")]
