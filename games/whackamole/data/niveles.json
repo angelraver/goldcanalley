@@ -4,10 +4,10 @@
 	"meta_puntos": 300,
 	"tiempo_limite": 30,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_marron" },
-	  { "pos": [1, 4], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 2], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 4], "tipo_topo": "topo_marron" }
+	  { "pos": [1, 2], "tipo_topo": "marron" },
+	  { "pos": [1, 4], "tipo_topo": "marron" },
+	  { "pos": [3, 2], "tipo_topo": "marron" },
+	  { "pos": [3, 4], "tipo_topo": "marron" }
 	]
   },
   "2": {
@@ -15,11 +15,11 @@
 	"meta_puntos": 450,
 	"tiempo_limite": 30,
 	"hoyos": [
-	  { "pos": [2, 2], "tipo_topo": "topo_marron" },
-	  { "pos": [2, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 4], "tipo_topo": "topo_marron" },
-	  { "pos": [1, 3], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 3], "tipo_topo": "topo_marron" }
+	  { "pos": [2, 2], "tipo_topo": "marron" },
+	  { "pos": [2, 3], "tipo_topo": "rojo" },
+	  { "pos": [2, 4], "tipo_topo": "marron" },
+	  { "pos": [1, 3], "tipo_topo": "marron" },
+	  { "pos": [3, 3], "tipo_topo": "marron" }
 	]
   },
   "3": {
@@ -27,11 +27,11 @@
 	"meta_puntos": 650,
 	"tiempo_limite": 35,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_marron" },
-	  { "pos": [1, 5], "tipo_topo": "topo_marron" },
-	  { "pos": [2, 3], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 1], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 5], "tipo_topo": "topo_marron" }
+	  { "pos": [1, 1], "tipo_topo": "marron" },
+	  { "pos": [1, 5], "tipo_topo": "marron" },
+	  { "pos": [2, 3], "tipo_topo": "verde" },
+	  { "pos": [3, 1], "tipo_topo": "marron" },
+	  { "pos": [3, 5], "tipo_topo": "marron" }
 	]
   },
   "4": {
@@ -39,12 +39,12 @@
 	"meta_puntos": 900,
 	"tiempo_limite": 35,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 3], "tipo_topo": "topo_marron" },
-	  { "pos": [1, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 3], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 5], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 1], "tipo_topo": "rojo" },
+	  { "pos": [1, 3], "tipo_topo": "marron" },
+	  { "pos": [1, 5], "tipo_topo": "rojo" },
+	  { "pos": [3, 1], "tipo_topo": "rojo" },
+	  { "pos": [3, 3], "tipo_topo": "marron" },
+	  { "pos": [3, 5], "tipo_topo": "rojo" }
 	]
   },
   "5": {
@@ -52,13 +52,13 @@
 	"meta_puntos": 1200,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_marron" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 4], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 4], "tipo_topo": "topo_verde" }
+	  { "pos": [1, 2], "tipo_topo": "verde" },
+	  { "pos": [1, 4], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "marron" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [2, 4], "tipo_topo": "marron" },
+	  { "pos": [3, 2], "tipo_topo": "rojo" },
+	  { "pos": [3, 4], "tipo_topo": "verde" }
 	]
   },
   "6": {
@@ -66,14 +66,14 @@
 	"meta_puntos": 1100,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 5], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 1], "tipo_topo": "rojo" },
+	  { "pos": [1, 3], "tipo_topo": "naranja" },
+	  { "pos": [1, 5], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "verde" },
+	  { "pos": [2, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 1], "tipo_topo": "rojo" },
+	  { "pos": [3, 3], "tipo_topo": "naranja" },
+	  { "pos": [3, 5], "tipo_topo": "rojo" }
 	]
   },
   "7": {
@@ -81,13 +81,13 @@
 	"meta_puntos": 1400,
 	"tiempo_limite": 35,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 4], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 2], "tipo_topo": "rojo" },
+	  { "pos": [1, 4], "tipo_topo": "verde" },
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "rojo" },
+	  { "pos": [2, 5], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "verde" },
+	  { "pos": [3, 4], "tipo_topo": "rojo" }
 	]
   },
   "8": {
@@ -95,14 +95,14 @@
 	"meta_puntos": 1300,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 5], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 4], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 5], "tipo_topo": "topo_verde" }
+	  { "pos": [1, 1], "tipo_topo": "verde" },
+	  { "pos": [1, 3], "tipo_topo": "naranja" },
+	  { "pos": [1, 5], "tipo_topo": "verde" },
+	  { "pos": [2, 2], "tipo_topo": "naranja" },
+	  { "pos": [2, 4], "tipo_topo": "naranja" },
+	  { "pos": [3, 1], "tipo_topo": "verde" },
+	  { "pos": [3, 3], "tipo_topo": "naranja" },
+	  { "pos": [3, 5], "tipo_topo": "verde" }
 	]
   },
   "9": {
@@ -110,15 +110,15 @@
 	"meta_puntos": 1800,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 4], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 2], "tipo_topo": "rojo" },
+	  { "pos": [1, 3], "tipo_topo": "rojo" },
+	  { "pos": [1, 4], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "verde" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [2, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 2], "tipo_topo": "rojo" },
+	  { "pos": [3, 3], "tipo_topo": "rojo" },
+	  { "pos": [3, 4], "tipo_topo": "rojo" }
 	]
   },
   "10": {
@@ -126,14 +126,14 @@
 	"meta_puntos": 1650,
 	"tiempo_limite": 35,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 5], "tipo_topo": "topo_azul" }
+	  { "pos": [1, 1], "tipo_topo": "azul" },
+	  { "pos": [1, 3], "tipo_topo": "rojo" },
+	  { "pos": [1, 5], "tipo_topo": "azul" },
+	  { "pos": [2, 2], "tipo_topo": "verde" },
+	  { "pos": [2, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 1], "tipo_topo": "azul" },
+	  { "pos": [3, 3], "tipo_topo": "rojo" },
+	  { "pos": [3, 5], "tipo_topo": "azul" }
 	]
   },
   "11": {
@@ -141,18 +141,18 @@
 	"meta_puntos": 2100,
 	"tiempo_limite": 45,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 5], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 1], "tipo_topo": "rojo" },
+	  { "pos": [1, 2], "tipo_topo": "verde" },
+	  { "pos": [1, 3], "tipo_topo": "rojo" },
+	  { "pos": [1, 4], "tipo_topo": "verde" },
+	  { "pos": [1, 5], "tipo_topo": "rojo" },
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 5], "tipo_topo": "azul" },
+	  { "pos": [3, 1], "tipo_topo": "rojo" },
+	  { "pos": [3, 2], "tipo_topo": "verde" },
+	  { "pos": [3, 3], "tipo_topo": "rojo" },
+	  { "pos": [3, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 5], "tipo_topo": "rojo" }
 	]
   },
   "12": {
@@ -160,14 +160,14 @@
 	"meta_puntos": 2400,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_marron" },
-	  { "pos": [1, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [1, 5], "tipo_topo": "topo_marron" },
-	  { "pos": [2, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 1], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 5], "tipo_topo": "topo_marron" }
+	  { "pos": [1, 1], "tipo_topo": "marron" },
+	  { "pos": [1, 3], "tipo_topo": "dorado" },
+	  { "pos": [1, 5], "tipo_topo": "marron" },
+	  { "pos": [2, 2], "tipo_topo": "azul" },
+	  { "pos": [2, 4], "tipo_topo": "azul" },
+	  { "pos": [3, 1], "tipo_topo": "marron" },
+	  { "pos": [3, 3], "tipo_topo": "dorado" },
+	  { "pos": [3, 5], "tipo_topo": "marron" }
 	]
   },
   "13": {
@@ -175,13 +175,13 @@
 	"meta_puntos": 2200,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 5], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 5], "tipo_topo": "topo_verde" }
+	  { "pos": [1, 1], "tipo_topo": "verde" },
+	  { "pos": [1, 5], "tipo_topo": "verde" },
+	  { "pos": [2, 2], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "rojo" },
+	  { "pos": [2, 4], "tipo_topo": "azul" },
+	  { "pos": [3, 1], "tipo_topo": "verde" },
+	  { "pos": [3, 5], "tipo_topo": "verde" }
 	]
   },
   "14": {
@@ -189,13 +189,13 @@
 	"meta_puntos": 1900,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 4], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 4], "tipo_topo": "topo_naranja" }
+	  { "pos": [1, 2], "tipo_topo": "naranja" },
+	  { "pos": [1, 4], "tipo_topo": "naranja" },
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [2, 5], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "naranja" },
+	  { "pos": [3, 4], "tipo_topo": "naranja" }
 	]
   },
   "15": {
@@ -203,21 +203,21 @@
 	"meta_puntos": 3100,
 	"tiempo_limite": 45,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_marron" },
-	  { "pos": [1, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 3], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 5], "tipo_topo": "topo_marron" },
-	  { "pos": [2, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 3], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 1], "tipo_topo": "topo_marron" },
-	  { "pos": [3, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 3], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 5], "tipo_topo": "topo_marron" }
+	  { "pos": [1, 1], "tipo_topo": "marron" },
+	  { "pos": [1, 2], "tipo_topo": "rojo" },
+	  { "pos": [1, 3], "tipo_topo": "verde" },
+	  { "pos": [1, 4], "tipo_topo": "rojo" },
+	  { "pos": [1, 5], "tipo_topo": "marron" },
+	  { "pos": [2, 1], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "verde" },
+	  { "pos": [2, 3], "tipo_topo": "azul" },
+	  { "pos": [2, 4], "tipo_topo": "verde" },
+	  { "pos": [2, 5], "tipo_topo": "rojo" },
+	  { "pos": [3, 1], "tipo_topo": "marron" },
+	  { "pos": [3, 2], "tipo_topo": "rojo" },
+	  { "pos": [3, 3], "tipo_topo": "verde" },
+	  { "pos": [3, 4], "tipo_topo": "rojo" },
+	  { "pos": [3, 5], "tipo_topo": "marron" }
 	]
   },
   "16": {
@@ -225,13 +225,13 @@
 	"meta_puntos": 2600,
 	"tiempo_limite": 35,
 	"hoyos": [
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 3], "tipo_topo": "topo_dorado" }
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 2], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "azul" },
+	  { "pos": [2, 4], "tipo_topo": "azul" },
+	  { "pos": [2, 5], "tipo_topo": "azul" },
+	  { "pos": [1, 3], "tipo_topo": "dorado" },
+	  { "pos": [3, 3], "tipo_topo": "dorado" }
 	]
   },
   "17": {
@@ -239,17 +239,17 @@
 	"meta_puntos": 2300,
 	"tiempo_limite": 45,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 3], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 4], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 3], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 4], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 5], "tipo_topo": "topo_azul" }
+	  { "pos": [1, 1], "tipo_topo": "azul" },
+	  { "pos": [1, 2], "tipo_topo": "naranja" },
+	  { "pos": [1, 3], "tipo_topo": "verde" },
+	  { "pos": [1, 4], "tipo_topo": "naranja" },
+	  { "pos": [1, 5], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [3, 1], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "naranja" },
+	  { "pos": [3, 3], "tipo_topo": "verde" },
+	  { "pos": [3, 4], "tipo_topo": "naranja" },
+	  { "pos": [3, 5], "tipo_topo": "azul" }
 	]
   },
   "18": {
@@ -257,21 +257,21 @@
 	"meta_puntos": 3500,
 	"tiempo_limite": 50,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 5], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 5], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 1], "tipo_topo": "rojo" },
+	  { "pos": [1, 2], "tipo_topo": "azul" },
+	  { "pos": [1, 3], "tipo_topo": "naranja" },
+	  { "pos": [1, 4], "tipo_topo": "azul" },
+	  { "pos": [1, 5], "tipo_topo": "rojo" },
+	  { "pos": [2, 1], "tipo_topo": "verde" },
+	  { "pos": [2, 2], "tipo_topo": "rojo" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [2, 4], "tipo_topo": "rojo" },
+	  { "pos": [2, 5], "tipo_topo": "verde" },
+	  { "pos": [3, 1], "tipo_topo": "rojo" },
+	  { "pos": [3, 2], "tipo_topo": "azul" },
+	  { "pos": [3, 3], "tipo_topo": "naranja" },
+	  { "pos": [3, 4], "tipo_topo": "azul" },
+	  { "pos": [3, 5], "tipo_topo": "rojo" }
 	]
   },
   "19": {
@@ -279,14 +279,14 @@
 	"meta_puntos": 2800,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [1, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 5], "tipo_topo": "topo_rojo" }
+	  { "pos": [1, 1], "tipo_topo": "azul" },
+	  { "pos": [1, 5], "tipo_topo": "azul" },
+	  { "pos": [2, 2], "tipo_topo": "verde" },
+	  { "pos": [2, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 3], "tipo_topo": "dorado" },
+	  { "pos": [1, 3], "tipo_topo": "rojo" },
+	  { "pos": [3, 1], "tipo_topo": "rojo" },
+	  { "pos": [3, 5], "tipo_topo": "rojo" }
 	]
   },
   "20": {
@@ -294,17 +294,17 @@
 	"meta_puntos": 2600,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [2, 1], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 4], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 5], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 3], "tipo_topo": "topo_dorado" }
+	  { "pos": [2, 1], "tipo_topo": "naranja" },
+	  { "pos": [2, 2], "tipo_topo": "naranja" },
+	  { "pos": [2, 3], "tipo_topo": "naranja" },
+	  { "pos": [2, 4], "tipo_topo": "naranja" },
+	  { "pos": [2, 5], "tipo_topo": "naranja" },
+	  { "pos": [1, 1], "tipo_topo": "azul" },
+	  { "pos": [1, 5], "tipo_topo": "azul" },
+	  { "pos": [3, 1], "tipo_topo": "azul" },
+	  { "pos": [3, 5], "tipo_topo": "azul" },
+	  { "pos": [1, 3], "tipo_topo": "dorado" },
+	  { "pos": [3, 3], "tipo_topo": "dorado" }
 	]
   },
   "21": {
@@ -312,13 +312,13 @@
 	"meta_puntos": 3200,
 	"tiempo_limite": 35,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 4], "tipo_topo": "topo_azul" }
+	  { "pos": [1, 2], "tipo_topo": "azul" },
+	  { "pos": [1, 4], "tipo_topo": "azul" },
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "azul" },
+	  { "pos": [2, 5], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "azul" },
+	  { "pos": [3, 4], "tipo_topo": "azul" }
 	]
   },
   "22": {
@@ -326,18 +326,18 @@
 	"meta_puntos": 3000,
 	"tiempo_limite": 45,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 4], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 2], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 4], "tipo_topo": "topo_naranja" }
+	  { "pos": [1, 1], "tipo_topo": "rojo" },
+	  { "pos": [1, 3], "tipo_topo": "rojo" },
+	  { "pos": [1, 5], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "verde" },
+	  { "pos": [2, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 1], "tipo_topo": "rojo" },
+	  { "pos": [3, 3], "tipo_topo": "rojo" },
+	  { "pos": [3, 5], "tipo_topo": "rojo" },
+	  { "pos": [1, 2], "tipo_topo": "naranja" },
+	  { "pos": [1, 4], "tipo_topo": "naranja" },
+	  { "pos": [3, 2], "tipo_topo": "naranja" },
+	  { "pos": [3, 4], "tipo_topo": "naranja" }
 	]
   },
   "23": {
@@ -345,15 +345,15 @@
 	"meta_puntos": 3400,
 	"tiempo_limite": 45,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 4], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 5], "tipo_topo": "topo_azul" }
+	  { "pos": [1, 1], "tipo_topo": "azul" },
+	  { "pos": [1, 2], "tipo_topo": "rojo" },
+	  { "pos": [1, 4], "tipo_topo": "rojo" },
+	  { "pos": [1, 5], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [3, 1], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "rojo" },
+	  { "pos": [3, 4], "tipo_topo": "rojo" },
+	  { "pos": [3, 5], "tipo_topo": "azul" }
 	]
   },
   "24": {
@@ -361,21 +361,21 @@
 	"meta_puntos": 3800,
 	"tiempo_limite": 50,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [1, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 5], "tipo_topo": "topo_verde" },
-	  { "pos": [2, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 3], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 5], "tipo_topo": "topo_verde" }
+	  { "pos": [1, 1], "tipo_topo": "verde" },
+	  { "pos": [1, 2], "tipo_topo": "verde" },
+	  { "pos": [1, 3], "tipo_topo": "rojo" },
+	  { "pos": [1, 4], "tipo_topo": "verde" },
+	  { "pos": [1, 5], "tipo_topo": "verde" },
+	  { "pos": [2, 1], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "azul" },
+	  { "pos": [2, 4], "tipo_topo": "azul" },
+	  { "pos": [2, 5], "tipo_topo": "rojo" },
+	  { "pos": [3, 1], "tipo_topo": "verde" },
+	  { "pos": [3, 2], "tipo_topo": "verde" },
+	  { "pos": [3, 3], "tipo_topo": "rojo" },
+	  { "pos": [3, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 5], "tipo_topo": "verde" }
 	]
   },
   "25": {
@@ -383,16 +383,16 @@
 	"meta_puntos": 2900,
 	"tiempo_limite": 40,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 5], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 2], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 4], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 1], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 5], "tipo_topo": "topo_naranja" },
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" }
+	  { "pos": [1, 1], "tipo_topo": "naranja" },
+	  { "pos": [1, 3], "tipo_topo": "naranja" },
+	  { "pos": [1, 5], "tipo_topo": "naranja" },
+	  { "pos": [2, 2], "tipo_topo": "dorado" },
+	  { "pos": [2, 4], "tipo_topo": "dorado" },
+	  { "pos": [3, 1], "tipo_topo": "naranja" },
+	  { "pos": [3, 3], "tipo_topo": "naranja" },
+	  { "pos": [3, 5], "tipo_topo": "naranja" },
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 5], "tipo_topo": "azul" }
 	]
   },
   "26": {
@@ -400,17 +400,17 @@
 	"meta_puntos": 4200,
 	"tiempo_limite": 45,
 	"hoyos": [
-	  { "pos": [1, 2], "tipo_topo": "topo_dorado" },
-	  { "pos": [1, 4], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_dorado" },
-	  { "pos": [3, 4], "tipo_topo": "topo_dorado" },
-	  { "pos": [1, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 5], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 1], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 5], "tipo_topo": "topo_verde" }
+	  { "pos": [1, 2], "tipo_topo": "dorado" },
+	  { "pos": [1, 4], "tipo_topo": "dorado" },
+	  { "pos": [2, 1], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [2, 5], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "dorado" },
+	  { "pos": [3, 4], "tipo_topo": "dorado" },
+	  { "pos": [1, 1], "tipo_topo": "verde" },
+	  { "pos": [1, 5], "tipo_topo": "verde" },
+	  { "pos": [3, 1], "tipo_topo": "verde" },
+	  { "pos": [3, 5], "tipo_topo": "verde" }
 	]
   },
   "27": {
@@ -418,21 +418,21 @@
 	"meta_puntos": 4800,
 	"tiempo_limite": 50,
 	"hoyos": [
-	  { "pos": [1, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [1, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [1, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [1, 5], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 1], "tipo_topo": "topo_rojo" },
-	  { "pos": [2, 2], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 3], "tipo_topo": "topo_dorado" },
-	  { "pos": [2, 4], "tipo_topo": "topo_azul" },
-	  { "pos": [2, 5], "tipo_topo": "topo_rojo" },
-	  { "pos": [3, 1], "tipo_topo": "topo_azul" },
-	  { "pos": [3, 2], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 3], "tipo_topo": "topo_naranja" },
-	  { "pos": [3, 4], "tipo_topo": "topo_verde" },
-	  { "pos": [3, 5], "tipo_topo": "topo_azul" }
+	  { "pos": [1, 1], "tipo_topo": "azul" },
+	  { "pos": [1, 2], "tipo_topo": "verde" },
+	  { "pos": [1, 3], "tipo_topo": "naranja" },
+	  { "pos": [1, 4], "tipo_topo": "verde" },
+	  { "pos": [1, 5], "tipo_topo": "azul" },
+	  { "pos": [2, 1], "tipo_topo": "rojo" },
+	  { "pos": [2, 2], "tipo_topo": "azul" },
+	  { "pos": [2, 3], "tipo_topo": "dorado" },
+	  { "pos": [2, 4], "tipo_topo": "azul" },
+	  { "pos": [2, 5], "tipo_topo": "rojo" },
+	  { "pos": [3, 1], "tipo_topo": "azul" },
+	  { "pos": [3, 2], "tipo_topo": "verde" },
+	  { "pos": [3, 3], "tipo_topo": "naranja" },
+	  { "pos": [3, 4], "tipo_topo": "verde" },
+	  { "pos": [3, 5], "tipo_topo": "azul" }
 	]
   }
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbg6qdy5u2qga"
-path="res://.godot/imported/topo_marron.png-947ba4117ce3292242fd6a46c7b05516.ctex"
+uid="uid://i70b3yyh52l"
+path="res://.godot/imported/verde.png-4ac44887dedb1b6317c2656de0821a90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/whackamole/assets/images/topos/topo_marron.png"
-dest_files=["res://.godot/imported/topo_marron.png-947ba4117ce3292242fd6a46c7b05516.ctex"]
+source_file="res://games/whackamole/assets/images/topos/verde.png"
+dest_files=["res://.godot/imported/verde.png-4ac44887dedb1b6317c2656de0821a90.ctex"]
 
 [params]
 
