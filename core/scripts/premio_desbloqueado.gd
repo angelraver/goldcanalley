@@ -1,6 +1,7 @@
 extends Control
 
 const CARPETA_PREMIOS = "res://core/assets/images/prizes/"
+const ESCENA_SELECCION_NIVELES = "res://core/scenes/seleccion_niveles.tscn"
 
 # --- NUEVAS REFERENCIAS DE NODOS ---
 # Basado en la estructura mostrada en tu captura de pantalla
@@ -121,5 +122,5 @@ func animar_pop_control(node: Control, scale_objetivo: Vector2) -> void:
 func _on_pantalla_pressed() -> void:
 	# Consumir la alerta para que no se vuelva a mostrar
 	save_manager.premio_recien_desbloqueado = ""
-	# Ir a la selección de niveles
-	get_tree().change_scene_to_file("res://scenes/seleccion_niveles.tscn")
+	# Ir a la selección de niveles del juego actual
+	get_tree().change_scene_to_file(ESCENA_SELECCION_NIVELES)
