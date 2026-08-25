@@ -1,31 +1,27 @@
 [gd_scene format=3 uid="uid://dwbx64orng73p"]
 
 [ext_resource type="Script" uid="uid://b2ttfca1kpqbr" path="res://games/whackamole/scripts/audio_manager.gd" id="1_am"]
-[ext_resource type="AudioStream" uid="uid://cg6okcufowqi3" path="res://games/whackamole/assets/sounds/hits/4.wav" id="3_hit4"]
-[ext_resource type="AudioStream" uid="uid://ddshojod6v2c2" path="res://games/whackamole/assets/sounds/hits/7.wav" id="5_hit7"]
-[ext_resource type="AudioStream" uid="uid://dgghkoogtnoni" path="res://games/whackamole/assets/sounds/hits/10.wav" id="6_hit10"]
-[ext_resource type="AudioStream" uid="uid://bd2e47ky3y15o" path="res://games/whackamole/assets/sounds/hits/28.wav" id="11_hit28"]
-[ext_resource type="AudioStream" uid="uid://dboemkye1hsoc" path="res://games/whackamole/assets/sounds/hits/34.wav" id="17_hit34"]
-[ext_resource type="AudioStream" uid="uid://fjlhbilce7mo" path="res://games/whackamole/assets/sounds/risas/risa1.wav" id="18_risa1"]
-[ext_resource type="AudioStream" uid="uid://fb40ehjha3d6" path="res://games/whackamole/assets/sounds/risas/risa2.wav" id="19_risa2"]
-[ext_resource type="AudioStream" uid="uid://na1djh5lc2c7" path="res://games/whackamole/assets/sounds/risas/risa3.wav" id="20_risa3"]
-[ext_resource type="AudioStream" uid="uid://byklofrf4brcf" path="res://games/whackamole/assets/sounds/risas/risa4.wav" id="21_risa4"]
-[ext_resource type="AudioStream" uid="uid://l87yti7nolsr" path="res://games/whackamole/assets/sounds/risas/risa5.wav" id="22_risa5"]
-[ext_resource type="AudioStream" uid="uid://bt0o6vdtowpxy" path="res://games/whackamole/assets/sounds/outchs/ouch1.wav" id="23_ouch1"]
-[ext_resource type="AudioStream" uid="uid://snhbrnwhxmfh" path="res://games/whackamole/assets/sounds/outchs/ouch2.wav" id="24_ouch2"]
-[ext_resource type="AudioStream" uid="uid://ciylxrlt53ckx" path="res://games/whackamole/assets/sounds/outchs/ouch3.wav" id="25_ouch3"]
-[ext_resource type="AudioStream" uid="uid://cqd2x3ekm1fj6" path="res://games/whackamole/assets/sounds/outchs/ouch4.wav" id="26_ouch4"]
-[ext_resource type="AudioStream" uid="uid://ot3wxu1lhcub" path="res://games/whackamole/assets/sounds/outchs/ouch5.wav" id="27_ouch5"]
-[ext_resource type="AudioStream" uid="uid://coxotnp73opeh" path="res://games/whackamole/assets/sounds/outchs/ouch6.wav" id="28_ouch6"]
+[ext_resource type="AudioStream" uid="uid://bu1n6r2icwyoa" path="res://games/whackamole/assets/sounds/hits/4.wav" id="3_hit4"]
+[ext_resource type="AudioStream" uid="uid://dd6corxqfh8h4" path="res://games/whackamole/assets/sounds/hits/10.wav" id="6_hit10"]
+[ext_resource type="AudioStream" uid="uid://cy1r2wxc5aovn" path="res://games/whackamole/assets/sounds/hits/28.wav" id="11_hit28"]
+[ext_resource type="AudioStream" uid="uid://c6nn83oya7l5t" path="res://games/whackamole/assets/sounds/hits/34.wav" id="17_hit34"]
+[ext_resource type="AudioStream" uid="uid://bi20outk2k2ag" path="res://games/whackamole/assets/sounds/risas/risa1.wav" id="18_risa1"]
+[ext_resource type="AudioStream" uid="uid://yhtkbrps1lfn" path="res://games/whackamole/assets/sounds/risas/risa2.wav" id="19_risa2"]
+[ext_resource type="AudioStream" uid="uid://bgkhb0pabnfcs" path="res://games/whackamole/assets/sounds/risas/risa3.wav" id="20_risa3"]
+[ext_resource type="AudioStream" uid="uid://dnlsco76g0k5" path="res://games/whackamole/assets/sounds/risas/risa4.wav" id="21_risa4"]
+[ext_resource type="AudioStream" uid="uid://b3p6r8ie2jebx" path="res://games/whackamole/assets/sounds/risas/risa5.wav" id="22_risa5"]
+[ext_resource type="AudioStream" uid="uid://ek0qrtrkceg4" path="res://games/whackamole/assets/sounds/outchs/ouch1.wav" id="23_ouch1"]
+[ext_resource type="AudioStream" uid="uid://dikkj22tblt" path="res://games/whackamole/assets/sounds/outchs/ouch2.wav" id="24_ouch2"]
+[ext_resource type="AudioStream" uid="uid://bufa7wtukqhyr" path="res://games/whackamole/assets/sounds/outchs/ouch3.wav" id="25_ouch3"]
+[ext_resource type="AudioStream" uid="uid://68dpayf8jkr6" path="res://games/whackamole/assets/sounds/outchs/ouch4.wav" id="26_ouch4"]
+[ext_resource type="AudioStream" uid="uid://otyomt21yjgy" path="res://games/whackamole/assets/sounds/outchs/ouch5.wav" id="27_ouch5"]
+[ext_resource type="AudioStream" uid="uid://fhix2jap0af3" path="res://games/whackamole/assets/sounds/outchs/ouch6.wav" id="28_ouch6"]
 
 [node name="AudioJuego" type="Node" unique_id=1723359510]
 script = ExtResource("1_am")
 
 [node name="Hit4" type="AudioStreamPlayer" parent="." unique_id=1569975149]
 stream = ExtResource("3_hit4")
-
-[node name="Hit7" type="AudioStreamPlayer" parent="." unique_id=1638495643]
-stream = ExtResource("5_hit7")
 
 [node name="Hit10" type="AudioStreamPlayer" parent="." unique_id=1473000670]
 stream = ExtResource("6_hit10")

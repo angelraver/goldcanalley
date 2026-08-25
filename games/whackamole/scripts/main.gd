@@ -12,7 +12,7 @@ extends Node3D
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var ui_timer: UITimer = $UI/Timer as UITimer
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
-@onready var audio_juego: GameAudioBase = $AudioJuego
+@onready var audio: GameAudioBase = $AudioJuego
 
 const ANIM_ESCONDER: StringName = &"esconder"
 
@@ -95,7 +95,6 @@ func cargar_nivel(id_nivel: String) -> void:
 			hoyo_instancia.anim_player.animation_finished.connect(
 				_on_anim_hoyo_finalizada.bind(hoyo_instancia)
 			)
-		hoyo_instancia.audio = audio_juego
 		hoyos_activos.append(hoyo_instancia)
 
 func actualizar_ui_level() -> void:
@@ -119,14 +118,19 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 
 	if mazo != null and hoyo_node != null:
 		mazo.golpear_en(hoyo_node.global_position, camara.global_position)
-		
+
+	# 1. Golpe de martillo: suena en cada clic
+	if audio:
+		audio.play_hit()
+
 	if fue_acierto:
 		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
 		puntaje_nivel += puntos
 		if ui_puntaje:
 			ui_puntaje.establecer_puntaje(puntaje_nivel)
-		if audio_juego:
-			audio_juego.play_ouch(_sonido_topo(hoyo_node, "outch"))
+		# 2. Topo golpeado: solo cuando el topo estaba afuera
+		if audio:
+			audio.play_ouch(_sonido_topo(hoyo_node, "outch"))
 	else:
 		print("¡Golpe en falso! Sin puntos.")
 
@@ -136,8 +140,8 @@ func _on_anim_hoyo_finalizada(anim_nombre: StringName, hoyo_node: Node3D) -> voi
 		return
 	if not juego_activo:
 		return
-	if audio_juego:
-		audio_juego.play_risa(_sonido_topo(hoyo_node, "risa"))
+	if audio:
+		audio.play_risa(_sonido_topo(hoyo_node, "risa"))
 
 func _sonido_topo(hoyo_node: Node3D, clave: String) -> String:
 	var config: Dictionary = sonidos_por_hoyo.get(hoyo_node, {})

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://kka34qmlhs2y"]
 
 [ext_resource type="Script" uid="uid://cxotf84avwi3v" path="res://core/scripts/audio_manager.gd" id="1_3dgps"]
-[ext_resource type="AudioStream" uid="uid://mxyckkkyksrw" path="res://core/assets/sounds/ok.wav" id="1_4tesi"]
-[ext_resource type="AudioStream" uid="uid://c0t5jnd5v6gjg" path="res://core/assets/sounds/welldone1.wav" id="3_151wy"]
+[ext_resource type="AudioStream" uid="uid://t727smp6b43i" path="res://core/assets/sounds/ok.wav" id="1_4tesi"]
+[ext_resource type="AudioStream" uid="uid://b5fbtt30n4ka7" path="res://core/assets/sounds/welldone1.wav" id="3_151wy"]
 
 [node name="AudioManager" type="Node" unique_id=1655563066]
 script = ExtResource("1_3dgps")
