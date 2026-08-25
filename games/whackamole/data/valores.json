@@ -13,7 +13,7 @@
 	"rango_expuesto": [1.2, 1.8],
 	"pts": 75,
 	"outch": "outch2",
-	"risa": "risa",
+	"risa": "risa2"
   },
   "verde": {
 	"textura_path": "verde.png",
@@ -21,7 +21,6 @@
 	"rango_expuesto": [0.8, 1.3],
 	"pts": 125,
 	"outch": "outch3",
-	"risa": "risa",
 	"risa": "risa3"
   },
   "azul": {
@@ -46,6 +45,6 @@
 	"rango_expuesto": [0.5, 0.9],
 	"pts": 500,
 	"outch": "outch6",
-	"risa": "risa6"
+	"risa": "risa5"
   }
 }

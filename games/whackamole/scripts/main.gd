@@ -14,9 +14,12 @@ extends Node3D
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var audio_juego: GameAudioBase = $AudioJuego
 
+const ANIM_ESCONDER: StringName = &"esconder"
+
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
 var hoyos_activos: Array[Node3D] = []
+var sonidos_por_hoyo: Dictionary = {}
 var puntaje_nivel: int = 0
 var juego_activo: bool = false
 
@@ -67,10 +70,11 @@ func cargar_nivel(id_nivel: String) -> void:
 	for hoyo in hoyos_activos:
 		hoyo.queue_free()
 	hoyos_activos.clear()
+	sonidos_por_hoyo.clear()
 	
 	for configuracion_hoyo in lista_hoyos:
 		var coord: Array = configuracion_hoyo.get("pos", [2, 3])
-		var tipo_topo: String = configuracion_hoyo.get("tipo_topo", "topo_rojo")
+		var tipo_topo: String = configuracion_hoyo.get("tipo_topo", "rojo")
 		
 		var grid_x: int = coord[0]
 		var grid_y: int = coord[1]
@@ -84,8 +88,13 @@ func cargar_nivel(id_nivel: String) -> void:
 		
 		if datos_topos.has(tipo_topo):
 			hoyo_instancia.aplicar_configuracion(datos_topos[tipo_topo])
-		
+			sonidos_por_hoyo[hoyo_instancia] = datos_topos[tipo_topo]
+
 		hoyo_instancia.hoyo_cliqueado.connect(_on_hoyo_cliqueado)
+		if hoyo_instancia.anim_player:
+			hoyo_instancia.anim_player.animation_finished.connect(
+				_on_anim_hoyo_finalizada.bind(hoyo_instancia)
+			)
 		hoyo_instancia.audio = audio_juego
 		hoyos_activos.append(hoyo_instancia)
 
@@ -116,8 +125,23 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 		puntaje_nivel += puntos
 		if ui_puntaje:
 			ui_puntaje.establecer_puntaje(puntaje_nivel)
+		if audio_juego:
+			audio_juego.play_ouch(_sonido_topo(hoyo_node, "outch"))
 	else:
 		print("¡Golpe en falso! Sin puntos.")
+
+func _on_anim_hoyo_finalizada(anim_nombre: StringName, hoyo_node: Node3D) -> void:
+	# La risa suena cuando el topo termina de esconderse sin haber sido golpeado
+	if anim_nombre != ANIM_ESCONDER:
+		return
+	if not juego_activo:
+		return
+	if audio_juego:
+		audio_juego.play_risa(_sonido_topo(hoyo_node, "risa"))
+
+func _sonido_topo(hoyo_node: Node3D, clave: String) -> String:
+	var config: Dictionary = sonidos_por_hoyo.get(hoyo_node, {})
+	return str(config.get(clave, ""))
 
 func _on_tiempo_agotado() -> void:
 	juego_activo = false
