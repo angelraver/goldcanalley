@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://bwa3xnuuqdkpq"]
 
+[ext_resource type="Script" uid="uid://xfb76nhza7y82" path="res://games/plinko/scripts/ramp.gd" id="1_y7y82"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rieu1"]
 resource_name = "M_Pegs"
 cull_mode = 2
@@ -42,11 +44,12 @@ shadow_mesh = SubResource("ArrayMesh_a4x6j")
 data = PackedVector3Array(0, -0.015, 0.125, 0, 0.015, -0.125, 0, 0.015, 0.125, 0, -0.015, 0.125, 0, -0.015, -0.125, 0, 0.015, -0.125, 0, -0.015, -0.125, 0.4, 0.015, -0.125, 0, 0.015, -0.125, 0, -0.015, -0.125, 0.4, -0.015, -0.125, 0.4, 0.015, -0.125, 0.4, -0.015, -0.125, 0.4, 0.015, 0.125, 0.4, 0.015, -0.125, 0.4, -0.015, -0.125, 0.4, -0.015, 0.125, 0.4, 0.015, 0.125, 0.4, -0.015, 0.125, 0, 0.015, 0.125, 0.4, 0.015, 0.125, 0.4, -0.015, 0.125, 0, -0.015, 0.125, 0, 0.015, 0.125, 0, -0.015, -0.125, 0.4, -0.015, 0.125, 0.4, -0.015, -0.125, 0, -0.015, -0.125, 0, -0.015, 0.125, 0.4, -0.015, 0.125, 0.4, 0.015, -0.125, 0, 0.015, 0.125, 0, 0.015, -0.125, 0.4, 0.015, -0.125, 0.4, 0.015, 0.125, 0, 0.015, 0.125)
 
 [node name="RampSmall" type="Node3D" unique_id=1882095169]
+script = ExtResource("1_y7y82")
 
-[node name="Ramp_Small" type="MeshInstance3D" parent="." unique_id=173498702]
+[node name="Ramp" type="MeshInstance3D" parent="." unique_id=173498702]
 mesh = SubResource("ArrayMesh_axagp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ramp_Small" unique_id=1305348864]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ramp" unique_id=1305348864]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp_Small/StaticBody3D" unique_id=1267839270]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D" unique_id=1267839270]
 shape = SubResource("ConcavePolygonShape3D_b65df")

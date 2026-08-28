@@ -3,7 +3,7 @@ extends Node3D
 # Rutas de las escenas individuales
 @export var board_frame_scene: PackedScene = preload("res://games/plinko/scenes/board_frame.tscn")
 @export var peg_scene: PackedScene = preload("res://games/plinko/scenes/peg.tscn")
-@export var ramp_small_scene: PackedScene = preload("res://games/plinko/scenes/ramp_small.tscn")
+@export var ramp_scene: PackedScene = preload("res://games/plinko/scenes/ramp.tscn")
 @export var slot_scene: PackedScene = preload("res://games/plinko/scenes/slot.tscn")
 @export var divider_scene: PackedScene = preload("res://games/plinko/scenes/divider.tscn")
 
@@ -38,15 +38,14 @@ func generate_level(level_id: String) -> void:
 
 	var peg_color_hex: String = level_data.get("color_peg", "ff00ff")
 	var board_color_hex: String = level_data.get("color_board", "ffff00")
+	var ramp_color_hex: String = level_data.get("color_ramp", peg_color_hex)
 
 	# 1. Instanciar el Marco Base del Tablero
 	if board_frame_scene:
 		var frame_inst = board_frame_scene.instantiate()
 		board_frame_holder.add_child(frame_inst)
 
-	
-		if frame_inst and frame_inst.has_method("set_board_color"):
-			frame_inst.set_board_color(board_color_hex)
+		_apply_element_color(frame_inst, board_color_hex)
 
 	# 2. Leer parámetros de la grilla
 	cols = level_data.get("grid_cols")
@@ -63,8 +62,7 @@ func generate_level(level_id: String) -> void:
 		board_elements.add_child(peg_inst)
 		peg_inst.position = grid_to_world(peg_col, peg_row)
 
-		if peg_inst.has_method("set_peg_color"):
-			peg_inst.set_peg_color(peg_color_hex)
+		_apply_element_color(peg_inst, peg_color_hex)
 
 	# 4. Instanciar Rampas
 	var ramps_array = level_data.get("ramps", [])
@@ -73,10 +71,12 @@ func generate_level(level_id: String) -> void:
 		var ramp_row: int = ramp_info["row"]
 		var rot_deg: float = ramp_info.get("rotation_deg", 0.0)
 		
-		var ramp_inst = ramp_small_scene.instantiate()
+		var ramp_inst = ramp_scene.instantiate()
 		board_elements.add_child(ramp_inst)
 		ramp_inst.position = grid_to_world(ramp_col, ramp_row)
 		ramp_inst.rotation_degrees.z = rot_deg
+
+		_apply_element_color(ramp_inst, ramp_color_hex)
 
 	var slots_array = level_data.get("slots", [])
 	build_slots(slots_array)
@@ -150,6 +150,21 @@ func grid_to_world(col_pos: float, row_pos: float) -> Vector3:
 	var z_pos: float = 0.2
 
 	return Vector3(x_pos, y_pos, z_pos)
+
+func _apply_element_color(node: Node, color_hex: String) -> void:
+	# API genérica unificada: todos los elementos (board, peg, ramp) exponen set_element_color
+	# que internamente delega a ColorUtils.apply_color. Fallback directo por si el nodo no
+	# tiene el método (p.ej. escena sin script).
+	if node.has_method("set_element_color"):
+		node.call("set_element_color", color_hex)
+	elif node.has_method("set_board_color"):
+		node.call("set_board_color", color_hex)
+	elif node.has_method("set_peg_color"):
+		node.call("set_peg_color", color_hex)
+	elif node.has_method("set_ramp_color"):
+		node.call("set_ramp_color", color_hex)
+	else:
+		ColorUtils.apply_color(node, color_hex)
 
 func clear_board() -> void:
 	for child in board_frame_holder.get_children():
