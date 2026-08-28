@@ -48,32 +48,32 @@ func generate_level(level_id: String) -> void:
 	# 3. Instanciar Pilones
 	var pegs_array = level_data.get("pegs", [])
 	for peg_info in pegs_array:
-		var col: float = float(peg_info["col"])
-		var row: int = peg_info["row"]
+		var peg_col: float = float(peg_info["col"])
+		var peg_row: int = peg_info["row"]
 		
 		var peg_inst = peg_scene.instantiate()
 		board_elements.add_child(peg_inst)
-		peg_inst.position = grid_to_world(col, row, cols, rows, cell_size)
+		peg_inst.position = grid_to_world(peg_col, peg_row)
 
 	# 4. Instanciar Rampas
 	var ramps_array = level_data.get("ramps", [])
 	for ramp_info in ramps_array:
-		var col: int = ramp_info["col"]
-		var row: int = ramp_info["row"]
+		var ramp_col: int = ramp_info["col"]
+		var ramp_row: int = ramp_info["row"]
 		var rot_deg: float = ramp_info.get("rotation_deg", 0.0)
 		
 		var ramp_inst = ramp_small_scene.instantiate()
 		board_elements.add_child(ramp_inst)
-		ramp_inst.position = grid_to_world(col, row, cols, rows, cell_size)
+		ramp_inst.position = grid_to_world(ramp_col, ramp_row)
 		ramp_inst.rotation_degrees.z = rot_deg
 
 	var slots_array = level_data.get("slots", [])
-	build_slots(slots_array, cols, rows, cell_size)
+	build_slots(slots_array)
 
 	# 5. Ajustar la cámara automáticamente al tamaño del tablero
-	setup_camera(cols, rows, cell_size)
+	setup_camera()
 
-func build_slots(slots_data: Array, cols: int, rows: int, cell_size: float) -> void:
+func build_slots(slots_data: Array) -> void:
 	var row_y: float = -2.8 # Fila donde se instancian los sensores
 	
 	for i in range(slots_data.size()):
@@ -91,7 +91,7 @@ func build_slots(slots_data: Array, cols: int, rows: int, cell_size: float) -> v
 		var mid_col: float = (col_start + col_end) / 2.0
 		var slot_inst = slot_scene.instantiate()
 		slot_inst.points = pts
-		slot_inst.position = grid_to_world(mid_col, row_y, cols, rows, cell_size)
+		slot_inst.position = grid_to_world(mid_col, row_y)
 		
 		# 3. Ajustamos el ancho dinámicamente ANTES de añadirlo a la escena
 		slot_inst.setup_slot(slot_width_world, pts, color_hex)
@@ -101,12 +101,12 @@ func build_slots(slots_data: Array, cols: int, rows: int, cell_size: float) -> v
 
 		# 4. Instanciar divisores (Dividers) en col_start y col_end
 		var divider_inst = divider_scene.instantiate()
-		divider_inst.position = grid_to_world(col_start, row_y, cols, rows, cell_size)
+		divider_inst.position = grid_to_world(col_start, row_y)
 		board_elements.add_child(divider_inst)
 
 		if i == slots_data.size() - 1:
 			var last_divider = divider_scene.instantiate()
-			last_divider.position = grid_to_world(col_end, row_y, cols, rows, cell_size)
+			last_divider.position = grid_to_world(col_end, row_y)
 			board_elements.add_child(last_divider)
 
 func _on_ball_scored(points_awarded: int) -> void:
@@ -116,26 +116,26 @@ func _on_ball_scored(points_awarded: int) -> void:
 	# Preparamos la siguiente bola para lanzar tras un breve retraso
 	get_tree().create_timer(0.5).timeout.connect(spawn_next_ball)
 
-func setup_camera(cols: int, rows: int, cell_size: float) -> void:
-	var total_width: float = cols * cell_size
-	var total_height: float = rows * cell_size
+func setup_camera() -> void:
+	var total_width_cam: float = cols * cell_size
+	var total_height_cam: float = rows * cell_size
 
-	var max_dimension: float = max(total_width, total_height)
+	var max_dimension_cam: float = max(total_width_cam, total_height_cam)
 	# Aumentamos la distancia en Z de 1.35 a 2.5 para abarcar todo el marco
-	var distance_z: float = max_dimension * 1.4
+	var distance_z: float = max_dimension_cam * 1.4
 
 	camera.position = Vector3(0.0, 0.0, distance_z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func grid_to_world(col: float, row: float, total_cols: int, total_rows: int, cell_size: float) -> Vector3:
-	var total_width: float = total_cols * cell_size
-	var total_height: float = total_rows * cell_size
+func grid_to_world(col_pos: float, row_pos: float) -> Vector3:
+	var total_width_grid: float = cols * cell_size
+	var total_height_grid: float = rows * cell_size
 
-	var start_x: float = -(total_width / 2.0) + (cell_size / 2.0)
-	var start_y: float = -(total_height / 2.0) + (cell_size / 2.0)
+	var start_x: float = -(total_width_grid / 2.0) + (cell_size / 2.0)
+	var start_y: float = -(total_height_grid / 2.0) + (cell_size / 2.0)
 
-	var x_pos: float = start_x + (col * cell_size)
-	var y_pos: float = start_y + (row * cell_size)
+	var x_pos: float = start_x + (col_pos * cell_size)
+	var y_pos: float = start_y + (row_pos * cell_size)
 	var z_pos: float = 0.2
 
 	return Vector3(x_pos, y_pos, z_pos)

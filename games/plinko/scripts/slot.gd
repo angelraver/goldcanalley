@@ -15,6 +15,7 @@ func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 	# Referencias directas
 	var col = $CollisionShape3D
 	var bg_mesh = $BackgroundMesh
+	var bg_mesh_floor = $BackgroundMeshPiso
 	var label = $PointsLabel
 
 	# 1. Ajustar el tamaño del sensor de colisión (BoxShape3D)
@@ -25,7 +26,7 @@ func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 		col.shape = new_box
 
 	# 2. Ajustar el tamaño del panel de fondo (QuadMesh / PlaneMesh)
-	if bg_mesh:
+	if bg_mesh && bg_mesh_floor:
 		var new_quad = QuadMesh.new()
 		# Asignamos el ancho dinámico y una altura fija para la franja del fondo
 		new_quad.size = Vector2(slot_width, 0.3)
@@ -33,10 +34,11 @@ func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 		# Crear un material único con el color del JSON
 		var mat = StandardMaterial3D.new()
 		mat.albedo_color = Color(color_hex)
-		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED # Mantener color vivo sin depender de luces
+		#mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED # Mantener color vivo sin depender de luces
 		new_quad.material = mat
 		
 		bg_mesh.mesh = new_quad
+		bg_mesh_floor.mesh = new_quad
 
 	# 3. Actualizar el texto del Label3D
 	if label:
@@ -45,4 +47,4 @@ func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("release_ball") or body.name.begins_with("Ball"):
 		emit_signal("ball_scored", points)
-		body.queue_free()
+		#body.queue_free()
