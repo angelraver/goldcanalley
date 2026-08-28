@@ -14,7 +14,7 @@ extends Node3D
 
 var score: int = 0
 var cols: int = 10
-var rows: int = 15
+var rows: int = 12
 var cell_size: float = 0.2
 
 var ball_scene: PackedScene = preload("res://games/plinko/scenes/ball.tscn")
@@ -40,19 +40,12 @@ func generate_level(level_id: String) -> void:
 	var board_color_hex: String = level_data.get("color_board", "ffff00")
 	var ramp_color_hex: String = level_data.get("color_ramp", peg_color_hex)
 
-	# 1. Instanciar el Marco Base del Tablero
 	if board_frame_scene:
 		var frame_inst = board_frame_scene.instantiate()
 		board_frame_holder.add_child(frame_inst)
 
 		_apply_element_color(frame_inst, board_color_hex)
 
-	# 2. Leer parámetros de la grilla
-	cols = level_data.get("grid_cols")
-	rows = level_data.get("grid_rows")
-	cell_size = level_data.get("cell_size")
-
-	# 3. Instanciar Pilones
 	var pegs_array = level_data.get("pegs", [])
 	for peg_info in pegs_array:
 		var peg_col: float = float(peg_info["col"])
@@ -64,7 +57,6 @@ func generate_level(level_id: String) -> void:
 
 		_apply_element_color(peg_inst, peg_color_hex)
 
-	# 4. Instanciar Rampas
 	var ramps_array = level_data.get("ramps", [])
 	for ramp_info in ramps_array:
 		var ramp_col: float = float(ramp_info["col"])
@@ -81,7 +73,6 @@ func generate_level(level_id: String) -> void:
 	var slots_array = level_data.get("slots", [])
 	build_slots(slots_array)
 
-	# 5. Ajustar la cámara automáticamente al tamaño del tablero
 	setup_camera()
 
 func build_slots(slots_data: Array) -> void:

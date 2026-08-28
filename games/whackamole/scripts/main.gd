@@ -2,7 +2,6 @@ extends Node3D
 
 @export var topo_hoyo_scene: PackedScene = preload("res://games/whackamole/scenes/topo_hoyo.tscn")
 @export var separacion_grilla: Vector2 = Vector2(2.3, 2.3)
-@export var escena_puntos_flotantes: PackedScene = preload("res://core/scenes/puntos_flotantes.tscn")
 @export var nivel_actual: int = 1
 
 @onready var anim_camara: AnimationPlayer = $AnimationPlayer
