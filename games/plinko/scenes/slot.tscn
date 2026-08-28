@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cxwgre2h64elr"]
+
+[ext_resource type="Script" uid="uid://c1iynv88tn7dl" path="res://games/plinko/scripts/slot.gd" id="1_hs8up"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8dl7b"]
+size = Vector3(0.2, 0.2, 0.3)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8dl7b"]
+size = Vector2(0.2, 0.2)
+
+[node name="Slot" type="Area3D" unique_id=771503965]
+script = ExtResource("1_hs8up")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=983363778]
+shape = SubResource("BoxShape3D_8dl7b")
+
+[node name="BackgroundMesh" type="MeshInstance3D" parent="." unique_id=1188044973]
+mesh = SubResource("QuadMesh_8dl7b")
+
+[node name="PointsLabel" type="Label3D" parent="." unique_id=850176706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+text = "POINTS"

@@ -1,0 +1,184 @@
+extends Node3D
+
+# Rutas de las escenas individuales
+@export var board_frame_scene: PackedScene = preload("res://games/plinko/scenes/board_frame.tscn")
+@export var peg_scene: PackedScene = preload("res://games/plinko/scenes/peg.tscn")
+@export var ramp_small_scene: PackedScene = preload("res://games/plinko/scenes/ramp_small.tscn")
+@export var slot_scene: PackedScene = preload("res://games/plinko/scenes/slot.tscn")
+@export var divider_scene: PackedScene = preload("res://games/plinko/scenes/divider.tscn")
+
+# Nodos contenedores y cámara
+@onready var board_frame_holder: Node3D = $BoardFrameHolder
+@onready var board_elements: Node3D = $BoardElements
+@onready var camera: Camera3D = $Camera3D
+
+var score: int = 0
+var cols: int = 10
+var rows: int = 15
+var cell_size: float = 0.2
+
+var ball_scene: PackedScene = preload("res://games/plinko/scenes/ball.tscn")
+var current_ball: RigidBody3D = null
+
+const LEVELS_JSON_PATH: String = "res://games/plinko/data/niveles.json"
+
+func _ready() -> void:
+	generate_level("1")
+	spawn_next_ball()
+
+func generate_level(level_id: String) -> void:
+	print("generate level!")
+	clear_board()
+
+	var level_data = load_level_data(level_id)
+	if level_data.is_empty():
+		push_error("No se pudieron cargar los datos para el nivel: " + level_id)
+		return
+
+	# 1. Instanciar el Marco Base del Tablero
+	if board_frame_scene:
+		var frame_inst = board_frame_scene.instantiate()
+		board_frame_holder.add_child(frame_inst)
+
+	# 2. Leer parámetros de la grilla
+	cols = level_data.get("grid_cols")
+	rows = level_data.get("grid_rows")
+	cell_size = level_data.get("cell_size")
+
+	# 3. Instanciar Pilones
+	var pegs_array = level_data.get("pegs", [])
+	for peg_info in pegs_array:
+		var col: float = float(peg_info["col"])
+		var row: int = peg_info["row"]
+		
+		var peg_inst = peg_scene.instantiate()
+		board_elements.add_child(peg_inst)
+		peg_inst.position = grid_to_world(col, row, cols, rows, cell_size)
+
+	# 4. Instanciar Rampas
+	var ramps_array = level_data.get("ramps", [])
+	for ramp_info in ramps_array:
+		var col: int = ramp_info["col"]
+		var row: int = ramp_info["row"]
+		var rot_deg: float = ramp_info.get("rotation_deg", 0.0)
+		
+		var ramp_inst = ramp_small_scene.instantiate()
+		board_elements.add_child(ramp_inst)
+		ramp_inst.position = grid_to_world(col, row, cols, rows, cell_size)
+		ramp_inst.rotation_degrees.z = rot_deg
+
+	var slots_array = level_data.get("slots", [])
+	build_slots(slots_array, cols, rows, cell_size)
+
+	# 5. Ajustar la cámara automáticamente al tamaño del tablero
+	setup_camera(cols, rows, cell_size)
+
+func build_slots(slots_data: Array, cols: int, rows: int, cell_size: float) -> void:
+	var row_y: float = -2.8 # Fila donde se instancian los sensores
+	
+	for i in range(slots_data.size()):
+		var slot_info = slots_data[i]
+		var col_start: float = float(slot_info["col_start"])
+		var col_end: float = float(slot_info["col_end"])
+		var pts: int = int(slot_info["points"])
+		var color_hex: String = slot_info.get("color", "#FF0000") # Rojo por defecto si falta en JSON
+
+		# 1. Calcular el ancho total del slot en unidades de mundo
+		var total_cols_span: float = col_end - col_start
+		var slot_width_world: float = total_cols_span * cell_size
+
+		# 2. Posición central del slot
+		var mid_col: float = (col_start + col_end) / 2.0
+		var slot_inst = slot_scene.instantiate()
+		slot_inst.points = pts
+		slot_inst.position = grid_to_world(mid_col, row_y, cols, rows, cell_size)
+		
+		# 3. Ajustamos el ancho dinámicamente ANTES de añadirlo a la escena
+		slot_inst.setup_slot(slot_width_world, pts, color_hex)
+		
+		slot_inst.ball_scored.connect(_on_ball_scored)
+		board_elements.add_child(slot_inst)
+
+		# 4. Instanciar divisores (Dividers) en col_start y col_end
+		var divider_inst = divider_scene.instantiate()
+		divider_inst.position = grid_to_world(col_start, row_y, cols, rows, cell_size)
+		board_elements.add_child(divider_inst)
+
+		if i == slots_data.size() - 1:
+			var last_divider = divider_scene.instantiate()
+			last_divider.position = grid_to_world(col_end, row_y, cols, rows, cell_size)
+			board_elements.add_child(last_divider)
+
+func _on_ball_scored(points_awarded: int) -> void:
+	score += points_awarded
+	print("¡Goles/Puntos anotados!: ", points_awarded, " | Puntaje Total: ", score)
+	
+	# Preparamos la siguiente bola para lanzar tras un breve retraso
+	get_tree().create_timer(0.5).timeout.connect(spawn_next_ball)
+
+func setup_camera(cols: int, rows: int, cell_size: float) -> void:
+	var total_width: float = cols * cell_size
+	var total_height: float = rows * cell_size
+
+	var max_dimension: float = max(total_width, total_height)
+	# Aumentamos la distancia en Z de 1.35 a 2.5 para abarcar todo el marco
+	var distance_z: float = max_dimension * 1.4
+
+	camera.position = Vector3(0.0, 0.0, distance_z)
+	camera.look_at(Vector3.ZERO, Vector3.UP)
+
+func grid_to_world(col: float, row: float, total_cols: int, total_rows: int, cell_size: float) -> Vector3:
+	var total_width: float = total_cols * cell_size
+	var total_height: float = total_rows * cell_size
+
+	var start_x: float = -(total_width / 2.0) + (cell_size / 2.0)
+	var start_y: float = -(total_height / 2.0) + (cell_size / 2.0)
+
+	var x_pos: float = start_x + (col * cell_size)
+	var y_pos: float = start_y + (row * cell_size)
+	var z_pos: float = 0.2
+
+	return Vector3(x_pos, y_pos, z_pos)
+
+func clear_board() -> void:
+	for child in board_frame_holder.get_children():
+		child.queue_free()
+	for child in board_elements.get_children():
+		child.queue_free()
+
+func load_level_data(level_id: String) -> Dictionary:
+	if not FileAccess.file_exists(LEVELS_JSON_PATH):
+		push_error("Archivo JSON no encontrado en: " + LEVELS_JSON_PATH)
+		return {}
+
+	var file = FileAccess.open(LEVELS_JSON_PATH, FileAccess.READ)
+	var parsed_result = JSON.parse_string(file.get_as_text())
+	
+	if parsed_result == null or not parsed_result.has(level_id):
+		return {}
+
+	return parsed_result[level_id]
+
+func spawn_next_ball() -> void:
+	if current_ball == null:
+		current_ball = ball_scene.instantiate()
+		
+		# Calculamos los límites superiores basados en el tamaño del tablero
+		var board_width: float = cols * cell_size
+		var board_height: float = rows * cell_size + 0.5
+		
+		# Ajustar el barrido horizontal dentro de los límites de las paredes
+		current_ball.min_x = -(board_width / 2.0) + 0.15
+		current_ball.max_x = (board_width / 2.0) - 0.15
+		# Posicionarla justo por arriba de la primera fila de pilones
+		current_ball.spawn_y = (board_height / 2.0) + 0.1
+		
+		add_child(current_ball)
+		
+func _unhandled_input(event: InputEvent) -> void:
+	# Detectar clic de mouse o tap en pantalla táctil
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if current_ball != null and not current_ball.is_active:
+			current_ball.release_ball()
+			# Desvinculamos el puntero para preparar la siguiente cuando se requiera
+			current_ball = null
