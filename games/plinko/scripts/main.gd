@@ -35,10 +35,18 @@ func generate_level(level_id: String) -> void:
 		push_error("No se pudieron cargar los datos para el nivel: " + level_id)
 		return
 
+
+	var peg_color_hex: String = level_data.get("color_peg", "ff00ff")
+	var board_color_hex: String = level_data.get("color_board", "ffff00")
+
 	# 1. Instanciar el Marco Base del Tablero
 	if board_frame_scene:
 		var frame_inst = board_frame_scene.instantiate()
 		board_frame_holder.add_child(frame_inst)
+
+	
+		if frame_inst and frame_inst.has_method("set_board_color"):
+			frame_inst.set_board_color(board_color_hex)
 
 	# 2. Leer parámetros de la grilla
 	cols = level_data.get("grid_cols")
@@ -55,10 +63,13 @@ func generate_level(level_id: String) -> void:
 		board_elements.add_child(peg_inst)
 		peg_inst.position = grid_to_world(peg_col, peg_row)
 
+		if peg_inst.has_method("set_peg_color"):
+			peg_inst.set_peg_color(peg_color_hex)
+
 	# 4. Instanciar Rampas
 	var ramps_array = level_data.get("ramps", [])
 	for ramp_info in ramps_array:
-		var ramp_col: int = ramp_info["col"]
+		var ramp_col: float = float(ramp_info["col"])
 		var ramp_row: int = ramp_info["row"]
 		var rot_deg: float = ramp_info.get("rotation_deg", 0.0)
 		

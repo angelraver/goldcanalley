@@ -19,9 +19,9 @@ transform = Transform3D(1, 0, 0, 0, 1.1001962, 0, 0, 0, 1, 0, 0.011204787, -0.14
 mesh = SubResource("QuadMesh_8dl7b")
 
 [node name="BackgroundMeshPiso" type="MeshInstance3D" parent="." unique_id=953722329]
-transform = Transform3D(1, 0, 0, 0, -6.299768e-08, 0.9999998, 0, -1.4412189, -4.371138e-08, 0, -0.151, -0.008)
+transform = Transform3D(1, 0, 0, 0, -6.299768e-08, 0.9999998, 0, -1.4412189, -4.371138e-08, 0, -0.151, -0.0895869)
 mesh = SubResource("QuadMesh_8dl7b")
 
 [node name="PointsLabel" type="Label3D" parent="." unique_id=850176706]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08690697, 0.01)
 text = "POINTS"

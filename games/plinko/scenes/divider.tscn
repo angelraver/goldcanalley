@@ -9,6 +9,7 @@ size = Vector3(0.05, 0.4, 0.3)
 [node name="Divider" type="StaticBody3D" unique_id=1234859979]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1907659535]
+visible = false
 mesh = SubResource("BoxMesh_8dl7b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=182133318]

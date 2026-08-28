@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://co382rtnvh6g6"]
 
+[ext_resource type="Script" uid="uid://de0xrrq1vdynd" path="res://games/plinko/scripts/peg.gd" id="1_wjvk1"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rieu1"]
 resource_name = "M_Pegs"
 cull_mode = 2
@@ -45,6 +47,7 @@ height = 0.3
 radius = 0.02
 
 [node name="Peg" type="Node3D" unique_id=12897870]
+script = ExtResource("1_wjvk1")
 
 [node name="Peg_Base" type="MeshInstance3D" parent="." unique_id=97221363]
 transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, 0, 0, 0)
@@ -53,5 +56,5 @@ mesh = SubResource("ArrayMesh_j4267")
 [node name="StaticBody3D" type="StaticBody3D" parent="Peg_Base" unique_id=974228276]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Peg_Base/StaticBody3D" unique_id=1136568762]
-transform = Transform3D(-0.626604, 7.110111e-08, 0.7793382, 0.7793382, -3.4065945e-08, 0.626604, 7.110113e-08, 1, -3.4065952e-08, 0, 0, -0.15476596)
+transform = Transform3D(1.9106859e-15, 4.371139e-08, 1.0000002, 1.0000002, -4.371139e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, -0.15476596)
 shape = SubResource("CylinderShape3D_72j8r")
