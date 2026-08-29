@@ -1,11 +1,12 @@
 extends Node3D
 
-# Rutas de las escenas individuales
+@export_file("*.json") var ruta_niveles_json: String = "res://games/plinko/data/niveles.json"
 @export var board_frame_scene: PackedScene = preload("res://games/plinko/scenes/board_frame.tscn")
 @export var peg_scene: PackedScene = preload("res://games/plinko/scenes/peg.tscn")
 @export var ramp_scene: PackedScene = preload("res://games/plinko/scenes/ramp.tscn")
 @export var slot_scene: PackedScene = preload("res://games/plinko/scenes/slot.tscn")
 @export var divider_scene: PackedScene = preload("res://games/plinko/scenes/divider.tscn")
+@export var nivel_actual: int = 1
 
 # Nodos contenedores y cámara
 @onready var board_frame_holder: Node3D = $BoardFrameHolder
@@ -20,25 +21,38 @@ var cell_size: float = 0.2
 var ball_scene: PackedScene = preload("res://games/plinko/scenes/ball.tscn")
 var current_ball: RigidBody3D = null
 
-const LEVELS_JSON_PATH: String = "res://games/plinko/data/niveles.json"
-
 func _ready() -> void:
-	generate_level("1")
+	nivel_actual = save_manager.nivel_actual_seleccionado
+	cargar_nivel(nivel_actual)
 	spawn_next_ball()
 
-func generate_level(level_id: String) -> void:
+func cargar_nivel(numero_nivel: int) -> void:
 	print("generate level!")
 	clear_board()
 
-	var level_data = load_level_data(level_id)
-	if level_data.is_empty():
-		push_error("No se pudieron cargar los datos para el nivel: " + level_id)
+	if not FileAccess.file_exists(ruta_niveles_json):
+		print("ERROR: No existe el archivo de niveles")
 		return
 
+	var texto_json = FileAccess.get_file_as_string(ruta_niveles_json)
+	var datos_niveles = JSON.parse_string(texto_json)
+	if not datos_niveles or not datos_niveles.has(str(numero_nivel)):
+		print("ERROR: No existe el nivel ", numero_nivel)
+		return
+
+	var level_data = datos_niveles[str(numero_nivel)]
 
 	var peg_color_hex: String = level_data.get("color_peg", "ff00ff")
 	var board_color_hex: String = level_data.get("color_board", "ffff00")
 	var ramp_color_hex: String = level_data.get("color_ramp", peg_color_hex)
+
+	# Soporte para niveles legacy con grid_cols/grid_rows/cell_size
+	if level_data.has("grid_cols"):
+		cols = level_data.get("grid_cols")
+	if level_data.has("grid_rows"):
+		rows = level_data.get("grid_rows")
+	if level_data.has("cell_size"):
+		cell_size = level_data.get("cell_size")
 
 	if board_frame_scene:
 		var frame_inst = board_frame_scene.instantiate()
@@ -164,12 +178,13 @@ func clear_board() -> void:
 		child.queue_free()
 
 func load_level_data(level_id: String) -> Dictionary:
-	if not FileAccess.file_exists(LEVELS_JSON_PATH):
-		push_error("Archivo JSON no encontrado en: " + LEVELS_JSON_PATH)
+	# Compatibilidad: wrapper legacy que ahora usa ruta_niveles_json y get_file_as_string
+	if not FileAccess.file_exists(ruta_niveles_json):
+		print("ERROR: No existe el archivo de niveles")
 		return {}
 
-	var file = FileAccess.open(LEVELS_JSON_PATH, FileAccess.READ)
-	var parsed_result = JSON.parse_string(file.get_as_text())
+	var texto_json = FileAccess.get_file_as_string(ruta_niveles_json)
+	var parsed_result = JSON.parse_string(texto_json)
 	
 	if parsed_result == null or not parsed_result.has(level_id):
 		return {}

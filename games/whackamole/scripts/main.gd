@@ -1,5 +1,7 @@
 extends Node3D
 
+@export_file("*.json") var ruta_niveles_json: String = "res://games/whackamole/data/niveles.json"
+@export_file("*.json") var ruta_valores_json: String = "res://games/whackamole/data/valores.json"
 @export var topo_hoyo_scene: PackedScene = preload("res://games/whackamole/scenes/topo_hoyo.tscn")
 @export var separacion_grilla: Vector2 = Vector2(2.3, 2.3)
 @export var nivel_actual: int = 1
@@ -23,6 +25,7 @@ var puntaje_nivel: int = 0
 var juego_activo: bool = false
 
 func _ready() -> void:
+	cargar_valores()
 	nivel_actual = save_manager.nivel_actual_seleccionado
 
 	if ui_timer:
@@ -30,8 +33,7 @@ func _ready() -> void:
 	if panel_resultados:
 		panel_resultados.reiniciar_solicitado.connect(reiniciar_nivel)
 
-	cargar_archivos_json()
-	cargar_nivel(str(nivel_actual))
+	cargar_nivel(nivel_actual)
 	
 	anim_camara.play("inicio_camara")
 	await anim_camara.animation_finished
@@ -49,20 +51,32 @@ func iniciar_partida() -> void:
 		
 	iniciar_spawner()
 
-func cargar_archivos_json() -> void:
-	if FileAccess.file_exists("res://games/whackamole/data/valores.json"):
-		var raw = FileAccess.get_file_as_string("res://games/whackamole/data/valores.json")
-		datos_topos = JSON.parse_string(raw)
-		
-	if FileAccess.file_exists("res://games/whackamole/data/niveles.json"):
-		var raw = FileAccess.get_file_as_string("res://games/whackamole/data/niveles.json")
-		datos_niveles = JSON.parse_string(raw)
-
-func cargar_nivel(id_nivel: String) -> void:
-	if not datos_niveles.has(id_nivel):
+func cargar_valores() -> void:
+	if not FileAccess.file_exists(ruta_valores_json):
+		print("ERROR: No existe el archivo de valores en: ", ruta_valores_json)
 		return
-		
-	var config_nivel = datos_niveles[id_nivel]
+
+	var texto_json = FileAccess.get_file_as_string(ruta_valores_json)
+	var datos = JSON.parse_string(texto_json)
+
+	if datos is Dictionary:
+		datos_topos = datos
+	else:
+		print("ERROR: Formato inválido en valores.json")
+
+func cargar_nivel(numero_nivel: int) -> void:
+	if not FileAccess.file_exists(ruta_niveles_json):
+		print("ERROR: No existe el archivo de niveles")
+		return
+
+	var texto_json = FileAccess.get_file_as_string(ruta_niveles_json)
+	var datos_niveles_tmp = JSON.parse_string(texto_json)
+	if not datos_niveles_tmp or not datos_niveles_tmp.has(str(numero_nivel)):
+		print("ERROR: No existe el nivel ", numero_nivel)
+		return
+
+	datos_niveles = datos_niveles_tmp
+	var config_nivel = datos_niveles[str(numero_nivel)]
 	var lista_hoyos: Array = config_nivel.get("hoyos", [])
 	actualizar_ui_level()
 
@@ -167,5 +181,5 @@ func reiniciar_nivel() -> void:
 	if ui_level_number:
 		ui_level_number.visible = true
 	
-	cargar_nivel(str(nivel_actual))
+	cargar_nivel(nivel_actual)
 	iniciar_partida()

@@ -7,6 +7,9 @@ func _on_boton_goldcanalley_pressed() -> void:
 
 func _on_boton_whackamole_pressed() -> void:
 	_iniciar_juego("whackamole")
+	
+func _on_boton_plinko_pressed() -> void:
+	_iniciar_juego("plinko")
 
 func _iniciar_juego(id_juego: String) -> void:
 	audio_manager.play_start()

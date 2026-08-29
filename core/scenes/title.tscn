@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bcd1ofetag504"]
 
 [ext_resource type="Script" uid="uid://c0x8sp71taj7u" path="res://core/scripts/title.gd" id="1_2xeeo"]
-[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_bj87q"]
+[ext_resource type="Texture2D" uid="uid://dhm87r5bq2oka" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_bj87q"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_2xeeo"]
-[ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://core/assets/images/logo.png" id="4_4e4sy"]
-[ext_resource type="Texture2D" uid="uid://fuxlvlci1b2t" path="res://games/goldcanalley/assets/images/logo.png" id="5_bj87q"]
-[ext_resource type="Texture2D" uid="uid://beo3pfrblphcv" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
-[ext_resource type="Texture2D" uid="uid://du254petg5bme" path="res://games/whackamole/assets/images/logo.png" id="6_oip1l"]
-[ext_resource type="Texture2D" uid="uid://dj80kcallsdvp" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
+[ext_resource type="Texture2D" uid="uid://bwp7plbrdja8d" path="res://core/assets/images/logo.png" id="4_4e4sy"]
+[ext_resource type="Texture2D" uid="uid://c6nyrmpl5ag5g" path="res://games/goldcanalley/assets/images/logo.png" id="5_bj87q"]
+[ext_resource type="Texture2D" uid="uid://cnxvtolpaaljy" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
+[ext_resource type="Texture2D" uid="uid://cnh2juky5yv20" path="res://games/whackamole/assets/images/logo.png" id="6_oip1l"]
+[ext_resource type="Texture2D" uid="uid://w11w41j4jpou" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
 shader = ExtResource("3_2xeeo")
@@ -65,8 +65,8 @@ texture = ExtResource("4_4e4sy")
 layout_mode = 0
 offset_left = 81.0
 offset_top = 589.9999
-offset_right = 681.0
-offset_bottom = 1490.0
+offset_right = 481.0
+offset_bottom = 1189.9999
 scale = Vector2(0.36, 0.36)
 texture_normal = ExtResource("5_bj87q")
 
@@ -78,6 +78,15 @@ offset_right = 966.0
 offset_bottom = 1030.0
 scale = Vector2(0.53626305, 0.53626305)
 texture_normal = ExtResource("6_oip1l")
+
+[node name="ButtonPlinko" type="TextureButton" parent="." unique_id=1906105612]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 797.99994
+offset_right = 644.0
+offset_bottom = 1398.0
+scale = Vector2(0.36, 0.36)
+texture_normal = ExtResource("5_bj87q")
 
 [node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
 layout_mode = 0
@@ -97,9 +106,8 @@ offset_bottom = 1309.0
 scale = Vector2(0.6, 0.6)
 texture_normal = ExtResource("7_uj4fn")
 
-[connection signal="pressed" from="ButtonGoldCanAlley" to="." method="_on_boton_start_pressed"]
 [connection signal="pressed" from="ButtonGoldCanAlley" to="." method="_on_boton_goldcanalley_pressed"]
-[connection signal="pressed" from="ButtonGoldCanAlley" to="." method="_on_boton_home_pressed"]
 [connection signal="pressed" from="ButtonWhackamole" to="." method="_on_boton_whackamole_pressed"]
+[connection signal="pressed" from="ButtonPlinko" to="." method="_on_boton_plinko_pressed"]
 [connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]
