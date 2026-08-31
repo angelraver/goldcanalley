@@ -1,5 +1,7 @@
 extends Node3D
 
+const MAX_BALLS: int = 5
+
 @export_file("*.json") var ruta_niveles_json: String = "res://games/plinko/data/niveles.json"
 @export var board_frame_scene: PackedScene = preload("res://games/plinko/scenes/board_frame.tscn")
 @export var peg_scene: PackedScene = preload("res://games/plinko/scenes/peg.tscn")
@@ -20,6 +22,7 @@ var cell_size: float = 0.2
 
 var ball_scene: PackedScene = preload("res://games/plinko/scenes/ball.tscn")
 var current_ball: RigidBody3D = null
+var balls_launched: int = 0
 
 func _ready() -> void:
 	nivel_actual = save_manager.nivel_actual_seleccionado
@@ -29,15 +32,15 @@ func _ready() -> void:
 func cargar_nivel(numero_nivel: int) -> void:
 	print("generate level!")
 	clear_board()
+	score = 0
+	balls_launched = 0
 
 	if not FileAccess.file_exists(ruta_niveles_json):
-		print("ERROR: No existe el archivo de niveles")
 		return
 
 	var texto_json = FileAccess.get_file_as_string(ruta_niveles_json)
 	var datos_niveles = JSON.parse_string(texto_json)
 	if not datos_niveles or not datos_niveles.has(str(numero_nivel)):
-		print("ERROR: No existe el nivel ", numero_nivel)
 		return
 
 	var level_data = datos_niveles[str(numero_nivel)]
@@ -125,12 +128,14 @@ func build_slots(slots_data: Array) -> void:
 			last_divider.position = grid_to_world(col_end, row_y)
 			board_elements.add_child(last_divider)
 
-func _on_ball_scored(points_awarded: int) -> void:
+func _on_ball_scored(points_awarded: int, ball_node: Node = null) -> void:
 	score += points_awarded
 	print("¡Goles/Puntos anotados!: ", points_awarded, " | Puntaje Total: ", score)
 	
-	# Preparamos la siguiente bola para lanzar tras un breve retraso
-	get_tree().create_timer(0.5).timeout.connect(spawn_next_ball)
+	if balls_launched >= MAX_BALLS:
+		print("juego finalizado el puntaje es: " + str(score))
+	else:
+		get_tree().create_timer(0.3).timeout.connect(spawn_next_ball)
 
 func setup_camera() -> void:
 	var total_width_cam: float = cols * cell_size
@@ -192,6 +197,9 @@ func load_level_data(level_id: String) -> Dictionary:
 	return parsed_result[level_id]
 
 func spawn_next_ball() -> void:
+	if balls_launched >= MAX_BALLS:
+		return
+
 	if current_ball == null:
 		current_ball = ball_scene.instantiate()
 		
@@ -212,5 +220,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if current_ball != null and not current_ball.is_active:
 			current_ball.release_ball()
+			balls_launched += 1
 			# Desvinculamos el puntero para preparar la siguiente cuando se requiera
 			current_ball = null

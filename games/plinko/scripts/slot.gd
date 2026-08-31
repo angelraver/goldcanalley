@@ -1,13 +1,15 @@
 extends Area3D
 
 var points: int = 0
+var balls_in_slot: Dictionary = {}
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
-signal ball_scored(points_awarded)
+signal ball_scored(points_awarded, ball_node)
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
 func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 	points = pts
@@ -26,15 +28,12 @@ func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 		col.shape = new_box
 
 	# 2. Ajustar el tamaño del panel de fondo (QuadMesh / PlaneMesh)
-	if bg_mesh && bg_mesh_floor:
+	if bg_mesh and bg_mesh_floor:
 		var new_quad = QuadMesh.new()
-		# Asignamos el ancho dinámico y una altura fija para la franja del fondo
 		new_quad.size = Vector2(slot_width, 0.3)
 		
-		# Crear un material único con el color del JSON
 		var mat = StandardMaterial3D.new()
 		mat.albedo_color = Color(color_hex)
-		#mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED # Mantener color vivo sin depender de luces
 		new_quad.material = mat
 		
 		bg_mesh.mesh = new_quad
@@ -45,6 +44,31 @@ func setup_slot(slot_width: float, pts: int, color_hex: String) -> void:
 		label.text = str(pts)
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.has_method("release_ball") or body.name.begins_with("Ball"):
-		emit_signal("ball_scored", points)
-		#body.queue_free()
+	if body is RigidBody3D and not body.is_queued_for_deletion():
+		balls_in_slot[body] = 0.0
+
+func _on_body_exited(body: Node3D) -> void:
+	if balls_in_slot.has(body):
+		balls_in_slot.erase(body)
+
+func _physics_process(delta: float) -> void:
+	for ball in balls_in_slot.keys():
+		if not is_instance_valid(ball) or ball.is_queued_for_deletion():
+			balls_in_slot.erase(ball)
+			continue
+		
+		# Si la bola ya sumó puntos previamente, la ignoramos
+		if ball.get("scored") == true:
+			balls_in_slot.erase(ball)
+			continue
+
+		var is_settled: bool = ball.linear_velocity.length() < 0.1 and ball.angular_velocity.length() < 0.1
+		
+		if is_settled:
+			balls_in_slot[ball] += delta
+			if balls_in_slot[ball] >= 0.4:
+				ball.set("scored", true) # Marcamos la bola como puntuada
+				balls_in_slot.erase(ball)
+				emit_signal("ball_scored", points, ball)
+		else:
+			balls_in_slot[ball] = 0.0
