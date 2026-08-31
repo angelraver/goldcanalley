@@ -56,6 +56,7 @@ func _ready() -> void:
 	nivel_actual = save_manager.nivel_actual_seleccionado
 
 	if panel_resultados:
+		panel_resultados.visible = false
 		panel_resultados.reiniciar_solicitado.connect(reiniciar_nivel)
 
 	cargar_nivel(nivel_actual)
@@ -77,7 +78,11 @@ func cargar_valores() -> void:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
+	# --- ESTANDAR PanelResultados: reset estado y ocultar panel ---
 	panel_resultados_mostrado = false
+	if panel_resultados:
+		panel_resultados.visible = false
+
 	esperando_fin_nivel = false
 	pelotas_restantes = pelotas_maximas
 	actualizar_ui_pelotas()
@@ -295,6 +300,9 @@ func actualizar_ui_level() -> void:
 		ui_level_number.establecer_nivel(nivel_actual)
 
 func mostrar_panel_resultados() -> void:
+	# --- ESTANDAR PanelResultados: guard, ocultar HUD y mostrar ---
+	if not panel_resultados:
+		return
 	if panel_resultados_mostrado:
 		return
 	panel_resultados_mostrado = true
@@ -304,8 +312,7 @@ func mostrar_panel_resultados() -> void:
 	if ui_level_number: ui_level_number.visible = false
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
 
-	if panel_resultados:
-		panel_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+	panel_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void:
 	var mesh_instance = nuevo_objeto.get_node_or_null("MeshInstance3D") as MeshInstance3D
