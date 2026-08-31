@@ -23,17 +23,40 @@ var cell_size: float = 0.2
 var ball_scene: PackedScene = preload("res://games/plinko/scenes/ball.tscn")
 var current_ball: RigidBody3D = null
 var balls_launched: int = 0
+var active_balls: Array[RigidBody3D] = []
+var game_ended: bool = false
 
 func _ready() -> void:
 	nivel_actual = save_manager.nivel_actual_seleccionado
 	cargar_nivel(nivel_actual)
 	spawn_next_ball()
 
+func _process(delta: float) -> void:
+	if game_ended or balls_launched < MAX_BALLS:
+		return
+	
+	var all_settled: bool = true
+	if active_balls.is_empty():
+		all_settled = false
+	else:
+		for ball in active_balls:
+			if not is_instance_valid(ball):
+				continue
+			if ball.linear_velocity.length() > 0.1 or ball.angular_velocity.length() > 0.1:
+				all_settled = false
+				break
+	
+	if all_settled:
+		game_ended = true
+		print("juego finalizado el puntaje es: " + str(score))
+
 func cargar_nivel(numero_nivel: int) -> void:
 	print("generate level!")
 	clear_board()
 	score = 0
 	balls_launched = 0
+	active_balls.clear()
+	game_ended = false
 
 	if not FileAccess.file_exists(ruta_niveles_json):
 		return
@@ -128,14 +151,9 @@ func build_slots(slots_data: Array) -> void:
 			last_divider.position = grid_to_world(col_end, row_y)
 			board_elements.add_child(last_divider)
 
-func _on_ball_scored(points_awarded: int, ball_node: Node = null) -> void:
+func _on_ball_scored(points_awarded: int, _ball_node: Node = null) -> void:
 	score += points_awarded
 	print("¡Goles/Puntos anotados!: ", points_awarded, " | Puntaje Total: ", score)
-	
-	if balls_launched >= MAX_BALLS:
-		print("juego finalizado el puntaje es: " + str(score))
-	else:
-		get_tree().create_timer(0.3).timeout.connect(spawn_next_ball)
 
 func setup_camera() -> void:
 	var total_width_cam: float = cols * cell_size
@@ -221,5 +239,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if current_ball != null and not current_ball.is_active:
 			current_ball.release_ball()
 			balls_launched += 1
-			# Desvinculamos el puntero para preparar la siguiente cuando se requiera
+			active_balls.append(current_ball)
 			current_ball = null
+			
+			# Esperar 1 segundo tras el lanzamiento para instanciar la siguiente bola (si quedan disponibles)
+			if balls_launched < MAX_BALLS:
+				get_tree().create_timer(1.0).timeout.connect(spawn_next_ball)
