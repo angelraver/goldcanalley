@@ -24,15 +24,16 @@ var sonidos_por_hoyo: Dictionary = {}
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
 var juego_activo: bool = false
-var panel_resultados_mostrado: bool = false
+var ctrl_resultados: ControladorResultados
 
 func _ready() -> void:
 	cargar_valores()
 	nivel_actual = save_manager.nivel_actual_seleccionado
 
-	if panel_resultados:
-		panel_resultados.visible = false
-		panel_resultados.reiniciar_solicitado.connect(reiniciar_nivel)
+	ctrl_resultados = ControladorResultados.new()
+	add_child(ctrl_resultados)
+	var hud: Array = [ui_puntaje, ui_level_number, ui_timer]
+	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 	if ui_timer:
 		ui_timer.tiempo_agotado.connect(_on_tiempo_agotado)
 
@@ -68,10 +69,7 @@ func cargar_valores() -> void:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
-	# --- ESTANDAR PanelResultados: reset estado y ocultar panel ---
-	panel_resultados_mostrado = false
-	if panel_resultados:
-		panel_resultados.visible = false
+	ctrl_resultados.reset()
 
 	if not FileAccess.file_exists(ruta_niveles_json):
 		print("ERROR: No existe el archivo de niveles")
@@ -89,10 +87,6 @@ func cargar_nivel(numero_nivel: int) -> void:
 	puntaje_nivel = 0
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
-	# Restaurar HUD para nueva partida (panel oculto, HUD visible)
-	if ui_puntaje: ui_puntaje.visible = true
-	if ui_level_number: ui_level_number.visible = true
-	if ui_timer: ui_timer.visible = false
 	var lista_hoyos: Array = config_nivel.get("hoyos", [])
 
 	for hoyo in hoyos_activos:
@@ -126,26 +120,13 @@ func cargar_nivel(numero_nivel: int) -> void:
 		hoyos_activos.append(hoyo_instancia)
 
 func actualizar_ui_level() -> void:
-	if ui_level_number:
-		ui_level_number.establecer_nivel(nivel_actual)
+	ctrl_resultados.actualizar_nivel(nivel_actual)
 
 func actualizar_ui_puntaje() -> void:
-	if ui_puntaje:
-		ui_puntaje.establecer_puntaje(puntaje_nivel)
+	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 
 func mostrar_panel_resultados() -> void:
-	# --- ESTANDAR PanelResultados: guard, ocultar HUD y mostrar ---
-	if not panel_resultados:
-		return
-	if panel_resultados_mostrado:
-		return
-	panel_resultados_mostrado = true
-
-	if ui_puntaje: ui_puntaje.visible = false
-	if ui_level_number: ui_level_number.visible = false
-	if ui_timer: ui_timer.visible = false
-
-	panel_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func iniciar_spawner() -> void:
 	while juego_activo:
@@ -172,8 +153,7 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 	if fue_acierto:
 		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
 		puntaje_nivel += puntos
-		if ui_puntaje:
-			ui_puntaje.establecer_puntaje(puntaje_nivel)
+		actualizar_ui_puntaje()
 		# 2. Topo golpeado: solo cuando el topo estaba afuera
 		if audio:
 			audio.play_ouch(_sonido_topo(hoyo_node, "outch"))

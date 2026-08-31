@@ -1,5 +1,5 @@
 {
-  "12": {
+  "1": {
 	"titulo": "Primeras Caídas",
 	"puntaje": 450,
 	"color_board": "1A1D24",
@@ -27,7 +27,7 @@
 	  { "col_start": 7.6, "col_end": 9.6, "points": 500, "color": "F5B027" }
 	]
   },
-  "13": {
+  "2": {
 	"titulo": "El Reloj de Arena",
 	"puntaje": 650,
 	"color_board": "0F172A",
@@ -59,7 +59,7 @@
 	  { "col_start": 8.2, "col_end": 9.6, "points": 500, "color": "F5B027" }
 	]
   },
-  "21": {
+  "3": {
 	"titulo": "Cascada Zig-Zag",
 	"puntaje": 800,
 	"color_board": "18022B",
@@ -85,7 +85,7 @@
 	  { "col_start": 8.4, "col_end": 9.6, "points": 500, "color": "F5B027" }
 	]
   },
-  "31": {
+  "4": {
 	"titulo": "El Embudo Central",
 	"puntaje": 850,
 	"color_board": "0B132B",
@@ -144,7 +144,7 @@
 	  { "col_start": 7.6, "col_end": 9.6, "points": 100, "color": "F5276C" }
 	]
   },
-  "1": {
+  "6": {
 	"titulo": "Laberinto de Rampas",
 	"puntaje": 1000,
 	"color_board": "051923",
@@ -170,6 +170,367 @@
 	  { "col_start": 3.5, "col_end": 5.5, "points": 0, "color": "90A1B9" },
 	  { "col_start": 5.5, "col_end": 7.5, "points": 100, "color": "F5276C" },
 	  { "col_start": 7.5, "col_end": 9.6, "points": 200, "color": "F54927" }
+	]
+  },
+  "7": {
+	"titulo": "Pirámide Invertida",
+	"puntaje": 1100,
+	"color_board": "12002B",
+	"color_peg": "C084FC",
+	"color_ramp": "22C55E",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 2.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 }, { "col": 4.0, "row": 12.0 }, { "col": 5.0, "row": 12.0 }, { "col": 6.0, "row": 12.0 }, { "col": 7.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 2.5, "row": 11.0 }, { "col": 3.5, "row": 11.0 }, { "col": 4.5, "row": 11.0 }, { "col": 5.5, "row": 11.0 }, { "col": 6.5, "row": 11.0 }, { "col": 7.5, "row": 11.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 3.0, "row": 10.0 }, { "col": 4.0, "row": 10.0 }, { "col": 5.0, "row": 10.0 }, { "col": 6.0, "row": 10.0 }, { "col": 7.0, "row": 10.0 },
+	  { "col": 2.5, "row": 9.0 },  { "col": 3.5, "row": 9.0 },  { "col": 4.5, "row": 9.0 },  { "col": 5.5, "row": 9.0 },  { "col": 6.5, "row": 9.0 },
+	  { "col": 3.0, "row": 8.0 },  { "col": 4.0, "row": 8.0 },  { "col": 5.0, "row": 8.0 },  { "col": 6.0, "row": 8.0 },
+	  { "col": 3.5, "row": 7.0 },  { "col": 4.5, "row": 7.0 },  { "col": 5.5, "row": 7.0 },
+	  { "col": 4.0, "row": 6.0 },  { "col": 5.0, "row": 6.0 },
+	  { "col": 4.5, "row": 5.0 },
+	  { "col": 2.0, "row": 2.0 },  { "col": 7.0, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 4.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 3.0, "rotation_deg": 30 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 1.6, "col_end": 3.8, "points": 100, "color": "F5276C" },
+	  { "col_start": 3.8, "col_end": 5.8, "points": 0, "color": "90A1B9" },
+	  { "col_start": 5.8, "col_end": 8.0, "points": 200, "color": "F54927" },
+	  { "col_start": 8.0, "col_end": 9.6, "points": 50, "color": "F54927" }
+	]
+  },
+  "8": {
+	"titulo": "Doble Rampa Cruzada",
+	"puntaje": 1150,
+	"color_board": "030712",
+	"color_peg": "38BDF8",
+	"color_ramp": "F43F5E",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 2.0, "row": 12.0 }, { "col": 7.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 7.5, "row": 11.0 },
+	  { "col": 4.0, "row": 8.0 },  { "col": 5.0, "row": 8.0 },
+	  { "col": 4.5, "row": 7.0 },
+	  { "col": 1.0, "row": 4.0 },  { "col": 2.0, "row": 4.0 },  { "col": 7.0, "row": 4.0 },  { "col": 8.0, "row": 4.0 },
+	  { "col": 1.5, "row": 3.0 },  { "col": 7.5, "row": 3.0 },
+	  { "col": 4.0, "row": 1.0 },  { "col": 5.0, "row": 1.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 10.0, "rotation_deg": -35 },
+	  { "col": 4.6, "row": 8.0, "rotation_deg": -25 },
+	  { "col": 2.6, "row": 5.0, "rotation_deg": 25 },
+	  { "col": 7.6, "row": 3.0, "rotation_deg": 35 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.8, "points": 100, "color": "F5276C" },
+	  { "col_start": 1.8, "col_end": 3.8, "points": 500, "color": "F5B027" },
+	  { "col_start": 3.8, "col_end": 5.8, "points": 50, "color": "F54927" },
+	  { "col_start": 5.8, "col_end": 7.8, "points": 200, "color": "F54927" },
+	  { "col_start": 7.8, "col_end": 9.6, "points": 0, "color": "90A1B9" }
+	]
+  },
+  "9": {
+	"titulo": "Las Columnas",
+	"puntaje": 1250,
+	"color_board": "171717",
+	"color_peg": "A855F7",
+	"color_ramp": "EAB308",
+	"pegs": [
+	  { "col": 2.0, "row": 12.0 }, { "col": 5.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 2.0, "row": 11.0 }, { "col": 5.0, "row": 11.0 }, { "col": 8.0, "row": 11.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 5.0, "row": 10.0 }, { "col": 8.0, "row": 10.0 },
+	  { "col": 2.0, "row": 9.0 },  { "col": 5.0, "row": 9.0 },  { "col": 8.0, "row": 9.0 },
+	  { "col": 2.0, "row": 8.0 },  { "col": 5.0, "row": 8.0 },  { "col": 8.0, "row": 8.0 },
+	  { "col": 2.0, "row": 5.0 },  { "col": 5.0, "row": 5.0 },  { "col": 8.0, "row": 5.0 },
+	  { "col": 2.0, "row": 4.0 },  { "col": 5.0, "row": 4.0 },  { "col": 8.0, "row": 4.0 },
+	  { "col": 2.0, "row": 3.0 },  { "col": 5.0, "row": 3.0 },  { "col": 8.0, "row": 3.0 },
+	  { "col": 2.0, "row": 2.0 },  { "col": 5.0, "row": 2.0 },  { "col": 8.0, "row": 2.0 },
+	  { "col": 2.0, "row": 1.0 },  { "col": 5.0, "row": 1.0 },  { "col": 8.0, "row": 1.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 7.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 6.0, "rotation_deg": 30 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.8, "points": 50, "color": "F54927" },
+	  { "col_start": 1.8, "col_end": 3.8, "points": 200, "color": "F54927" },
+	  { "col_start": 3.8, "col_end": 5.8, "points": 500, "color": "F5B027" },
+	  { "col_start": 5.8, "col_end": 7.8, "points": 100, "color": "F5276C" },
+	  { "col_start": 7.8, "col_end": 9.6, "points": 0, "color": "90A1B9" }
+	]
+  },
+  "10": {
+	"titulo": "El Filtro Central",
+	"puntaje": 1300,
+	"color_board": "090D16",
+	"color_peg": "06B6D4",
+	"color_ramp": "F97316",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 2.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 }, { "col": 4.0, "row": 12.0 }, { "col": 5.0, "row": 12.0 }, { "col": 6.0, "row": 12.0 }, { "col": 7.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 7.5, "row": 11.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 7.0, "row": 10.0 },
+	  { "col": 4.0, "row": 8.0 },  { "col": 5.0, "row": 8.0 },  { "col": 6.0, "row": 8.0 },
+	  { "col": 3.5, "row": 7.0 },  { "col": 4.5, "row": 7.0 },  { "col": 5.5, "row": 7.0 },  { "col": 6.5, "row": 7.0 },
+	  { "col": 4.0, "row": 6.0 },  { "col": 5.0, "row": 6.0 },  { "col": 6.0, "row": 6.0 },
+	  { "col": 1.5, "row": 3.0 },  { "col": 7.5, "row": 3.0 },
+	  { "col": 1.0, "row": 2.0 },  { "col": 2.0, "row": 2.0 }, { "col": 7.0, "row": 2.0 },  { "col": 8.0, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 9.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 8.0, "rotation_deg": 30 },
+	  { "col": -0.6, "row": 5.0, "rotation_deg": -25 },
+	  { "col": 7.6, "row": 4.0, "rotation_deg": 25 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 0, "color": "90A1B9" },
+	  { "col_start": 1.6, "col_end": 3.6, "points": 200, "color": "F54927" },
+	  { "col_start": 3.6, "col_end": 5.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 5.6, "col_end": 7.6, "points": 100, "color": "F5276C" },
+	  { "col_start": 7.6, "col_end": 9.6, "points": 50, "color": "F54927" }
+	]
+  },
+  "11": {
+	"titulo": "Onda Expansiva",
+	"puntaje": 1400,
+	"color_board": "1F0322",
+	"color_peg": "EC4899",
+	"color_ramp": "10B981",
+	"pegs": [
+	  { "col": 4.0, "row": 12.0 }, { "col": 5.0, "row": 12.0 },
+	  { "col": 3.5, "row": 11.0 }, { "col": 5.5, "row": 11.0 },
+	  { "col": 2.5, "row": 9.0 },  { "col": 6.5, "row": 9.0 },
+	  { "col": 1.5, "row": 8.0 },  { "col": 7.5, "row": 8.0 },
+	  { "col": 1.0, "row": 7.0 },  { "col": 8.0, "row": 7.0 },
+	  { "col": 2.5, "row": 5.0 },  { "col": 6.5, "row": 5.0 },
+	  { "col": 3.5, "row": 4.0 },  { "col": 5.5, "row": 4.0 },
+	  { "col": 4.0, "row": 3.0 },  { "col": 5.0, "row": 3.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 10.0, "rotation_deg": -35 },
+	  { "col": 7.6, "row": 9.0, "rotation_deg": 35 },
+	  { "col": 3.6, "row": 6.0, "rotation_deg": -25 },
+	  { "col": -0.6, "row": 2.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 1.0, "rotation_deg": 30 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.8, "points": 500, "color": "F5B027" },
+	  { "col_start": 1.8, "col_end": 3.8, "points": 50, "color": "F54927" },
+	  { "col_start": 3.8, "col_end": 5.8, "points": 0, "color": "90A1B9" },
+	  { "col_start": 5.8, "col_end": 7.8, "points": 100, "color": "F5276C" },
+	  { "col_start": 7.8, "col_end": 9.6, "points": 500, "color": "F5B027" }
+	]
+  },
+  "12": {
+	"titulo": "Malla Escalonada",
+	"puntaje": 1450,
+	"color_board": "022C22",
+	"color_peg": "A7F3D0",
+	"color_ramp": "FACC15",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 }, { "col": 5.0, "row": 12.0 }, { "col": 7.0, "row": 12.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 4.0, "row": 10.0 }, { "col": 6.0, "row": 10.0 }, { "col": 8.0, "row": 10.0 },
+	  { "col": 1.0, "row": 8.0 },  { "col": 3.0, "row": 8.0 },  { "col": 5.0, "row": 8.0 },  { "col": 7.0, "row": 8.0 },
+	  { "col": 2.0, "row": 6.0 },  { "col": 4.0, "row": 6.0 },  { "col": 6.0, "row": 6.0 },  { "col": 8.0, "row": 6.0 },
+	  { "col": 1.0, "row": 4.0 },  { "col": 3.0, "row": 4.0 },  { "col": 5.0, "row": 4.0 },  { "col": 7.0, "row": 4.0 },
+	  { "col": 2.0, "row": 2.0 },  { "col": 4.0, "row": 2.0 },  { "col": 6.0, "row": 2.0 },  { "col": 8.0, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 11.0, "rotation_deg": -25 },
+	  { "col": 7.6, "row": 10.0, "rotation_deg": 25 },
+	  { "col": -0.6, "row": 5.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 4.0, "rotation_deg": 30 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 100, "color": "F5276C" },
+	  { "col_start": 1.6, "col_end": 3.6, "points": 200, "color": "F54927" },
+	  { "col_start": 3.6, "col_end": 5.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 5.6, "col_end": 7.6, "points": 50, "color": "F54927" },
+	  { "col_start": 7.6, "col_end": 9.6, "points": 0, "color": "90A1B9" }
+	]
+  },
+  "13": {
+	"titulo": "Embudos Gemelos",
+	"puntaje": 1500,
+	"color_board": "180828",
+	"color_peg": "38BDF8",
+	"color_ramp": "F43F5E",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 2.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 }, { "col": 6.0, "row": 12.0 }, { "col": 7.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 2.5, "row": 11.0 }, { "col": 6.5, "row": 11.0 }, { "col": 7.5, "row": 11.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 7.0, "row": 10.0 },
+	  { "col": 4.5, "row": 8.0 },
+	  { "col": 1.0, "row": 6.0 }, { "col": 2.0, "row": 6.0 }, { "col": 3.0, "row": 6.0 }, { "col": 6.0, "row": 6.0 }, { "col": 7.0, "row": 6.0 }, { "col": 8.0, "row": 6.0 },
+	  { "col": 1.5, "row": 5.0 }, { "col": 2.5, "row": 5.0 }, { "col": 6.5, "row": 5.0 }, { "col": 7.5, "row": 5.0 },
+	  { "col": 2.0, "row": 4.0 }, { "col": 7.0, "row": 4.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 9.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 8.0, "rotation_deg": 30 },
+	  { "col": 2.6, "row": 3.0, "rotation_deg": -25 },
+	  { "col": 4.6, "row": 2.0, "rotation_deg": 25 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 100, "color": "F5276C" },
+	  { "col_start": 1.6, "col_end": 3.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 3.6, "col_end": 5.6, "points": 0, "color": "90A1B9" },
+	  { "col_start": 5.6, "col_end": 7.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 7.6, "col_end": 9.6, "points": 50, "color": "F54927" }
+	]
+  },
+  "14": {
+	"titulo": "La Pared Central",
+	"puntaje": 1600,
+	"color_board": "0F172A",
+	"color_peg": "FACC15",
+	"color_ramp": "A855F7",
+	"pegs": [
+	  { "col": 4.5, "row": 12.0 },
+	  { "col": 4.5, "row": 11.0 },
+	  { "col": 4.5, "row": 10.0 },
+	  { "col": 4.5, "row": 9.0 },
+	  { "col": 4.5, "row": 8.0 },
+	  { "col": 4.5, "row": 7.0 },
+	  { "col": 4.5, "row": 6.0 },
+	  { "col": 1.0, "row": 4.0 }, { "col": 2.0, "row": 4.0 }, { "col": 7.0, "row": 4.0 }, { "col": 8.0, "row": 4.0 },
+	  { "col": 1.5, "row": 3.0 }, { "col": 2.5, "row": 3.0 }, { "col": 6.5, "row": 3.0 }, { "col": 7.5, "row": 3.0 },
+	  { "col": 2.0, "row": 2.0 }, { "col": 7.0, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 11.0, "rotation_deg": -35 },
+	  { "col": 7.6, "row": 10.0, "rotation_deg": 35 },
+	  { "col": -0.6, "row": 6.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 5.0, "rotation_deg": 30 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 0, "color": "90A1B9" },
+	  { "col_start": 1.6, "col_end": 3.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 3.6, "col_end": 5.6, "points": 200, "color": "F54927" },
+	  { "col_start": 5.6, "col_end": 7.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 7.6, "col_end": 9.6, "points": 50, "color": "F54927" }
+	]
+  },
+  "15": {
+	"titulo": "Cascada Asimétrica",
+	"puntaje": 1650,
+	"color_board": "1E1B4B",
+	"color_peg": "4ADE80",
+	"color_ramp": "FB923C",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 2.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 2.5, "row": 11.0 },
+	  { "col": 6.0, "row": 9.0 },  { "col": 7.0, "row": 9.0 },  { "col": 8.0, "row": 9.0 },
+	  { "col": 6.5, "row": 8.0 },  { "col": 7.5, "row": 8.0 },
+	  { "col": 2.0, "row": 6.0 },  { "col": 3.0, "row": 6.0 },  { "col": 4.0, "row": 6.0 },
+	  { "col": 2.5, "row": 5.0 },  { "col": 3.5, "row": 5.0 },
+	  { "col": 5.0, "row": 3.0 },  { "col": 6.0, "row": 3.0 },  { "col": 7.0, "row": 3.0 },
+	  { "col": 5.5, "row": 2.0 },  { "col": 6.5, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": 4.6, "row": 10.0, "rotation_deg": 30 },
+	  { "col": -0.6, "row": 8.0, "rotation_deg": -30 },
+	  { "col": 5.6, "row": 4.0, "rotation_deg": 25 },
+	  { "col": -0.6, "row": 2.0, "rotation_deg": -25 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 1.6, "col_end": 3.6, "points": 100, "color": "F5276C" },
+	  { "col_start": 3.6, "col_end": 5.6, "points": 50, "color": "F54927" },
+	  { "col_start": 5.6, "col_end": 7.6, "points": 200, "color": "F54927" },
+	  { "col_start": 7.6, "col_end": 9.6, "points": 500, "color": "F5B027" }
+	]
+  },
+  "16": {
+	"titulo": "La Gran X",
+	"puntaje": 1750,
+	"color_board": "111827",
+	"color_peg": "F43F5E",
+	"color_ramp": "38BDF8",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 7.5, "row": 11.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 7.0, "row": 10.0 },
+	  { "col": 2.5, "row": 9.0 },  { "col": 6.5, "row": 9.0 },
+	  { "col": 3.0, "row": 8.0 },  { "col": 6.0, "row": 8.0 },
+	  { "col": 3.5, "row": 7.0 },  { "col": 5.5, "row": 7.0 },
+	  { "col": 4.5, "row": 6.0 },
+	  { "col": 3.5, "row": 5.0 },  { "col": 5.5, "row": 5.0 },
+	  { "col": 3.0, "row": 4.0 },  { "col": 6.0, "row": 4.0 },
+	  { "col": 2.5, "row": 3.0 },  { "col": 6.5, "row": 3.0 },
+	  { "col": 2.0, "row": 2.0 },  { "col": 7.0, "row": 2.0 },
+	  { "col": 1.5, "row": 1.0 },  { "col": 7.5, "row": 1.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 7.0, "rotation_deg": -35 },
+	  { "col": 7.6, "row": 6.0, "rotation_deg": 35 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.6, "points": 100, "color": "F5276C" },
+	  { "col_start": 1.6, "col_end": 3.6, "points": 50, "color": "F54927" },
+	  { "col_start": 3.6, "col_end": 5.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 5.6, "col_end": 7.6, "points": 200, "color": "F54927" },
+	  { "col_start": 7.6, "col_end": 9.6, "points": 0, "color": "90A1B9" }
+	]
+  },
+  "17": {
+	"titulo": "Fortaleza Infernal",
+	"puntaje": 1900,
+	"color_board": "180202",
+	"color_peg": "EF4444",
+	"color_ramp": "EAB308",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 2.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 }, { "col": 4.0, "row": 12.0 }, { "col": 5.0, "row": 12.0 }, { "col": 6.0, "row": 12.0 }, { "col": 7.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 1.5, "row": 11.0 }, { "col": 2.5, "row": 11.0 }, { "col": 3.5, "row": 11.0 }, { "col": 4.5, "row": 11.0 }, { "col": 5.5, "row": 11.0 }, { "col": 6.5, "row": 11.0 }, { "col": 7.5, "row": 11.0 },
+	  { "col": 2.0, "row": 10.0 }, { "col": 3.0, "row": 10.0 }, { "col": 4.0, "row": 10.0 }, { "col": 5.0, "row": 10.0 }, { "col": 6.0, "row": 10.0 }, { "col": 7.0, "row": 10.0 },
+	  { "col": 2.5, "row": 6.0 },  { "col": 3.5, "row": 6.0 },  { "col": 4.5, "row": 6.0 },  { "col": 5.5, "row": 6.0 },  { "col": 6.5, "row": 6.0 },
+	  { "col": 3.0, "row": 5.0 },  { "col": 4.0, "row": 5.0 },  { "col": 5.0, "row": 5.0 },  { "col": 6.0, "row": 5.0 },
+	  { "col": 3.5, "row": 4.0 },  { "col": 4.5, "row": 4.0 },  { "col": 5.5, "row": 4.0 },
+	  { "col": 4.0, "row": 3.0 },  { "col": 5.0, "row": 3.0 },
+	  { "col": 4.5, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 9.0, "rotation_deg": -35 },
+	  { "col": 7.6, "row": 8.0, "rotation_deg": 35 },
+	  { "col": 2.6, "row": 7.0, "rotation_deg": -25 },
+	  { "col": 4.6, "row": 6.0, "rotation_deg": 25 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.4, "points": 500, "color": "F5B027" },
+	  { "col_start": 1.4, "col_end": 3.4, "points": 50, "color": "F54927" },
+	  { "col_start": 3.4, "col_end": 5.4, "points": 0, "color": "90A1B9" },
+	  { "col_start": 5.4, "col_end": 7.4, "points": 100, "color": "F5276C" },
+	  { "col_start": 7.4, "col_end": 9.6, "points": 500, "color": "F5B027" }
+	]
+  },
+  "18": {
+	"titulo": "El Desafío Maestro",
+	"puntaje": 2100,
+	"color_board": "090514",
+	"color_peg": "A855F7",
+	"color_ramp": "06B6D4",
+	"pegs": [
+	  { "col": 1.0, "row": 12.0 }, { "col": 3.0, "row": 12.0 }, { "col": 6.0, "row": 12.0 }, { "col": 8.0, "row": 12.0 },
+	  { "col": 2.0, "row": 11.0 }, { "col": 7.0, "row": 11.0 },
+	  { "col": 4.0, "row": 9.0 },  { "col": 5.0, "row": 9.0 },
+	  { "col": 4.5, "row": 8.0 },
+	  { "col": 1.0, "row": 6.0 },  { "col": 2.0, "row": 6.0 },  { "col": 7.0, "row": 6.0 },  { "col": 8.0, "row": 6.0 },
+	  { "col": 1.5, "row": 5.0 },  { "col": 7.5, "row": 5.0 },
+	  { "col": 3.5, "row": 3.0 },  { "col": 4.5, "row": 3.0 },  { "col": 5.5, "row": 3.0 },
+	  { "col": 4.0, "row": 2.0 },  { "col": 5.0, "row": 2.0 }
+	],
+	"ramps": [
+	  { "col": -0.6, "row": 10.0, "rotation_deg": -30 },
+	  { "col": 7.6, "row": 9.0, "rotation_deg": 30 },
+	  { "col": 3.6, "row": 7.0, "rotation_deg": -30 },
+	  { "col": -0.6, "row": 4.0, "rotation_deg": -25 },
+	  { "col": 7.6, "row": 3.0, "rotation_deg": 25 }
+	],
+	"slots": [
+	  { "col_start": -0.6, "col_end": 1.4, "points": 100, "color": "F5276C" },
+	  { "col_start": 1.4, "col_end": 3.2, "points": 0, "color": "90A1B9" },
+	  { "col_start": 3.2, "col_end": 4.8, "points": 500, "color": "F5B027" },
+	  { "col_start": 4.8, "col_end": 6.6, "points": 500, "color": "F5B027" },
+	  { "col_start": 6.6, "col_end": 9.6, "points": 200, "color": "F54927" }
 	]
   }
 }
