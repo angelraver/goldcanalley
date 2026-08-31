@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://blfnudq81val2"]
 
 [ext_resource type="Script" uid="uid://8ysg2u5cf3sj" path="res://core/scripts/seleccion_niveles.gd" id="1_p1kcx"]
-[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_tqjw7"]
+[ext_resource type="Texture2D" uid="uid://dhm87r5bq2oka" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_tqjw7"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_4r2yw"]
-[ext_resource type="Texture2D" uid="uid://02bx7lk1ionj" path="res://core/assets/images/ui/panel_levels.png" id="4_uq1cj"]
+[ext_resource type="Texture2D" uid="uid://d22m5ychi8c71" path="res://core/assets/images/ui/panel_levels.png" id="4_uq1cj"]
 [ext_resource type="PackedScene" uid="uid://ov0lifr7f0e5" path="res://core/scenes/slot_nivel.tscn" id="5_4cylx"]
-[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://core/assets/images/ui/button_home.png" id="6_a2uob"]
-[ext_resource type="Texture2D" uid="uid://d0mkgw33r214a" path="res://core/assets/images/ui/button_arrow.png" id="7_6oqdd"]
-[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="8_4f7dg"]
-[ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://core/assets/images/logo.png" id="9_b48cm"]
+[ext_resource type="Texture2D" uid="uid://qsrcy407ey01" path="res://core/assets/images/ui/button_home.png" id="6_a2uob"]
+[ext_resource type="Texture2D" uid="uid://dc71wewmtt37d" path="res://core/assets/images/ui/button_arrow.png" id="7_6oqdd"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_4f7dg"]
+[ext_resource type="Texture2D" uid="uid://bwp7plbrdja8d" path="res://core/assets/images/logo.png" id="9_b48cm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfcpm"]
 shader = ExtResource("3_4r2yw")

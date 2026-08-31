@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d5px7euex7n2"]
 
 [ext_resource type="Script" uid="uid://sih04qfkaejs" path="res://core/scripts/premio_desbloqueado.gd" id="1_5x0u0"]
-[ext_resource type="Texture2D" uid="uid://cv874ogk2418f" path="res://core/assets/images/ui/panel_prize.png" id="1_tmdpf"]
+[ext_resource type="Texture2D" uid="uid://c5cp2sqlxmrow" path="res://core/assets/images/ui/panel_prize.png" id="1_tmdpf"]
 
 [node name="PremioDesbloqueado" type="Control" unique_id=1099836888]
 layout_mode = 3

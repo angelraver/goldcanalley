@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cmx6nlfdepqkt"]
 
 [ext_resource type="Script" uid="uid://smmc3aovjttf" path="res://core/scripts/options.gd" id="1_85aq5"]
-[ext_resource type="Texture2D" uid="uid://bs37i6imttmc3" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_gycth"]
+[ext_resource type="Texture2D" uid="uid://dhm87r5bq2oka" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_gycth"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_gyu1t"]
-[ext_resource type="Texture2D" uid="uid://b75bxwnikh2ns" path="res://core/assets/images/ui/panel_options.png" id="4_g5hix"]
-[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="5_rftt1"]
-[ext_resource type="Texture2D" uid="uid://ib7uf2run2xg" path="res://core/assets/images/ui/icon_music.png" id="6_0un6s"]
-[ext_resource type="Texture2D" uid="uid://b8h11v3yhjcsh" path="res://core/assets/images/ui/icon_check_off.png" id="7_kywri"]
-[ext_resource type="Texture2D" uid="uid://c8wbeyw02kibl" path="res://core/assets/images/ui/icon_sound.png" id="8_apvty"]
-[ext_resource type="Texture2D" uid="uid://uvmhr30n1qal" path="res://core/assets/images/ui/button_home.png" id="9_vhp3b"]
+[ext_resource type="Texture2D" uid="uid://y14w5mbypeai" path="res://core/assets/images/ui/panel_options.png" id="4_g5hix"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="5_rftt1"]
+[ext_resource type="Texture2D" uid="uid://btucqoyx1cnck" path="res://core/assets/images/ui/icon_music.png" id="6_0un6s"]
+[ext_resource type="Texture2D" uid="uid://cb2dpjn1dlibu" path="res://core/assets/images/ui/icon_check_off.png" id="7_kywri"]
+[ext_resource type="Texture2D" uid="uid://dxdrkbjulk8mc" path="res://core/assets/images/ui/icon_sound.png" id="8_apvty"]
+[ext_resource type="Texture2D" uid="uid://qsrcy407ey01" path="res://core/assets/images/ui/button_home.png" id="9_vhp3b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qa6uu"]
 shader = ExtResource("3_gyu1t")

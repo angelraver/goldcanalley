@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://baxy0w3t7imt"]
 
 [ext_resource type="Script" uid="uid://dpii45hxyh3x8" path="res://games/whackamole/scripts/topo_hoyo.gd" id="1_ceb3w"]
-[ext_resource type="PackedScene" uid="uid://bcymwnv13dq5b" path="res://games/whackamole/assets/models/hoyo.glb" id="2_s512f"]
-[ext_resource type="PackedScene" uid="uid://dabcfap33q7tg" path="res://games/whackamole/assets/models/topo.glb" id="3_y4oh6"]
+[ext_resource type="PackedScene" uid="uid://cc7m8hcs5t17" path="res://games/whackamole/assets/models/hoyo.glb" id="2_s512f"]
+[ext_resource type="PackedScene" uid="uid://et0f0nx0seo8" path="res://games/whackamole/assets/models/topo.glb" id="3_y4oh6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pdr7n"]
 radius = 1.1489258
