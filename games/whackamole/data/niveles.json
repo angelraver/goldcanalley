@@ -1,6 +1,5 @@
 {
   "1": {
-	"titulo": "Primeros Brotes",
 	"meta_puntos": 300,
 	"tiempo_limite": 30,
 	"hoyos": [
@@ -11,7 +10,6 @@
 	]
   },
   "2": {
-	"titulo": "Centro de Atención",
 	"meta_puntos": 450,
 	"tiempo_limite": 30,
 	"hoyos": [
@@ -23,7 +21,6 @@
 	]
   },
   "3": {
-	"titulo": "Paso Ligero",
 	"meta_puntos": 650,
 	"tiempo_limite": 35,
 	"hoyos": [
@@ -35,7 +32,6 @@
 	]
   },
   "4": {
-	"titulo": "Columnas en Alerta",
 	"meta_puntos": 900,
 	"tiempo_limite": 35,
 	"hoyos": [
@@ -48,7 +44,6 @@
 	]
   },
   "5": {
-	"titulo": "Sorpresa Dorada",
 	"meta_puntos": 1200,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -62,7 +57,6 @@
 	]
   },
   "6": {
-	"titulo": "Cuidado con la Trampa",
 	"meta_puntos": 1100,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -77,7 +71,6 @@
 	]
   },
   "7": {
-	"titulo": "Reflejos Azules",
 	"meta_puntos": 1400,
 	"tiempo_limite": 35,
 	"hoyos": [
@@ -91,7 +84,6 @@
 	]
   },
   "8": {
-	"titulo": "Campo Minado",
 	"meta_puntos": 1300,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -106,7 +98,6 @@
 	]
   },
   "9": {
-	"titulo": "Gran Bloque",
 	"meta_puntos": 1800,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -122,7 +113,6 @@
 	]
   },
   "10": {
-	"titulo": "Zig-Zag Veloz",
 	"meta_puntos": 1650,
 	"tiempo_limite": 35,
 	"hoyos": [
@@ -137,7 +127,6 @@
 	]
   },
   "11": {
-	"titulo": "Anillo Exterior",
 	"meta_puntos": 2100,
 	"tiempo_limite": 45,
 	"hoyos": [
@@ -156,7 +145,6 @@
 	]
   },
   "12": {
-	"titulo": "Fiebre del Oro",
 	"meta_puntos": 2400,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -171,7 +159,6 @@
 	]
   },
   "13": {
-	"titulo": "Líneas Cruzadas",
 	"meta_puntos": 2200,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -185,7 +172,6 @@
 	]
   },
   "14": {
-	"titulo": "Trampa de Sombras",
 	"meta_puntos": 1900,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -199,7 +185,6 @@
 	]
   },
   "15": {
-	"titulo": "Invasión Total",
 	"meta_puntos": 3100,
 	"tiempo_limite": 45,
 	"hoyos": [
@@ -221,7 +206,6 @@
 	]
   },
   "16": {
-	"titulo": "Pasillo Relámpago",
 	"meta_puntos": 2600,
 	"tiempo_limite": 35,
 	"hoyos": [
@@ -235,7 +219,6 @@
 	]
   },
   "17": {
-	"titulo": "Laberinto de Mina",
 	"meta_puntos": 2300,
 	"tiempo_limite": 45,
 	"hoyos": [
@@ -253,7 +236,6 @@
 	]
   },
   "18": {
-	"titulo": "Caos en la Mesa",
 	"meta_puntos": 3500,
 	"tiempo_limite": 50,
 	"hoyos": [
@@ -275,7 +257,6 @@
 	]
   },
   "19": {
-	"titulo": "Ataque en V",
 	"meta_puntos": 2800,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -290,7 +271,6 @@
 	]
   },
   "20": {
-	"titulo": "Cinturón de Fuego",
 	"meta_puntos": 2600,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -308,7 +288,6 @@
 	]
   },
   "21": {
-	"titulo": "Tormenta Azul",
 	"meta_puntos": 3200,
 	"tiempo_limite": 35,
 	"hoyos": [
@@ -322,7 +301,6 @@
 	]
   },
   "22": {
-	"titulo": "Tablero de Ajedrez",
 	"meta_puntos": 3000,
 	"tiempo_limite": 45,
 	"hoyos": [
@@ -341,7 +319,6 @@
 	]
   },
   "23": {
-	"titulo": "Doble Espiral",
 	"meta_puntos": 3400,
 	"tiempo_limite": 45,
 	"hoyos": [
@@ -357,7 +334,6 @@
 	]
   },
   "24": {
-	"titulo": "Lluvia de Opciones",
 	"meta_puntos": 3800,
 	"tiempo_limite": 50,
 	"hoyos": [
@@ -379,7 +355,6 @@
 	]
   },
   "25": {
-	"titulo": "Campo de Minas Royale",
 	"meta_puntos": 2900,
 	"tiempo_limite": 40,
 	"hoyos": [
@@ -396,7 +371,6 @@
 	]
   },
   "26": {
-	"titulo": "Sinfonía Dorada",
 	"meta_puntos": 4200,
 	"tiempo_limite": 45,
 	"hoyos": [
@@ -414,7 +388,6 @@
 	]
   },
   "27": {
-	"titulo": "El Gran Desafío Final",
 	"meta_puntos": 4800,
 	"tiempo_limite": 50,
 	"hoyos": [

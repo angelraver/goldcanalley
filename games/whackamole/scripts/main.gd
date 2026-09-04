@@ -11,6 +11,7 @@ extends Node3D
 @onready var camara: Camera3D = $CamaraPivote/Camera3D
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
+@onready var ui_level_title: Label = $UI/LevelTitle
 @onready var ui_timer: UITimer = $UI/Timer as UITimer
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var audio: GameAudioBase = $AudioJuego
@@ -134,6 +135,8 @@ func cargar_nivel(numero_nivel: int) -> void:
 			)
 		hoyos_activos.append(hoyo_instancia)
 
+	anunciar_nivel(numero_nivel)
+
 func _resolver_tipo(tipo_raw) -> String:
 	# Soporta niveles.json compacto (0-5 int / "0"-"5" string) y clásico ("marron", etc.)
 	if tipo_raw is int or tipo_raw is float:
@@ -212,3 +215,14 @@ func _on_tiempo_agotado() -> void:
 func reiniciar_nivel() -> void:
 	cargar_nivel(nivel_actual)
 	iniciar_partida()
+
+func anunciar_nivel(numero_nivel: int) -> void:
+	if not ui_level_title:
+		return
+	ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel))
+	ui_level_title.modulate.a = 1.0
+	ui_level_title.visible = true
+	var tween = create_tween()
+	tween.tween_interval(1.5)
+	tween.tween_property(ui_level_title, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(func(): ui_level_title.visible = false)
