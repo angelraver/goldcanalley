@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_tndlh"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="8_uxcgu"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
-[ext_resource type="PackedScene" path="res://games/whackamole/scenes/audio_manager.tscn" id="9_audio"]
+[ext_resource type="PackedScene" uid="uid://dwbx64orng73p" path="res://games/whackamole/scenes/audio_manager.tscn" id="9_audio"]
+
+[sub_resource type="Environment" id="Environment_5o6qw"]
 
 [sub_resource type="Animation" id="Animation_pdr7n"]
 length = 0.001
@@ -96,6 +98,9 @@ uv1_triplanar = true
 script = ExtResource("1_ea0aq")
 metadata/_edit_horizontal_guides_ = [59.0]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1801163196]
+environment = SubResource("Environment_5o6qw")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1915339222]
 transform = Transform3D(1, 0, 0, 0, 0.5600552, 0.8284553, 0, -0.8284553, 0.5600552, 0, 10.969155, 13.810493)
 
@@ -174,4 +179,4 @@ offset_top = 0.0
 offset_right = 144.0
 offset_bottom = 72.0
 
-[node name="AudioJuego" parent="." instance=ExtResource("9_audio")]
+[node name="AudioJuego" parent="." unique_id=392662616 instance=ExtResource("9_audio")]

@@ -35,6 +35,9 @@ var balls_launched: int = 0
 var active_balls: Array[RigidBody3D] = []
 var game_ended: bool = false
 var ctrl_resultados: ControladorResultados
+var tiempo_bolas_quietas: float = 0.0
+const UMBRAL_QUIETUD: float = 0.1
+const TIEMPO_QUIETO_REQUERIDO: float = 0.5 # >0.4s de slot.gd para asegurar puntuación definitiva
 
 func _ready() -> void:
 	nivel_actual = save_manager.nivel_actual_seleccionado
@@ -48,23 +51,38 @@ func _ready() -> void:
 	spawn_next_ball()
 
 func _process(delta: float) -> void:
-	if game_ended or balls_launched < MAX_BALLS:
+	if game_ended:
 		return
-	
-	var all_settled: bool = true
-	if active_balls.is_empty():
-		all_settled = false
+	# Condición 1: que no queden bolas por arrojar. Ocurre siempre antes que la 2.
+	if balls_launched < MAX_BALLS:
+		tiempo_bolas_quietas = 0.0
+		return
+	# Condición 1 cumplida (todas usadas). Evaluar condición 2: todas quietas.
+	if _todas_bolas_quietas():
+		tiempo_bolas_quietas += delta
+		if tiempo_bolas_quietas >= TIEMPO_QUIETO_REQUERIDO:
+			game_ended = true
+			mostrar_panel_resultados()
 	else:
-		for ball in active_balls:
-			if not is_instance_valid(ball):
-				continue
-			if ball.linear_velocity.length() > 0.1 or ball.angular_velocity.length() > 0.1:
-				all_settled = false
-				break
-	
-	if all_settled:
-		game_ended = true
-		mostrar_panel_resultados()
+		tiempo_bolas_quietas = 0.0
+
+func _todas_bolas_quietas() -> bool:
+	# Debe haber tantas bolas activas como lanzadas y ninguna en vuelo
+	if active_balls.size() != MAX_BALLS:
+		return false
+	if active_balls.is_empty():
+		return false
+	for ball in active_balls:
+		if not is_instance_valid(ball):
+			return false
+		# Velocity instantánea < umbral (misma métrica que slot.gd:64)
+		if ball.linear_velocity.length() > UMBRAL_QUIETUD or ball.angular_velocity.length() > UMBRAL_QUIETUD:
+			return false
+		# Opcional: si la bola aún no ha sido puntuada, no considerarla definitiva
+		# Slot marca ball.set("scored", true) tras 0.4s quieta dentro del slot.
+		# Si queremos asegurar puntuación definitiva, exigir scored == true:
+		# if ball.get("scored") != true: return false
+	return true
 
 func cargar_nivel(numero_nivel: int) -> void:
 	ctrl_resultados.reset()
@@ -76,6 +94,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	balls_launched = 0
 	active_balls.clear()
 	game_ended = false
+	tiempo_bolas_quietas = 0.0
 	if current_ball and is_instance_valid(current_ball):
 		current_ball.queue_free()
 		current_ball = null
@@ -118,8 +137,8 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	var pegs_array = level_data.get("pegs", [])
 	for peg_info in pegs_array:
-		var peg_col: float = float(peg_info["col"])
-		var peg_row: int = peg_info["row"]
+		var peg_col: float = float(peg_info["x"])
+		var peg_row: int = peg_info["y"]
 		
 		var peg_inst = peg_scene.instantiate()
 		board_elements.add_child(peg_inst)
@@ -129,9 +148,9 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	var ramps_array = level_data.get("ramps", [])
 	for ramp_info in ramps_array:
-		var ramp_col: float = float(ramp_info["col"])
-		var ramp_row: int = ramp_info["row"]
-		var rot_deg: float = ramp_info.get("rotation_deg", 0.0)
+		var ramp_col: float = float(ramp_info["x"])
+		var ramp_row: float = float(ramp_info["y"])
+		var rot_deg: float = ramp_info.get("rot", 0.0)
 		
 		var ramp_inst = ramp_scene.instantiate()
 		board_elements.add_child(ramp_inst)
@@ -150,9 +169,9 @@ func build_slots(slots_data: Array) -> void:
 	
 	for i in range(slots_data.size()):
 		var slot_info = slots_data[i]
-		var col_start: float = float(slot_info["col_start"])
-		var col_end: float = float(slot_info["col_end"])
-		var pts: int = int(slot_info["points"])
+		var col_start: float = float(slot_info["x_start"])
+		var col_end: float = float(slot_info["x_end"])
+		var pts: int = int(slot_info["pts"])
 		var color_hex: String = slot_info.get("color", "#FF0000") # Rojo por defecto si falta en JSON
 
 		# 1. Calcular el ancho total del slot en unidades de mundo
