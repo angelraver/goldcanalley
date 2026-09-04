@@ -18,7 +18,7 @@
 	"plinko": {
 		"escena_juego": "res://games/plinko/scenes/main.tscn",
 		"ruta_niveles_json": "res://games/plinko/data/niveles.json",
-		"textos_json": "res://games/whackamole/data/textos.json",
+		"textos_json": "res://games/plinko/data/textos.json",
 		"textura_fondo": "res://games/whackamole/assets/images/fondo_selector.png",
 		"textura_logo": "res://games/plinko/assets/images/logo.png",
 		"prefijo_texto": "plinko_"

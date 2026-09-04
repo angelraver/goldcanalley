@@ -16,6 +16,7 @@ const MAX_BALLS: int = 5
 @onready var camera: Camera3D = $Camera3D
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
+@onready var ui_level_title: Label = $UI/LevelTitle
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var audio_juego: GameAudioBase = $AudioJuego
 
@@ -162,6 +163,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	var slots_array = level_data.get("slots", [])
 	build_slots(slots_array)
 
+	anunciar_nivel(numero_nivel)
 	setup_camera()
 
 func build_slots(slots_data: Array) -> void:
@@ -277,6 +279,17 @@ func _apply_element_color(node: Node, color_hex: String) -> void:
 		node.call("set_ramp_color", color_hex)
 	else:
 		ColorUtils.apply_color(node, color_hex)
+
+func anunciar_nivel(numero_nivel: int) -> void:
+	if not ui_level_title:
+		return
+	ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel))
+	ui_level_title.modulate.a = 1.0
+	ui_level_title.visible = true
+	var tween = create_tween()
+	tween.tween_interval(1.5)
+	tween.tween_property(ui_level_title, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(func(): ui_level_title.visible = false)
 
 func clear_board() -> void:
 	for child in board_frame_holder.get_children():

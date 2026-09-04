@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="4_panel"]
 [ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="6_67mu3"]
 [ext_resource type="Texture2D" uid="uid://c323blul3mu44" path="res://games/plinko/assets/images/logo.png" id="7_6v8q1"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_ever"]
 [ext_resource type="PackedScene" uid="uid://x89ydk1niw67b" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
@@ -61,6 +62,29 @@ material = SubResource("StandardMaterial3D_67mu3")
 [node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("3_levelnum")]
 
 [node name="PanelResultados" parent="UI" unique_id=696404095 instance=ExtResource("4_panel")]
+
+[node name="LevelTitle" type="Label" parent="UI" unique_id=1507659899]
+custom_minimum_size = Vector2(600, 0)
+custom_maximum_size = Vector2(-1, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -394.5
+offset_right = 0.5
+offset_bottom = 394.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0061463, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_ever")
+theme_override_font_sizes/font_size = 64
+text = "Texto largo para confirmar el corte de linea automático"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Fondo" type="CSGBox3D" parent="." unique_id=1807674525]
 transform = Transform3D(2.7020472e-15, 4.3711385e-08, 1.1564965, 1.4141771, -4.3711385e-08, 0, 6.181564e-08, 0.99999994, -5.0552075e-08, -0.008993864, 1.319293, -2.2378979)

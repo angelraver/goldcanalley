@@ -1,6 +1,5 @@
 {
   "1": {
-    "titulo": "Primeras Caídas",
     "puntaje": 450,
     "color_board": "EB051B",
     "color_peg": "F2E200",
@@ -55,7 +54,6 @@
     ]
   },
   "2": {
-    "titulo": "El Reloj de Arena",
     "puntaje": 650,
     "color_board": "EB051B",
     "color_peg": "F2E200",
@@ -115,7 +113,6 @@
     ]
   },
   "3": {
-    "titulo": "Cascada Zig-Zag",
     "puntaje": 800,
     "color_board": "EB051B",
     "color_peg": "F2E200",
@@ -168,7 +165,6 @@
     ]
   },
   "4": {
-    "titulo": "El Embudo Central",
     "puntaje": 850,
     "color_board": "F2E200",
     "color_peg": "EB051B",
@@ -232,7 +228,6 @@
     ]
   },
   "5": {
-    "titulo": "Doble Diamante",
     "puntaje": 900,
     "color_board": "EB051B",
     "color_peg": "F2E200",
@@ -291,7 +286,6 @@
     ]
   },
   "6": {
-    "titulo": "Laberinto de Rampas",
     "puntaje": 1000,
     "color_board": "F2E200",
     "color_peg": "EB051B",
@@ -340,7 +334,6 @@
     ]
   },
   "7": {
-    "titulo": "Pirámide Invertida",
     "puntaje": 1100,
     "color_board": "EB051B",
     "color_peg": "F2E200",
@@ -398,7 +391,6 @@
     ]
   },
   "8": {
-    "titulo": "Doble Rampa Cruzada",
     "puntaje": 1150,
     "color_board": "030712",
     "color_peg": "38BDF8",
@@ -457,7 +449,6 @@
     ]
   },
   "9": {
-    "titulo": "Las xumnas",
     "puntaje": 1250,
     "color_board": "171717",
     "color_peg": "A855F7",
@@ -520,7 +511,6 @@
     ]
   },
   "10": {
-    "titulo": "El Filtro Central",
     "puntaje": 1300,
     "color_board": "090D16",
     "color_peg": "06B6D4",
@@ -588,7 +578,6 @@
     ]
   },
   "11": {
-    "titulo": "Onda Expansiva",
     "puntaje": 1400,
     "color_board": "1F0322",
     "color_peg": "EC4899",
@@ -646,7 +635,6 @@
     ]
   },
   "12": {
-    "titulo": "Malla Escalonada",
     "puntaje": 1450,
     "color_board": "090D16",
     "color_peg": "FFFFFF",
@@ -697,7 +685,6 @@
     ]
   },
   "13": {
-    "titulo": "Embudos Gemelos",
     "puntaje": 1500,
     "color_board": "030712",
     "color_peg": "FFFFFF",
@@ -749,7 +736,6 @@
     ]
   },
   "14": {
-    "titulo": "La Pared Central",
     "puntaje": 1600,
     "color_board": "0F172A",
     "color_peg": "FACC15",
@@ -824,7 +810,6 @@
     ]
   },
   "15": {
-    "titulo": "Cascada Asimétrica",
     "puntaje": 1650,
     "color_board": "1E1B4B",
     "color_peg": "4ADE80",
@@ -894,7 +879,6 @@
     ]
   },
   "16": {
-    "titulo": "La Gran X",
     "puntaje": 1750,
     "color_board": "111827",
     "color_peg": "F43F5E",
@@ -962,7 +946,6 @@
     ]
   },
   "17": {
-    "titulo": "Fortaleza Infernal",
     "puntaje": 1900,
     "color_board": "FF0000",
     "color_peg": "FFFFFF",
@@ -1104,7 +1087,6 @@
     ]
   },
   "18": {
-    "titulo": "El Desafío Maestro",
     "puntaje": 2100,
     "color_board": "#FE9A37",
     "color_peg": "#FE9A37",
