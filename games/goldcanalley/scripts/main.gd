@@ -218,9 +218,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not controles_activos:
 		return
 
-	if (event is InputEventScreenTouch and event.pressed) or \
-	   (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
-		lanzar_nueva_pelota(event.position)
+	if OS.has_feature("mobile"):
+		if event is InputEventScreenTouch and event.pressed:
+			lanzar_nueva_pelota(event.position)
+	else:
+		if event is InputEventMouseButton \
+		and event.pressed \
+		and event.button_index == MOUSE_BUTTON_LEFT:
+			lanzar_nueva_pelota(event.position)
 
 func _process(delta: float) -> void:
 	if barra_energia and indicador_circulo:
