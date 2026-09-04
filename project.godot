@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="tapball"
-run/main_scene="uid://bcd1ofetag504"
+run/main_scene="uid://cokb2wqhdfvfb"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,7 @@ window/size/viewport_width=720
 window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation=1
 
 [physics]
 
