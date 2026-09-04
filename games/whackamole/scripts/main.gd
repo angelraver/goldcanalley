@@ -16,6 +16,7 @@ extends Node3D
 @onready var audio: GameAudioBase = $AudioJuego
 
 const ANIM_ESCONDER: StringName = &"esconder"
+const TIPOS: Array[String] = ["marron", "rojo", "verde", "azul", "naranja", "dorado"]
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
@@ -64,7 +65,20 @@ func cargar_valores() -> void:
 	var datos = JSON.parse_string(texto_json)
 
 	if datos is Dictionary:
-		datos_topos = datos
+		datos_topos.clear()
+		for clave in datos.keys():
+			var valor = datos[clave]
+			var clave_str: String
+			# Soporta valores.json con claves compactas (0-5 / "0"-"5") o clásicas ("marron", etc.)
+			if clave is String and (clave as String).is_valid_int():
+				var idx := int(clave)
+				if idx >= 0 and idx < TIPOS.size():
+					clave_str = TIPOS[idx]
+				else:
+					clave_str = clave
+			else:
+				clave_str = str(clave)
+			datos_topos[clave_str] = valor
 	else:
 		print("ERROR: Formato inválido en valores.json")
 
@@ -96,7 +110,8 @@ func cargar_nivel(numero_nivel: int) -> void:
 	
 	for configuracion_hoyo in lista_hoyos:
 		var coord: Array = configuracion_hoyo.get("pos", [2, 3])
-		var tipo_topo: String = configuracion_hoyo.get("tipo_topo", "rojo")
+		var tipo_raw = configuracion_hoyo.get("tipo", configuracion_hoyo.get("tipo_topo", 1))
+		var tipo_topo: String = _resolver_tipo(tipo_raw)
 		
 		var grid_x: int = coord[0]
 		var grid_y: int = coord[1]
@@ -118,6 +133,23 @@ func cargar_nivel(numero_nivel: int) -> void:
 				_on_anim_hoyo_finalizada.bind(hoyo_instancia)
 			)
 		hoyos_activos.append(hoyo_instancia)
+
+func _resolver_tipo(tipo_raw) -> String:
+	# Soporta niveles.json compacto (0-5 int / "0"-"5" string) y clásico ("marron", etc.)
+	if tipo_raw is int or tipo_raw is float:
+		var idx := int(tipo_raw)
+		if idx >= 0 and idx < TIPOS.size():
+			return TIPOS[idx]
+		return TIPOS[1]
+	if tipo_raw is String:
+		var s: String = tipo_raw
+		if s.is_valid_int():
+			var idx2 := int(s)
+			if idx2 >= 0 and idx2 < TIPOS.size():
+				return TIPOS[idx2]
+		# Si es letra de un solo dígito (p.ej. "A"), también podría mapearse, pero se asume string clásico
+		return s
+	return TIPOS[1]
 
 func actualizar_ui_level() -> void:
 	ctrl_resultados.actualizar_nivel(nivel_actual)
