@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6nyrmpl5ag5g" path="res://games/goldcanalley/assets/images/logo.png" id="5_bj87q"]
 [ext_resource type="Texture2D" uid="uid://cnxvtolpaaljy" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
 [ext_resource type="Texture2D" uid="uid://cnh2juky5yv20" path="res://games/whackamole/assets/images/logo.png" id="6_oip1l"]
+[ext_resource type="Texture2D" uid="uid://c323blul3mu44" path="res://games/plinko/assets/images/logo.png" id="7_oip1l"]
 [ext_resource type="Texture2D" uid="uid://w11w41j4jpou" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
@@ -72,21 +73,21 @@ texture_normal = ExtResource("5_bj87q")
 
 [node name="ButtonWhackamole" type="TextureButton" parent="." unique_id=991209445]
 layout_mode = 0
-offset_left = 416.00003
-offset_top = 630.0
-offset_right = 966.0
-offset_bottom = 1030.0
+offset_left = 212.0
+offset_top = 775.0
+offset_right = 762.0
+offset_bottom = 1175.0
 scale = Vector2(0.53626305, 0.53626305)
 texture_normal = ExtResource("6_oip1l")
 
 [node name="ButtonPlinko" type="TextureButton" parent="." unique_id=1906105612]
 layout_mode = 0
-offset_left = 244.0
-offset_top = 797.99994
-offset_right = 644.0
-offset_bottom = 1398.0
+offset_left = 455.0
+offset_top = 604.0
+offset_right = 979.0
+offset_bottom = 1204.0001
 scale = Vector2(0.36, 0.36)
-texture_normal = ExtResource("5_bj87q")
+texture_normal = ExtResource("7_oip1l")
 
 [node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
 layout_mode = 0
