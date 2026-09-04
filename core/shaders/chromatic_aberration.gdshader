@@ -11,22 +11,22 @@ float random(float seed) {
 void fragment() {
 	vec2 uv = UV;
 	
-	# Bloquea las alturas horizontales para crear los saltos típicos del glitch
+	// Bloquea las alturas horizontales para crear los saltos tipicos del glitch
 	float block = floor(uv.y * block_size);
 	float noise = random(block + floor(u_time * 12.0));
 	
-	# Desplazamiento condicional (solo salta de a ratos)
+	// Desplazamiento condicional (solo salta de a ratos)
 	if (noise > 0.75) {
 		uv.x += (random(block) - 0.5) * glitch_intensity;
 	}
 	
-	# Muestra con aberración cromática en canal Alpha para fuentes
+	// Muestra con aberracion cromatica en canal Alpha para fuentes
 	float r = texture(TEXTURE, uv + vec2(glitch_intensity, 0.0)).a;
 	float g = texture(TEXTURE, uv).a;
 	float b = texture(TEXTURE, uv - vec2(glitch_intensity, 0.0)).a;
 	
 	vec4 text_color = vec4(r, g, b, texture(TEXTURE, uv).a);
 	
-	# Mantiene el azul base (#005095) o color aplicado al Label
+	// Mantiene el azul base (#005095) o color aplicado al Label
 	COLOR = text_color * COLOR;
 }
