@@ -18,6 +18,7 @@ extends Node3D
 
 const ANIM_ESCONDER: StringName = &"esconder"
 const TIPOS: Array[String] = ["marron", "rojo", "verde", "azul", "naranja", "dorado"]
+const MAX_TOPOS_SIMULTANEOS: int = 3
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
@@ -165,14 +166,47 @@ func mostrar_panel_resultados() -> void:
 
 func iniciar_spawner() -> void:
 	while juego_activo:
-		await get_tree().create_timer(randf_range(0.8, 1.8)).timeout
+		await get_tree().create_timer(randf_range(0.6, 1.4)).timeout
 		
-		if not juego_activo or hoyos_activos.size() == 0:
+		if not juego_activo or hoyos_activos.is_empty():
 			continue
-			
-		var hoyo_elegido = hoyos_activos.pick_random()
-		if hoyo_elegido.estado_actual == hoyo_elegido.Estado.ESCONDIDO:
-			hoyo_elegido.emerger()
+		
+		var visibles := 0
+		for h in hoyos_activos:
+			if h.estado_actual != h.Estado.ESCONDIDO:
+				visibles += 1
+		
+		var disponibles: Array = hoyos_activos.filter(func(h): return h.estado_actual == h.Estado.ESCONDIDO)
+		if disponibles.is_empty():
+			continue
+		
+		var espacio := MAX_TOPOS_SIMULTANEOS - visibles
+		if espacio <= 0:
+			continue
+		
+		var max_posible := mini(espacio, disponibles.size())
+		var cantidad := _elegir_cantidad_aleatoria(max_posible)
+		disponibles.shuffle()
+		for i in range(cantidad):
+			disponibles[i].emerger()
+
+func _elegir_cantidad_aleatoria(max_posible: int) -> int:
+	if max_posible <= 1:
+		return 1
+	var r := randf()
+	if max_posible >= 3:
+		if r < 0.55:
+			return 1
+		elif r < 0.85:
+			return 2
+		else:
+			return 3
+	elif max_posible == 2:
+		if r < 0.65:
+			return 1
+		else:
+			return 2
+	return 1
 
 func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> void:
 	if not juego_activo:
