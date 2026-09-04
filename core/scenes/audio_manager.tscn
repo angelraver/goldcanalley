@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://t727smp6b43i" path="res://core/assets/sounds/ok.wav" id="1_4tesi"]
 [ext_resource type="AudioStream" uid="uid://b5fbtt30n4ka7" path="res://core/assets/sounds/welldone1.wav" id="3_151wy"]
 [ext_resource type="AudioStream" uid="uid://cdry5sn0hrdax" path="res://core/assets/sounds/prize1.wav" id="4_prize"]
+[ext_resource type="AudioStream" uid="uid://cn44jskjs82e7" path="res://core/assets/sounds/ok1.wav" id="5_ok1"]
 
 [node name="AudioManager" type="Node" unique_id=1655563066]
 script = ExtResource("1_3dgps")
@@ -16,3 +17,6 @@ stream = ExtResource("3_151wy")
 
 [node name="Prize" type="AudioStreamPlayer" parent="." unique_id=847291503]
 stream = ExtResource("4_prize")
+
+[node name="Ok1" type="AudioStreamPlayer" parent="." unique_id=923477162]
+stream = ExtResource("5_ok1")

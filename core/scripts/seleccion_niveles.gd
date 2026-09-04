@@ -112,4 +112,5 @@ func _on_nivel_seleccionado(numero_nivel: int) -> void:
 	get_tree().change_scene_to_file(escena_juego_destino)
 
 func _on_boton_home_pressed() -> void:
+	audio_manager.play_ok1()
 	get_tree().change_scene_to_file("res://core/scenes/title.tscn")
