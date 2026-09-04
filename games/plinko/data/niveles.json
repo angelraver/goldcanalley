@@ -50,7 +50,7 @@
       { "x_start": -0.6, "x_end": 1.6, "pts": 0, "color": "90A1B9" },
       { "x_start": 1.6, "x_end": 3.6, "pts": 50, "color": "F54927" },
       { "x_start": 3.6, "x_end": 5.6, "pts": 100, "color": "F5276C" },
-      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "F54927" },
+      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "C82909" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 500, "color": "F5B027" }
     ]
   },
@@ -109,7 +109,7 @@
     "slots": [
       { "x_start": -0.6, "x_end": 1.4, "pts": 0, "color": "90A1B9" },
       { "x_start": 1.4, "x_end": 3.8, "pts": 50, "color": "F54927" },
-      { "x_start": 3.8, "x_end": 5.8, "pts": 200, "color": "F54927" },
+      { "x_start": 3.8, "x_end": 5.8, "pts": 200, "color": "C82909" },
       { "x_start": 5.8, "x_end": 8.2, "pts": 100, "color": "F5276C" },
       { "x_start": 8.2, "x_end": 9.6, "pts": 500, "color": "F5B027" }
     ]
@@ -163,7 +163,7 @@
       { "x_start": -0.6, "x_end": 1.4, "pts": 0, "color": "90A1B9" },
       { "x_start": 1.4, "x_end": 3.4, "pts": 50, "color": "F54927" },
       { "x_start": 3.4, "x_end": 5.4, "pts": 100, "color": "F5276C" },
-      { "x_start": 5.4, "x_end": 8.4, "pts": 200, "color": "F54927" },
+      { "x_start": 5.4, "x_end": 8.4, "pts": 200, "color": "C82909" },
       { "x_start": 8.4, "x_end": 9.6, "pts": 500, "color": "F5B027" }
     ]
   },
@@ -227,7 +227,7 @@
       { "x_start": -0.6, "x_end": 2, "pts": 0, "color": "90A1B9" },
       { "x_start": 2, "x_end": 4, "pts": 100, "color": "F5276C" },
       { "x_start": 4, "x_end": 5.6, "pts": 500, "color": "F5B027" },
-      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "F54927" },
+      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "C82909" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 50, "color": "F54927" }
     ]
   },
@@ -284,7 +284,7 @@
     ],
     "slots": [
       { "x_start": -0.6, "x_end": 1.6, "pts": 0, "color": "90A1B9" },
-      { "x_start": 1.6, "x_end": 3.6, "pts": 200, "color": "F54927" },
+      { "x_start": 1.6, "x_end": 3.6, "pts": 200, "color": "C82909" },
       { "x_start": 3.6, "x_end": 5.6, "pts": 50, "color": "F54927" },
       { "x_start": 5.6, "x_end": 7.6, "pts": 500, "color": "F5B027" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 100, "color": "F5276C" }
@@ -336,7 +336,7 @@
       { "x_start": 1.5, "x_end": 3.5, "pts": 50, "color": "F54927" },
       { "x_start": 3.5, "x_end": 5.5, "pts": 0, "color": "90A1B9" },
       { "x_start": 5.5, "x_end": 7.5, "pts": 100, "color": "F5276C" },
-      { "x_start": 7.5, "x_end": 9.6, "pts": 200, "color": "F54927" }
+      { "x_start": 7.5, "x_end": 9.6, "pts": 200, "color": "C82909" }
     ]
   },
   "7": {
@@ -393,7 +393,7 @@
       { "x_start": -0.6, "x_end": 1.6, "pts": 500, "color": "F5B027" },
       { "x_start": 1.6, "x_end": 3.8, "pts": 100, "color": "F5276C" },
       { "x_start": 3.8, "x_end": 5.8, "pts": 0, "color": "90A1B9" },
-      { "x_start": 5.8, "x_end": 8, "pts": 200, "color": "F54927" },
+      { "x_start": 5.8, "x_end": 8, "pts": 200, "color": "C82909" },
       { "x_start": 8, "x_end": 9.6, "pts": 50, "color": "F54927" }
     ]
   },
@@ -452,7 +452,7 @@
       { "x_start": -0.6, "x_end": 1.8, "pts": 100, "color": "F5276C" },
       { "x_start": 1.8, "x_end": 3.8, "pts": 500, "color": "F5B027" },
       { "x_start": 3.8, "x_end": 5.8, "pts": 50, "color": "F54927" },
-      { "x_start": 5.8, "x_end": 7.8, "pts": 200, "color": "F54927" },
+      { "x_start": 5.8, "x_end": 7.8, "pts": 200, "color": "C82909" },
       { "x_start": 7.8, "x_end": 9.6, "pts": 0, "color": "90A1B9" }
     ]
   },
@@ -513,7 +513,7 @@
     ],
     "slots": [
       { "x_start": -0.6, "x_end": 1.8, "pts": 50, "color": "F54927" },
-      { "x_start": 1.8, "x_end": 3.8, "pts": 200, "color": "F54927" },
+      { "x_start": 1.8, "x_end": 3.8, "pts": 200, "color": "C82909" },
       { "x_start": 3.8, "x_end": 5.8, "pts": 500, "color": "F5B027" },
       { "x_start": 5.8, "x_end": 7.8, "pts": 100, "color": "F5276C" },
       { "x_start": 7.8, "x_end": 9.6, "pts": 0, "color": "90A1B9" }
@@ -581,7 +581,7 @@
     ],
     "slots": [
       { "x_start": -0.6, "x_end": 1.6, "pts": 0, "color": "90A1B9" },
-      { "x_start": 1.6, "x_end": 3.6, "pts": 200, "color": "F54927" },
+      { "x_start": 1.6, "x_end": 3.6, "pts": 200, "color": "C82909" },
       { "x_start": 3.6, "x_end": 5.6, "pts": 500, "color": "F5B027" },
       { "x_start": 5.6, "x_end": 7.6, "pts": 100, "color": "F5276C" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 50, "color": "F54927" }
@@ -690,7 +690,7 @@
     ],
     "slots": [
       { "x_start": -0.6, "x_end": 1.6, "pts": 100, "color": "F5276C" },
-      { "x_start": 1.6, "x_end": 3.6, "pts": 200, "color": "F54927" },
+      { "x_start": 1.6, "x_end": 3.6, "pts": 200, "color": "C82909" },
       { "x_start": 3.6, "x_end": 5.6, "pts": 500, "color": "F5B027" },
       { "x_start": 5.6, "x_end": 7.6, "pts": 50, "color": "F54927" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 0, "color": "90A1B9" }
@@ -818,7 +818,7 @@
     "slots": [
       { "x_start": -0.6, "x_end": 1.6, "pts": 0, "color": "90A1B9" },
       { "x_start": 1.6, "x_end": 3.6, "pts": 500, "color": "F5B027" },
-      { "x_start": 3.6, "x_end": 5.6, "pts": 200, "color": "F54927" },
+      { "x_start": 3.6, "x_end": 5.6, "pts": 200, "color": "C82909" },
       { "x_start": 5.6, "x_end": 7.6, "pts": 500, "color": "F5B027" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 50, "color": "F54927" }
     ]
@@ -889,7 +889,7 @@
       { "x_start": -0.6, "x_end": 1.6, "pts": 500, "color": "F5B027" },
       { "x_start": 1.6, "x_end": 3.6, "pts": 100, "color": "F5276C" },
       { "x_start": 3.6, "x_end": 5.6, "pts": 50, "color": "F54927" },
-      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "F54927" },
+      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "C82909" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 500, "color": "F5B027" }
     ]
   },
@@ -922,10 +922,8 @@
       { "x": 6.5, "y": 8 },
       { "x": 3, "y": 7 },
       { "x": 6, "y": 7 },
-
       { "x": 3.5, "y": 6 },
       { "x": 5.5, "y": 6 },
-
       { "x": 3, "y": 5 },
       { "x": 4, "y": 5 },
       { "x": 5, "y": 5 },
@@ -959,7 +957,7 @@
       { "x_start": -0.6, "x_end": 1.6, "pts": 100, "color": "F5276C" },
       { "x_start": 1.6, "x_end": 3.6, "pts": 50, "color": "F54927" },
       { "x_start": 3.6, "x_end": 5.6, "pts": 500, "color": "F5B027" },
-      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "F54927" },
+      { "x_start": 5.6, "x_end": 7.6, "pts": 200, "color": "C82909" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 0, "color": "90A1B9" }
     ]
   },
@@ -1095,13 +1093,14 @@
       { "x": 8, "y": 0 },
       { "x": 9.3, "y": 0 }
     ],
-    "ramps": [],
+    "ramps": [
+    ],
     "slots": [
-      { "x_start": -0.6, "x_end": 1.4, "pts": 0, "color": "F5B027" },
+      { "x_start": -0.6, "x_end": 1.4, "pts": 0, "color": "90A1B9" },
       { "x_start": 1.4, "x_end": 3.4, "pts": 50, "color": "F54927" },
-      { "x_start": 3.4, "x_end": 5.4, "pts": 500, "color": "90A1B9" },
-      { "x_start": 5.4, "x_end": 7.4, "pts": 50, "color": "F5276C" },
-      { "x_start": 7.4, "x_end": 9.6, "pts": 0, "color": "F5B027" }
+      { "x_start": 3.4, "x_end": 5.4, "pts": 500, "color": "F5B027" },
+      { "x_start": 5.4, "x_end": 7.4, "pts": 50, "color": "F54927" },
+      { "x_start": 7.4, "x_end": 9.6, "pts": 0, "color": "90A1B9" }
     ]
   },
   "18": {
@@ -1141,11 +1140,12 @@
       { "x": 8, "y": 4 },
       { "x": 9.3, "y": 4 }
     ],
-    "ramps": [],
+    "ramps": [
+    ],
     "slots": [
       { "x_start": -0.6, "x_end": 1.6, "pts": 500, "color": "F5B027" },
       { "x_start": 1.6, "x_end": 3.6, "pts": 0, "color": "90A1B9" },
-      { "x_start": 3.6, "x_end": 5.6, "pts": 50, "color": "F5276C" },
+      { "x_start": 3.6, "x_end": 5.6, "pts": 50, "color": "F54927" },
       { "x_start": 5.6, "x_end": 7.6, "pts": 0, "color": "90A1B9" },
       { "x_start": 7.6, "x_end": 9.6, "pts": 500, "color": "F5B027" }
     ]
