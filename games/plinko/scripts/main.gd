@@ -17,6 +17,7 @@ const MAX_BALLS: int = 5
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
+@onready var audio_juego: GameAudioBase = $AudioJuego
 
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
@@ -48,7 +49,6 @@ func _ready() -> void:
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 
 	cargar_nivel(nivel_actual)
-	spawn_next_ball()
 
 func _process(delta: float) -> void:
 	if game_ended:
@@ -232,11 +232,23 @@ func setup_camera() -> void:
 	var total_height_cam: float = rows * cell_size
 
 	var max_dimension_cam: float = max(total_width_cam, total_height_cam)
-	# Aumentamos la distancia en Z de 1.35 a 2.5 para abarcar todo el marco
 	var distance_z: float = max_dimension_cam * 1.4
 
-	camera.position = Vector3(0.0, 0.0, distance_z)
-	camera.look_at(Vector3.ZERO, Vector3.UP)
+	# 1. Posición y rotación de destino (vista normal de juego)
+	var final_position: Vector3 = Vector3(0.0, 0.0, distance_z)
+	var final_rotation: Vector3 = Vector3.ZERO
+
+	# 2. Estado inicial: Cerca del tablero (ej. 30% de la distancia final) y dada vuelta en Z (180°)
+	camera.position = Vector3(0.0, 0.0, distance_z * 0.2)
+	camera.rotation_degrees = Vector3(0.0, 0.0, 180.0)
+
+	# 3. Animar posición y rotación en paralelo
+	var tween: Tween = create_tween().set_parallel(true)
+	tween.tween_property(camera, "position", final_position, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(camera, "rotation_degrees", final_rotation, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	# 4. Cuando finaliza la transición, spawneamos la primera bola
+	tween.chain().tween_callback(spawn_next_ball)
 
 func grid_to_world(col_pos: float, row_pos: float) -> Vector3:
 	var total_width_grid: float = cols * cell_size
@@ -294,6 +306,11 @@ func spawn_next_ball() -> void:
 
 	if current_ball == null:
 		current_ball = ball_scene.instantiate()
+		
+		# Inyección de audio: patrón GameAudioBase (ver games/goldcanalley/scripts/main.gd:141 y games/goldcanalley/scripts/lata.gd:7)
+		# Usa set() para evitar error de tipado estático (current_ball es RigidBody3D pero el script define var audio)
+		if audio_juego:
+			current_ball.set("audio", audio_juego)
 		
 		# Calculamos los límites superiores basados en el tamaño del tablero
 		var board_width: float = cols * cell_size

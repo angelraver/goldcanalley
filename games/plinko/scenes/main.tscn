@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://cjbojfqj2p0x6"]
 
 [ext_resource type="Script" uid="uid://nqm0rjk44k85" path="res://games/plinko/scripts/main.gd" id="1_7jgrb"]
-[ext_resource type="Texture2D" uid="uid://ba6j7n5y0of6s" path="res://games/plinko/assets/images/floor.jpg" id="2_cihct"]
+[ext_resource type="Texture2D" uid="uid://bt76pahoi0hs4" path="res://games/plinko/assets/images/floor.jpg" id="2_cihct"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="2_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="3_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="4_panel"]
 [ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="6_67mu3"]
-[ext_resource type="Texture2D" uid="uid://dda1rjqayn58s" path="res://games/plinko/assets/images/logo.png" id="7_6v8q1"]
+[ext_resource type="Texture2D" uid="uid://c323blul3mu44" path="res://games/plinko/assets/images/logo.png" id="7_6v8q1"]
+[ext_resource type="PackedScene" uid="uid://x89ydk1niw67b" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 background_mode = 2
@@ -71,3 +72,5 @@ material = SubResource("StandardMaterial3D_6v8q1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 mesh = SubResource("QuadMesh_8dl7b")
 surface_material_override/0 = SubResource("StandardMaterial3D_bun8v")
+
+[node name="AudioJuego" parent="." instance=ExtResource("10_audio")]
