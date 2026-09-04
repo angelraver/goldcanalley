@@ -3,5 +3,10 @@
 		"es": "Selección de nivel",
 		"en": "Level selection",
 		"pt": "Seleção de nível"
+	},
+	"nuevo_premio": {
+		"es": "¡Nuevo Premio!",
+		"en": "New Prize!",
+		"pt": "Novo prêmio!"
 	}
 }

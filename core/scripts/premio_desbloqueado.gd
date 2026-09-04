@@ -3,13 +3,9 @@ extends Control
 const CARPETA_PREMIOS = "res://core/assets/images/prizes/"
 const ESCENA_SELECCION_NIVELES = "res://core/scenes/seleccion_niveles.tscn"
 
-# --- NUEVAS REFERENCIAS DE NODOS ---
-# Basado en la estructura mostrada en tu captura de pantalla
 @onready var panel_premio: Control = $PanelPremio # Asumo que es tipo Control o derivado
-@onready var label_titulo: Label = $PanelPremio/LabelTitulo
-@onready var label_instruccion: Label = $PanelPremio/LabelInstruccion
-
-# --- REFERENCIAS EXISTENTES ---
+@onready var label_titulo: Label = $PanelPremio/Titulo
+@onready var label_nombre: Label = $PanelPremio/Nombre
 @onready var imagen_juguete: TextureRect = $PanelPremio/ImagenJuguete
 @onready var boton_pantalla: Button = $BotonPantalla
 
@@ -23,16 +19,16 @@ var scale_orig_titulo: Vector2
 var scale_orig_instruccion: Vector2
 
 func _ready() -> void:
-	# --- LÓGICA DE CARGA EXISTENTE ---
+	audio_manager.play_prize()
+
 	var nombre_premio = save_manager.premio_recien_desbloqueado
 	var ruta_imagen = CARPETA_PREMIOS + nombre_premio + ".png"
 
 	if ResourceLoader.exists(ruta_imagen):
 		imagen_juguete.texture = load(ruta_imagen)
 
-
-	# --- 1. CAPTURAR TRANSFORMACIONES Y FIJAR PIVOTES (Blindaje) ---
-	# Capturamos los valores exactos definidos en el Editor antes de animar
+	label_titulo.text = game_manager.obtener_texto("nuevo_premio")
+	label_nombre.text = nombre_premio.to_upper()
 
 	# Panel Padre
 	panel_premio.pivot_offset = panel_premio.size / 2
@@ -47,8 +43,8 @@ func _ready() -> void:
 	scale_orig_juguete = imagen_juguete.scale
 
 	# Hijo 3: Instrucción
-	label_instruccion.pivot_offset = label_instruccion.size / 2
-	scale_orig_instruccion = label_instruccion.scale
+	label_nombre.pivot_offset = label_nombre.size / 2
+	scale_orig_instruccion = label_nombre.scale
 
 	# --- 2. ESTADO INICIAL PARA LA ANIMACIÓN ---
 	# Panel Padre: Comienza al 50% de SU escala original
@@ -57,7 +53,7 @@ func _ready() -> void:
 	# Hijos: Comienzan al 0% (invisibles)
 	label_titulo.scale = Vector2.ZERO
 	imagen_juguete.scale = Vector2.ZERO
-	label_instruccion.scale = Vector2.ZERO
+	label_nombre.scale = Vector2.ZERO
 
 
 	# --- LÓGICA DE BOTÓN EXISTENTE ---
@@ -100,7 +96,7 @@ func ejecutar_secuencia_entrada() -> void:
 	await get_tree().create_timer(DELAY_ENTRE_HIJOS).timeout # Pequeño delay
 
 	# 3. Aparece la Instrucción
-	animar_pop_control(label_instruccion, scale_orig_instruccion)
+	animar_pop_control(label_nombre, scale_orig_instruccion)
 
 
 # --- FUNCIÓN HELPER DE ANIMACIÓN "POP" (Reutilizada de Main) ---
@@ -120,6 +116,7 @@ func animar_pop_control(node: Control, scale_objetivo: Vector2) -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _on_pantalla_pressed() -> void:
+	audio_manager.play_start()
 	# Consumir la alerta para que no se vuelva a mostrar
 	save_manager.premio_recien_desbloqueado = ""
 	# Ir a la selección de niveles del juego actual

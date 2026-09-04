@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1jn8jktknhgr" path="res://core/scripts/austral_animated_logo.gd" id="1_ftdwx"]
 [ext_resource type="Shader" uid="uid://cxaqtqf2cuq7n" path="res://core/shaders/logo_dissolver.gshader.gdshader" id="1_xlfdt"]
-[ext_resource type="Texture2D" uid="uid://bgbqq4881134c" path="res://core/assets/images/Retro Pixel Penguin Sprite.png" id="2_w34d2"]
+[ext_resource type="Texture2D" uid="uid://bgbqq4881134c" path="res://core/assets/images/logoaustral.png" id="2_w34d2"]
 [ext_resource type="Script" uid="uid://crg0shgk80tx0" path="res://core/scripts/logo_script.gd" id="3_w34d2"]
 [ext_resource type="FontFile" uid="uid://wscybhe32177" path="res://core/fonts/PressStart2P-Regular.ttf" id="4_0pxjp"]
 [ext_resource type="Shader" uid="uid://bt6k72wxlttto" path="res://core/shaders/chromatic_aberration.gdshader" id="4_8chsa"]
@@ -21,6 +21,9 @@ shader_parameter/u_color_3 = Color(0.05, 0.15, 0.3, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8chsa"]
 shader = ExtResource("4_8chsa")
+shader_parameter/u_time = 0.0
+shader_parameter/glitch_intensity = 0.015
+shader_parameter/block_size = 30.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_w34d2"]
 font = ExtResource("4_0pxjp")

@@ -3,6 +3,7 @@ extends Node
 # --- NODOS EXISTENTES DE EFECTOS ---
 @onready var start: AudioStreamPlayer = $Start
 @onready var welldone: AudioStreamPlayer = $Welldone
+@onready var prize: AudioStreamPlayer = $Prize
 
 # --- CONTROL DE ESTADO GLOBAL ---
 var music_enabled: bool = true
@@ -58,3 +59,7 @@ func play_start() -> void:
 func play_welldone() -> void:
 	if sfx_enabled and welldone:
 		welldone.play()
+
+func play_prize() -> void:
+	if sfx_enabled and prize:
+		prize.play()

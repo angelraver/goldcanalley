@@ -4,11 +4,11 @@ const RUTA_GUARDADO = "user://progreso.json"
 
 const LISTA_PREMIOS: Array[String] = [
 	"aros", "dino", "drum",
-	"doll", "robot", "duck",
-	"auto2", "tricep", "horse",
+	"doll", "roboto", "duck",
+	"racer", "tricep", "horse",
 	"bunny", "plane", "train",
-	"rocket", "robot2", "teddy",
-	"auto", "astro", "rex"
+	"rocket", "robot", "teddy",
+	"bluey", "astro", "rex"
 ]
 
 var datos_progreso: Dictionary = {}
