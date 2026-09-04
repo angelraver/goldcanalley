@@ -16,22 +16,27 @@ extends Node3D
 @onready var audio: GameAudioBase = $AudioJuego
 
 const ANIM_ESCONDER: StringName = &"esconder"
+const TIPOS: Array[String] = ["marron", "rojo", "verde", "azul", "naranja", "dorado"]
 
 var datos_topos: Dictionary = {}
 var datos_niveles: Dictionary = {}
 var hoyos_activos: Array[Node3D] = []
 var sonidos_por_hoyo: Dictionary = {}
 var puntaje_nivel: int = 0
+var puntaje_maximo_nivel: int = 0
 var juego_activo: bool = false
+var ctrl_resultados: ControladorResultados
 
 func _ready() -> void:
 	cargar_valores()
 	nivel_actual = save_manager.nivel_actual_seleccionado
 
+	ctrl_resultados = ControladorResultados.new()
+	add_child(ctrl_resultados)
+	var hud: Array = [ui_puntaje, ui_level_number, ui_timer]
+	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 	if ui_timer:
 		ui_timer.tiempo_agotado.connect(_on_tiempo_agotado)
-	if panel_resultados:
-		panel_resultados.reiniciar_solicitado.connect(reiniciar_nivel)
 
 	cargar_nivel(nivel_actual)
 	
@@ -60,11 +65,26 @@ func cargar_valores() -> void:
 	var datos = JSON.parse_string(texto_json)
 
 	if datos is Dictionary:
-		datos_topos = datos
+		datos_topos.clear()
+		for clave in datos.keys():
+			var valor = datos[clave]
+			var clave_str: String
+			# Soporta valores.json con claves compactas (0-5 / "0"-"5") o clásicas ("marron", etc.)
+			if clave is String and (clave as String).is_valid_int():
+				var idx := int(clave)
+				if idx >= 0 and idx < TIPOS.size():
+					clave_str = TIPOS[idx]
+				else:
+					clave_str = clave
+			else:
+				clave_str = str(clave)
+			datos_topos[clave_str] = valor
 	else:
 		print("ERROR: Formato inválido en valores.json")
 
 func cargar_nivel(numero_nivel: int) -> void:
+	ctrl_resultados.reset()
+
 	if not FileAccess.file_exists(ruta_niveles_json):
 		print("ERROR: No existe el archivo de niveles")
 		return
@@ -77,8 +97,11 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	datos_niveles = datos_niveles_tmp
 	var config_nivel = datos_niveles[str(numero_nivel)]
-	var lista_hoyos: Array = config_nivel.get("hoyos", [])
+	puntaje_maximo_nivel = int(config_nivel.get("meta_puntos", 300))
+	puntaje_nivel = 0
+	actualizar_ui_puntaje()
 	actualizar_ui_level()
+	var lista_hoyos: Array = config_nivel.get("hoyos", [])
 
 	for hoyo in hoyos_activos:
 		hoyo.queue_free()
@@ -87,7 +110,8 @@ func cargar_nivel(numero_nivel: int) -> void:
 	
 	for configuracion_hoyo in lista_hoyos:
 		var coord: Array = configuracion_hoyo.get("pos", [2, 3])
-		var tipo_topo: String = configuracion_hoyo.get("tipo_topo", "rojo")
+		var tipo_raw = configuracion_hoyo.get("tipo", configuracion_hoyo.get("tipo_topo", 1))
+		var tipo_topo: String = _resolver_tipo(tipo_raw)
 		
 		var grid_x: int = coord[0]
 		var grid_y: int = coord[1]
@@ -110,9 +134,31 @@ func cargar_nivel(numero_nivel: int) -> void:
 			)
 		hoyos_activos.append(hoyo_instancia)
 
+func _resolver_tipo(tipo_raw) -> String:
+	# Soporta niveles.json compacto (0-5 int / "0"-"5" string) y clásico ("marron", etc.)
+	if tipo_raw is int or tipo_raw is float:
+		var idx := int(tipo_raw)
+		if idx >= 0 and idx < TIPOS.size():
+			return TIPOS[idx]
+		return TIPOS[1]
+	if tipo_raw is String:
+		var s: String = tipo_raw
+		if s.is_valid_int():
+			var idx2 := int(s)
+			if idx2 >= 0 and idx2 < TIPOS.size():
+				return TIPOS[idx2]
+		# Si es letra de un solo dígito (p.ej. "A"), también podría mapearse, pero se asume string clásico
+		return s
+	return TIPOS[1]
+
 func actualizar_ui_level() -> void:
-	if ui_level_number:
-		ui_level_number.establecer_nivel(nivel_actual)
+	ctrl_resultados.actualizar_nivel(nivel_actual)
+
+func actualizar_ui_puntaje() -> void:
+	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
+
+func mostrar_panel_resultados() -> void:
+	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func iniciar_spawner() -> void:
 	while juego_activo:
@@ -139,8 +185,7 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 	if fue_acierto:
 		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
 		puntaje_nivel += puntos
-		if ui_puntaje:
-			ui_puntaje.establecer_puntaje(puntaje_nivel)
+		actualizar_ui_puntaje()
 		# 2. Topo golpeado: solo cuando el topo estaba afuera
 		if audio:
 			audio.play_ouch(_sonido_topo(hoyo_node, "outch"))
@@ -162,24 +207,8 @@ func _sonido_topo(hoyo_node: Node3D, clave: String) -> String:
 
 func _on_tiempo_agotado() -> void:
 	juego_activo = false
-	
-	if ui_puntaje: ui_puntaje.visible = false
-	if ui_level_number: ui_level_number.visible = false
-	if ui_timer: ui_timer.visible = false
-
-	var config_nivel = datos_niveles.get(str(nivel_actual), {})
-	var meta_puntos: int = int(config_nivel.get("meta_puntos", 300))
-
-	if panel_resultados:
-		panel_resultados.mostrar(nivel_actual, puntaje_nivel, meta_puntos)
+	mostrar_panel_resultados()
 
 func reiniciar_nivel() -> void:
-	puntaje_nivel = 0
-	if ui_puntaje:
-		ui_puntaje.visible = true
-		ui_puntaje.establecer_puntaje(0)
-	if ui_level_number:
-		ui_level_number.visible = true
-	
 	cargar_nivel(nivel_actual)
 	iniciar_partida()

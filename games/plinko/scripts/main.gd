@@ -14,8 +14,17 @@ const MAX_BALLS: int = 5
 @onready var board_frame_holder: Node3D = $BoardFrameHolder
 @onready var board_elements: Node3D = $BoardElements
 @onready var camera: Camera3D = $Camera3D
+@onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
+@onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
+@onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 
-var score: int = 0
+var puntaje_nivel: int = 0
+var puntaje_maximo_nivel: int = 0
+# Compatibilidad: alias legacy 'score' usado en prints previos
+var score: int:
+	get: return puntaje_nivel
+	set(value): puntaje_nivel = value
+
 var cols: int = 10
 var rows: int = 12
 var cell_size: float = 0.2
@@ -23,17 +32,75 @@ var cell_size: float = 0.2
 var ball_scene: PackedScene = preload("res://games/plinko/scenes/ball.tscn")
 var current_ball: RigidBody3D = null
 var balls_launched: int = 0
+var active_balls: Array[RigidBody3D] = []
+var game_ended: bool = false
+var ctrl_resultados: ControladorResultados
+var tiempo_bolas_quietas: float = 0.0
+const UMBRAL_QUIETUD: float = 0.1
+const TIEMPO_QUIETO_REQUERIDO: float = 0.5 # >0.4s de slot.gd para asegurar puntuación definitiva
 
 func _ready() -> void:
 	nivel_actual = save_manager.nivel_actual_seleccionado
+
+	ctrl_resultados = ControladorResultados.new()
+	add_child(ctrl_resultados)
+	var hud: Array = [ui_puntaje, ui_level_number]
+	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
+
 	cargar_nivel(nivel_actual)
 	spawn_next_ball()
 
+func _process(delta: float) -> void:
+	if game_ended:
+		return
+	# Condición 1: que no queden bolas por arrojar. Ocurre siempre antes que la 2.
+	if balls_launched < MAX_BALLS:
+		tiempo_bolas_quietas = 0.0
+		return
+	# Condición 1 cumplida (todas usadas). Evaluar condición 2: todas quietas.
+	if _todas_bolas_quietas():
+		tiempo_bolas_quietas += delta
+		if tiempo_bolas_quietas >= TIEMPO_QUIETO_REQUERIDO:
+			game_ended = true
+			mostrar_panel_resultados()
+	else:
+		tiempo_bolas_quietas = 0.0
+
+func _todas_bolas_quietas() -> bool:
+	# Debe haber tantas bolas activas como lanzadas y ninguna en vuelo
+	if active_balls.size() != MAX_BALLS:
+		return false
+	if active_balls.is_empty():
+		return false
+	for ball in active_balls:
+		if not is_instance_valid(ball):
+			return false
+		# Velocity instantánea < umbral (misma métrica que slot.gd:64)
+		if ball.linear_velocity.length() > UMBRAL_QUIETUD or ball.angular_velocity.length() > UMBRAL_QUIETUD:
+			return false
+		# Opcional: si la bola aún no ha sido puntuada, no considerarla definitiva
+		# Slot marca ball.set("scored", true) tras 0.4s quieta dentro del slot.
+		# Si queremos asegurar puntuación definitiva, exigir scored == true:
+		# if ball.get("scored") != true: return false
+	return true
+
 func cargar_nivel(numero_nivel: int) -> void:
+	ctrl_resultados.reset()
+
 	print("generate level!")
 	clear_board()
-	score = 0
+	puntaje_nivel = 0
+	puntaje_maximo_nivel = 0
 	balls_launched = 0
+	active_balls.clear()
+	game_ended = false
+	tiempo_bolas_quietas = 0.0
+	if current_ball and is_instance_valid(current_ball):
+		current_ball.queue_free()
+		current_ball = null
+
+	actualizar_ui_puntaje()
+	actualizar_ui_level()
 
 	if not FileAccess.file_exists(ruta_niveles_json):
 		return
@@ -44,6 +111,11 @@ func cargar_nivel(numero_nivel: int) -> void:
 		return
 
 	var level_data = datos_niveles[str(numero_nivel)]
+
+	# Puntaje máximo del nivel (meta para PanelResultados). Soporta claves legacy.
+	puntaje_maximo_nivel = int(level_data.get("puntaje", level_data.get("meta_puntos", 1000)))
+	actualizar_ui_puntaje()
+	actualizar_ui_level()
 
 	var peg_color_hex: String = level_data.get("color_peg", "ff00ff")
 	var board_color_hex: String = level_data.get("color_board", "ffff00")
@@ -65,8 +137,8 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	var pegs_array = level_data.get("pegs", [])
 	for peg_info in pegs_array:
-		var peg_col: float = float(peg_info["col"])
-		var peg_row: int = peg_info["row"]
+		var peg_col: float = float(peg_info["x"])
+		var peg_row: int = peg_info["y"]
 		
 		var peg_inst = peg_scene.instantiate()
 		board_elements.add_child(peg_inst)
@@ -76,9 +148,9 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	var ramps_array = level_data.get("ramps", [])
 	for ramp_info in ramps_array:
-		var ramp_col: float = float(ramp_info["col"])
-		var ramp_row: int = ramp_info["row"]
-		var rot_deg: float = ramp_info.get("rotation_deg", 0.0)
+		var ramp_col: float = float(ramp_info["x"])
+		var ramp_row: float = float(ramp_info["y"])
+		var rot_deg: float = ramp_info.get("rot", 0.0)
 		
 		var ramp_inst = ramp_scene.instantiate()
 		board_elements.add_child(ramp_inst)
@@ -97,9 +169,9 @@ func build_slots(slots_data: Array) -> void:
 	
 	for i in range(slots_data.size()):
 		var slot_info = slots_data[i]
-		var col_start: float = float(slot_info["col_start"])
-		var col_end: float = float(slot_info["col_end"])
-		var pts: int = int(slot_info["points"])
+		var col_start: float = float(slot_info["x_start"])
+		var col_end: float = float(slot_info["x_end"])
+		var pts: int = int(slot_info["pts"])
 		var color_hex: String = slot_info.get("color", "#FF0000") # Rojo por defecto si falta en JSON
 
 		# 1. Calcular el ancho total del slot en unidades de mundo
@@ -128,14 +200,32 @@ func build_slots(slots_data: Array) -> void:
 			last_divider.position = grid_to_world(col_end, row_y)
 			board_elements.add_child(last_divider)
 
-func _on_ball_scored(points_awarded: int, ball_node: Node = null) -> void:
-	score += points_awarded
-	print("¡Goles/Puntos anotados!: ", points_awarded, " | Puntaje Total: ", score)
-	
-	if balls_launched >= MAX_BALLS:
-		print("juego finalizado el puntaje es: " + str(score))
-	else:
-		get_tree().create_timer(0.3).timeout.connect(spawn_next_ball)
+func _on_ball_scored(points_awarded: int, _ball_node: Node = null) -> void:
+	puntaje_nivel += points_awarded
+	actualizar_ui_puntaje()
+	if _ball_node:
+		EfectosUI.crear_efecto_puntos((_ball_node as Node3D).global_position, points_awarded)
+	print("¡Goles/Puntos anotados!: ", points_awarded, " | Puntaje Total: ", puntaje_nivel)
+
+func actualizar_ui_puntaje() -> void:
+	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
+
+func actualizar_ui_level() -> void:
+	ctrl_resultados.actualizar_nivel(nivel_actual)
+
+func mostrar_panel_resultados() -> void:
+	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
+func reiniciar_nivel() -> void:
+	for ball in active_balls:
+		if is_instance_valid(ball):
+			ball.queue_free()
+	active_balls.clear()
+	if current_ball and is_instance_valid(current_ball):
+		current_ball.queue_free()
+		current_ball = null
+	cargar_nivel(nivel_actual)
+	spawn_next_ball()
 
 func setup_camera() -> void:
 	var total_width_cam: float = cols * cell_size
@@ -199,6 +289,8 @@ func load_level_data(level_id: String) -> Dictionary:
 func spawn_next_ball() -> void:
 	if balls_launched >= MAX_BALLS:
 		return
+	if game_ended or ctrl_resultados.esta_mostrado():
+		return
 
 	if current_ball == null:
 		current_ball = ball_scene.instantiate()
@@ -216,10 +308,16 @@ func spawn_next_ball() -> void:
 		add_child(current_ball)
 		
 func _unhandled_input(event: InputEvent) -> void:
+	if game_ended or ctrl_resultados.esta_mostrado():
+		return
 	# Detectar clic de mouse o tap en pantalla táctil
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if current_ball != null and not current_ball.is_active:
 			current_ball.release_ball()
 			balls_launched += 1
-			# Desvinculamos el puntero para preparar la siguiente cuando se requiera
+			active_balls.append(current_ball)
 			current_ball = null
+			
+			# Esperar 1 segundo tras el lanzamiento para instanciar la siguiente bola (si quedan disponibles)
+			if balls_launched < MAX_BALLS:
+				get_tree().create_timer(1.0).timeout.connect(spawn_next_ball)

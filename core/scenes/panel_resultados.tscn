@@ -2,14 +2,14 @@
 
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="1_diad0"]
 [ext_resource type="Script" uid="uid://u6rxejfub056" path="res://core/scripts/panel_resultados.gd" id="1_pqqu8"]
-[ext_resource type="Texture2D" uid="uid://ce45aexd81vyl" path="res://core/assets/images/ui/panel_level.png" id="2_pqqu8"]
-[ext_resource type="Texture2D" uid="uid://bnd0ijgu2accx" path="res://core/assets/images/ui/button_ok.png" id="3_shjp8"]
-[ext_resource type="Texture2D" uid="uid://c2ti2rrel70iq" path="res://core/assets/images/ui/button_restart.png" id="4_3qrhc"]
-[ext_resource type="Texture2D" uid="uid://cjfrgb4i7ka14" path="res://core/assets/images/ui/ribbon_yellow.png" id="5_sxpki"]
-[ext_resource type="Texture2D" uid="uid://bjbq77a3cyby" path="res://core/assets/images/ui/ribbon_red.png" id="6_s5fhk"]
-[ext_resource type="Texture2D" uid="uid://crj3mfi0j4w71" path="res://core/assets/images/ui/ribbon_blue.png" id="7_g2gab"]
-[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="8_at4u4"]
-[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="9_g8ea4"]
+[ext_resource type="Texture2D" uid="uid://dbmn2xf5kr2sw" path="res://core/assets/images/ui/panel_level.png" id="2_pqqu8"]
+[ext_resource type="Texture2D" uid="uid://bihe8adftliab" path="res://core/assets/images/ui/button_ok.png" id="3_shjp8"]
+[ext_resource type="Texture2D" uid="uid://uq4t6egpq8n" path="res://core/assets/images/ui/button_restart.png" id="4_3qrhc"]
+[ext_resource type="Texture2D" uid="uid://c1y8n11p5rnwo" path="res://core/assets/images/ui/ribbon_yellow.png" id="5_sxpki"]
+[ext_resource type="Texture2D" uid="uid://cf8u17s3juvfx" path="res://core/assets/images/ui/ribbon_red.png" id="6_s5fhk"]
+[ext_resource type="Texture2D" uid="uid://b8f8a3kiclq5c" path="res://core/assets/images/ui/ribbon_blue.png" id="7_g2gab"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_at4u4"]
+[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="9_g8ea4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kyv4s"]
 shader = ExtResource("1_diad0")

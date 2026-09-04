@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6l8gsmux112o"]
 
-[ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://games/goldcanalley/assets/images/world/ball.png" id="1_sha3n"]
+[ext_resource type="Texture2D" uid="uid://dkenyvgkr7vmc" path="res://games/goldcanalley/assets/images/world/ball.png" id="1_sha3n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7dm0k"]
 bounce = 0.03
