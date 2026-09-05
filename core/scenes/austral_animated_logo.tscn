@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1jn8jktknhgr" path="res://core/scripts/austral_animated_logo.gd" id="1_ftdwx"]
 [ext_resource type="Shader" uid="uid://cxaqtqf2cuq7n" path="res://core/shaders/logo_dissolver.gshader.gdshader" id="1_xlfdt"]
-[ext_resource type="Texture2D" uid="uid://bgbqq4881134c" path="res://core/assets/images/logoaustral.png" id="2_w34d2"]
+[ext_resource type="Texture2D" uid="uid://deabg1e3ceyma" path="res://core/assets/images/logoaustral.png" id="3_i31ri"]
 [ext_resource type="Script" uid="uid://crg0shgk80tx0" path="res://core/scripts/logo_script.gd" id="3_w34d2"]
 [ext_resource type="FontFile" uid="uid://wscybhe32177" path="res://core/fonts/PressStart2P-Regular.ttf" id="4_0pxjp"]
 [ext_resource type="Shader" uid="uid://bt6k72wxlttto" path="res://core/shaders/chromatic_aberration.gdshader" id="4_8chsa"]
@@ -72,7 +72,7 @@ offset_left = 200.0
 offset_top = 398.0
 offset_right = 502.0
 offset_bottom = 701.0
-texture = ExtResource("2_w34d2")
+texture = ExtResource("3_i31ri")
 expand_mode = 1
 stretch_mode = 4
 script = ExtResource("3_w34d2")

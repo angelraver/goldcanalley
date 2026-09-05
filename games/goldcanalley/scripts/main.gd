@@ -259,6 +259,11 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 	var nueva_pelota = escena_pelota.instantiate() as RigidBody3D
 	nueva_pelota.set_meta("max_shot", fuerza_calculada >= fuerza_maxima * 0.95)
 	contenedor_pelotas.add_child(nueva_pelota)
+	
+	var is_max_shot := fuerza_calculada >= fuerza_maxima * 0.95
+
+	if is_max_shot:
+		nueva_pelota.activar_max_shot()
 
 	var punto_salida = camara.global_position - camara.global_transform.basis.z * 1.0
 	nueva_pelota.global_position = punto_salida
