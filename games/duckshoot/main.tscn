@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bxclitkt2fwl8"]
+
+[ext_resource type="PackedScene" uid="uid://dlmerivvjlnng" path="res://games/duckshoot/wave1.glb" id="1_37fyd"]
+[ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/escalera.glb" id="2_7x46q"]
+[ext_resource type="PackedScene" uid="uid://b4iytmkd01tvn" path="res://games/duckshoot/wave2.glb" id="2_a3k4b"]
+[ext_resource type="PackedScene" uid="uid://brnuid4qmqu2o" path="res://games/duckshoot/duck.glb" id="3_7x46q"]
+[ext_resource type="PackedScene" uid="uid://cq4dabq4uowwc" path="res://games/duckshoot/bomb.glb" id="5_ebpld"]
+
+[node name="Main" type="Node3D" unique_id=732211628]
+
+[node name="wave1" parent="." unique_id=1539790582 instance=ExtResource("1_37fyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="escalera" parent="wave1" unique_id=203979572 instance=ExtResource("2_7x46q")]
+transform = Transform3D(4.5390186, 0, 0, 0, 4.3857923, 0, 0, 0, 3.414928, 0, 0, 0)
+
+[node name="wave2" parent="." unique_id=101334076 instance=ExtResource("2_a3k4b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35747805, 0.7)
+
+[node name="duck" parent="." unique_id=1670358528 instance=ExtResource("3_7x46q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.117544435)
+
+[node name="bomb" parent="." unique_id=221351611 instance=ExtResource("5_ebpld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.2)
