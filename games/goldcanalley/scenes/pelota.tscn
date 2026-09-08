@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c6l8gsmux112o"]
 
 [ext_resource type="Texture2D" uid="uid://dkenyvgkr7vmc" path="res://games/goldcanalley/assets/images/world/ball.png" id="1_sha3n"]
+[ext_resource type="Script" uid="uid://b4y5beitlo8l5" path="res://games/goldcanalley/scenes/pelota.gd" id="1_vbg1x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7dm0k"]
 bounce = 0.03
@@ -17,11 +18,25 @@ material = SubResource("StandardMaterial3D_7mycd")
 radius = 0.15
 height = 0.3
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0oe71"]
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+color = Color(1, 1, 1, 0.5058824)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbg1x"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.35686275)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vbg1x"]
+material = SubResource("StandardMaterial3D_vbg1x")
+size = Vector2(0.08, 0.08)
+
 [node name="Pelota" type="RigidBody3D" unique_id=2131689663]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_7dm0k")
 continuous_cd = true
 angular_damp = 0.5
+script = ExtResource("1_vbg1x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1862335249]
 shape = SubResource("SphereShape3D_kyv4s")
@@ -29,3 +44,13 @@ shape = SubResource("SphereShape3D_kyv4s")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=439839242]
 transform = Transform3D(-0.98059136, 0, -0.19606273, 0, 1, 0, 0.19606273, 0, -0.98059136, 0, 0, 0)
 mesh = SubResource("SphereMesh_8dl7b")
+
+[node name="Trail" type="GPUParticles3D" parent="." unique_id=103102549]
+emitting = false
+amount = 80
+lifetime = 0.25
+one_shot = true
+preprocess = 0.15
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_0oe71")
+draw_pass_1 = SubResource("QuadMesh_vbg1x")
