@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c5kilkgvyklgu"]
+
+[ext_resource type="PackedScene" uid="uid://dlmerivvjlnng" path="res://games/duckshoot/wave1.glb" id="1_56pfl"]
+
+[node name="Wave" type="Node3D" unique_id=254715147]
+
+[node name="wave1" parent="." unique_id=48410819 instance=ExtResource("1_56pfl")]

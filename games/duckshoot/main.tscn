@@ -1,24 +1,33 @@
 [gd_scene format=3 uid="uid://bxclitkt2fwl8"]
 
-[ext_resource type="PackedScene" uid="uid://dlmerivvjlnng" path="res://games/duckshoot/wave1.glb" id="1_37fyd"]
+[ext_resource type="Script" uid="uid://b5mc1wtap7s6m" path="res://games/duckshoot/main.gd" id="1_vnc0d"]
 [ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/escalera.glb" id="2_7x46q"]
-[ext_resource type="PackedScene" uid="uid://b4iytmkd01tvn" path="res://games/duckshoot/wave2.glb" id="2_a3k4b"]
-[ext_resource type="PackedScene" uid="uid://brnuid4qmqu2o" path="res://games/duckshoot/duck.glb" id="3_7x46q"]
-[ext_resource type="PackedScene" uid="uid://cq4dabq4uowwc" path="res://games/duckshoot/bomb.glb" id="5_ebpld"]
+[ext_resource type="PackedScene" uid="uid://dwc4lkfi7r578" path="res://games/duckshoot/wall.glb" id="3_37fyd"]
+
+[sub_resource type="Environment" id="Environment_7x46q"]
+background_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.627451, 0.627451, 0.627451, 1)
+ambient_light_energy = 0.5
 
 [node name="Main" type="Node3D" unique_id=732211628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1337472, 0, 0, 0)
+script = ExtResource("1_vnc0d")
 
-[node name="wave1" parent="." unique_id=1539790582 instance=ExtResource("1_37fyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1755815024]
+transform = Transform3D(1, 0, 0, 0, 0.9568233, 0.29067016, 0, -0.25638005, 0.84394765, -0.053592227, 1.8100388, 4.319243)
 
-[node name="escalera" parent="wave1" unique_id=203979572 instance=ExtResource("2_7x46q")]
-transform = Transform3D(4.5390186, 0, 0, 0, 4.3857923, 0, 0, 0, 3.414928, 0, 0, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1151453859]
+environment = SubResource("Environment_7x46q")
 
-[node name="wave2" parent="." unique_id=101334076 instance=ExtResource("2_a3k4b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35747805, 0.7)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=544758961]
+transform = Transform3D(-0.99801755, -1.0724167e-08, -0.06293673, -0.05719555, -0.4172786, 0.906977, -0.026262159, 0.90877867, 0.4164513, 0, 6.4838476, 5.2749615)
 
-[node name="duck" parent="." unique_id=1670358528 instance=ExtResource("3_7x46q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.117544435)
+[node name="escalera" parent="." unique_id=203979572 instance=ExtResource("2_7x46q")]
+transform = Transform3D(-2.0869216e-07, 0, -5.9877534, 0, 8.147206, 0, 4.7743196, 0, -2.6173302e-07, -1.4480975, 2.7629633, 0.046835933)
 
-[node name="bomb" parent="." unique_id=221351611 instance=ExtResource("5_ebpld")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.2)
+[node name="wall" parent="." unique_id=1872483640 instance=ExtResource("3_37fyd")]
+transform = Transform3D(-2.9251977e-08, 0, 0.88203084, 0, 1.1578606, 0, -0.6692073, 0, -3.855479e-08, -1.5138388, 0.4454608, 0.7716294)
+
+[node name="wall2" parent="." unique_id=659544840 instance=ExtResource("3_37fyd")]
+transform = Transform3D(-2.9251977e-08, 0, 0.88203084, 0, 1.1386193, 0, -0.6692073, 0, -3.855479e-08, 1.4861612, 0.4544741, 0.7716294)

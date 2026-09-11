@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://kuvbn8w7et7w"]
+
+[ext_resource type="PackedScene" uid="uid://b4iytmkd01tvn" path="res://games/duckshoot/wave2.glb" id="1_56pfl"]
+
+[node name="Wave" type="Node3D" unique_id=254715147]
+
+[node name="wave2" parent="." unique_id=747823329 instance=ExtResource("1_56pfl")]
+transform = Transform3D(1.191121, 0, 0, 0, 0.943502, 0, 0, 0, 1, -0.13006571, 0.122053996, 0.023019597)
