@@ -251,6 +251,11 @@ func lanzar_aro(swipe: Vector2) -> void:
 	ring_lanzado.set_meta("launch_number", anillos_lanzados)
 	ring_lanzado.freeze = false
 	ring_lanzado.sleeping = false
+	ring_lanzado.freeze = false
+	ring_lanzado.sleeping = false
+	ring_lanzado.angular_velocity = Vector3.ZERO
+	ring_lanzado.angular_damp = 8.0
+	
 	ring_lanzado.apply_central_impulse(direccion * fuerza)
 	ring_lanzado.apply_torque_impulse(Vector3(8.0, 0.0, 0.0))
 
