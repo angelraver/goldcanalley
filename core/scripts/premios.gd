@@ -4,11 +4,74 @@ const CARPETA_PREMIOS = "res://core/assets/images/prizes/"
 const RUTA_RIBBON_AZUL = "res://core/assets/images/ui/ribbon_tiny_blue.png"
 
 @onready var grid_premios: GridContainer = $ScrollContainer/ContenidoEstanteria/GridPremios
-@onready var camara: Camera2D = $Camera2D
+@onready var scroll_container: ScrollContainer = $ScrollContainer
+@onready var boton_home: TextureButton = $BotonHome
+
+var arrastrando := false
 
 func _ready() -> void:
+	scroll_container.gui_input.connect(_on_scroll_container_gui_input)
 	refrescar_estanteria()
 
+func _input(event: InputEvent) -> void:
+
+	# ==========================
+	# MOUSE
+	# ==========================
+
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+
+			if event.pressed:
+				if _puede_empezar_drag(event.position):
+					arrastrando = true
+			else:
+				arrastrando = false
+
+			return
+
+	if event is InputEventMouseMotion and arrastrando:
+		_mover_biblioteca(event.relative)
+		get_viewport().set_input_as_handled()
+		return
+
+
+	# ==========================
+	# TOUCH
+	# ==========================
+
+	if event is InputEventScreenTouch:
+
+		if event.pressed:
+			if _puede_empezar_drag(event.position):
+				arrastrando = true
+		else:
+			arrastrando = false
+
+		return
+
+	if event is InputEventScreenDrag and arrastrando:
+		_mover_biblioteca(event.relative)
+		get_viewport().set_input_as_handled()
+
+
+func _puede_empezar_drag(posicion: Vector2) -> bool:
+
+	# Tiene que estar dentro de la biblioteca
+	if not scroll_container.get_global_rect().has_point(posicion):
+		return false
+
+	# Pero no encima del botón Home
+	if boton_home.get_global_rect().has_point(posicion):
+		return false
+
+	return true
+
+
+func _mover_biblioteca(delta: Vector2) -> void:
+	scroll_container.scroll_horizontal -= int(delta.x)
+	scroll_container.scroll_vertical -= int(delta.y)
+	
 func refrescar_estanteria() -> void:
 	for child in grid_premios.get_children():
 		child.queue_free()
@@ -80,20 +143,26 @@ func crear_slot_premio(nombre_png: String, desbloqueado: bool, actuales: int, re
 func _on_boton_home_pressed() -> void:
 	get_tree().change_scene_to_file("res://core/scenes/title.tscn")
 
-# --- NAVEGACIÓN Y DESPLAZAMIENTO POR CÁMARA (TOUCH / MOUSE) ---
-var arrastrando: bool = false
-var posicion_inicial_dedo: Vector2 = Vector2.ZERO
-var posicion_inicial_camara: Vector2 = Vector2.ZERO
+func _on_scroll_container_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		arrastrando = event.pressed
+		scroll_container.accept_event()
+		return
 
-func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and arrastrando:
+		mover_scroll(event.relative)
+		scroll_container.accept_event()
+		return
+
 	if event is InputEventScreenTouch:
-		if event.pressed:
-			arrastrando = true
-			posicion_inicial_dedo = event.position
-			posicion_inicial_camara = camara.position
-		else:
-			arrastrando = false
+		arrastrando = event.pressed
+		scroll_container.accept_event()
+		return
 
-	elif event is InputEventScreenDrag and arrastrando:
-		var delta: Vector2 = event.position - posicion_inicial_dedo
-		camara.position = posicion_inicial_camara - delta
+	if event is InputEventScreenDrag and arrastrando:
+		mover_scroll(event.relative)
+		scroll_container.accept_event()
+
+func mover_scroll(delta: Vector2) -> void:
+	scroll_container.scroll_horizontal -= int(round(delta.x))
+	scroll_container.scroll_vertical -= int(round(delta.y))
