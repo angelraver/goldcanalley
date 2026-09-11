@@ -23,6 +23,9 @@ const RING_SCENE: PackedScene = preload("res://games/ringtoss/scenes/ring.tscn")
 @onready var barra_energia: CanvasItem = get_node_or_null("UI/BarraEnergia") as CanvasItem
 @onready var contenedor_lanzamientos_ui: CanvasItem = get_node_or_null("UI/ContenedorPelotasUI") as CanvasItem
 
+@export var compensacion_perspectiva: float = 0.35
+@export var sensibilidad_horizontal_ring: float = 0.0002
+
 var pos_inicial_camara: Vector3 = Vector3(0.0, 3.8, -3.8)
 var rot_inicial_camara: Vector3 = Vector3(deg_to_rad(-85.0), 0.0, 0.0)
 var pos_final_camara: Vector3 = Vector3(0.0, 1.443, -0.31)
@@ -207,7 +210,7 @@ func _procesar_input_lanzamiento(presionado: bool, posicion: Vector2) -> void:
 
 
 func lanzar_aro(swipe: Vector2) -> void:
-	if current_ring == null or ring_launched:
+	if current_ring == null or ring_launched:	
 		return
 	if esperando_fin_nivel or ctrl_resultados.esta_mostrado():
 		return
@@ -225,8 +228,18 @@ func lanzar_aro(swipe: Vector2) -> void:
 		fuerza_maxima_ring
 	)
 
+	var centro_x: float = ring_spawn.global_position.x
+	var offset_x: float = current_ring.global_position.x - centro_x
+
+	var horizontal_swipe: float = clampf(
+		-swipe.x / maxf(absf(swipe.y), 1.0),
+		-0.8,
+		0.8
+	)
+
 	var direccion: Vector3 = Vector3(
-		swipe.x * 0.0005,
+		offset_x * compensacion_perspectiva +
+		horizontal_swipe * 0.5,
 		impulso_vertical_ring,
 		-1.0
 	).normalized()
