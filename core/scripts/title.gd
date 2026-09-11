@@ -10,7 +10,7 @@ func _on_boton_whackamole_pressed() -> void:
 	
 func _on_boton_plinko_pressed() -> void:
 	_iniciar_juego("plinko")
-
+	
 func _iniciar_juego(id_juego: String) -> void:
 	audio_manager.play_start()
 	
@@ -27,3 +27,7 @@ func _on_boton_prizes_pressed() -> void:
 func _on_boton_options_pressed() -> void:
 	audio_manager.play_start()
 	get_tree().change_scene_to_file("res://core/scenes/options.tscn")
+
+
+func _on_button_ringtoss_pressed() -> void:
+	_iniciar_juego("ringtoss")

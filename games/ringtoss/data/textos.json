@@ -1,0 +1,252 @@
+{
+  "1": {
+    "es": "Primer Aro",
+    "en": "First Ring",
+    "pt": "Primer Aro"
+  },
+  "2": {
+    "es": "Dos Blancos",
+    "en": "Two Targets",
+    "pt": "Dos Blancos"
+  },
+  "3": {
+    "es": "Triángulo Inicial",
+    "en": "Opening Triangle",
+    "pt": "Triángulo Inicial"
+  },
+  "4": {
+    "es": "Fila Corta",
+    "en": "Short Row",
+    "pt": "Fila Corta"
+  },
+  "5": {
+    "es": "Cruz Central",
+    "en": "Center Cross",
+    "pt": "Cruz Central"
+  },
+  "6": {
+    "es": "Cuatro Esquinas",
+    "en": "Four Corners",
+    "pt": "Cuatro Esquinas"
+  },
+  "7": {
+    "es": "Galería de Cinco",
+    "en": "Five Gallery",
+    "pt": "Galería de Cinco"
+  },
+  "8": {
+    "es": "La V",
+    "en": "The V",
+    "pt": "La V"
+  },
+  "9": {
+    "es": "Doble Fila",
+    "en": "Double Row",
+    "pt": "Doble Fila"
+  },
+  "10": {
+    "es": "Pequeña Pirámide",
+    "en": "Small Pyramid",
+    "pt": "Pequeña Pirámide"
+  },
+  "11": {
+    "es": "Hueco Central",
+    "en": "Center Gap",
+    "pt": "Hueco Central"
+  },
+  "12": {
+    "es": "Profundidad",
+    "en": "Depth Line",
+    "pt": "Profundidad"
+  },
+  "13": {
+    "es": "Escalonados",
+    "en": "Staggered",
+    "pt": "Escalonados"
+  },
+  "14": {
+    "es": "Pirámide Abierta",
+    "en": "Open Pyramid",
+    "pt": "Pirámide Abierta"
+  },
+  "15": {
+    "es": "Centro Protegido",
+    "en": "Guarded Center",
+    "pt": "Centro Protegido"
+  },
+  "16": {
+    "es": "Diamante Bajo",
+    "en": "Low Diamond",
+    "pt": "Diamante Bajo"
+  },
+  "17": {
+    "es": "Zig-Zag",
+    "en": "Zig-Zag",
+    "pt": "Zig-Zag"
+  },
+  "18": {
+    "es": "Torres Gemelas",
+    "en": "Twin Towers",
+    "pt": "Torres Gemelas"
+  },
+  "19": {
+    "es": "Punta de Flecha",
+    "en": "Arrowhead",
+    "pt": "Punta de Flecha"
+  },
+  "20": {
+    "es": "Tablero Lleno",
+    "en": "Full Board",
+    "pt": "Tablero Lleno"
+  },
+  "21": {
+    "es": "Fila Larga",
+    "en": "Long Row",
+    "pt": "Fila Larga"
+  },
+  "22": {
+    "es": "V Abierta",
+    "en": "Open V",
+    "pt": "V Abierta"
+  },
+  "23": {
+    "es": "Doble Fondo",
+    "en": "Double Depth",
+    "pt": "Doble Fondo"
+  },
+  "24": {
+    "es": "Herradura",
+    "en": "Horseshoe",
+    "pt": "Herradura"
+  },
+  "25": {
+    "es": "Marco Exterior",
+    "en": "Outer Frame",
+    "pt": "Marco Exterior"
+  },
+  "26": {
+    "es": "Dos Líneas",
+    "en": "Two Lines",
+    "pt": "Dos Líneas"
+  },
+  "27": {
+    "es": "Las Cuatro Puntas",
+    "en": "Four Points",
+    "pt": "Las Cuatro Puntas"
+  },
+  "28": {
+    "es": "La Gran X",
+    "en": "The Great X",
+    "pt": "La Gran X"
+  },
+  "29": {
+    "es": "Serpiente",
+    "en": "Snake",
+    "pt": "Serpiente"
+  },
+  "30": {
+    "es": "Trapecio",
+    "en": "Trapezoid",
+    "pt": "Trapecio"
+  },
+  "31": {
+    "es": "Tres Islas",
+    "en": "Three Islands",
+    "pt": "Tres Islas"
+  },
+  "32": {
+    "es": "Sólo Esquinas",
+    "en": "Corners Only",
+    "pt": "Sólo Esquinas"
+  },
+  "33": {
+    "es": "Túnel Profundo",
+    "en": "Deep Tunnel",
+    "pt": "Túnel Profundo"
+  },
+  "34": {
+    "es": "Alternancia",
+    "en": "Alternation",
+    "pt": "Alternancia"
+  },
+  "35": {
+    "es": "Doble V",
+    "en": "Double V",
+    "pt": "Doble V"
+  },
+  "36": {
+    "es": "Diamante Grande",
+    "en": "Big Diamond",
+    "pt": "Diamante Grande"
+  },
+  "37": {
+    "es": "Centro Vacío",
+    "en": "Empty Center",
+    "pt": "Centro Vacío"
+  },
+  "38": {
+    "es": "Pasillos Laterales",
+    "en": "Side Lanes",
+    "pt": "Pasillos Laterales"
+  },
+  "39": {
+    "es": "Media Luna",
+    "en": "Crescent",
+    "pt": "Media Luna"
+  },
+  "40": {
+    "es": "Anillo Exterior",
+    "en": "Outer Ring",
+    "pt": "Anillo Exterior"
+  },
+  "41": {
+    "es": "Fondo Triple",
+    "en": "Triple Backline",
+    "pt": "Fondo Triple"
+  },
+  "42": {
+    "es": "Esquinas Profundas",
+    "en": "Deep Corners",
+    "pt": "Esquinas Profundas"
+  },
+  "43": {
+    "es": "Diagonal Larga",
+    "en": "Long Diagonal",
+    "pt": "Diagonal Larga"
+  },
+  "44": {
+    "es": "Zig-Zag Salvaje",
+    "en": "Wild Zig-Zag",
+    "pt": "Zig-Zag Salvaje"
+  },
+  "45": {
+    "es": "Arco Cerrado",
+    "en": "Closed Arc",
+    "pt": "Arco Cerrado"
+  },
+  "46": {
+    "es": "Dos Frentes",
+    "en": "Two Fronts",
+    "pt": "Dos Frentes"
+  },
+  "47": {
+    "es": "Ajedrez Abierto",
+    "en": "Open Chessboard",
+    "pt": "Ajedrez Abierto"
+  },
+  "48": {
+    "es": "Caos Controlado",
+    "en": "Controlled Chaos",
+    "pt": "Caos Controlado"
+  },
+  "49": {
+    "es": "Falso Centro",
+    "en": "False Center",
+    "pt": "Falso Centro"
+  },
+  "50": {
+    "es": "Gran Final",
+    "en": "Grand Finale",
+    "pt": "Gran Final"
+  }
+}

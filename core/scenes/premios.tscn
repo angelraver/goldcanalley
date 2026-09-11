@@ -50,6 +50,7 @@ offset_top = 572.0
 offset_right = 671.00006
 offset_bottom = 1472.0
 scale = Vector2(3.1999984, 2.9826684)
+mouse_filter = 2
 theme_override_constants/h_separation = 36
 theme_override_constants/v_separation = 36
 columns = 3
@@ -57,74 +58,92 @@ columns = 3
 [node name="ColorRect4" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=839841565]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect5" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1758673845]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect6" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=395205505]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect7" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1142890736]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect8" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=340749460]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect9" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=186245385]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect10" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1622358964]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect11" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1858262879]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect12" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1999082519]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect13" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=965783797]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect14" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1420955680]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect15" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1278931062]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect16" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=663200321]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect17" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=2123769557]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect18" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1950922819]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect3" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=1660462949]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect2" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=730308114]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="ScrollContainer/ContenidoEstanteria/GridPremios" unique_id=542565124]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="BotonHome" type="TextureButton" parent="." unique_id=382509913]
 layout_mode = 0
@@ -134,4 +153,5 @@ offset_right = 414.0
 offset_bottom = 1226.0
 texture_normal = ExtResource("2_662ax")
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="BotonHome" to="." method="_on_boton_home_pressed"]

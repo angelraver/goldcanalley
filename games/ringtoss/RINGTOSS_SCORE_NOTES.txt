@@ -1,0 +1,18 @@
+Ring Toss - score detection integration
+
+- Score sensors are generated dynamically from main.gd.
+- Each cone reads its points value from niveles.json.
+- Each ring can score only once.
+- A miss is resolved automatically after tiempo_maximo_tiro.
+- Reaching puntaje_maximo ends the level early, matching Gold Can Alley.
+- PanelResultados handles score saving and next-level unlocking through SaveManager.
+- Restart cleans old rings and generates a new one.
+
+Tunable values in the Main inspector under "Deteccion de score":
+- sensor_cono_radio
+- sensor_cono_altura
+- sensor_cono_offset_y
+- sensor_centro_ring_radio_local
+- tiempo_confirmacion_score
+- tiempo_maximo_tiro
+- velocidad_vertical_max_score
