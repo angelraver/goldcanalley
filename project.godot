@@ -13,7 +13,7 @@ config_version=5
 config/name="tapball"
 run/main_scene="uid://cokb2wqhdfvfb"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="uid://de1jbngdk5shs"
+config/icon="uid://lbq7n8mhnq6l"
 
 [autoload]
 
