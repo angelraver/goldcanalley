@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://blfnudq81val2"]
 
 [ext_resource type="Script" uid="uid://8ysg2u5cf3sj" path="res://core/scripts/seleccion_niveles.gd" id="1_p1kcx"]
+[ext_resource type="Shader" uid="uid://dtd576hrtqkjb" path="res://core/scenes/desenfoque.gdshader" id="2_4r2yw"]
 [ext_resource type="Texture2D" uid="uid://dhm87r5bq2oka" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_tqjw7"]
-[ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_4r2yw"]
 [ext_resource type="Texture2D" uid="uid://d22m5ychi8c71" path="res://core/assets/images/ui/panel_levels.png" id="4_uq1cj"]
 [ext_resource type="PackedScene" uid="uid://ov0lifr7f0e5" path="res://core/scenes/slot_nivel.tscn" id="5_4cylx"]
 [ext_resource type="Texture2D" uid="uid://qsrcy407ey01" path="res://core/assets/images/ui/button_home.png" id="6_a2uob"]
@@ -10,10 +10,9 @@
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_4f7dg"]
 [ext_resource type="Texture2D" uid="uid://bwp7plbrdja8d" path="res://core/assets/images/logo.png" id="9_b48cm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfcpm"]
-shader = ExtResource("3_4r2yw")
-shader_parameter/nivel_desenfoque = 2.5
-shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7a4w"]
+shader = ExtResource("2_4r2yw")
+shader_parameter/blur_amount = 4.00000019
 
 [node name="SeleccionNiveles" type="Control" unique_id=1770219720]
 layout_mode = 3
@@ -23,25 +22,14 @@ metadata/_edit_vertical_guides_ = [722.0]
 metadata/_edit_horizontal_guides_ = [1282.0]
 
 [node name="Fondo" type="TextureRect" parent="." unique_id=324759105]
+texture_repeat = 1
+material = SubResource("ShaderMaterial_w7a4w")
 layout_mode = 0
 offset_left = -400.0
 offset_right = 393.0
 offset_bottom = 1024.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_tqjw7")
-
-[node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=1601346032]
-material = SubResource("ShaderMaterial_wfcpm")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.3348694
-offset_top = 0.77826405
-offset_right = -2.3348389
-offset_bottom = 0.77819824
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Frente" type="TextureRect" parent="." unique_id=355580354]
 layout_mode = 1
