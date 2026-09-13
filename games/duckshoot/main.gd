@@ -8,17 +8,17 @@ extends Node3D
 @export var wave_1_mesh: PackedScene    = preload("res://games/duckshoot/wave1.tscn")
 @export var wave_2_mesh: PackedScene    = preload("res://games/duckshoot/wave2.tscn") # ¡Nuevo modelo!
 
-const DISTANCIA_SPAWN: float = 1 # Distancia en unidades que debe avanzar el último pato para permitir otro spawn
+const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el último pato para permitir otro spawn
 @export_group("Ancho de Carril (X)")
-@export var x_left_spawn: float = -2.0   # Punto de spawn izquierda / límite de despawn
-@export var x_right_spawn: float = 2.0   # Punto de spawn derecha / límite de despawn
+@export var x_left_spawn: float = -1.5   # Punto de spawn izquierda / límite de despawn
+@export var x_right_spawn: float = 1.5   # Punto de spawn derecha / límite de despawn
 @export_group("Dimensiones de Escalón (Y / Z)")
 @export var base_y: float = 0.0
 @export var step_y: float = 0.55
 @export var base_z: float = 1.4
 @export var step_z: float = 0.3
 @export_group("Escala de Velocidad (1 a 5)")
-@export var speed_multiplier: float = 1.5
+@export var speed_multiplier: float = 0.5
 @export_group("Prefabs")
 @export var wave_z_offset: float = 0 # Distancia hacia adelante respecto al pato para tapar su base
 
