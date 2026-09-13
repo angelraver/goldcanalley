@@ -22,6 +22,13 @@
 		"textura_fondo": "res://games/whackamole/assets/images/fondo_selector.png",
 		"textura_logo": "res://games/plinko/assets/images/logo.png",
 		"prefijo_texto": "plinko_"
+	},
+	"ringtoss": {
+		"escena_juego": "res://games/ringtoss/scenes/main.tscn",
+		"ruta_niveles_json": "res://games/ringtoss/data/niveles.json",
+		"textos_json": "res://games/ringtoss/data/textos.json",
+		"textura_fondo": "res://games/whackamole/assets/images/fondo_selector.png",
+		"textura_logo": "res://games/ringtoss/assets/images/logo.png",
+		"prefijo_texto": "ringtoss_"
 	}
-	
 }
