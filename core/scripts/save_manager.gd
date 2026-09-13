@@ -14,6 +14,7 @@ const LISTA_PREMIOS: Array[String] = [
 var datos_progreso: Dictionary = {}
 var juego_actual_seleccionado: String = "goldcanalley"
 var nivel_actual_seleccionado: int = 1
+var pagina_niveles_por_juego: Dictionary = {}
 var premio_recien_desbloqueado: String = ""
 
 func _ready() -> void:
@@ -55,6 +56,19 @@ func guardar_a_disco() -> void:
 		archivo.close()
 
 # --- REGISTRO Y CONSULTA DE PROGRESO DE NIVELES ---
+# --- ESTADO DEL SELECTOR DE NIVELES ---
+
+func obtener_pagina_niveles(id_game: String = "") -> int:
+	if id_game == "":
+		id_game = juego_actual_seleccionado
+
+	return int(pagina_niveles_por_juego.get(id_game, 1))
+
+func guardar_pagina_niveles(pagina: int, id_game: String = "") -> void:
+	if id_game == "":
+		id_game = juego_actual_seleccionado
+
+	pagina_niveles_por_juego[id_game] = maxi(pagina, 1)
 
 func registrar_puntaje_nivel(numero_nivel: int, nuevo_puntaje: int, puntaje_maximo: int, id_game: String = "") -> bool:
 	if id_game == "": id_game = juego_actual_seleccionado
