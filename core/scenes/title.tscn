@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cnh2juky5yv20" path="res://games/whackamole/assets/images/logo.png" id="6_oip1l"]
 [ext_resource type="Texture2D" uid="uid://b5cp8inpvl2xr" path="res://games/plinko/assets/images/logo.png" id="7_oip1l"]
 [ext_resource type="Texture2D" uid="uid://w11w41j4jpou" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
-[ext_resource type="Texture2D" uid="uid://dsf38lpndvao7" path="res://games/ringtoss/assets/images/logo.png" id="8_4e4sy"]
+[ext_resource type="Texture2D" uid="uid://dx16h332x6thg" path="res://games/ringtoss/assets/images/logo.png" id="8_4e4sy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
 shader = ExtResource("3_2xeeo")
@@ -65,60 +65,66 @@ texture = ExtResource("4_4e4sy")
 
 [node name="ButtonGoldCanAlley" type="TextureButton" parent="." unique_id=256854180]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 589.9999
-offset_right = 481.0
-offset_bottom = 1189.9999
+offset_left = -23.00002
+offset_top = 413.99988
+offset_right = 500.99997
+offset_bottom = 1013.99976
 scale = Vector2(0.36, 0.36)
+pivot_offset = Vector2(262, 300)
 texture_normal = ExtResource("5_bj87q")
 
 [node name="ButtonWhackamole" type="TextureButton" parent="." unique_id=991209445]
 layout_mode = 0
-offset_left = 436.0
-offset_top = 809.00006
-offset_right = 887.1679
-offset_bottom = 1124.1438
+offset_left = 298.0
+offset_top = 710.0
+offset_right = 749.16797
+offset_bottom = 1025.1438
 scale = Vector2(0.53626305, 0.53626305)
+pivot_offset = Vector2(181, 241)
 texture_normal = ExtResource("6_oip1l")
 ignore_texture_size = true
 stretch_mode = 4
 
 [node name="ButtonPlinko" type="TextureButton" parent="." unique_id=1906105612]
 layout_mode = 0
-offset_left = 455.0
-offset_top = 604.0
-offset_right = 979.0
-offset_bottom = 1204.0001
+offset_left = 230.00009
+offset_top = 424.99994
+offset_right = 754.0001
+offset_bottom = 1025.0
 scale = Vector2(0.36, 0.36)
+pivot_offset = Vector2(262, 300)
 texture_normal = ExtResource("7_oip1l")
 
 [node name="ButtonRingToss" type="TextureButton" parent="." unique_id=1163062909]
 layout_mode = 0
-offset_left = 87.00001
-offset_top = 780.00006
-offset_right = 448.76276
-offset_bottom = 1262.9719
+offset_left = 62.0
+offset_top = 660.0
+offset_right = 423.76276
+offset_bottom = 1142.9719
 scale = Vector2(0.53626305, 0.53626305)
+pivot_offset = Vector2(181, 241)
 texture_normal = ExtResource("8_4e4sy")
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
 layout_mode = 0
-offset_left = 463.0
-offset_top = 1080.0
-offset_right = 795.0
-offset_bottom = 1330.0
+offset_left = 386.0
+offset_top = 1045.0
+offset_right = 718.0
+offset_bottom = 1295.0
 scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(166, 125)
 texture_normal = ExtResource("6_ljifs")
 
 [node name="Options" type="TextureButton" parent="." unique_id=110325157]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 1125.0
-offset_right = 339.0
-offset_bottom = 1375.0
+offset_left = -18.0
+offset_top = 1059.9999
+offset_right = 314.0
+offset_bottom = 1309.9999
 scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(166, 125)
 texture_normal = ExtResource("7_uj4fn")
 
 [connection signal="pressed" from="ButtonGoldCanAlley" to="." method="_on_boton_goldcanalley_pressed"]
