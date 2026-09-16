@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bxclitkt2fwl8"]
 
-[ext_resource type="Script" uid="uid://b5mc1wtap7s6m" path="res://games/duckshoot/main.gd" id="1_vnc0d"]
-[ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/escalera.glb" id="2_7x46q"]
+[ext_resource type="Script" uid="uid://b5mc1wtap7s6m" path="res://games/duckshoot/scripts/main.gd" id="1_vnc0d"]
+[ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/assets/models/escalera.glb" id="2_7x46q"]
+[ext_resource type="PackedScene" uid="uid://ch101a72hcr3v" path="res://games/duckshoot/scenes/rifle.tscn" id="3_1otfw"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -14,7 +15,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1337472, 0, 0, 0)
 script = ExtResource("1_vnc0d")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1755815024]
-transform = Transform3D(1, 0, 0, 0, 0.9568233, 0.29067016, 0, -0.25638005, 0.84394765, -0.053592227, 1.8100388, 6.645194)
+transform = Transform3D(1, 0, 0, 0, 0.9806515, 0.19576171, 0, -0.17266786, 0.86496484, -0.054, 0.9915805, 4.7736273)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1151453859]
 environment = SubResource("Environment_7x46q")
@@ -24,3 +25,10 @@ transform = Transform3D(-0.99801755, -1.0724167e-08, -0.06293673, -0.05719555, -
 
 [node name="escalera" parent="." unique_id=203979572 instance=ExtResource("2_7x46q")]
 transform = Transform3D(-2.0869216e-07, 0, -5.9877534, 0, 8.147206, 0, 4.7743196, 0, -2.6173302e-07, -1.4480975, 2.7629633, 0.046835933)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="escalera" unique_id=1025292398]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=169377846]
+
+[node name="rifle" parent="." unique_id=862231063 instance=ExtResource("3_1otfw")]
+transform = Transform3D(0.00067057094, -0.060388587, 0, 0.05710894, 0.0007090805, 0, 0, 0, 0.08820309, 0.0051113367, 0.40487158, 5.272612)

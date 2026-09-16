@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://tuc8yphbd1ly"]
 
-[ext_resource type="PackedScene" uid="uid://brnuid4qmqu2o" path="res://games/duckshoot/duck.glb" id="1_rkbqy"]
-[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/target.gd" id="1_y3hbw"]
+[ext_resource type="PackedScene" path="res://games/duckshoot/assets/models/duck.glb" id="1_rkbqy"]
+[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/scripts/target.gd" id="1_y3hbw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dl7b"]
 size = Vector3(1.2432861, 1.1323242, 0.20159912)

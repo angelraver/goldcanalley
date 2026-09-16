@@ -1,12 +1,12 @@
 extends Node3D
 
-@export var duck_a_scene: PackedScene = preload("res://games/duckshoot/duck.tscn")
-@export var bomb_scene: PackedScene   = preload("res://games/duckshoot/bomb.tscn")
-@export_file("*.json") var level_json_path: String = "res://games/duckshoot/niveles.json"
+@export var duck_a_scene: PackedScene = preload("res://games/duckshoot/scenes/duck.tscn")
+@export var bomb_scene: PackedScene   = preload("res://games/duckshoot/scenes/bomb.tscn")
+@export_file("*.json") var level_json_path: String = "res://games/duckshoot/data/niveles.json"
 @export_group("Decorado")
-@export var wave_row_scene: PackedScene = preload("res://games/duckshoot/wave_row.tscn")
-@export var wave_1_mesh: PackedScene    = preload("res://games/duckshoot/wave1.tscn")
-@export var wave_2_mesh: PackedScene    = preload("res://games/duckshoot/wave2.tscn") # ¡Nuevo modelo!
+@export var wave_row_scene: PackedScene = preload("res://games/duckshoot/scenes/wave_row.tscn")
+@export var wave_1_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave1.tscn")
+@export var wave_2_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave2.tscn") # ¡Nuevo modelo!
 
 const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el último pato para permitir otro spawn
 @export_group("Ancho de Carril (X)")

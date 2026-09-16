@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kuvbn8w7et7w"]
 
-[ext_resource type="PackedScene" uid="uid://b4iytmkd01tvn" path="res://games/duckshoot/wave2.glb" id="1_56pfl"]
+[ext_resource type="PackedScene" uid="uid://b4iytmkd01tvn" path="res://games/duckshoot/assets/models/wave2.glb" id="1_56pfl"]
 
 [node name="Wave" type="Node3D" unique_id=254715147]
 

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dr8garlvr8xbg"]
+
+[ext_resource type="Script" uid="uid://cv6bsy41wfe8r" path="res://games/duckshoot/scripts/bala.gd" id="1_kf50m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyv4s"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.28
+
+[sub_resource type="SphereMesh" id="SphereMesh_8dl7b"]
+
+[node name="Bala" type="Node3D" unique_id=1727156559]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_kf50m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=511396634]
+material_override = SubResource("StandardMaterial3D_kyv4s")
+mesh = SubResource("SphereMesh_8dl7b")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=55281732]

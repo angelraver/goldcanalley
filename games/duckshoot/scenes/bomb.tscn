@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dalnwdqytbvpt"]
 
-[ext_resource type="PackedScene" uid="uid://cq4dabq4uowwc" path="res://games/duckshoot/bomb.glb" id="1_6eum7"]
-[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/target.gd" id="1_kqcde"]
+[ext_resource type="PackedScene" path="res://games/duckshoot/assets/models/bomb.glb" id="1_6eum7"]
+[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/scripts/target.gd" id="1_kqcde"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dl7b"]
 size = Vector3(0.6247711, 0.63427734, 0.20159912)
