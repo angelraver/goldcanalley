@@ -10,6 +10,9 @@ ambient_light_source = 2
 ambient_light_color = Color(0.627451, 0.627451, 0.627451, 1)
 ambient_light_energy = 0.5
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1otfw"]
+size = Vector3(0.06690216, 0.07285309, 0.50390625)
+
 [node name="Main" type="Node3D" unique_id=732211628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1337472, 0, 0, 0)
 script = ExtResource("1_vnc0d")
@@ -28,7 +31,21 @@ transform = Transform3D(-2.0869216e-07, 0, -5.9877534, 0, 8.147206, 0, 4.7743196
 
 [node name="StaticBody3D" type="StaticBody3D" parent="escalera" unique_id=1025292398]
 
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=704338794]
+transform = Transform3D(1, 0, -6.3948846e-14, 0, 1.0000029, 0, 0, 0, 1, 0.052950513, -0.17862876, -0.24472365)
+shape = SubResource("BoxShape3D_1otfw")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=1909008373]
+transform = Transform3D(1, 0, -3.1974423e-14, 0, 1.0000014, 0, 0, 0, 1, 0.10481981, -0.24501781, -0.24380234)
+shape = SubResource("BoxShape3D_1otfw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=1883767163]
+transform = Transform3D(1, 0, -1.7763568e-14, 0, 1.0000007, 0, 0, 0, 1, 0.1762457, -0.31668043, -0.24702743)
+shape = SubResource("BoxShape3D_1otfw")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=169377846]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1.0000004, 0, 0, 0, 1, 0.15481837, -0.38919085, -0.24572735)
+shape = SubResource("BoxShape3D_1otfw")
 
 [node name="rifle" parent="." unique_id=862231063 instance=ExtResource("3_1otfw")]
-transform = Transform3D(0.00067057094, -0.060388587, 0, 0.05710894, 0.0007090805, 0, 0, 0, 0.08820309, 0.0051113367, 0.40487158, 5.272612)
+transform = Transform3D(0.00067057094, -0.060388587, 0, 0.05710894, 0.0007090805, 0, 0, 0, 0.08820309, 0.0051113367, 0.40487158, 5.7408977)

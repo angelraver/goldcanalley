@@ -14,15 +14,34 @@ class_name Rifle
 @export var sway_amount_y: float = 0.03
 @export var sway_amount_x: float = 0.015
 
-@export_group("Margen de Seguridad (Padding)")
-# Cuánto margen (en unidades 3D) dejamos respecto al borde exacto de la pantalla
-@export var margin_x: float = -0.2
-@export var margin_y: float = -0.3
+@export_group("Geometría y Cuadrante del Rifle")
 
-@export_group("Orientación y Perspectiva")
-# Ángulos máximos (en grados) que rotará el rifle al llegar a los extremos
-@export var max_yaw_degrees: float = 12.0   # Rotación horizontal (izquierda/derecha)
-@export var max_pitch_degrees: float = 8.0   # Rotación vertical (arriba/abajo)
+@export_group("Geometría y Cuadrante del Rifle")
+## Posición neutra central del tablero
+@export var board_center: Vector3 = Vector3(0.0, 0.0, 0.0)
+
+## Distancia Z a la que se coloca el rifle por detrás del tablero
+@export var rifle_z_distance: float = 4.0
+
+## Rango de traslación horizontal del rifle (cuadrante central)
+@export var rifle_move_range_x: float = 0.2
+
+## Rango de traslación vertical del rifle (cuadrante central)
+@export var rifle_move_range_y: float = 1
+
+## Cuánto puede subir el rifle desde el centro
+@export var rifle_move_up_limit: float = 0.8
+
+## Cuánto puede bajar el rifle desde el centro (ajústalo a un valor menor, ej. 0.3)
+@export var rifle_move_down_limit: float = 0.2
+
+
+@export_group("Ángulos de Inclinación (Grados)")
+## Ángulo máximo de rotación horizontal al ir a los extremos (Yaw)
+@export var max_aim_yaw_degrees: float = 25.0
+
+## Ángulo máximo de rotación vertical al ir a los extremos (Pitch)
+@export var max_aim_pitch_degrees: float = 20.0
 
 enum State { IDLE, DRAGGING, WAITING_FOR_SHOT }
 var current_state: State = State.IDLE
@@ -37,40 +56,27 @@ var time_passed: float = 0.0
 
 var base_position: Vector3 = Vector3.ZERO
 
-# Límites calculados dinámicamente según la cámara
-var limit_min_x: float = -1.0
-var limit_max_x: float = 1.0
-var limit_min_y: float = -3.0
-var limit_max_y: float = 3.0
+# Límites de desplazamiento local del rifle
+var min_rifle_x: float
+var max_rifle_x: float
+var min_rifle_y: float
+var max_rifle_y: float
 
 func _ready() -> void:
-	base_position = position
 	if not muzzle and has_node("Muzzle"):
 		muzzle = $Muzzle as Node3D
 
-	# Calcular los límites visibles al iniciar
-	_update_view_bounds()
+	base_position = Vector3(board_center.x, board_center.y, board_center.z + rifle_z_distance)
+	position = base_position
 
-func _update_view_bounds() -> void:
-	var camera = get_viewport().get_camera_3d()
-	if not camera:
-		return
+	min_rifle_x = base_position.x - rifle_move_range_x
+	max_rifle_x = base_position.x + rifle_move_range_x
+	
+	# Límites verticales independientes:
+	min_rifle_y = base_position.y - rifle_move_down_limit  # Límite hacia abajo
+	max_rifle_y = base_position.y + rifle_move_up_limit    # Límite hacia arriba
 
-	# Distancia Z desde la cámara hasta la posición actual del rifle
-	var depth = abs(camera.global_position.z - global_position.z)
-	var viewport_size = get_viewport().get_visible_rect().size
-
-	# Proyectar los esquinas del viewport al mundo 3D en la profundidad del rifle
-	var top_left_3d = camera.project_position(Vector2(0, 0), depth)
-	var bottom_right_3d = camera.project_position(viewport_size, depth)
-
-	# El límite horizontal va de izquierda a derecha con margen
-	limit_min_x = top_left_3d.x + margin_x
-	limit_max_x = bottom_right_3d.x - margin_x
-
-	# El límite vertical va desde la parte inferior hasta la MITAD de la pantalla
-	limit_min_y = bottom_right_3d.y + margin_y
-	limit_max_y = (top_left_3d.y + bottom_right_3d.y) * 0.5 - margin_y
+	_update_rifle_transform()
 
 func _process(delta: float) -> void:
 	time_passed += delta
@@ -84,7 +90,7 @@ func _process(delta: float) -> void:
 
 		State.WAITING_FOR_SHOT:
 			idle_timer += delta
-			_apply_sway(delta, 0.3) 
+			_apply_sway(delta, 0.3)
 			
 			if idle_timer >= lock_aim_delay:
 				_transition_to_idle()
@@ -92,12 +98,9 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT):
 		var touch_pos = event.position
-		var viewport_height = get_viewport().get_visible_rect().size.y
 		
 		if event.is_pressed():
-			# Solo permitir iniciar si toca de la mitad hacia abajo o está en modo espera
-			if touch_pos.y >= (viewport_height / 2.0) or current_state == State.WAITING_FOR_SHOT:
-				_on_touch_down(touch_pos)
+			_on_touch_down(touch_pos)
 		else:
 			_on_touch_up()
 
@@ -124,33 +127,20 @@ func _on_touch_drag(screen_pos: Vector2) -> void:
 	var viewport_size = get_viewport().get_visible_rect().size
 	var drag_delta = screen_pos - touch_start_pos
 
-	var world_width = limit_max_x - limit_min_x
-	var world_height = limit_max_y - limit_min_y
+	# Mapeo del arrastre en pantalla al movimiento 3D del rifle
+	var move_sensitivity_x = (rifle_move_range_x * 2.0) / viewport_size.x
+	var move_sensitivity_y = (rifle_move_range_y * 2.0) / viewport_size.y
 
-	var move_x = (drag_delta.x / viewport_size.x) * world_width * 2.0
-	var move_y = -(drag_delta.y / viewport_size.y) * world_height * 2.0
+	var target_x = rifle_start_pos.x + (drag_delta.x * move_sensitivity_x)
+	var target_y = rifle_start_pos.y - (drag_delta.y * move_sensitivity_y)
 
-	var target_x = clamp(rifle_start_pos.x + move_x, limit_min_x, limit_max_x)
-	var target_y = clamp(rifle_start_pos.y + move_y, limit_min_y, limit_max_y)
-
-	position.x = target_x
-	position.y = target_y
+	# 1. MOVER EL RIFLE (Traslación dentro del cuadrante)
+	position.x = clamp(target_x, min_rifle_x, max_rifle_x)
+	position.y = clamp(target_y, min_rifle_y, max_rifle_y)
 	base_position = position
 
-	# --- AJUSTE DE ROTACIÓN PARA EL LÁSER Y APUNTADO ---
-	_update_rifle_rotation()
-	
-func _update_rifle_rotation() -> void:
-	# Normalizar la posición del rifle entre -1.0 y 1.0 según los límites
-	var norm_x = (position.x - (limit_min_x + limit_max_x) * 0.5) / ((limit_max_x - limit_min_x) * 0.5)
-	var norm_y = (position.y - (limit_min_y + limit_max_y) * 0.5) / ((limit_max_y - limit_min_y) * 0.5)
-
-	# Inclinación progresiva: al ir a la derecha rotamos en Y negativo, etc.
-	var target_yaw = deg_to_rad(-norm_x * max_yaw_degrees)
-	var target_pitch = deg_to_rad(norm_y * max_pitch_degrees)
-
-	rotation.y = target_yaw
-	rotation.x = target_pitch
+	# 2. CALCULAR ROTACIÓN SEGÚN LA POSICIÓN
+	_update_rifle_transform()
 
 func _on_touch_up() -> void:
 	if not is_touching:
@@ -164,22 +154,51 @@ func _on_touch_up() -> void:
 func _transition_to_idle() -> void:
 	current_state = State.IDLE
 
-func _apply_sway(delta: float, intensity: float = 1.0) -> void:
-	var offset_y = sin(time_passed * sway_speed) * sway_amount_y * intensity
-	var offset_x = cos(time_passed * sway_speed * 0.5) * sway_amount_x * intensity
-	
-	position.x = clamp(base_position.x + offset_x, limit_min_x, limit_max_x)
-	position.y = clamp(base_position.y + offset_y, limit_min_y, limit_max_y)
+
+func _update_rifle_transform() -> void:
+	var norm_x: float = 0.0
+	var norm_y: float = 0.0
+
+	if rifle_move_range_x > 0.0:
+		norm_x = (position.x - board_center.x) / rifle_move_range_x
+
+	# Normalización asimétrica según si sube o baja
+	var delta_y = position.y - board_center.y
+	if delta_y > 0.0 and rifle_move_up_limit > 0.0:
+		norm_y = delta_y / rifle_move_up_limit
+	elif delta_y < 0.0 and rifle_move_down_limit > 0.0:
+		norm_y = delta_y / rifle_move_down_limit
+
+	var target_yaw = deg_to_rad(-norm_x * max_aim_yaw_degrees)
+	var target_pitch = deg_to_rad(norm_y * max_aim_pitch_degrees)
+
+	rotation.y = target_yaw
+	rotation.x = target_pitch
 
 func shoot() -> void:
 	if not bullet_scene or not muzzle:
 		return
 		
 	var bullet_instance = bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet_instance)
 	
+	# Usar el vector de dirección global real desde la culata hasta la boquilla (Muzzle)
+	var real_rifle_direction = (muzzle.global_position - global_position).normalized()
+	
+	if real_rifle_direction == Vector3.ZERO:
+		real_rifle_direction = -global_transform.basis.z
+
+	get_tree().current_scene.add_child(bullet_instance)
 	bullet_instance.global_position = muzzle.global_position
 	
-	var forward_dir = -muzzle.global_transform.basis.z
+	# IMPORTANTE: Llamar a setup DESPUÉS de establecer global_position y añadir a la escena
 	if bullet_instance.has_method("setup"):
-		bullet_instance.setup(forward_dir)
+		bullet_instance.setup(real_rifle_direction)
+		
+func _apply_sway(delta: float, intensity: float = 1.0) -> void:
+	var offset_y = sin(time_passed * sway_speed) * sway_amount_y * intensity
+	var offset_x = cos(time_passed * sway_speed * 0.5) * sway_amount_x * intensity
+	
+	position.x = clamp(base_position.x + offset_x, min_rifle_x, max_rifle_x)
+	position.y = clamp(base_position.y + offset_y, min_rifle_y, max_rifle_y)
+
+	_update_rifle_transform()

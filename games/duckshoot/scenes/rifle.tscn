@@ -8,7 +8,7 @@ albedo_color = Color(0, 0, 0, 1)
 metallic = 0.3
 
 [node name="rifle" unique_id=862231063 instance=ExtResource("1_6qume")]
-transform = Transform3D(0.0005870576, -0.09999311, 0, 0.049996555, 0.0011741152, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.011741205, -0.9999311, 0, 0.9999311, 0.011741205, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_q1eg8")
 
 [node name="Cube" parent="." index="0" unique_id=736888548]
