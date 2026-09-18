@@ -20,6 +20,8 @@ func setup(dir: Vector3) -> void:
 func _ready() -> void:
 	if ray_cast:
 		ray_cast.enabled = true
+		ray_cast.collide_with_areas = true # <--- ¡ESTO ES CRUCIAL!
+		ray_cast.collide_with_bodies = true
 
 func _process(delta: float) -> void:
 	# Autodestrucción por tiempo
@@ -30,32 +32,37 @@ func _process(delta: float) -> void:
 
 	# Calcular desplazamiento de este frame
 	var move_distance = speed * delta
-	var next_position = global_position + (direction * move_distance)
-
-	# Actualizar dirección y longitud del RayCast usando el vector real de movimiento
+	
 	if ray_cast:
-		ray_cast.target_position = ray_cast.to_local(next_position)
+		# Apuntar el raycast exactamente a la distancia que va a recorrer la bala en este cuadro
+		ray_cast.target_position = Vector3(0, 0, -move_distance)
 		ray_cast.force_raycast_update()
 
 		if ray_cast.is_colliding():
 			var collider = ray_cast.get_collider()
+			print("1. RayCast colisionó con: ", collider.name) # Checkear si el raycast detecta algo
+
 			var hit_point = ray_cast.get_collision_point()
 			var normal = ray_cast.get_collision_normal()
 
-			# Procesar rebote si aún nos quedan intentos
+			var target_instance = collider
+			if not collider.has_method("on_hit") and collider.get_parent() and collider.get_parent().has_method("on_hit"):
+				target_instance = collider.get_parent()
+
+			if target_instance.has_method("on_hit"):
+				print("2. IMPACTO EN PATO CONFIRMADO!") # <--- ESTE ES EL PRINT CLAVE
+				target_instance.on_hit()
+			else:
+				print("3. Colisionó con algo pero NO tiene on_hit(): ", target_instance.name)
+
 			if current_bounces < max_bounces:
 				_bounce(hit_point, normal)
-				
-				# Si además chocamos contra un target, avisamos
-				if collider and collider.is_in_group("targets") and collider.has_method("on_hit"):
-					collider.on_hit()
 			else:
-				# Si superó el límite de rebotes, se destruye
 				queue_free()
 			return
 
-	# Si no hay colisión, avanzamos
-	global_position = next_position
+	# Si no colisiona, avanza en la posición global
+	global_position += direction * move_distance
 
 func _bounce(hit_point: Vector3, normal: Vector3) -> void:
 	current_bounces += 1

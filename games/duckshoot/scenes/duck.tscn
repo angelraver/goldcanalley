@@ -1,17 +1,35 @@
 [gd_scene format=3 uid="uid://tuc8yphbd1ly"]
 
-[ext_resource type="PackedScene" path="res://games/duckshoot/assets/models/duck.glb" id="1_rkbqy"]
+[ext_resource type="PackedScene" uid="uid://7g8l1q3en05g" path="res://games/duckshoot/assets/models/duck.glb" id="1_rkbqy"]
 [ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/scripts/target.gd" id="1_y3hbw"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8dl7b"]
-size = Vector3(1.2432861, 1.1323242, 0.20159912)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8dl7b"]
+height = 0.09794922
+radius = 0.28271484
 
-[node name="Duck" type="Area3D" unique_id=696013669]
-transform = Transform3D(-0.4, 0, -3.4969112e-08, 0, 0.4, 0, 3.4969112e-08, 0, -0.4, 0, 0, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_kyv4s"]
+size = Vector3(0.33898926, 0.33642578, 0.09655762)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kyv4s"]
+height = 0.08834839
+radius = 0.5600586
+
+[node name="Duck" type="Node3D" unique_id=1100825524]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
 script = ExtResource("1_y3hbw")
 
 [node name="duck" parent="." unique_id=1673520995 instance=ExtResource("1_rkbqy")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=921486170]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09882879, 0.34065068, 0.08005902)
-shape = SubResource("BoxShape3D_8dl7b")
+[node name="Area3D" type="Area3D" parent="." unique_id=1892375850 groups=["targets"]]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=830919245]
+transform = Transform3D(1, 2.842171e-14, -1.6940659e-21, 0, -4.371139e-08, -1, -2.842171e-14, 1, -4.371139e-08, -0.03161325, 0.6567988, 0.038494617)
+shape = SubResource("CylinderShape3D_8dl7b")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" unique_id=1459206958]
+transform = Transform3D(0.67793614, 0.7351208, -2.8155714e-08, -0.7351208, 0.67793614, -6.42663e-08, -2.8155718e-08, 6.4265876e-08, 1, -0.25865483, 0.6060351, 0.06280518)
+shape = SubResource("BoxShape3D_kyv4s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=854664587]
+transform = Transform3D(1, -2.842171e-14, -1.6940659e-21, 0, -4.371139e-08, 1, -2.842171e-14, -1, -4.371139e-08, 0.17408514, 0.2350019, 0.051864624)
+shape = SubResource("CylinderShape3D_kyv4s")
