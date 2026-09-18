@@ -140,7 +140,10 @@ func _orient_base_model() -> void:
 	elif direction == -1:
 		rotation_degrees.y = 0.0
 
-	# Si recibió un disparo, tumbamos el modelo 90 grados hacia atrás en su eje X local
+	# Aplicar caída lateral al impactar:
 	if hit_fold_angle > 0.0:
 		var fold_radians = (PI / 2.0) * hit_fold_angle
-		rotate_object_local(Vector3.LEFT, fold_radians)
+		
+		# Si va a la derecha (direction == 1), rotamos en un sentido; si va a la izquierda, en el opuesto
+		var axis_dir = Vector3.RIGHT if direction == 1 else Vector3.LEFT
+		rotate_object_local(axis_dir, fold_radians)

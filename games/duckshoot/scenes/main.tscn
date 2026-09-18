@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b5mc1wtap7s6m" path="res://games/duckshoot/scripts/main.gd" id="1_vnc0d"]
 [ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/assets/models/escalera.glb" id="2_7x46q"]
 [ext_resource type="PackedScene" uid="uid://ch101a72hcr3v" path="res://games/duckshoot/scenes/rifle.tscn" id="3_1otfw"]
+[ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="4_jus0j"]
+[ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_mwiov"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -13,12 +15,19 @@ ambient_light_energy = 0.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_1otfw"]
 size = Vector3(0.06690216, 0.07285309, 0.50390625)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tth7i"]
+albedo_texture = ExtResource("4_jus0j")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f5gc"]
+albedo_texture = ExtResource("5_mwiov")
+
 [node name="Main" type="Node3D" unique_id=732211628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1337472, 0, 0, 0)
 script = ExtResource("1_vnc0d")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1755815024]
-transform = Transform3D(1, 0, 0, 0, 0.9806515, 0.19576171, 0, -0.17266786, 0.86496484, -0.054, 0.9915805, 4.7736273)
+transform = Transform3D(1, 0, 0, 0, 0.9806515, 0.19576171, 0, -0.17266786, 0.86496484, 0.045051713, 0.9915805, 4.7736273)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1151453859]
 environment = SubResource("Environment_7x46q")
@@ -27,7 +36,7 @@ environment = SubResource("Environment_7x46q")
 transform = Transform3D(-0.99801755, -1.0724167e-08, -0.06293673, -0.05719555, -0.4172786, 0.906977, -0.026262159, 0.90877867, 0.4164513, 0, 6.4838476, 5.2749615)
 
 [node name="escalera" parent="." unique_id=203979572 instance=ExtResource("2_7x46q")]
-transform = Transform3D(-2.0869216e-07, 0, -5.9877534, 0, 8.147206, 0, 4.7743196, 0, -2.6173302e-07, -1.4480975, 2.7629633, 0.046835933)
+transform = Transform3D(-2.0024653e-07, 0, -5.9877534, 0, 8.147206, 0, 4.581106, 0, -2.6173302e-07, -1.4480975, 2.7629633, 0.046835933)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="escalera" unique_id=1025292398]
 
@@ -49,3 +58,15 @@ shape = SubResource("BoxShape3D_1otfw")
 
 [node name="rifle" parent="." unique_id=862231063 instance=ExtResource("3_1otfw")]
 transform = Transform3D(0.00067057094, -0.060388587, 0, 0.05710894, 0.0007090805, 0, 0, 0, 0.08820309, 0.0051113367, 0.40487158, 5.7408977)
+
+[node name="Piso" type="CSGBox3D" parent="." unique_id=1393206161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7631626, 2.4259157)
+use_collision = true
+size = Vector3(6, 0.1, 6)
+material = SubResource("StandardMaterial3D_tth7i")
+
+[node name="Fondo" type="CSGBox3D" parent="." unique_id=1633192958]
+transform = Transform3D(1.9959188e-15, 4.3711385e-08, 0.8542683, 1.044609, -4.3711385e-08, 0, 4.5661306e-08, 0.99999994, -3.7341255e-08, -0.008993864, 1.516304, -0.23381335)
+use_collision = true
+size = Vector3(6, 0.2, 6)
+material = SubResource("StandardMaterial3D_8f5gc")

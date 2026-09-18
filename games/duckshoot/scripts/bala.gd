@@ -1,7 +1,7 @@
 extends Node3D
 class_name Bullet
 
-@export var speed: float = 5.0
+@export var speed: float = 10.0
 @export var max_bounces: int = 3
 @export var max_lifetime: float = 4.0
 

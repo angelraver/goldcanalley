@@ -12,8 +12,8 @@ class_name WaveRow
 # Modelo por defecto (Wave 1)
 @export var wave_mesh_scene: PackedScene = preload("res://games/duckshoot/scenes/wave1.tscn")
 
-@export var count: int = 5
-@export var step_x: float = 0.6
+@export var count: int = 6
+@export var step_x: float = 0.5
 @export var speed: float = 2.0          # Velocidad de rotación
 @export var radius_x: float = 0.08      # Radio/Desplazamiento horizontal (Eje X)
 @export var radius_y: float = 0.03      # Radio/Desplazamiento vertical (Eje Y)

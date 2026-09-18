@@ -3,5 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://0w75fqw7r1al" path="res://games/duckshoot/assets/models/wave1.glb" id="1_56pfl"]
 
 [node name="Wave" type="Node3D" unique_id=254715147]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
 [node name="wave1" parent="." unique_id=48410819 instance=ExtResource("1_56pfl")]
