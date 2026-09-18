@@ -74,11 +74,18 @@ pivot_offset = Vector2(262, 300)
 texture_normal = ExtResource("5_bj87q")
 
 [node name="ButtonWhackamole" type="TextureButton" parent="." unique_id=991209445]
-layout_mode = 0
-offset_left = 298.0
-offset_top = 710.0
-offset_right = 749.16797
-offset_bottom = 1025.1438
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -419.16794
+offset_top = 74.4281
+offset_right = 32.0
+offset_bottom = 389.57202
+grow_horizontal = 0
+grow_vertical = 2
 scale = Vector2(0.53626305, 0.53626305)
 pivot_offset = Vector2(181, 241)
 texture_normal = ExtResource("6_oip1l")
@@ -96,11 +103,15 @@ pivot_offset = Vector2(262, 300)
 texture_normal = ExtResource("7_oip1l")
 
 [node name="ButtonRingToss" type="TextureButton" parent="." unique_id=1163062909]
-layout_mode = 0
-offset_left = 62.0
-offset_top = 660.0
-offset_right = 423.76276
-offset_bottom = 1142.9719
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 56.0
+offset_top = 30.514038
+offset_right = 417.76276
+offset_bottom = 513.4861
+grow_vertical = 2
 scale = Vector2(0.53626305, 0.53626305)
 pivot_offset = Vector2(181, 241)
 texture_normal = ExtResource("8_4e4sy")
@@ -108,21 +119,28 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
-layout_mode = 0
-offset_left = 386.0
-offset_top = 1045.0
-offset_right = 718.0
-offset_bottom = 1295.0
-scale = Vector2(0.8, 0.8)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -332.0
+offset_top = -250.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(166, 125)
 texture_normal = ExtResource("6_ljifs")
 
 [node name="Options" type="TextureButton" parent="." unique_id=110325157]
-layout_mode = 0
-offset_left = -18.0
-offset_top = 1059.9999
-offset_right = 314.0
-offset_bottom = 1309.9999
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_right = 332.0
+grow_vertical = 0
 scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(166, 125)
 texture_normal = ExtResource("7_uj4fn")
