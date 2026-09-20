@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://bta2npruaxppi"]
+
+[ext_resource type="Script" uid="uid://bm8ikv6c8w2ib" path="res://games/ringtoss/scripts/main.gd" id="1_ib744"]
+[ext_resource type="PackedScene" uid="uid://bjwtb5jto7ook" path="res://games/goldcanalley/assets/models/table.glb" id="1_r1pxh"]
+[ext_resource type="Texture2D" uid="uid://kfttotjficfc" path="res://games/goldcanalley/assets/images/world/table.png" id="2_ib744"]
+[ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="3_mmmnk"]
+[ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="4_diuyt"]
+[ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="7_l362f"]
+[ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_yqfkt"]
+[ext_resource type="Texture2D" uid="uid://dkenyvgkr7vmc" path="res://games/goldcanalley/assets/images/world/ball.png" id="9_vmfpc"]
+[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
+[ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
+[ext_resource type="PackedScene" uid="uid://dgj64nmwi6qa4" path="res://games/goldcanalley/scenes/audio_manager.tscn" id="13_66au0"]
+
+[sub_resource type="Environment" id="Environment_8vloa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjv1v"]
+albedo_texture = ExtResource("2_ib744")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scn8t"]
+albedo_texture = ExtResource("2_ib744")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ygsn6"]
+data = PackedVector3Array(-0.8401, -0.6308, -0.9999, -0.8401, 0.072399996, -0.84099996, -0.8401, 0.072399996, -0.9999, -0.8401, -0.6308, -0.9999, -0.8401, -0.6308, -0.84099996, -0.8401, 0.072399996, -0.84099996, -0.8401, -0.6308, -0.84099996, -0.9989, 0.072399996, -0.84099996, -0.8401, 0.072399996, -0.84099996, -0.8401, -0.6308, -0.84099996, -0.9989, -0.6308, -0.84099996, -0.9989, 0.072399996, -0.84099996, -0.9989, -0.6308, -0.84099996, -0.9989, 0.072399996, -0.9999, -0.9989, 0.072399996, -0.84099996, -0.9989, -0.6308, -0.84099996, -0.9989, -0.6308, -0.9999, -0.9989, 0.072399996, -0.9999, -0.9989, -0.6308, -0.9999, -0.8401, 0.072399996, -0.9999, -0.9989, 0.072399996, -0.9999, -0.9989, -0.6308, -0.9999, -0.8401, -0.6308, -0.9999, -0.8401, 0.072399996, -0.9999, -0.8401, -0.6308, -0.84099996, -0.9989, -0.6308, -0.9999, -0.9989, -0.6308, -0.84099996, -0.8401, -0.6308, -0.84099996, -0.8401, -0.6308, -0.9999, -0.9989, -0.6308, -0.9999, -0.9989, 0.072399996, -0.84099996, -0.8401, 0.072399996, -0.9999, -0.8401, 0.072399996, -0.84099996, -0.9989, 0.072399996, -0.84099996, -0.9989, 0.072399996, -0.9999, -0.8401, 0.072399996, -0.9999, -0.8382, -0.6337, 0.8391, -0.8382, 0.0696, 0.9981, -0.8382, 0.0696, 0.8391, -0.8382, -0.6337, 0.8391, -0.8382, -0.6337, 0.9981, -0.8382, 0.0696, 0.9981, -0.8382, -0.6337, 0.9981, -0.99719995, 0.0696, 0.9981, -0.8382, 0.0696, 0.9981, -0.8382, -0.6337, 0.9981, -0.99719995, -0.6337, 0.9981, -0.99719995, 0.0696, 0.9981, -0.99719995, -0.6337, 0.9981, -0.99719995, 0.0696, 0.8391, -0.99719995, 0.0696, 0.9981, -0.99719995, -0.6337, 0.9981, -0.99719995, -0.6337, 0.8391, -0.99719995, 0.0696, 0.8391, -0.99719995, -0.6337, 0.8391, -0.8382, 0.0696, 0.8391, -0.99719995, 0.0696, 0.8391, -0.99719995, -0.6337, 0.8391, -0.8382, -0.6337, 0.8391, -0.8382, 0.0696, 0.8391, -0.8382, -0.6337, 0.9981, -0.99719995, -0.6337, 0.8391, -0.99719995, -0.6337, 0.9981, -0.8382, -0.6337, 0.9981, -0.8382, -0.6337, 0.8391, -0.99719995, -0.6337, 0.8391, -0.99719995, 0.0696, 0.9981, -0.8382, 0.0696, 0.8391, -0.8382, 0.0696, 0.9981, -0.99719995, 0.0696, 0.9981, -0.99719995, 0.0696, 0.8391, -0.8382, 0.0696, 0.8391, 0.99679995, -0.6372, -1, 0.99679995, 0.066, -0.8411, 0.99679995, 0.066, -1, 0.99679995, -0.6372, -1, 0.99679995, -0.6372, -0.8411, 0.99679995, 0.066, -0.8411, 0.99679995, -0.6372, -0.8411, 0.8379, 0.066, -0.8411, 0.99679995, 0.066, -0.8411, 0.99679995, -0.6372, -0.8411, 0.8379, -0.6372, -0.8411, 0.8379, 0.066, -0.8411, 0.8379, -0.6372, -0.8411, 0.8379, 0.066, -1, 0.8379, 0.066, -0.8411, 0.8379, -0.6372, -0.8411, 0.8379, -0.6372, -1, 0.8379, 0.066, -1, 0.8379, -0.6372, -1, 0.99679995, 0.066, -1, 0.8379, 0.066, -1, 0.8379, -0.6372, -1, 0.99679995, -0.6372, -1, 0.99679995, 0.066, -1, 0.99679995, -0.6372, -0.8411, 0.8379, -0.6372, -1, 0.8379, -0.6372, -0.8411, 0.99679995, -0.6372, -0.8411, 0.99679995, -0.6372, -1, 0.8379, -0.6372, -1, 0.8379, 0.066, -0.8411, 0.99679995, 0.066, -1, 0.99679995, 0.066, -0.8411, 0.8379, 0.066, -0.8411, 0.8379, 0.066, -1, 0.99679995, 0.066, -1, 0.99579996, -0.6358, 0.8379, 0.99579996, 0.067499995, 0.99679995, 0.99579996, 0.067499995, 0.8379, 0.99579996, -0.6358, 0.8379, 0.99579996, -0.6358, 0.99679995, 0.99579996, 0.067499995, 0.99679995, 0.99579996, -0.6358, 0.99679995, 0.8369, 0.067499995, 0.99679995, 0.99579996, 0.067499995, 0.99679995, 0.99579996, -0.6358, 0.99679995, 0.8369, -0.6358, 0.99679995, 0.8369, 0.067499995, 0.99679995, 0.8369, -0.6358, 0.99679995, 0.8369, 0.067499995, 0.8379, 0.8369, 0.067499995, 0.99679995, 0.8369, -0.6358, 0.99679995, 0.8369, -0.6358, 0.8379, 0.8369, 0.067499995, 0.8379, 0.8369, -0.6358, 0.8379, 0.99579996, 0.067499995, 0.8379, 0.8369, 0.067499995, 0.8379, 0.8369, -0.6358, 0.8379, 0.99579996, -0.6358, 0.8379, 0.99579996, 0.067499995, 0.8379, 0.99579996, -0.6358, 0.99679995, 0.8369, -0.6358, 0.8379, 0.8369, -0.6358, 0.99679995, 0.99579996, -0.6358, 0.99679995, 0.99579996, -0.6358, 0.8379, 0.8369, -0.6358, 0.8379, 0.8369, 0.067499995, 0.99679995, 0.99579996, 0.067499995, 0.8379, 0.99579996, 0.067499995, 0.99679995, 0.8369, 0.067499995, 0.99679995, 0.8369, 0.067499995, 0.8379, 0.99579996, 0.067499995, 0.8379, 1, -0.0727, -1, -1, -0.0727, 1, 1, -0.0727, 1, 1, -0.0727, -1, -1, -0.0727, -1, -1, -0.0727, 1, 1, 0.0727, 1, -1, -0.0727, 1, -1, 0.0727, 1, 1, 0.0727, 1, 1, -0.0727, 1, -1, -0.0727, 1, -1, 0.0727, 1, -1, -0.0727, -1, -1, 0.0727, -1, -1, 0.0727, 1, -1, -0.0727, 1, -1, -0.0727, -1, -1, 0.0727, -1, 1, 0.0727, 1, -1, 0.0727, 1, -1, 0.0727, -1, 1, 0.0727, -1, 1, 0.0727, 1, 1, 0.0727, -1, 1, -0.0727, 1, 1, 0.0727, 1, 1, 0.0727, -1, 1, -0.0727, -1, 1, -0.0727, 1, -1, 0.0727, -1, 1, -0.0727, -1, 1, 0.0727, -1, -1, 0.0727, -1, -1, -0.0727, -1, 1, -0.0727, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s68c3"]
+albedo_texture = ExtResource("3_mmmnk")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_siham"]
+albedo_texture = ExtResource("4_diuyt")
+
+[sub_resource type="World3D" id="World3D_3q8t4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4ey"]
+albedo_texture = ExtResource("9_vmfpc")
+
+[sub_resource type="SphereMesh" id="SphereMesh_0mero"]
+material = SubResource("StandardMaterial3D_ya4ey")
+
+[node name="Main" type="Node3D" unique_id=662956677]
+script = ExtResource("1_ib744")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1536599264]
+transform = Transform3D(1, 0, 0, 0, 0.99995744, 0.0092289895, 0, -0.0092289895, 0.99995744, 0, 1.4426732, -0.87311673)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=781585274]
+transform = Transform3D(1, 0, 0, 0, 0.9428425, 0.3332387, 0, -0.3332387, 0.9428425, 0, 2, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1459191971]
+environment = SubResource("Environment_8vloa")
+
+[node name="table" parent="." unique_id=1871750330 instance=ExtResource("1_r1pxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6931398, 0.022, 0.68844604, -3.9946957)
+
+[node name="Cube_005" parent="table" index="0" unique_id=1295277795]
+surface_material_override/0 = SubResource("StandardMaterial3D_yjv1v")
+surface_material_override/1 = SubResource("StandardMaterial3D_scn8t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="table/Cube_005" index="0" unique_id=1900104730]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="table/Cube_005/StaticBody3D" unique_id=233628994]
+shape = SubResource("ConcavePolygonShape3D_ygsn6")
+
+[node name="Piso" type="CSGBox3D" parent="." unique_id=1272039920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+use_collision = true
+size = Vector3(6, 0.1, 6)
+material = SubResource("StandardMaterial3D_s68c3")
+
+[node name="Fondo" type="CSGBox3D" parent="." unique_id=1713158741]
+transform = Transform3D(1.9959188e-15, 4.3711385e-08, 0.8542683, 1.044609, -4.3711385e-08, 0, 4.5661306e-08, 0.99999994, -3.7341255e-08, -0.008993864, 2.2794666, -5.659729)
+use_collision = true
+size = Vector3(6, 0.2, 6)
+material = SubResource("StandardMaterial3D_siham")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1700791284]
+
+[node name="Puntaje" parent="UI" unique_id=626633466 instance=ExtResource("7_l362f")]
+
+[node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("8_yqfkt")]
+
+[node name="ContenedorPelotasUI" type="HBoxContainer" parent="UI" unique_id=576714175]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -239.99997
+offset_top = 66.0
+offset_right = -127.0
+offset_bottom = 130.0
+grow_horizontal = 0
+scale = Vector2(1.8, 1.933)
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/ContenedorPelotasUI" unique_id=1512023161]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/ContenedorPelotasUI/SubViewportContainer" unique_id=932763041]
+world_3d = SubResource("World3D_3q8t4")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=1363693347]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=1347786463]
+
+[node name="PelotaUI" type="MeshInstance3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=921489129]
+mesh = SubResource("SphereMesh_0mero")
+
+[node name="LabelPelotas" type="Label" parent="UI/ContenedorPelotasUI" unique_id=1427273534]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("10_luw0m")
+theme_override_font_sizes/font_size = 40
+text = "x 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelResultados" parent="UI" unique_id=696404095 instance=ExtResource("11_c722h")]
+
+[node name="LevelTitle" type="Label" parent="UI" unique_id=1246917212]
+custom_minimum_size = Vector2(600, 0)
+custom_maximum_size = Vector2(-1, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -394.5
+offset_right = 0.5
+offset_bottom = 394.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0061463, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_idbda")
+theme_override_font_sizes/font_size = 64
+text = "Texto largo para confirmar el corte de linea automático"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=1674815260]
+
+[node name="AudioJuego" parent="." unique_id=497255853 instance=ExtResource("13_66au0")]
+
+[node name="RingSpawn" type="Marker3D" parent="." unique_id=394817297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8402618, -1.1534083)
+
+[connection signal="ready" from="." to="." method="_ready"]
+
+[editable path="table"]

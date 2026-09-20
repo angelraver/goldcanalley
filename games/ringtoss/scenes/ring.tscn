@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://b57hs0q68hhw6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ring"]
+albedo_color = Color(0.95, 0.12, 0.12, 1)
+roughness = 0.32
+
+[sub_resource type="TorusMesh" id="TorusMesh_a387k"]
+material = SubResource("StandardMaterial3D_ring")
+inner_radius = 0.8
+rings = 18
+ring_segments = 24
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ring_segment"]
+size = Vector3(0.37, 0.18, 0.18)
+
+[node name="Ring" type="RigidBody3D" unique_id=1618309219]
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+mass = 0.25
+continuous_cd = true
+linear_damp = 0.15
+angular_damp = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1813353350]
+mesh = SubResource("TorusMesh_a387k")
+
+[node name="CollisionShape3D_00" type="CollisionShape3D" parent="." unique_id=282363994]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.9, 0, 0)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_01" type="CollisionShape3D" parent="." unique_id=1501467420]
+transform = Transform3D(-0.3826834, 0, -0.92387956, 0, 1, 0, 0.92387956, 0, -0.3826834, 0.8314916, 0, 0.3444151)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_02" type="CollisionShape3D" parent="." unique_id=1136193625]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 0.6363961, 0, 0.6363961)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_03" type="CollisionShape3D" parent="." unique_id=2041098411]
+transform = Transform3D(-0.9238795, 0, -0.3826835, 0, 1, 0, 0.3826835, 0, -0.9238795, 0.3444151, 0, 0.8314916)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_04" type="CollisionShape3D" parent="." unique_id=2650522]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0.9)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_05" type="CollisionShape3D" parent="." unique_id=1106106541]
+transform = Transform3D(-0.9238795, 0, 0.38268343, 0, 1, 0, -0.38268343, 0, -0.9238795, -0.3444151, 0, 0.8314916)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_06" type="CollisionShape3D" parent="." unique_id=735355671]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.6363961, 0, 0.6363961)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_07" type="CollisionShape3D" parent="." unique_id=351705000]
+transform = Transform3D(-0.38268358, 0, 0.9238795, 0, 1, 0, -0.9238795, 0, -0.38268358, -0.8314916, 0, 0.3444151)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_08" type="CollisionShape3D" parent="." unique_id=655278923]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -0.9, 0, 0)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_09" type="CollisionShape3D" parent="." unique_id=490029752]
+transform = Transform3D(0.3826836, 0, 0.92387944, 0, 1, 0, -0.92387944, 0, 0.3826836, -0.8314916, 0, -0.3444151)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_10" type="CollisionShape3D" parent="." unique_id=132597257]
+transform = Transform3D(0.70710665, 0, 0.7071069, 0, 1, 0, -0.7071069, 0, 0.70710665, -0.6363961, 0, -0.6363961)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_11" type="CollisionShape3D" parent="." unique_id=840433834]
+transform = Transform3D(0.92387956, 0, 0.38268343, 0, 1, 0, -0.38268343, 0, 0.92387956, -0.3444151, 0, -0.8314916)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_12" type="CollisionShape3D" parent="." unique_id=1966638995]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 0, 0, -0.9)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_13" type="CollisionShape3D" parent="." unique_id=643405913]
+transform = Transform3D(0.92387956, 0, -0.3826833, 0, 1, 0, 0.3826833, 0, 0.92387956, 0.3444151, 0, -0.8314916)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_14" type="CollisionShape3D" parent="." unique_id=164917427]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.6363961, 0, -0.6363961)
+shape = SubResource("BoxShape3D_ring_segment")
+
+[node name="CollisionShape3D_15" type="CollisionShape3D" parent="." unique_id=1813807778]
+transform = Transform3D(0.38268328, 0, -0.9238796, 0, 1, 0, 0.9238796, 0, 0.38268328, 0.8314916, 0, -0.3444151)
+shape = SubResource("BoxShape3D_ring_segment")

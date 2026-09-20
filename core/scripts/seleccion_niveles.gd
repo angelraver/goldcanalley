@@ -16,6 +16,7 @@ var escena_juego_destino: String = ""
 func _ready() -> void:
 	# 1. Cargar la configuración según el juego actual seleccionado
 	var config_juego = game_manager.obtener_config_juego_actual()
+	print("juego actual seleccionado: " + save_manager.juego_actual_seleccionado)
 	ruta_niveles_json = config_juego.get("ruta_niveles_json", "")
 	escena_juego_destino = config_juego.get("escena_juego", "")
 	print("ruta_niveles_json: " + ruta_niveles_json)
@@ -34,11 +35,19 @@ func _ready() -> void:
 	# 2. Obtener total de niveles del minijuego actual
 	total_niveles = obtener_total_niveles()
 
-	# 3. Determinar página inicial
-	if save_manager and save_manager.nivel_actual_seleccionado > 0:
-		pagina_actual = int(ceil(float(save_manager.nivel_actual_seleccionado) / float(NIVELES_POR_PAGINA)))
-		if pagina_actual < 1:
-			pagina_actual = 1
+	# 3. Recuperar la página propia de este juego
+	var total_paginas: int = maxi(
+		1,
+		int(ceil(float(total_niveles) / float(NIVELES_POR_PAGINA)))
+	)
+
+	pagina_actual = clampi(
+		save_manager.obtener_pagina_niveles(),
+		1,
+		total_paginas
+	)
+
+	save_manager.guardar_pagina_niveles(pagina_actual)
 
 	# 4. Conectar señales
 	if boton_prev and not boton_prev.pressed.is_connected(_on_boton_prev_pressed):
@@ -99,12 +108,15 @@ func actualizar_visibilidad_botones() -> void:
 func _on_boton_prev_pressed() -> void:
 	if pagina_actual > 1:
 		pagina_actual -= 1
+		save_manager.guardar_pagina_niveles(pagina_actual)
 		refrescar_pantalla_niveles()
 
 func _on_boton_next_pressed() -> void:
 	var total_paginas: int = int(ceil(float(total_niveles) / float(NIVELES_POR_PAGINA)))
+
 	if pagina_actual < total_paginas:
 		pagina_actual += 1
+		save_manager.guardar_pagina_niveles(pagina_actual)
 		refrescar_pantalla_niveles()
 
 func _on_nivel_seleccionado(numero_nivel: int) -> void:
