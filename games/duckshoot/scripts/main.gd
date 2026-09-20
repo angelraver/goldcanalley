@@ -15,12 +15,12 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @export_group("Dimensiones de Escalón (Y / Z)")
 @export var base_y: float = 0.0
 @export var step_y: float = 0.55
-@export var base_z: float = 1.4
+@export var base_z: float = 1.1
 @export var step_z: float = 0.3
 @export_group("Escala de Velocidad (1 a 5)")
 @export var speed_multiplier: float = 0.5
 @export_group("Prefabs")
-@export var wave_z_offset: float = 0 # Distancia hacia adelante respecto al pato para tapar su base
+@export var wave_z_offset: float = 0.1 # Distancia hacia adelante respecto al pato para tapar su base
 
 var level_total_ducks: int = 0
 var ducks_spawned: int = 0
@@ -106,23 +106,35 @@ func _process(_delta: float) -> void:
 	for lane in lanes_data:
 		_check_lane_spawn(lane)
 
+func _notification(what: int) -> void:
+	# Manejo robusto para Mobile / Desktop cuando la app pierde el foco
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		get_tree().paused = true
+	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		get_tree().paused = false
+
 func _check_lane_spawn(lane: Dictionary) -> void:
-	# Si ya alcanzamos el total de patos a spawnear, cerramos la creación de nuevos elementos
 	if ducks_spawned >= level_total_ducks:
 		return
 		
 	var can_spawn = false
 	var last_target = lane["last_spawned_target"]
 	
-	# Caso 1: El carril está libre (aún no nació nada o el anterior ya desapareció/murió)
+	# Caso 1: No hay ningún objetivo previo registrado en la variable
 	if not is_instance_valid(last_target):
 		can_spawn = true
 	else:
-		# Caso 2: Calcular la distancia recorrida en X por el último elemento
+		# Caso 2: Verificar si el último objetivo sigue dentro de la "Zona de Spawn"
+		# Si el pato ya entró en el tramo o cambió de estado (ENTERING -> MOVING_STRAIGHT -> EXITING), 
+		# medimos su distancia X actual con respecto al origen.
 		var start_x = x_left_spawn if lane["dir"] == 1 else x_right_spawn
-		var distance_traveled = abs(last_target.global_position.x - start_x)
+		var distance_from_spawn = abs(last_target.global_position.x - start_x)
 		
-		if distance_traveled >= DISTANCIA_SPAWN:
+		# Solamente permitimos un nuevo spawn si:
+		# a) El último pato ya avanzó la distancia mínima requerida (DISTANCIA_SPAWN)
+		# b) Y además, el pato ya pasó la fase inicial de curva de entrada (State.ENTERING -> state != 0)
+		#    o ya no está tapando físicamente la boca de entrada.
+		if distance_from_spawn >= DISTANCIA_SPAWN and last_target.current_state != Target.State.ENTERING:
 			can_spawn = true
 			
 	if can_spawn:

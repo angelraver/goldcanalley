@@ -3,17 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://vsq4l4agdo64" path="res://games/duckshoot/assets/models/rifle.glb" id="1_6qume"]
 [ext_resource type="Script" uid="uid://c4dfs7fm81eiy" path="res://games/duckshoot/scripts/rifle.gd" id="2_q1eg8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vt4i"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 0.3
-
 [node name="rifle" unique_id=862231063 instance=ExtResource("1_6qume")]
 transform = Transform3D(0.011741205, -0.9999311, 0, 0.9999311, 0.011741205, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_q1eg8")
 
-[node name="Cube" parent="." index="0" unique_id=736888548]
-transform = Transform3D(-4.371139e-08, 0.9999998, -3.8213705e-15, -4.371139e-08, 1.910685e-15, 0.9999999, 1, 4.371138e-08, 4.3711385e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_6vt4i")
+[node name="Cube_002" parent="." index="0" unique_id=1647587170]
+transform = Transform3D(-4.371139e-08, 1.0000001, 4.371139e-08, 0, -4.3711392e-08, 1, 1, 4.3711392e-08, 1.9106855e-15, 0, 0, 0)
 
 [node name="Muzzle" type="Node3D" parent="." index="1" unique_id=208054003]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7429156, -0.008166459, -14.618687)

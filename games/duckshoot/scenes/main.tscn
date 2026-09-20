@@ -5,15 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://ch101a72hcr3v" path="res://games/duckshoot/scenes/rifle.tscn" id="3_1otfw"]
 [ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="4_jus0j"]
 [ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_mwiov"]
+[ext_resource type="PackedScene" uid="uid://b2o3t4tmr3sv0" path="res://games/duckshoot/scenes/escalera.tscn" id="6_mwiov"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
 ambient_light_source = 2
 ambient_light_color = Color(0.627451, 0.627451, 0.627451, 1)
 ambient_light_energy = 0.5
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1otfw"]
-size = Vector3(0.06690216, 0.07285309, 0.50390625)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tth7i"]
 albedo_texture = ExtResource("4_jus0j")
@@ -22,9 +20,14 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f5gc"]
 albedo_texture = ExtResource("5_mwiov")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1otfw"]
+size = Vector3(0.07138109, 0.07285309, 0.50390625)
+
 [node name="Main" type="Node3D" unique_id=732211628]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1337472, 0, 0, 0)
 script = ExtResource("1_vnc0d")
+
+[node name="rifle" parent="." unique_id=862231063 instance=ExtResource("3_1otfw")]
+transform = Transform3D(0.0011741206, -0.09999311, 0, 0.09999311, 0.0011741206, 0, 0, 0, 0.1, 0, 0.60171497, 5.183117)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1755815024]
 transform = Transform3D(1, 0, 0, 0, 0.9806515, 0.19576171, 0, -0.17266786, 0.86496484, 0.045051713, 0.9915805, 4.7736273)
@@ -35,29 +38,9 @@ environment = SubResource("Environment_7x46q")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=544758961]
 transform = Transform3D(-0.99801755, -1.0724167e-08, -0.06293673, -0.05719555, -0.4172786, 0.906977, -0.026262159, 0.90877867, 0.4164513, 0, 6.4838476, 5.2749615)
 
-[node name="escalera" parent="." unique_id=203979572 instance=ExtResource("2_7x46q")]
+[node name="escalera0" parent="." unique_id=203979572 instance=ExtResource("2_7x46q")]
 transform = Transform3D(-2.0024653e-07, 0, -5.9877534, 0, 8.147206, 0, 4.581106, 0, -2.6173302e-07, -1.4480975, 2.7629633, 0.046835933)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="escalera" unique_id=1025292398]
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=704338794]
-transform = Transform3D(1, 0, -6.3948846e-14, 0, 1.0000029, 0, 0, 0, 1, 0.052950513, -0.17862876, -0.24472365)
-shape = SubResource("BoxShape3D_1otfw")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=1909008373]
-transform = Transform3D(1, 0, -3.1974423e-14, 0, 1.0000014, 0, 0, 0, 1, 0.10481981, -0.24501781, -0.24380234)
-shape = SubResource("BoxShape3D_1otfw")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=1883767163]
-transform = Transform3D(1, 0, -1.7763568e-14, 0, 1.0000007, 0, 0, 0, 1, 0.1762457, -0.31668043, -0.24702743)
-shape = SubResource("BoxShape3D_1otfw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=169377846]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, 1.0000004, 0, 0, 0, 1, 0.15481837, -0.38919085, -0.24572735)
-shape = SubResource("BoxShape3D_1otfw")
-
-[node name="rifle" parent="." unique_id=862231063 instance=ExtResource("3_1otfw")]
-transform = Transform3D(0.00067057094, -0.060388587, 0, 0.05710894, 0.0007090805, 0, 0, 0, 0.08820309, 0.0051113367, 0.40487158, 5.7408977)
+visible = false
 
 [node name="Piso" type="CSGBox3D" parent="." unique_id=1393206161]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7631626, 2.4259157)
@@ -70,3 +53,25 @@ transform = Transform3D(1.9959188e-15, 4.3711385e-08, 0.8542683, 1.044609, -4.37
 use_collision = true
 size = Vector3(6, 0.2, 6)
 material = SubResource("StandardMaterial3D_8f5gc")
+
+[node name="escalera" parent="." unique_id=1224728706 instance=ExtResource("6_mwiov")]
+transform = Transform3D(-2.1166903e-07, 0, -6.110894, 0, 8.310408, 0, 4.842423, 0, -2.671157e-07, 0.110105515, -0.7084732, 0.4023242)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="escalera" unique_id=1025292398]
+transform = Transform3D(1, 0, -3.755369e-15, 0, 1, 0, 3.755369e-15, 0, 1, -0.1203295, 0.41772157, 0.25498772)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=704338794]
+transform = Transform3D(1, 0, -2.842171e-14, 0, 1.0000029, 0, 0, 0, 0.9999998, 0.04778719, -0.17289102, -0.24472365)
+shape = SubResource("BoxShape3D_1otfw")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=1909008373]
+transform = Transform3D(1, 0, -2.842171e-14, 0, 1.000001, 0, 0, 0, 0.9999998, 0.11909685, -0.2434228, -0.24380232)
+shape = SubResource("BoxShape3D_1otfw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=1883767163]
+transform = Transform3D(1, 0, -1.4210855e-14, 0, 1.0000006, 0, 0, 0, 0.9999998, 0.1882476, -0.3139466, -0.24702743)
+shape = SubResource("BoxShape3D_1otfw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=169377846]
+transform = Transform3D(1, 0, 3.1974423e-14, 0, 1, 0, 0, 0, 0.9999998, 0.25988328, -0.38448653, -0.24572732)
+shape = SubResource("BoxShape3D_1otfw")
