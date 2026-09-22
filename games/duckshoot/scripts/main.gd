@@ -22,6 +22,9 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @export_group("Prefabs")
 @export var wave_z_offset: float = 0.1 # Distancia hacia adelante respecto al pato para tapar su base
 
+@onready var rifle: Rifle = $rifle
+@onready var audio_juego: GameAudioBase = $AudioJuego
+
 var level_total_ducks: int = 0
 var ducks_spawned: int = 0
 var ducks_despawned: int = 0
@@ -31,6 +34,9 @@ var is_game_over: bool = false
 var lanes_data: Array = []
 
 func _ready() -> void:
+	# Inyección de audio: patrón GameAudioBase (ver games/plinko/scripts/main.gd:324 y games/goldcanalley/scripts/main.gd:141)
+	if audio_juego and rifle:
+		rifle.audio = audio_juego
 	load_level("1")
 
 func load_level(level_id: String) -> void:
@@ -51,6 +57,8 @@ func load_level(level_id: String) -> void:
 	ducks_spawned = 0
 	ducks_despawned = 0
 	is_game_over = false
+	if audio_juego:
+		audio_juego.stop_gears()
 	lanes_data.clear()
 	
 	# Procesar lane_1 a lane_4
@@ -164,6 +172,8 @@ func _spawn_next_target(lane: Dictionary) -> void:
 		instance = duck_a_scene.instantiate() as Target
 		is_duck_item = true
 		ducks_spawned += 1
+		if ducks_spawned == 1 and audio_juego:
+			audio_juego.start_gears()
 
 	if not instance:
 		return
@@ -191,4 +201,6 @@ func _on_target_despawned(target: Target) -> void:
 		# Condición de Victoria / Fin del Juego
 		if ducks_despawned >= level_total_ducks:
 			is_game_over = true
+			if audio_juego:
+				audio_juego.stop_gears()
 			print("fin del juego")

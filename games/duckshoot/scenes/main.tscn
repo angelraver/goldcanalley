@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="4_jus0j"]
 [ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_mwiov"]
 [ext_resource type="PackedScene" uid="uid://b2o3t4tmr3sv0" path="res://games/duckshoot/scenes/escalera.tscn" id="6_mwiov"]
+[ext_resource type="PackedScene" uid="uid://ba4q6wqev3o8" path="res://games/duckshoot/scenes/audio_manager.tscn" id="7_audio"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -75,3 +76,5 @@ shape = SubResource("BoxShape3D_1otfw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="escalera/StaticBody3D" unique_id=169377846]
 transform = Transform3D(1, 0, 3.1974423e-14, 0, 1, 0, 0, 0, 0.9999998, 0.25988328, -0.38448653, -0.24572732)
 shape = SubResource("BoxShape3D_1otfw")
+
+[node name="AudioJuego" parent="." instance=ExtResource("7_audio")]

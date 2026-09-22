@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ba4q6wqev3o8"]
+
+[ext_resource type="Script" uid="uid://tgpj5dn8gqwz8" path="res://games/duckshoot/scripts/audio_manager.gd" id="1_am"]
+[ext_resource type="AudioStream" uid="uid://dhb28a5dbljcd" path="res://games/duckshoot/assets/sounds/rifle.wav" id="2_rifle"]
+[ext_resource type="AudioStream" uid="uid://cbynmbpydafy6" path="res://games/duckshoot/assets/sounds/gears.wav" id="3_gears"]
+[ext_resource type="AudioStream" uid="uid://d0rodox8mfdlw" path="res://games/duckshoot/assets/sounds/gearsstop.wav" id="4_gearsstop"]
+
+[node name="AudioJuego" type="Node" unique_id=1672015537]
+script = ExtResource("1_am")
+
+[node name="Rifle" type="AudioStreamPlayer" parent="." unique_id=718889052]
+stream = ExtResource("2_rifle")
+
+[node name="Gears" type="AudioStreamPlayer" parent="." unique_id=1699604902]
+stream = ExtResource("3_gears")
+
+[node name="GearsStop" type="AudioStreamPlayer" parent="." unique_id=1200582028]
+stream = ExtResource("4_gearsstop")

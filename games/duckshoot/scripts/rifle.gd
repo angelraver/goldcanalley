@@ -56,6 +56,9 @@ var time_passed: float = 0.0
 
 var base_position: Vector3 = Vector3.ZERO
 
+# --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
+var audio: GameAudioBase
+
 # Límites de desplazamiento local del rifle
 var min_rifle_x: float
 var max_rifle_x: float
@@ -178,7 +181,10 @@ func _update_rifle_transform() -> void:
 func shoot() -> void:
 	if not bullet_scene or not muzzle:
 		return
-		
+
+	if audio:
+		audio.play_rifle()
+
 	var bullet_instance = bullet_scene.instantiate()
 	
 	# Usar el vector de dirección global real desde la culata hasta la boquilla (Muzzle)
