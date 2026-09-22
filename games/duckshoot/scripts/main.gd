@@ -31,6 +31,7 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 
 @onready var rifle: Rifle = $rifle
 @onready var audio_juego: GameAudioBase = $AudioJuego
+@onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 
 # Definición de colores principales
 const COLOR_AMARILLO : Color = Color("ffd700")
@@ -48,6 +49,10 @@ var colores_map: Dictionary = {
 
 var valores_data: Dictionary = {}
 
+var puntaje_nivel: int = 0
+var puntaje_maximo_nivel: int = 0
+var ctrl_resultados: ControladorResultados
+
 var level_total_ducks: int = 0
 var ducks_spawned: int = 0
 var ducks_despawned: int = 0
@@ -60,6 +65,10 @@ func _ready() -> void:
 	# Inyección de audio
 	if audio_juego and rifle:
 		rifle.audio = audio_juego
+
+	ctrl_resultados = ControladorResultados.new()
+	add_child(ctrl_resultados)
+	ctrl_resultados.configurar(null, [ui_puntaje], ui_puntaje, null, reiniciar_nivel)
 	
 	_load_valores_config()
 	load_level("1")
@@ -88,9 +97,14 @@ func load_level(level_id: String) -> void:
 		return
 		
 	var level_config = json_data[level_id]
+	if ctrl_resultados:
+		ctrl_resultados.reset()
 	level_total_ducks = int(level_config.get("total", 50))
 	ducks_spawned = 0
 	ducks_despawned = 0
+	puntaje_nivel = 0
+	puntaje_maximo_nivel = 0
+	actualizar_ui_puntaje()
 	is_game_over = false
 	if audio_juego:
 		audio_juego.stop_gears()
@@ -234,7 +248,27 @@ func _spawn_next_target(lane: Dictionary) -> void:
 	instance.setup(lane["speed"], lane["dir"], target_x_limit, item_key, spawn_special)
 	
 	instance.target_despawned.connect(_on_target_despawned)
+	instance.target_hit.connect(_on_target_hit)
 	lane["last_spawned_target"] = instance
+
+func _on_target_hit(target: Target) -> void:
+	if is_game_over:
+		return
+	var puntos: int = target.puntos
+	if puntos <= 0:
+		return
+	puntaje_nivel += puntos
+	actualizar_ui_puntaje()
+	EfectosUI.crear_efecto_puntos(target.global_position, puntos)
+
+func actualizar_ui_puntaje() -> void:
+	if ctrl_resultados:
+		ctrl_resultados.actualizar_puntaje(puntaje_nivel)
+	elif ui_puntaje:
+		ui_puntaje.establecer_puntaje(puntaje_nivel)
+
+func reiniciar_nivel() -> void:
+	load_level("1")
 
 func _on_target_despawned(target: Target) -> void:
 	if not target.is_special:

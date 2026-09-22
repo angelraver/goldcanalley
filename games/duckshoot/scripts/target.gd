@@ -3,6 +3,7 @@ class_name Target
 
 var puntos: int = 0
 signal target_despawned(target: Target)
+signal target_hit(target: Target)
 
 @export var pulley_radius: float = 0.25
 @export var underground_distance: float = 0.6 # Distancia extra que recorre de cabeza tras bambalinas
@@ -48,6 +49,7 @@ func on_hit() -> void:
 	if is_hit:
 		return
 	is_hit = true
+	target_hit.emit(self)
 
 	if audio and not is_special:
 		audio.play_duck()
