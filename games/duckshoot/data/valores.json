@@ -1,0 +1,37 @@
+{
+  "A": {
+    "color": "amarillo",
+    "puntos": 100,
+    "model": "duck"
+  },
+  "B": {
+    "color": "rojo",
+    "puntos": 200,
+    "model": "duck"
+  },
+  "C": {
+    "color": "ambar",
+    "puntos": 300,
+    "model": "duck"
+  },
+  "D": {
+    "color": "blanco",
+    "puntos": 500,
+    "model": "duck"
+  },
+  "bomb": {
+    "color": "negro",
+    "puntos": 0,
+    "model": "bomb"
+  },
+  "ray": {
+    "color": "amarillo",
+    "puntos": 0,
+    "model": "duck"
+  },
+  "ice": {
+    "color": "blanco",
+    "puntos": 0,
+    "model": "duck"
+  }
+}

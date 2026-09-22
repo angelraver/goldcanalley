@@ -1,6 +1,7 @@
 extends Node3D
 class_name Target
 
+var puntos: int = 0
 signal target_despawned(target: Target)
 
 @export var pulley_radius: float = 0.25
@@ -153,3 +154,51 @@ func _orient_base_model() -> void:
 		# Si va a la derecha (direction == 1), rotamos en un sentido; si va a la izquierda, en el opuesto
 		var axis_dir = Vector3.RIGHT if direction == 1 else Vector3.LEFT
 		rotate_object_local(axis_dir, fold_radians)
+
+func set_target_data(p_puntos: int, p_color: Color) -> void:
+	puntos = p_puntos
+	
+	if not is_inside_tree():
+		await ready
+
+	_apply_color(p_color)
+
+func _apply_color(p_color: Color) -> void:
+	# Buscamos el nodo MeshInstance3D dentro del subnodo $duck
+	var mesh_node: MeshInstance3D = _find_mesh_instance(self)
+	if not mesh_node:
+		return
+
+	# Obtenemos o duplicamos el material para no teñir todos los patos juntos
+	var surface_count = mesh_node.get_surface_override_material_count()
+	
+	if surface_count > 0:
+		for i in range(surface_count):
+			_set_mesh_surface_color(mesh_node, i, p_color)
+	else:
+		# Si la malla no expone superficies múltiples, aplicamos a la superficie 0
+		_set_mesh_surface_color(mesh_node, 0, p_color)
+
+func _set_mesh_surface_color(mesh_node: MeshInstance3D, surface_idx: int, p_color: Color) -> void:
+	var mat = mesh_node.get_surface_override_material(surface_idx)
+	
+	if not mat:
+		var active_mat = mesh_node.get_active_material(surface_idx)
+		if active_mat:
+			mat = active_mat.duplicate() as StandardMaterial3D
+			mesh_node.set_surface_override_material(surface_idx, mat)
+
+	if mat is StandardMaterial3D:
+		mat.albedo_color = p_color
+
+# Función aux para recorrer los hijos y encontrar el MeshInstance3D importado
+func _find_mesh_instance(node: Node) -> MeshInstance3D:
+	if node is MeshInstance3D:
+		return node
+		
+	for child in node.get_children():
+		var found = _find_mesh_instance(child)
+		if found:
+			return found
+			
+	return null

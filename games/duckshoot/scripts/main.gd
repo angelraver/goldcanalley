@@ -2,28 +2,51 @@ extends Node3D
 
 @export var duck_a_scene: PackedScene = preload("res://games/duckshoot/scenes/duck.tscn")
 @export var bomb_scene: PackedScene   = preload("res://games/duckshoot/scenes/bomb.tscn")
+
 @export_file("*.json") var level_json_path: String = "res://games/duckshoot/data/niveles.json"
+@export_file("*.json") var valores_json_path: String = "res://games/duckshoot/data/valores.json"
+
 @export_group("Decorado")
 @export var wave_row_scene: PackedScene = preload("res://games/duckshoot/scenes/wave_row.tscn")
 @export var wave_1_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave1.tscn")
-@export var wave_2_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave2.tscn") # ¡Nuevo modelo!
+@export var wave_2_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave2.tscn")
 
 const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el último pato para permitir otro spawn
+
 @export_group("Ancho de Carril (X)")
 @export var x_left_spawn: float = -1.5   # Punto de spawn izquierda / límite de despawn
 @export var x_right_spawn: float = 1.5   # Punto de spawn derecha / límite de despawn
+
 @export_group("Dimensiones de Escalón (Y / Z)")
 @export var base_y: float = 0.0
 @export var step_y: float = 0.55
 @export var base_z: float = 1.1
 @export var step_z: float = 0.3
+
 @export_group("Escala de Velocidad (1 a 5)")
 @export var speed_multiplier: float = 0.5
+
 @export_group("Prefabs")
 @export var wave_z_offset: float = 0.1 # Distancia hacia adelante respecto al pato para tapar su base
 
 @onready var rifle: Rifle = $rifle
 @onready var audio_juego: GameAudioBase = $AudioJuego
+
+# Definición de colores principales
+const COLOR_AMARILLO : Color = Color("ffd700")
+const COLOR_ROJO     : Color = Color("e63946")
+const COLOR_AMBAR    : Color = Color("ff9f1c")
+const COLOR_BLANCO   : Color = Color("f8f9fa")
+
+var colores_map: Dictionary = {
+	"amarillo": COLOR_AMARILLO,
+	"rojo": COLOR_ROJO,
+	"ambar": COLOR_AMBAR,
+	"blanco": COLOR_BLANCO,
+	"negro": Color("1a1a1a")
+}
+
+var valores_data: Dictionary = {}
 
 var level_total_ducks: int = 0
 var ducks_spawned: int = 0
@@ -34,14 +57,27 @@ var is_game_over: bool = false
 var lanes_data: Array = []
 
 func _ready() -> void:
-	# Inyección de audio: patrón GameAudioBase (ver games/plinko/scripts/main.gd:324 y games/goldcanalley/scripts/main.gd:141)
+	# Inyección de audio
 	if audio_juego and rifle:
 		rifle.audio = audio_juego
+	
+	_load_valores_config()
 	load_level("1")
+
+func _load_valores_config() -> void:
+	if not FileAccess.file_exists(valores_json_path):
+		printerr("No se encontró el archivo valores.json en: ", valores_json_path)
+		return
+		
+	var file = FileAccess.open(valores_json_path, FileAccess.READ)
+	var parsed = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	if parsed is Dictionary:
+		valores_data = parsed
 
 func load_level(level_id: String) -> void:
 	if not FileAccess.file_exists(level_json_path):
-		#printerr("No se encontró el archivo niveles.json")
 		return
 		
 	var file = FileAccess.open(level_json_path, FileAccess.READ)
@@ -49,7 +85,6 @@ func load_level(level_id: String) -> void:
 	file.close()
 	
 	if not json_data or not json_data.has(level_id):
-		#printerr("Nivel no encontrado en el JSON: ", level_id)
 		return
 		
 	var level_config = json_data[level_id]
@@ -77,20 +112,16 @@ func load_level(level_id: String) -> void:
 			var lane_y = base_y + (lane_index * step_y)
 			var lane_z = base_z - (lane_index * step_z)
 			
-			# --- INSTANCIAR FILA DE OLAS DELANTE DEL ESCALÓN ---
+			# Instanciar fila de olas
 			var wave_row_instance: WaveRow = wave_row_scene.instantiate()
-			
 			var wave_type = l_info.get("wave_type", "wave1")
 			var chosen_wave_mesh = wave_2_mesh if wave_type == "wave2" else wave_1_mesh
 			wave_row_instance.set_wave_mesh(chosen_wave_mesh)
 
-			# La posicionamos en el centro de la escalera, a la altura del escalón 
-			# y un poquito más adelante en Z que los patos (lane_z + wave_z_offset)
-			var wave_y = lane_y - 0.1 # Un toque más abajo para cubrir la base del pato
+			var wave_y = lane_y - 0.1
 			var wave_z = lane_z + wave_z_offset
 			
 			wave_row_instance.position = Vector3(0, wave_y, wave_z)
-			# Darle un desfase de fase alternado a cada carril para que se muevan desfasados
 			wave_row_instance.phase_offset = lane_index * 1.5
 			add_child(wave_row_instance)
 			
@@ -103,19 +134,17 @@ func load_level(level_id: String) -> void:
 				"especial": l_info.get("especial", []),
 				"pos_y": lane_y,
 				"pos_z": lane_z,
-				"last_spawned_target": null # Referencia al último objetivo creado en este carril
+				"last_spawned_target": null
 			})
 
 func _process(_delta: float) -> void:
 	if is_game_over:
 		return
 		
-	# Recorrer cada carril para verificar si el último elemento avanzó la DISTANCIA_SPAWN
 	for lane in lanes_data:
 		_check_lane_spawn(lane)
 
 func _notification(what: int) -> void:
-	# Manejo robusto para Mobile / Desktop cuando la app pierde el foco
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		get_tree().paused = true
 	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
@@ -128,20 +157,12 @@ func _check_lane_spawn(lane: Dictionary) -> void:
 	var can_spawn = false
 	var last_target = lane["last_spawned_target"]
 	
-	# Caso 1: No hay ningún objetivo previo registrado en la variable
 	if not is_instance_valid(last_target):
 		can_spawn = true
 	else:
-		# Caso 2: Verificar si el último objetivo sigue dentro de la "Zona de Spawn"
-		# Si el pato ya entró en el tramo o cambió de estado (ENTERING -> MOVING_STRAIGHT -> EXITING), 
-		# medimos su distancia X actual con respecto al origen.
 		var start_x = x_left_spawn if lane["dir"] == 1 else x_right_spawn
 		var distance_from_spawn = abs(last_target.global_position.x - start_x)
 		
-		# Solamente permitimos un nuevo spawn si:
-		# a) El último pato ya avanzó la distancia mínima requerida (DISTANCIA_SPAWN)
-		# b) Y además, el pato ya pasó la fase inicial de curva de entrada (State.ENTERING -> state != 0)
-		#    o ya no está tapando físicamente la boca de entrada.
 		if distance_from_spawn >= DISTANCIA_SPAWN and last_target.current_state != Target.State.ENTERING:
 			can_spawn = true
 			
@@ -149,60 +170,76 @@ func _check_lane_spawn(lane: Dictionary) -> void:
 		_spawn_next_target(lane)
 
 func _spawn_next_target(lane: Dictionary) -> void:
-	# Determinar si en esta ocasión aparecerá un Especial o un Pato según especial_rate
 	var spawn_special = false
 	var especial_list = lane["especial"] as Array
+	var patos_list = lane["patos"] as Array
 	
 	if not especial_list.is_empty():
 		var rate = lane["especial_rate"]
-		# Chance de 1 en especial_rate (ej. 1 en 10)
 		if randi_range(1, rate) == 1:
 			spawn_special = true
 			
-	var instance: Target = null
-	var is_duck_item = false
-	
-	if spawn_special:
-		# Instanciar el objeto especial (Bomba)
-		instance = bomb_scene.instantiate() as Target
+	if not spawn_special and ducks_spawned >= level_total_ducks:
+		return
+
+	# Elegir clave del ítem (ej: "A", "B", "C", "D" o "bomb", "ray", "ice")
+	var item_key: String = ""
+	if spawn_special and not especial_list.is_empty():
+		item_key = especial_list.pick_random()
+	elif not patos_list.is_empty():
+		item_key = patos_list.pick_random()
 	else:
-		# Instanciar Pato (Sumará a la cuota global)
-		if ducks_spawned >= level_total_ducks:
-			return # Protección extra para no sobrepasar el límite total
-		instance = duck_a_scene.instantiate() as Target
-		is_duck_item = true
+		item_key = "A"
+
+	# Extraer configuración de valores.json
+	var item_config: Dictionary = valores_data.get(item_key, {})
+	var model_name: String = item_config.get("model", "duck")
+	var color_name: String = item_config.get("color", "amarillo")
+	var puntos_valor: int  = int(item_config.get("puntos", 0))
+
+	# Resolver escena según la propiedad 'model'
+	var target_scene: PackedScene = duck_a_scene
+	if model_name == "bomb":
+		target_scene = bomb_scene
+	else:
+		var scene_path = "res://games/duckshoot/scenes/" + model_name + ".tscn"
+		if ResourceLoader.exists(scene_path):
+			target_scene = load(scene_path)
+
+	var instance: Target = target_scene.instantiate() as Target
+	if not instance:
+		return
+
+	var is_duck_item = not spawn_special
+	if is_duck_item:
 		ducks_spawned += 1
 		if ducks_spawned == 1 and audio_juego:
 			audio_juego.start_gears()
 
-	if not instance:
-		return
-
-	# Inyección de audio: patrón GameAudioBase (ver games/goldcanalley/scripts/main.gd:141)
 	if audio_juego:
 		instance.audio = audio_juego
 
-	# Configurar posiciones
+	# Guardar valor de puntos e información de color en la instancia
+	var color_albedo: Color = colores_map.get(color_name, COLOR_AMARILLO)
+	if instance.has_method("set_target_data"):
+		instance.set_target_data(puntos_valor, color_albedo)
+	else:
+		instance.set("puntos", puntos_valor)
+
 	var start_x = x_left_spawn if lane["dir"] == 1 else x_right_spawn
 	var target_x_limit = x_right_spawn if lane["dir"] == 1 else x_left_spawn
 
 	add_child(instance)
 	instance.global_position = Vector3(start_x, lane["pos_y"], lane["pos_z"])
-	instance.setup(lane["speed"], lane["dir"], target_x_limit, "A" if is_duck_item else "bomb", not is_duck_item)
+	instance.setup(lane["speed"], lane["dir"], target_x_limit, item_key, spawn_special)
 	
-	# Suscribirse al evento de despawn del objetivo
 	instance.target_despawned.connect(_on_target_despawned)
-	
-	# Registrar este objetivo como el último de la fila para este carril
 	lane["last_spawned_target"] = instance
 
 func _on_target_despawned(target: Target) -> void:
-	# Si el objeto que llegó al final era un Pato (no especial), incrementamos el contador de despawns
 	if not target.is_special:
 		ducks_despawned += 1
-		#print("Pato completó recorrido. Progress: ", ducks_despawned, " / ", level_total_ducks)
 		
-		# Condición de Victoria / Fin del Juego
 		if ducks_despawned >= level_total_ducks:
 			is_game_over = true
 			if audio_juego:
