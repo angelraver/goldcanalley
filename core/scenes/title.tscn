@@ -73,17 +73,17 @@ scale = Vector2(0.36, 0.36)
 pivot_offset = Vector2(262, 300)
 texture_normal = ExtResource("5_bj87q")
 
-[node name="ButtonWhackamole" type="TextureButton" parent="." unique_id=991209445]
+[node name="ButtonWhackamole" type="TextureButton" parent="." unique_id=461577082]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -419.16794
-offset_top = 74.4281
-offset_right = 32.0
-offset_bottom = 389.57202
+offset_left = -386.99997
+offset_top = 38.00006
+offset_right = 64.16797
+offset_bottom = 353.14398
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.53626305, 0.53626305)
@@ -107,16 +107,35 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 56.0
-offset_top = 30.514038
-offset_right = 417.76276
-offset_bottom = 513.4861
+offset_left = 8.0
+offset_top = -12.999939
+offset_right = 369.76276
+offset_bottom = 469.97217
 grow_vertical = 2
 scale = Vector2(0.53626305, 0.53626305)
 pivot_offset = Vector2(181, 241)
 texture_normal = ExtResource("8_4e4sy")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="ButtonDuckshoot" type="TextureButton" parent="." unique_id=991209445]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = 180.00006
+offset_right = -88.83203
+offset_bottom = 495.14404
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.53626305, 0.53626305)
+pivot_offset = Vector2(181, 241)
+texture_normal = ExtResource("6_oip1l")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
 layout_mode = 1
@@ -149,5 +168,6 @@ texture_normal = ExtResource("7_uj4fn")
 [connection signal="pressed" from="ButtonWhackamole" to="." method="_on_boton_whackamole_pressed"]
 [connection signal="pressed" from="ButtonPlinko" to="." method="_on_boton_plinko_pressed"]
 [connection signal="pressed" from="ButtonRingToss" to="." method="_on_button_ringtoss_pressed"]
+[connection signal="pressed" from="ButtonDuckshoot" to="." method="_on_boton_duckshoot_pressed"]
 [connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]

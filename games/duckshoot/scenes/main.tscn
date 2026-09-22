@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b2o3t4tmr3sv0" path="res://games/duckshoot/scenes/escalera.tscn" id="6_mwiov"]
 [ext_resource type="PackedScene" uid="uid://ba4q6wqev3o8" path="res://games/duckshoot/scenes/audio_manager.tscn" id="7_audio"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_puntaje"]
+[ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_levelnum"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -81,5 +82,7 @@ shape = SubResource("BoxShape3D_1otfw")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1818975818]
 
 [node name="Puntaje" parent="UI" unique_id=626633466 instance=ExtResource("8_puntaje")]
+
+[node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("9_levelnum")]
 
 [node name="AudioJuego" parent="." instance=ExtResource("7_audio")]

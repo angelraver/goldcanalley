@@ -22,6 +22,13 @@ func _on_boton_plinko_pressed() -> void:
 		func():
 			_iniciar_juego("plinko")
 	)
+
+func _on_boton_duckshoot_pressed() -> void:
+	_press_feedback(
+		$ButtonDuckshoot,
+		func():
+			_iniciar_juego("duckshoot")
+	)
 	
 func _iniciar_juego(id_juego: String) -> void:
 	audio_manager.play_start()

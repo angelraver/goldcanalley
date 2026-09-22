@@ -32,6 +32,7 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @onready var rifle: Rifle = $rifle
 @onready var audio_juego: GameAudioBase = $AudioJuego
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
+@onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 
 # Definición de colores principales
 const COLOR_AMARILLO : Color = Color("ffd700")
@@ -52,6 +53,7 @@ var valores_data: Dictionary = {}
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
 var ctrl_resultados: ControladorResultados
+var nivel_actual: int = 1
 
 var level_total_ducks: int = 0
 var ducks_spawned: int = 0
@@ -66,12 +68,15 @@ func _ready() -> void:
 	if audio_juego and rifle:
 		rifle.audio = audio_juego
 
+	nivel_actual = save_manager.nivel_actual_seleccionado
+
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	ctrl_resultados.configurar(null, [ui_puntaje], ui_puntaje, null, reiniciar_nivel)
+	var hud: Array = [ui_puntaje, ui_level_number]
+	ctrl_resultados.configurar(null, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 	
 	_load_valores_config()
-	load_level("1")
+	load_level(str(nivel_actual))
 
 func _load_valores_config() -> void:
 	if not FileAccess.file_exists(valores_json_path):
@@ -97,6 +102,8 @@ func load_level(level_id: String) -> void:
 		return
 		
 	var level_config = json_data[level_id]
+	if level_id.is_valid_int():
+		nivel_actual = int(level_id)
 	if ctrl_resultados:
 		ctrl_resultados.reset()
 	level_total_ducks = int(level_config.get("total", 50))
@@ -105,6 +112,7 @@ func load_level(level_id: String) -> void:
 	puntaje_nivel = 0
 	puntaje_maximo_nivel = 0
 	actualizar_ui_puntaje()
+	actualizar_ui_level()
 	is_game_over = false
 	if audio_juego:
 		audio_juego.stop_gears()
@@ -267,8 +275,14 @@ func actualizar_ui_puntaje() -> void:
 	elif ui_puntaje:
 		ui_puntaje.establecer_puntaje(puntaje_nivel)
 
+func actualizar_ui_level() -> void:
+	if ctrl_resultados:
+		ctrl_resultados.actualizar_nivel(nivel_actual)
+	elif ui_level_number:
+		ui_level_number.establecer_nivel(nivel_actual)
+
 func reiniciar_nivel() -> void:
-	load_level("1")
+	load_level(str(nivel_actual))
 
 func _on_target_despawned(target: Target) -> void:
 	if not target.is_special:

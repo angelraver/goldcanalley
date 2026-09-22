@@ -1,38 +1,98 @@
 {
 	"1": {
-		"total": 50,
+		"total": 50.0,
 		"lane_1": {
 			"direction": "derecha",
 			"speed": "1",
-			"patos": ["A"],
+			"patos": [
+				"A"
+			],
 			"especial": [],
-			"especial_rate": 0,
+			"especial_rate": 0.0,
 			"wave_type": "wave2"
 		},
 		"lane_2": {
 			"direction": "izquierda",
 			"speed": "1",
-			"patos": ["B"],
-			"especial": ["bomb"],
-			"especial_rate": 20,
+			"patos": [
+				"B"
+			],
+			"especial": [
+				"bomb"
+			],
+			"especial_rate": 20.0,
 			"wave_type": "wave1"
 		},
 		"lane_3": {
 			"direction": "derecha",
 			"speed": "1",
-			"patos": ["C"],
+			"patos": [
+				"C"
+			],
 			"especial": [],
-			"especial_rate": 0,
+			"especial_rate": 0.0,
 			"wave_type": "wave2"
 		},
 		"lane_4": {
 			"direction": "izquierda",
 			"speed": "1",
-			"patos": ["D"],
-			"especial": ["bomb", "ray"],
-			"especial_rate": 20,
+			"patos": [
+				"D"
+			],
+			"especial": [
+				"bomb",
+				"ray"
+			],
+			"especial_rate": 20.0,
+			"wave_type": "wave1"
+		}
+	},
+	"2": {
+		"total": 50.0,
+		"lane_1": {
+			"direction": "derecha",
+			"speed": "1",
+			"patos": [
+				"A"
+			],
+			"especial": [],
+			"especial_rate": 0.0,
+			"wave_type": "wave2"
+		},
+		"lane_2": {
+			"direction": "izquierda",
+			"speed": "1",
+			"patos": [
+				"B"
+			],
+			"especial": [
+				"bomb"
+			],
+			"especial_rate": 20.0,
+			"wave_type": "wave1"
+		},
+		"lane_3": {
+			"direction": "derecha",
+			"speed": "1",
+			"patos": [
+				"C"
+			],
+			"especial": [],
+			"especial_rate": 0.0,
+			"wave_type": "wave2"
+		},
+		"lane_4": {
+			"direction": "izquierda",
+			"speed": "1",
+			"patos": [
+				"D"
+			],
+			"especial": [
+				"bomb",
+				"ray"
+			],
+			"especial_rate": 20.0,
 			"wave_type": "wave1"
 		}
 	}
-
 }

@@ -30,5 +30,13 @@
 		"textura_fondo": "res://games/whackamole/assets/images/fondo_selector.png",
 		"textura_logo": "res://games/ringtoss/assets/images/logo.png",
 		"prefijo_texto": "ringtoss_"
+	},
+	"duckshoot": {
+		"escena_juego": "res://games/duckshoot/scenes/main.tscn",
+		"ruta_niveles_json": "res://games/duckshoot/data/niveles.json",
+		"textos_json": "res://games/duckshoot/data/textos.json",
+		"textura_fondo": "res://games/whackamole/assets/images/fondo_selector.png",
+		"textura_logo": "res://games/duckshoot/assets/images/logo.png",
+		"prefijo_texto": "duckshoot_"
 	}
 }
