@@ -186,6 +186,10 @@ func shoot() -> void:
 		audio.play_rifle()
 
 	var bullet_instance = bullet_scene.instantiate()
+
+	# Inyección de audio: patrón GameAudioBase (ver games/goldcanalley/scripts/main.gd:141)
+	if audio:
+		bullet_instance.audio = audio
 	
 	# Usar el vector de dirección global real desde la culata hasta la boquilla (Muzzle)
 	var real_rifle_direction = (muzzle.global_position - global_position).normalized()

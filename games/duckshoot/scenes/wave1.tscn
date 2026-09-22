@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dl7b"]
 size = Vector3(0.60043335, 0.13046265, 0.038635254)
 
-[node name="Wave" type="Area3D" unique_id=1460113973]
+[node name="Wave" type="Area3D" unique_id=1460113973 groups=["agua"]]
 
 [node name="wave1" parent="." unique_id=48410819 instance=ExtResource("1_56pfl")]
 

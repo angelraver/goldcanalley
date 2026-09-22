@@ -13,6 +13,28 @@ func _ready() -> void:
 func play_rifle() -> void:
 	play("Rifle")
 
+func play_duck() -> void:
+	play_aleatorio("Duck")
+
+func play_shotmiss1() -> void:
+	_play_por_sufijo("ShotMiss", "1")
+
+func play_shotmiss2() -> void:
+	_play_por_sufijo("ShotMiss", "2")
+
+# Selección de variante por sufijo numérico (ver games/whackamole/scripts/audio_manager.gd: _play_variante).
+# Necesario porque ShotMiss1 y ShotMiss2 comparten el grupo "ShotMiss".
+func _play_por_sufijo(prefijo: String, sufijo: String) -> void:
+	if not sfx_habilitado():
+		return
+	var jugadores: Array = grupos_sonido.get(prefijo, [])
+	for jugador in jugadores:
+		if String(jugador.name).ends_with(sufijo):
+			jugador.play()
+			return
+	if not jugadores.is_empty():
+		jugadores[0].play()
+
 func start_gears() -> void:
 	if not sfx_habilitado():
 		return

@@ -8,6 +8,9 @@ class_name Bullet
 var direction: Vector3 = Vector3.FORWARD
 var life_timer: float = 0.0
 
+# --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
+var audio: GameAudioBase
+
 @onready var ray_cast: RayCast3D = $RayCast3D
 
 func setup(dir: Vector3) -> void:
@@ -49,6 +52,11 @@ func _process(delta: float) -> void:
 			if target_instance.has_method("on_hit"):
 				target_instance.on_hit()
 			else:
+				if audio:
+					if _es_agua(collider):
+						audio.play_shotmiss2()
+					else:
+						audio.play_shotmiss1()
 				# Pasamos el collider a la función para emparentar el agujero a él
 				_spawn_bullet_hole(hit_point, normal, collider)
 
@@ -57,6 +65,19 @@ func _process(delta: float) -> void:
 
 	# Si no colisiona, avanza en la posición global
 	global_position += direction * move_distance
+
+# Las olas (wave1/wave2) están en el grupo "agua" (ver wave1.tscn/wave2.tscn,
+# mismo recurso que el grupo "targets" del pato en duck.tscn). Se usa grupo
+# y no el nombre porque Godot auto-renombra los hermanos duplicados
+# ("Wave" -> "Wave@2", ...) y la comparación exacta fallaba en 23 de 24 olas.
+# El resto (escalera, Piso, Fondo) cae en el caso contrario.
+func _es_agua(nodo: Node) -> bool:
+	var actual := nodo
+	while actual:
+		if actual.is_in_group(&"agua"):
+			return true
+		actual = actual.get_parent()
+	return false
 
 func _spawn_bullet_hole(hit_point: Vector3, normal: Vector3, parent_node: Node3D) -> void:
 	if not bullet_hole_scene:

@@ -178,6 +178,10 @@ func _spawn_next_target(lane: Dictionary) -> void:
 	if not instance:
 		return
 
+	# Inyección de audio: patrón GameAudioBase (ver games/goldcanalley/scripts/main.gd:141)
+	if audio_juego:
+		instance.audio = audio_juego
+
 	# Configurar posiciones
 	var start_x = x_left_spawn if lane["dir"] == 1 else x_right_spawn
 	var target_x_limit = x_right_spawn if lane["dir"] == 1 else x_left_spawn
