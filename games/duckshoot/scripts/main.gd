@@ -135,17 +135,16 @@ func load_level(level_id: String) -> void:
 			var lane_z = base_z - (lane_index * step_z)
 			
 			# Instanciar fila de olas
-			var wave_row_instance: WaveRow = wave_row_scene.instantiate()
-			var wave_type = l_info.get("wave_type", "wave1")
-			var chosen_wave_mesh = wave_2_mesh if wave_type == "wave2" else wave_1_mesh
-			wave_row_instance.set_wave_mesh(chosen_wave_mesh)
-
-			var wave_y = lane_y - 0.1
-			var wave_z = lane_z + wave_z_offset
-			
-			wave_row_instance.position = Vector3(0, wave_y, wave_z)
-			wave_row_instance.phase_offset = lane_index * 1.5
-			add_child(wave_row_instance)
+			var wave_type = l_info.get("wave_type", "none")
+			if wave_type != "none":
+				var wave_row_instance: WaveRow = wave_row_scene.instantiate()
+				var chosen_wave_mesh = wave_2_mesh if wave_type == "wave2" else wave_1_mesh
+				wave_row_instance.set_wave_mesh(chosen_wave_mesh)
+				var wave_y = lane_y - 0.1
+				var wave_z = lane_z + wave_z_offset
+				wave_row_instance.position = Vector3(0, wave_y, wave_z)
+				wave_row_instance.phase_offset = lane_index * 1.5
+				add_child(wave_row_instance)
 			
 			lanes_data.append({
 				"index": lane_index,

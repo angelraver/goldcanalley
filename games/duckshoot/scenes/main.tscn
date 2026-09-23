@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bxclitkt2fwl8"]
 
 [ext_resource type="Script" uid="uid://b5mc1wtap7s6m" path="res://games/duckshoot/scripts/main.gd" id="1_vnc0d"]
-[ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/assets/models/escalera.glb" id="2_7x46q"]
+[ext_resource type="PackedScene" uid="uid://oipge6ql1fcx" path="res://games/duckshoot/assets/models/escalera.glb" id="2_7x46q"]
 [ext_resource type="PackedScene" uid="uid://ch101a72hcr3v" path="res://games/duckshoot/scenes/rifle.tscn" id="3_1otfw"]
-[ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="4_jus0j"]
-[ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_mwiov"]
+[ext_resource type="Texture2D" uid="uid://4mcoileoa8mj" path="res://games/goldcanalley/assets/images/world/floor.png" id="4_jus0j"]
+[ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_mwiov"]
 [ext_resource type="PackedScene" uid="uid://b2o3t4tmr3sv0" path="res://games/duckshoot/scenes/escalera.tscn" id="6_mwiov"]
 [ext_resource type="PackedScene" uid="uid://ba4q6wqev3o8" path="res://games/duckshoot/scenes/audio_manager.tscn" id="7_audio"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_puntaje"]
@@ -85,4 +85,4 @@ shape = SubResource("BoxShape3D_1otfw")
 
 [node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("9_levelnum")]
 
-[node name="AudioJuego" parent="." instance=ExtResource("7_audio")]
+[node name="AudioJuego" parent="." unique_id=688448039 instance=ExtResource("7_audio")]
