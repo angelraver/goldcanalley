@@ -4,7 +4,7 @@ class_name Target
 var puntos: int = 0
 signal target_despawned(target: Target)
 signal target_hit(target: Target)
-
+@export var target_height: float = 0.25 # Ajusta este valor según la altura total del modelo del pato
 @export var pulley_radius: float = 0.25
 @export var underground_distance: float = 0.6 # Distancia extra que recorre de cabeza tras bambalinas
 @export var fall_speed: float = 0.15 # Tiempo en segundos que tarda en caer
@@ -41,7 +41,7 @@ func setup(p_speed: float, p_direction: int, p_x_limit: float, p_type: String, p
 	exit_underground_progress = 0.0
 	is_hit = false
 	hit_fold_angle = 0.0
-	
+
 	current_state = State.ENTERING
 	_update_entering_position()
 
@@ -144,18 +144,20 @@ func _update_exiting_underground_position() -> void:
 
 func _orient_base_model() -> void:
 	rotation = Vector3.ZERO
+
 	if direction == 1:
 		rotation_degrees.y = 180.0
 	elif direction == -1:
 		rotation_degrees.y = 0.0
-
-	# Aplicar caída lateral al impactar:
 	if hit_fold_angle > 0.0:
 		var fold_radians = (PI / 2.0) * hit_fold_angle
-		
-		# Si va a la derecha (direction == 1), rotamos en un sentido; si va a la izquierda, en el opuesto
 		var axis_dir = Vector3.RIGHT if direction == 1 else Vector3.LEFT
-		rotate_object_local(axis_dir, fold_radians)
+
+		rotate_object_local(axis_dir, fold_radians)		
+		# Compensación Y: al rotar desde el centro, la base sube (target_height / 2.0).
+		# Se resta gradualmente a medida que se tumba (sin tocar base_y global)
+		var y_offset = (target_height / 2.0) * sin(fold_radians)
+		global_position.y = base_y - y_offset
 
 func set_target_data(p_puntos: int, p_color: Color) -> void:
 	puntos = p_puntos

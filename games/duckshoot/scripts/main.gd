@@ -11,6 +11,23 @@ extends Node3D
 @export var wave_1_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave1.tscn")
 @export var wave_2_mesh: PackedScene    = preload("res://games/duckshoot/scenes/wave2.tscn")
 
+@export_group("Calibración Fija de Carriles (Y / Z)")
+# Definición manual [Y, Z] para cada uno de los 4 carriles
+@export var lane_positions: Array[Vector2] = [
+	Vector2(0.03, 1.19), # Carril 1 (Abajo / Lane_1) -> [Y, Z]
+	Vector2(0.61, 0.82), # Carril 2                -> [Y, Z]
+	Vector2(1.2, 0.55), # Carril 3                -> [Y, Z]
+	Vector2(1.8, 0.17)  # Carril 4 (Arriba / Lane_4) -> [Y, Z]
+]
+
+# Offset de la Ola [Y, Z] relativo a la posición de su respectivo carril
+@export var wave_lane_offsets: Array[Vector2] = [
+	Vector2(-0.2, 0.05), # Offset Ola Carril 1
+	Vector2(-0.2, 0.05), # Offset Ola Carril 2
+	Vector2(-0.2, 0.05), # Offset Ola Carril 3
+	Vector2(-0.2, 0.05)  # Offset Ola Carril 4
+]
+
 const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el último pato para permitir otro spawn
 
 @export_group("Ancho de Carril (X)")
@@ -131,17 +148,24 @@ func load_level(level_id: String) -> void:
 			var godot_speed = raw_speed * speed_multiplier
 			
 			var lane_index = i - 1
-			var lane_y = base_y + (lane_index * step_y)
-			var lane_z = base_z - (lane_index * step_z)
 			
-			# Instanciar fila de olas
+			# Lectura de la calibración individual [Y, Z] para este carril
+			var pos_calibrada = lane_positions[lane_index] if lane_index < lane_positions.size() else Vector2.ZERO
+			var lane_y = pos_calibrada.x
+			var lane_z = pos_calibrada.y
+			
+			# Instanciar fila de olas con calibración independiente por carril
 			var wave_type = l_info.get("wave_type", "none")
 			if wave_type != "none":
 				var wave_row_instance: WaveRow = wave_row_scene.instantiate()
 				var chosen_wave_mesh = wave_2_mesh if wave_type == "wave2" else wave_1_mesh
 				wave_row_instance.set_wave_mesh(chosen_wave_mesh)
-				var wave_y = lane_y - 0.1
-				var wave_z = lane_z + wave_z_offset
+				
+				# Aplicar offset específico de la ola en este carril
+				var wave_offset = wave_lane_offsets[lane_index] if lane_index < wave_lane_offsets.size() else Vector2(-0.1, 0.1)
+				var wave_y = lane_y + wave_offset.x
+				var wave_z = lane_z + wave_offset.y
+				
 				wave_row_instance.position = Vector3(0, wave_y, wave_z)
 				wave_row_instance.phase_offset = lane_index * 1.5
 				add_child(wave_row_instance)
