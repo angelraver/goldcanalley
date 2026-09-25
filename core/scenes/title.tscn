@@ -2,22 +2,18 @@
 
 [ext_resource type="Script" uid="uid://c0x8sp71taj7u" path="res://core/scripts/title.gd" id="1_2xeeo"]
 [ext_resource type="Texture2D" uid="uid://8ctdimwp03il" path="res://core/assets/images/fondodia.jpeg" id="2_4e4sy"]
+[ext_resource type="Script" uid="uid://fc21akfhascg" path="res://core/scripts/carousel_menu.gd" id="2_carousel"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_2xeeo"]
 [ext_resource type="Texture2D" uid="uid://bwp7plbrdja8d" path="res://core/assets/images/logo.png" id="4_4e4sy"]
-[ext_resource type="Texture2D" uid="uid://c6nyrmpl5ag5g" path="res://games/goldcanalley/assets/images/logo.png" id="5_bj87q"]
 [ext_resource type="Texture2D" uid="uid://cnxvtolpaaljy" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
-[ext_resource type="Texture2D" uid="uid://cnh2juky5yv20" path="res://games/whackamole/assets/images/logo.png" id="6_oip1l"]
-[ext_resource type="Texture2D" uid="uid://c323blul3mu44" path="res://games/plinko/assets/images/logo.png" id="7_oip1l"]
 [ext_resource type="Texture2D" uid="uid://w11w41j4jpou" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
-[ext_resource type="Texture2D" uid="uid://dx16h332x6thg" path="res://games/ringtoss/assets/images/logo.png" id="8_4e4sy"]
-[ext_resource type="Texture2D" uid="uid://b51wfovfj5ej2" path="res://games/duckshoot/assets/images/logo.png" id="9_xopy8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
 shader = ExtResource("3_2xeeo")
 shader_parameter/nivel_desenfoque = 2.5
 shader_parameter/oscurecer = Color(0, 0, 0, 0.3)
 
-[node name="Title" type="Control" unique_id=942844040]
+[node name="Title" type="Control" unique_id=2096106481]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,148 +21,83 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2xeeo")
-metadata/_edit_horizontal_guides_ = [1278.0]
-metadata/_edit_vertical_guides_ = [724.0]
 
-[node name="Fondo" type="TextureRect" parent="." unique_id=1930174974]
-layout_mode = 0
-offset_left = -400.0
-offset_right = 393.0
-offset_bottom = 1024.0
-scale = Vector2(2, 2)
+[node name="Fondo" type="TextureRect" parent="." unique_id=1944187969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_4e4sy")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=718747323]
+[node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=641397611]
 material = SubResource("ShaderMaterial_tydxx")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.3348694
-offset_top = 0.77826405
-offset_right = -2.3348389
-offset_bottom = 0.77819824
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Logo" type="TextureRect" parent="." unique_id=2120168976]
+[node name="Logo" type="TextureRect" parent="." unique_id=891912092]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -257.0
-offset_top = -563.0
-offset_right = 271.0
-offset_bottom = -48.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_4e4sy")
-
-[node name="ButtonGoldCanAlley" type="TextureButton" parent="." unique_id=256854180]
-layout_mode = 0
-offset_left = -15.999982
-offset_top = 382.0
-offset_right = 508.00003
-offset_bottom = 981.9999
-scale = Vector2(0.36, 0.36)
-pivot_offset = Vector2(262, 300)
-texture_normal = ExtResource("5_bj87q")
-
-[node name="ButtonWhackamole" type="TextureButton" parent="." unique_id=461577082]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -564.0
-offset_top = 169.0
-offset_right = -112.83203
-offset_bottom = 484.14404
-grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(0.53626305, 0.53626305)
-pivot_offset = Vector2(181, 241)
-texture_normal = ExtResource("6_oip1l")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="ButtonPlinko" type="TextureButton" parent="." unique_id=1906105612]
-layout_mode = 0
-offset_left = 234.00003
-offset_top = 391.0
-offset_right = 758.0
-offset_bottom = 991.00006
-scale = Vector2(0.36, 0.36)
-pivot_offset = Vector2(262, 300)
-texture_normal = ExtResource("7_oip1l")
-
-[node name="ButtonRingToss" type="TextureButton" parent="." unique_id=1163062909]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 26.000008
-offset_top = -21.999939
-offset_right = 387.76276
-offset_bottom = 460.97217
-grow_vertical = 2
-scale = Vector2(0.53626305, 0.53626305)
-pivot_offset = Vector2(181, 241)
-texture_normal = ExtResource("8_4e4sy")
-ignore_texture_size = true
+offset_top = 24.0
+offset_bottom = 468.0
+grow_horizontal = 2
+texture = ExtResource("4_4e4sy")
+expand_mode = 1
 stretch_mode = 5
 
-[node name="ButtonDuckshoot" type="TextureButton" parent="." unique_id=991209445]
+[node name="CarouselMenu" type="Control" parent="." unique_id=133689711]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -430.00003
-offset_top = -16.0
-offset_right = 94.0
-offset_bottom = 470.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+offset_top = 270.0
+offset_bottom = -180.0
+grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.4, 0.4)
-pivot_offset = Vector2(181, 241)
-texture_normal = ExtResource("9_xopy8")
+script = ExtResource("2_carousel")
 
-[node name="Prizes" type="TextureButton" parent="." unique_id=127181374]
+[node name="Prizes" type="TextureButton" parent="." unique_id=1654253781]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -332.0
-offset_top = -250.0
+offset_left = -307.0
+offset_top = -275.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.6, 0.6)
-pivot_offset = Vector2(166, 125)
+pivot_offset = Vector2(65, 65)
+tooltip_text = "Premios"
 texture_normal = ExtResource("6_ljifs")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="Options" type="TextureButton" parent="." unique_id=110325157]
+[node name="Options" type="TextureButton" parent="." unique_id=935073818]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -250.0
-offset_right = 332.0
+offset_left = 20.0
+offset_top = -267.0
+offset_right = 299.0
+offset_bottom = -20.0
 grow_vertical = 0
-scale = Vector2(0.6, 0.6)
-pivot_offset = Vector2(166, 125)
+pivot_offset = Vector2(65, 65)
+tooltip_text = "Opciones"
 texture_normal = ExtResource("7_uj4fn")
+ignore_texture_size = true
+stretch_mode = 5
 
-[connection signal="pressed" from="ButtonGoldCanAlley" to="." method="_on_boton_goldcanalley_pressed"]
-[connection signal="pressed" from="ButtonWhackamole" to="." method="_on_boton_whackamole_pressed"]
-[connection signal="pressed" from="ButtonPlinko" to="." method="_on_boton_plinko_pressed"]
-[connection signal="pressed" from="ButtonRingToss" to="." method="_on_button_ringtoss_pressed"]
-[connection signal="pressed" from="ButtonDuckshoot" to="." method="_on_boton_duckshoot_pressed"]
 [connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]
