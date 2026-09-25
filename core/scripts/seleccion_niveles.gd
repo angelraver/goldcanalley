@@ -21,12 +21,9 @@ func _ready() -> void:
 	escena_juego_destino = config_juego.get("escena_juego", "")
 	print("ruta_niveles_json: " + ruta_niveles_json)
 	print("escena_juego_destino: " + escena_juego_destino)
-	# Cambiar textura de fondo opcionalmente si está especificada
 	var ruta_fondo = config_juego.get("textura_fondo", "")
 	if fondo and ResourceLoader.exists(ruta_fondo):
 		fondo.texture = load(ruta_fondo)
-	
-	print("pepe: " + ruta_fondo)
 	
 	var ruta_logo = config_juego.get("textura_logo", "")
 	if logo and ResourceLoader.exists(ruta_logo):

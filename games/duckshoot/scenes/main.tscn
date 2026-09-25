@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxclitkt2fwl8"]
 
 [ext_resource type="Script" uid="uid://b5mc1wtap7s6m" path="res://games/duckshoot/scripts/main.gd" id="1_vnc0d"]
-[ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/assets/models/escalera.glb" id="2_7x46q"]
+[ext_resource type="PackedScene" uid="uid://oipge6ql1fcx" path="res://games/duckshoot/assets/models/escalera.glb" id="2_7x46q"]
 [ext_resource type="PackedScene" uid="uid://ch101a72hcr3v" path="res://games/duckshoot/scenes/rifle.tscn" id="3_1otfw"]
 [ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="4_jus0j"]
 [ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="5_mwiov"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://ba4q6wqev3o8" path="res://games/duckshoot/scenes/audio_manager.tscn" id="7_audio"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_levelnum"]
+[ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="10_panel"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="11_ever"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -84,5 +86,28 @@ shape = SubResource("BoxShape3D_1otfw")
 [node name="Puntaje" parent="UI" unique_id=626633466 instance=ExtResource("8_puntaje")]
 
 [node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("9_levelnum")]
+
+[node name="PanelResultados" parent="UI" unique_id=696404095 instance=ExtResource("10_panel")]
+
+[node name="LevelTitle" type="Label" parent="UI" unique_id=1507659899]
+custom_minimum_size = Vector2(600, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -394.5
+offset_right = 300.0
+offset_bottom = 394.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("11_ever")
+theme_override_font_sizes/font_size = 64
+text = "Nivel 1"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="AudioJuego" parent="." unique_id=688448039 instance=ExtResource("7_audio")]

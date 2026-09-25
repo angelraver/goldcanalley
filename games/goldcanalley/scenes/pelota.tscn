@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6l8gsmux112o"]
 
 [ext_resource type="Texture2D" uid="uid://dkenyvgkr7vmc" path="res://games/goldcanalley/assets/images/world/ball.png" id="1_sha3n"]
-[ext_resource type="Script" uid="uid://b4y5beitlo8l5" path="res://games/goldcanalley/scenes/pelota.gd" id="1_vbg1x"]
+[ext_resource type="Script" uid="uid://b4y5beitlo8l5" path="res://games/goldcanalley/scripts/pelota.gd" id="1_vbg1x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7dm0k"]
 bounce = 0.03

@@ -16,8 +16,8 @@ extends Node3D
 @export var lane_positions: Array[Vector2] = [
 	Vector2(0.03, 1.19), # Carril 1 (Abajo / Lane_1) -> [Y, Z]
 	Vector2(0.61, 0.82), # Carril 2                -> [Y, Z]
-	Vector2(1.2, 0.55), # Carril 3                -> [Y, Z]
-	Vector2(1.8, 0.17)  # Carril 4 (Arriba / Lane_4) -> [Y, Z]
+	Vector2(1.2, 0.53), # Carril 3                -> [Y, Z]
+	Vector2(1.8, 0.15)  # Carril 4 (Arriba / Lane_4) -> [Y, Z]
 ]
 
 # Offset de la Ola [Y, Z] relativo a la posición de su respectivo carril
@@ -50,6 +50,8 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @onready var audio_juego: GameAudioBase = $AudioJuego
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
+@onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
+@onready var ui_level_title: Label = $UI/LevelTitle
 
 # Definición de colores principales
 const COLOR_AMARILLO : Color = Color("ffd700")
@@ -90,7 +92,7 @@ func _ready() -> void:
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
 	var hud: Array = [ui_puntaje, ui_level_number]
-	ctrl_resultados.configurar(null, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
+	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 	
 	_load_valores_config()
 	load_level(str(nivel_actual))
@@ -121,13 +123,27 @@ func load_level(level_id: String) -> void:
 	var level_config = json_data[level_id]
 	if level_id.is_valid_int():
 		nivel_actual = int(level_id)
+	# Reset panel + HUD antes de limpiar escena (restaura visibilidad)
 	if ctrl_resultados:
 		ctrl_resultados.reset()
+	# Limpiar targets y olas previas
+	for child in get_children():
+		if child is Target or child is WaveRow:
+			child.queue_free()
 	level_total_ducks = int(level_config.get("total", 50))
 	ducks_spawned = 0
 	ducks_despawned = 0
 	puntaje_nivel = 0
-	puntaje_maximo_nivel = 0
+	# Meta para ribbons: prioridad max_pts (schema duckshoot), fallback puntaje_maximo/meta_puntos
+	puntaje_maximo_nivel = int(level_config.get("max_pts", level_config.get("puntaje_maximo", level_config.get("meta_puntos", 0))))
+	if puntaje_maximo_nivel <= 0:
+		# Fallback: máximo teórico = pts más alto * total
+		var max_pts_por_item: int = 0
+		for k in valores_data.keys():
+			var v = valores_data[k]
+			if v is Dictionary:
+				max_pts_por_item = maxi(max_pts_por_item, int(v.get("puntos", 0)))
+		puntaje_maximo_nivel = max_pts_por_item * level_total_ducks
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
 	is_game_over = false
@@ -181,11 +197,13 @@ func load_level(level_id: String) -> void:
 				"pos_z": lane_z,
 				"last_spawned_target": null
 			})
+	anunciar_nivel(nivel_actual)
 
 func _process(_delta: float) -> void:
 	if is_game_over:
 		return
-		
+	if ctrl_resultados and ctrl_resultados.esta_mostrado():
+		return
 	for lane in lanes_data:
 		_check_lane_spawn(lane)
 
@@ -285,6 +303,8 @@ func _spawn_next_target(lane: Dictionary) -> void:
 func _on_target_hit(target: Target) -> void:
 	if is_game_over:
 		return
+	if ctrl_resultados and ctrl_resultados.esta_mostrado():
+		return
 	var puntos: int = target.puntos
 	if puntos <= 0:
 		return
@@ -304,15 +324,33 @@ func actualizar_ui_level() -> void:
 	elif ui_level_number:
 		ui_level_number.establecer_nivel(nivel_actual)
 
+func anunciar_nivel(n: int) -> void:
+	if not ui_level_title:
+		return
+	ui_level_title.text = game_manager.obtener_titulo_nivel(str(n), "duckshoot")
+	ui_level_title.modulate.a = 1.0
+	ui_level_title.visible = true
+	var tween = create_tween()
+	tween.tween_interval(1.5)
+	tween.tween_property(ui_level_title, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(func(): ui_level_title.visible = false)
+
+func mostrar_panel_resultados() -> void:
+	if ctrl_resultados and ctrl_resultados.esta_mostrado():
+		return
+	if is_game_over and ctrl_resultados and ctrl_resultados.esta_mostrado():
+		return
+	is_game_over = true
+	if audio_juego:
+		audio_juego.stop_gears()
+	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
 func reiniciar_nivel() -> void:
 	load_level(str(nivel_actual))
 
 func _on_target_despawned(target: Target) -> void:
 	if not target.is_special:
 		ducks_despawned += 1
-		
 		if ducks_despawned >= level_total_ducks:
-			is_game_over = true
-			if audio_juego:
-				audio_juego.stop_gears()
-			print("fin del juego")
+			if not is_game_over and not (ctrl_resultados and ctrl_resultados.esta_mostrado()):
+				mostrar_panel_resultados()

@@ -1,5 +1,5 @@
 {
-  "1": {
+  "111": {
 	"titulo": "Práctica de Tiro",
 	"total": 40,
 	"max_pts": 3400,
@@ -628,7 +628,7 @@
 	  "wave_type": "wave1"
 	}
   },
-  "18": {
+  "1": {
 	"titulo": "Maelstrom Absoluto",
 	"total": 500,
 	"max_pts": 72000,
