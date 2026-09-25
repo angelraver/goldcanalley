@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b2o3t4tmr3sv0"]
+
+[ext_resource type="PackedScene" uid="uid://486clog0c46e" path="res://games/duckshoot/assets/models/escalera.glb" id="1_hnfu6"]
+[ext_resource type="Texture2D" uid="uid://b20eal1c4fmlo" path="res://games/duckshoot/assets/images/pantano.png" id="2_6frey"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp7ax"]
+albedo_texture = ExtResource("2_6frey")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+
+[node name="escalera" unique_id=1224728706 instance=ExtResource("1_hnfu6")]
+
+[node name="escalera_svg" parent="." index="0" unique_id=1693575761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1185022, 0.4247024, 0.25452018)
+material_override = SubResource("StandardMaterial3D_xp7ax")

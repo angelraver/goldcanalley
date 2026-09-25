@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dalnwdqytbvpt"]
+
+[ext_resource type="PackedScene" path="res://games/duckshoot/assets/models/bomb.glb" id="1_6eum7"]
+[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/scripts/target.gd" id="1_kqcde"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8dl7b"]
+size = Vector3(0.6247711, 0.63427734, 0.20159912)
+
+[node name="Bomb" type="Area3D" unique_id=696013669]
+script = ExtResource("1_kqcde")
+
+[node name="bomb" parent="." unique_id=1548369785 instance=ExtResource("1_6eum7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16011895, 0.18902725, 0.014376819)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=921486170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10582495, 0.24577764, 0.08005902)
+shape = SubResource("BoxShape3D_8dl7b")

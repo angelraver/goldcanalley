@@ -1,0 +1,668 @@
+{
+  "111": {
+	"titulo": "Práctica de Tiro",
+	"total": 40,
+	"max_pts": 3400,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	}
+  },
+  "2": {
+	"titulo": "Primer Marejadilla",
+	"total": 60,
+	"max_pts": 6800,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": ["A", "B"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": ["B"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	}
+  },
+  "3": {
+	"titulo": "Flujo Cruzado",
+	"total": 80,
+	"max_pts": 10500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": ["A"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "2",
+	  "patos": ["A", "B"],
+	  "especial": ["bomb"],
+	  "especial_rate": 15,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": ["B"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave1"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "2",
+	  "patos": ["B", "C"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	}
+  },
+  "4": {
+	"titulo": "Agua Picada",
+	"total": 100,
+	"max_pts": 14200,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": ["A", "B"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": ["B"],
+	  "especial": ["bomb"],
+	  "especial_rate": 12,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "2",
+	  "patos": ["B", "C"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave1"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["C"],
+	  "especial": ["ray"],
+	  "especial_rate": 15,
+	  "wave_type": "none"
+	}
+  },
+  "5": {
+	"titulo": "¡Tormenta Marea Viva!",
+	"total": 120,
+	"max_pts": 16500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["A", "B", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["B", "C"],
+	  "especial": ["bomb"],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "3",
+	  "patos": ["C", "D"],
+	  "especial": ["ray"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["A", "C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	}
+  },
+  "6": {
+	"titulo": "Calma Tras la Tempestad",
+	"total": 130,
+	"max_pts": 18200,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "2",
+	  "patos": ["A", "B"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": ["B", "C"],
+	  "especial": ["ice"],
+	  "especial_rate": 12,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": ["B"],
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["C"],
+	  "especial": ["ray"],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	}
+  },
+  "7": {
+	"titulo": "Doble Corriente",
+	"total": 150,
+	"max_pts": 22000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "2",
+	  "patos": ["B"],
+	  "especial": ["bomb"],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["B", "C"],
+	  "especial": ["ray"],
+	  "especial_rate": 10,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": ["C", "D"],
+	  "especial": ["ice"],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "3",
+	  "patos": ["C"],
+	  "especial": ["bomb"],
+	  "especial_rate": 10,
+	  "wave_type": "wave1"
+	}
+  },
+  "8": {
+	"titulo": "Visión Fragmentada",
+	"total": 180,
+	"max_pts": 26500,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "3",
+	  "patos": ["A", "B", "C"],
+	  "especial": ["ray"],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["B", "C"],
+	  "especial": ["bomb"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["C", "D"],
+	  "especial": ["ice"],
+	  "especial_rate": 8,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "3",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb", "ray"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	}
+  },
+  "9": {
+	"titulo": "Corte de Oleaje",
+	"total": 210,
+	"max_pts": 31000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["B", "C"],
+	  "especial": ["ice"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["ray"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb", "ice"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	}
+  },
+  "10": {
+	"titulo": "¡Galerna Infernal!",
+	"total": 250,
+	"max_pts": 34500,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb", "ray"],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["A", "D"],
+	  "especial": ["bomb", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "5",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["ray", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
+  },
+  "11": {
+	"titulo": "Resaca Nocturna",
+	"total": 270,
+	"max_pts": 38000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["A", "B", "C"],
+	  "especial": ["ray"],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["B", "C"],
+	  "especial": ["ice"],
+	  "especial_rate": 10,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "3",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["ray"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	}
+  },
+  "12": {
+	"titulo": "Marea en Enjambre",
+	"total": 300,
+	"max_pts": 43500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "3",
+	  "patos": ["B", "C"],
+	  "especial": ["bomb"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["ray"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "3",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["ice"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb", "ice"],
+	  "especial_rate": 7,
+	  "wave_type": "wave1"
+	}
+  },
+  "13": {
+	"titulo": "Bolsón de Corrientes",
+	"total": 340,
+	"max_pts": 49000,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["ray"],
+	  "especial_rate": 7,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 7,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["ice"],
+	  "especial_rate": 7,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb", "ray"],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	}
+  },
+  "14": {
+	"titulo": "Barrera Oscura",
+	"total": 380,
+	"max_pts": 54000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb", "ice"],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["ray", "ice"],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb", "ray"],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "5",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
+  },
+  "15": {
+	"titulo": "¡Tsunami Rabioso!",
+	"total": 420,
+	"max_pts": 58000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "5",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 4,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "5",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 4,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "5",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 4,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "5",
+	  "patos": ["D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 4,
+	  "wave_type": "wave1"
+	}
+  },
+  "16": {
+	"titulo": "Sombra en la Espuma",
+	"total": 450,
+	"max_pts": 62000,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["A", "B", "C"],
+	  "especial": ["ray"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["ice"],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb"],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["bomb", "ray"],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	}
+  },
+  "17": {
+	"titulo": "Huracán de Blancos",
+	"total": 480,
+	"max_pts": 67500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "4",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["bomb", "ray"],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "5",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb", "ice"],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "4",
+	  "patos": ["C", "D"],
+	  "especial": ["ray", "ice"],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "5",
+	  "patos": ["B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
+  },
+  "1": {
+	"titulo": "Maelstrom Absoluto",
+	"total": 500,
+	"max_pts": 72000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "5",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "5",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "5",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "5",
+	  "patos": ["A", "B", "C", "D"],
+	  "especial": ["bomb", "ray", "ice"],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
+  }
+}

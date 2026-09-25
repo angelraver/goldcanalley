@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://tuc8yphbd1ly"]
+
+[ext_resource type="PackedScene" uid="uid://7g8l1q3en05g" path="res://games/duckshoot/assets/models/duck.glb" id="1_rkbqy"]
+[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/scripts/target.gd" id="1_y3hbw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kyv4s"]
+height = 0.14410019
+radius = 0.7
+
+[node name="Duck" type="Node3D" unique_id=1100825524]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
+script = ExtResource("1_y3hbw")
+
+[node name="duck" parent="." unique_id=1673520995 instance=ExtResource("1_rkbqy")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1892375850 groups=["targets"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=854664587]
+transform = Transform3D(1, -2.842171e-14, -1.6940659e-21, 0, -4.371139e-08, 1, -2.842171e-14, -1, -4.371139e-08, 0.112, 0.297, 0)
+shape = SubResource("CylinderShape3D_kyv4s")

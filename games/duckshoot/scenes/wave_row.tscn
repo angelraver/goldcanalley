@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://obu8t5s0k1av"]
+
+[ext_resource type="Script" uid="uid://coh1unt4ebdr7" path="res://games/duckshoot/scripts/wave_row.gd" id="1_ribjp"]
+
+[node name="WaveRow" type="Node3D" unique_id=166045599]
+script = ExtResource("1_ribjp")
+wave_mesh_scene = null
+count = null
+step_x = null
+speed = null
+radius_x = null
+radius_y = null
+phase_offset = null

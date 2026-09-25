@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmx6nlfdepqkt"]
 
 [ext_resource type="Script" uid="uid://smmc3aovjttf" path="res://core/scripts/options.gd" id="1_85aq5"]
-[ext_resource type="Texture2D" uid="uid://dhm87r5bq2oka" path="res://games/goldcanalley/assets/images/world/fondodia.jpeg" id="2_gycth"]
+[ext_resource type="Texture2D" uid="uid://8ctdimwp03il" path="res://core/assets/images/fondodia.jpeg" id="2_aea3w"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_gyu1t"]
 [ext_resource type="Texture2D" uid="uid://y14w5mbypeai" path="res://core/assets/images/ui/panel_options.png" id="4_g5hix"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="5_rftt1"]
@@ -33,7 +33,7 @@ offset_top = -2.0
 offset_right = 573.0
 offset_bottom = 1022.0
 scale = Vector2(1.4634976, 1.4634976)
-texture = ExtResource("2_gycth")
+texture = ExtResource("2_aea3w")
 
 [node name="FondoDesenfoque" type="ColorRect" parent="Fondo" unique_id=1996656753]
 material = SubResource("ShaderMaterial_qa6uu")
