@@ -1,5 +1,5 @@
 {
-  "1": {
+  "11": {
 	"rings": 5,
 	"puntaje_maximo": 300,
 	"separacion_x": 0.18,
@@ -2197,7 +2197,7 @@
 	  }
 	]
   },
-  "50": {
+  "1": {
 	"rings": 5,
 	"puntaje_maximo": 2000,
 	"separacion_x": 0.195,
