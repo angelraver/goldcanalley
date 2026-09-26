@@ -1,7 +1,14 @@
 Ring Toss - score detection integration
 
-- Score sensors are generated dynamically from main.gd.
-- Each cone reads its points value from niveles.json.
+- Score is geometric (no Area3D): each physics frame checks whether a
+  launched, unresolved ring is straddled by a cone axis (base below the
+  ring plane, tip above it, intersection inside radio_embocado, ring
+  reasonably horizontal).
+- Cone types come from data/valores.json (keys A-H: color, pts, size).
+- Each cone in niveles.json resolves its type via "tipo" field, a
+  single-letter "id", or its points value (100->C ... 250->F, resto->G).
+- "points" in niveles.json still overrides valores "pts", except the
+  trap type (negative pts in valores) which always subtracts.
 - Each ring can score only once.
 - A miss is resolved automatically after tiempo_maximo_tiro.
 - Reaching puntaje_maximo ends the level early, matching Gold Can Alley.
@@ -9,10 +16,8 @@ Ring Toss - score detection integration
 - Restart cleans old rings and generates a new one.
 
 Tunable values in the Main inspector under "Deteccion de score":
-- sensor_cono_radio
-- sensor_cono_altura
-- sensor_cono_offset_y
-- sensor_centro_ring_radio_local
-- tiempo_confirmacion_score
+- radio_embocado
+- penetracion_minima_score
+- horizontalidad_minima_score
 - tiempo_maximo_tiro
-- velocidad_vertical_max_score
+- demora_fin_por_objetivo

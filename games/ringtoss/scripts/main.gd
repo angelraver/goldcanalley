@@ -5,6 +5,7 @@ const RING_SCENE: PackedScene = preload("res://games/ringtoss/scenes/ring.tscn")
 const ALTURA_CONO_M: float = 0.279
 
 @export_file("*.json") var ruta_niveles_json: String = "res://games/ringtoss/data/niveles.json"
+@export_file("*.json") var ruta_valores_json: String = "res://games/ringtoss/data/valores.json"
 @export var escena_cono: PackedScene = preload("res://games/ringtoss/scenes/cone.tscn")
 @export var nivel_actual: int = 1
 
@@ -44,8 +45,10 @@ const ALTURA_CONO_M: float = 0.279
 var contenedor_conos: Node3D
 var ctrl_resultados: ControladorResultados
 var nivel_data: Dictionary = {}
+var tipos_cono: Dictionary = {}
 var anillos_en_escena: Array[RigidBody3D] = []
 var current_ring: RigidBody3D = null
+var _materiales_cono: Dictionary = {}
 
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
@@ -76,8 +79,19 @@ func _ready() -> void:
 			resto.visible = false
 
 	nivel_actual = max(1, save_manager.nivel_actual_seleccionado)
+	_cargar_valores()
 	cargar_nivel(nivel_actual)
 	_spawn_ring()
+
+
+func _cargar_valores() -> void:
+	tipos_cono = {}
+	if not FileAccess.file_exists(ruta_valores_json):
+		push_error("Ring Toss: no existe " + ruta_valores_json)
+		return
+	var datos: Variant = JSON.parse_string(FileAccess.get_file_as_string(ruta_valores_json))
+	if datos is Dictionary:
+		tipos_cono = datos as Dictionary
 
 
 func _input(event: InputEvent) -> void:
@@ -232,16 +246,24 @@ func cargar_nivel(numero_nivel: int) -> void:
 		if cono == null:
 			continue
 		var cone_id := str(cone_data.get("id", "cone"))
-		var puntos := int(cone_data.get("points", 100))
-		var escala_extra := float(cone_data.get("scale", 1.0))
+		var tipo := _resolver_tipo_cono(cone_data)
+		var entry: Dictionary = tipos_cono.get(tipo, {}) as Dictionary
+		var base_pts := int(entry.get("pts", 100))
+		var puntos := int(cone_data.get("points", base_pts))
+		# El tipo trampa (pts negativo) siempre resta, aunque el nivel traiga otro valor.
+		if base_pts < 0:
+			puntos = -absi(puntos) if puntos != 0 else base_pts
+		var escala_total := float(entry.get("size", 1.0)) * float(cone_data.get("scale", 1.0))
 		max_por_cono = max(max_por_cono, puntos)
 		contenedor_conos.add_child(cono)
 		cono.position = origen_conos + Vector3(float(cone_data.get("x", 0.0)) * separacion_x, 0.0, float(cone_data.get("z", 0.0)) * separacion_z)
-		cono.scale = escala_cono * escala_extra
+		cono.scale = escala_cono * escala_total
 		cono.rotation_degrees.y = float(cone_data.get("rot_y", rotacion_y_conos))
 		cono.set_meta("cone_id", cone_id)
+		cono.set_meta("tipo", tipo)
 		cono.set_meta("points", puntos)
-		cono.set_meta("altura_mundo", ALTURA_CONO_M * escala_extra)
+		cono.set_meta("altura_mundo", ALTURA_CONO_M * escala_total)
+		_aplicar_color_cono(cono, tipo, str(entry.get("color", "#FF2222")))
 
 	# Fallback: cada tiro podría acertar el cono de mayor valor.
 	if puntaje_maximo_nivel <= 0:
@@ -262,6 +284,39 @@ func cargar_nivel(numero_nivel: int) -> void:
 func reiniciar_nivel() -> void:
 	cargar_nivel(nivel_actual)
 	_spawn_ring()
+
+
+# Resuelve el tipo A-H del cono: campo "tipo" explícito, id de una letra,
+# o derivado de los puntos para los niveles viejos con ids c1..c9.
+func _resolver_tipo_cono(cone_data: Dictionary) -> String:
+	var explicito := str(cone_data.get("tipo", "")).strip_edges().to_upper()
+	if tipos_cono.has(explicito):
+		return explicito
+	var raw := str(cone_data.get("id", "")).strip_edges().to_upper()
+	if raw.length() == 1 and tipos_cono.has(raw):
+		return raw
+	var pts := int(cone_data.get("points", 100))
+	if pts <= 100:
+		return "C"
+	if pts <= 150:
+		return "D"
+	if pts <= 200:
+		return "E"
+	if pts <= 250:
+		return "F"
+	return "G"
+
+
+# Tiñe el cono con el color de su tipo (un material compartido por tipo).
+func _aplicar_color_cono(cono: Node3D, tipo: String, color_html: String) -> void:
+	if not _materiales_cono.has(tipo):
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color.html(color_html)
+		mat.roughness = 0.35
+		_materiales_cono[tipo] = mat
+	var mat_final: Material = _materiales_cono[tipo] as Material
+	for nodo in cono.find_children("*", "MeshInstance3D", true, false):
+		(nodo as MeshInstance3D).material_override = mat_final
 
 
 func _limpiar_escena() -> void:

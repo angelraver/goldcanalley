@@ -1,0 +1,10 @@
+{
+  "A": { "color": "#9400D3", "pts": 80, "size": 0.8 },
+  "B": { "color": "#4B0082", "pts": 90, "size": 0.9 },
+  "C": { "color": "#FF2222", "pts": 100, "size": 1.0 },
+  "D": { "color": "#FF8C00", "pts": 110, "size": 1.1 },
+  "E": { "color": "#FFD800", "pts": 120, "size": 1.2 },
+  "F": { "color": "#22CC44", "pts": 130, "size": 1.3 },
+  "G": { "color": "#2266FF", "pts": 140, "size": 1.4 },
+  "H": { "color": "#111111", "pts": -150, "size": 1.5 }
+}
