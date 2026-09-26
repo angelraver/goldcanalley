@@ -64,6 +64,7 @@ var tipos_cono: Dictionary = {}
 var anillos_en_escena: Array[RigidBody3D] = []
 var current_ring: RigidBody3D = null
 var _materiales_cono: Dictionary = {}
+var _materiales_cubo: Dictionary = {}
 
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
@@ -111,8 +112,25 @@ func _cargar_valores() -> void:
 		tipos_cono = datos as Dictionary
 
 
-# Cajas del nivel desde niveles.json: matriz [capa][fila][columna], 1 = caja.
+# Cajas del nivel desde niveles.json: matriz [capa][fila][columna], 0 = vacío,
+# distinto de 0 = caja (color A-H sorteado al crearla, ver _tipo_cubo_aleatorio).
 # La base del cubo mide 1m, por eso se escala a lado_cubos para mantenerlo simétrico.
+func _hay_caja(valor: Variant) -> bool:
+	if valor is String:
+		return valor != "0" and valor != ""
+	if valor is int or valor is float:
+		return valor != 0
+	return false
+
+
+# Letra de color A-H sorteada para cada caja al crearla.
+func _tipo_cubo_aleatorio() -> String:
+	if tipos_cono.is_empty():
+		return ""
+	var claves: Array = tipos_cono.keys()
+	return str(claves[randi() % claves.size()])
+
+
 func _generar_cajas_nivel(matriz: Array) -> void:
 	if escena_cubo == null or contenedor_cubos == null:
 		return
@@ -132,7 +150,7 @@ func _generar_cajas_nivel(matriz: Array) -> void:
 			if columnas == null:
 				continue
 			for columna in range(columnas.size()):
-				if int(columnas[columna]) == 0:
+				if not _hay_caja(columnas[columna]):
 					continue
 				var cubo := escena_cubo.instantiate() as Node3D
 				if cubo == null:
@@ -142,6 +160,7 @@ func _generar_cajas_nivel(matriz: Array) -> void:
 				var offset_z := (float(fila) - float(filas.size() - 1) * 0.5) * separacion_cubos
 				cubo.position = Vector3(centro_cubos.x + offset_x, y, centro_cubos.z + offset_z)
 				cubo.scale = escala
+				_aplicar_color_cubo(cubo, _tipo_cubo_aleatorio())
 
 
 func _input(event: InputEvent) -> void:
@@ -369,7 +388,7 @@ func _altura_apoyo_cono(matriz: Array, mundo_x: float, mundo_z: float) -> float:
 		var columnas: Array = filas[fila] as Array
 		if columnas == null or col < 0 or col >= columnas.size():
 			continue
-		if int(columnas[col]) != 0:
+		if _hay_caja(columnas[col]):
 			capa_max = capa
 	if capa_max < 0:
 		return origen_conos.y
@@ -406,6 +425,22 @@ func _aplicar_color_cono(cono: Node3D, tipo: String, color_html: String) -> void
 		_materiales_cono[tipo] = mat
 	var mat_final: Material = _materiales_cono[tipo] as Material
 	for nodo in cono.find_children("*", "MeshInstance3D", true, false):
+		(nodo as MeshInstance3D).material_override = mat_final
+
+
+# Tiñe la caja con el color del tipo A-H sorteado (un material por tipo).
+# Si la letra no existe en valores.json, conserva el material original del cubo.
+func _aplicar_color_cubo(cubo: Node3D, tipo: String) -> void:
+	if not tipos_cono.has(tipo):
+		return
+	if not _materiales_cubo.has(tipo):
+		var entry: Dictionary = tipos_cono[tipo] as Dictionary
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color.html(str(entry.get("color", "#C0996B")))
+		mat.roughness = 0.8
+		_materiales_cubo[tipo] = mat
+	var mat_final: Material = _materiales_cubo[tipo] as Material
+	for nodo in cubo.find_children("*", "MeshInstance3D", true, false):
 		(nodo as MeshInstance3D).material_override = mat_final
 
 
