@@ -54,7 +54,9 @@ const ALTURA_CONO_M: float = 0.279
 @onready var ui_level_title: Label = $UI/LevelTitle
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var barra_energia: CanvasItem = get_node_or_null("UI/BarraEnergia") as CanvasItem
-@onready var contenedor_lanzamientos_ui: CanvasItem = get_node_or_null("UI/ContenedorPelotasUI") as CanvasItem
+@onready var contenedor_aros_ui: CanvasItem = get_node_or_null("UI/ContenedorArosUI") as CanvasItem
+@onready var aro_ui_3d: Node3D = $UI/ContenedorArosUI/SubViewportContainer/SubViewport/AroUI as Node3D
+@onready var ui_label_aros: Label = $UI/ContenedorArosUI/LabelAros as Label
 
 var contenedor_conos: Node3D
 var contenedor_cubos: Node3D
@@ -91,10 +93,12 @@ func _ready() -> void:
 	add_child(ctrl_resultados)
 	ctrl_resultados.configurar(panel_resultados, [ui_puntaje, ui_level_number], ui_puntaje, ui_level_number, reiniciar_nivel)
 
-	# Restos de la escena base: se ocultan hasta agregar el aro.
-	for resto in [barra_energia, contenedor_lanzamientos_ui]:
-		if resto:
-			resto.visible = false
+	# Resto de la escena base: se oculta hasta agregar el aro.
+	if barra_energia:
+		barra_energia.visible = false
+	# El contador de aros sí se muestra.
+	if contenedor_aros_ui:
+		contenedor_aros_ui.visible = true
 
 	nivel_actual = max(1, save_manager.nivel_actual_seleccionado)
 	_cargar_valores()
@@ -250,6 +254,7 @@ func lanzar_aro(swipe: Vector2) -> void:
 	var ring_lanzado: RigidBody3D = current_ring
 	ring_launched = true
 	anillos_lanzados += 1
+	actualizar_ui_aros()
 	ring_lanzado.set_meta("resolved", false)
 	ring_lanzado.set_meta("launch_number", anillos_lanzados)
 	ring_lanzado.global_rotation = Vector3.ZERO
@@ -315,6 +320,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	nivel_data = datos[str(numero_nivel)] as Dictionary
 	anillos_totales = int(nivel_data.get("rings", 3))
 	puntaje_maximo_nivel = int(nivel_data.get("puntaje_maximo", 0))
+	actualizar_ui_aros()
 	var separacion_x := float(nivel_data.get("separacion_x", 0.30))
 	var separacion_z := float(nivel_data.get("separacion_z", 0.30))
 	var conos: Array = nivel_data.get("cones", [])
@@ -458,6 +464,16 @@ func _limpiar_escena() -> void:
 	current_ring = null
 	ring_launched = false
 	dragging = false
+
+
+func _process(delta: float) -> void:
+	if aro_ui_3d:
+		aro_ui_3d.rotate_y(delta * 1.5)
+
+
+func actualizar_ui_aros() -> void:
+	if ui_label_aros:
+		ui_label_aros.text = "x %d" % maxi(0, anillos_totales - anillos_lanzados)
 
 
 func _physics_process(_delta: float) -> void:

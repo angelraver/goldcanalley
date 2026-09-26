@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="4_diuyt"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="7_l362f"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_yqfkt"]
-[ext_resource type="Texture2D" uid="uid://05rbh6bdb3tw" path="res://games/goldcanalley/assets/images/world/ball.png" id="9_vmfpc"]
 [ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
@@ -22,11 +21,15 @@ albedo_texture = ExtResource("4_diuyt")
 
 [sub_resource type="World3D" id="World3D_3q8t4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4ey"]
-albedo_texture = ExtResource("9_vmfpc")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aro"]
+albedo_color = Color(0.95, 0.12, 0.12, 1)
+roughness = 0.32
 
-[sub_resource type="SphereMesh" id="SphereMesh_0mero"]
-material = SubResource("StandardMaterial3D_ya4ey")
+[sub_resource type="TorusMesh" id="TorusMesh_aro"]
+material = SubResource("StandardMaterial3D_aro")
+inner_radius = 0.8
+rings = 18
+ring_segments = 24
 
 [node name="Main" type="Node3D" unique_id=662956677]
 script = ExtResource("1_ib744")
@@ -58,7 +61,7 @@ material = SubResource("StandardMaterial3D_siham")
 
 [node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("8_yqfkt")]
 
-[node name="ContenedorPelotasUI" type="HBoxContainer" parent="UI" unique_id=576714175]
+[node name="ContenedorArosUI" type="HBoxContainer" parent="UI" unique_id=576714175]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -70,27 +73,28 @@ grow_horizontal = 0
 scale = Vector2(1.8, 1.933)
 theme_override_constants/separation = 0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/ContenedorPelotasUI" unique_id=1512023161]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/ContenedorArosUI" unique_id=1512023161]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="UI/ContenedorPelotasUI/SubViewportContainer" unique_id=932763041]
+[node name="SubViewport" type="SubViewport" parent="UI/ContenedorArosUI/SubViewportContainer" unique_id=932763041]
 world_3d = SubResource("World3D_3q8t4")
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(64, 64)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=1363693347]
+[node name="Camera3D" type="Camera3D" parent="UI/ContenedorArosUI/SubViewportContainer/SubViewport" unique_id=1363693347]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=1347786463]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="UI/ContenedorArosUI/SubViewportContainer/SubViewport" unique_id=1347786463]
 
-[node name="PelotaUI" type="MeshInstance3D" parent="UI/ContenedorPelotasUI/SubViewportContainer/SubViewport" unique_id=921489129]
-mesh = SubResource("SphereMesh_0mero")
+[node name="AroUI" type="MeshInstance3D" parent="UI/ContenedorArosUI/SubViewportContainer/SubViewport" unique_id=921489129]
+transform = Transform3D(0.45, 0, 0, 0, 0.19018, 0.40784, 0, -0.40784, 0.19018, 0, 0, 0)
+mesh = SubResource("TorusMesh_aro")
 
-[node name="LabelPelotas" type="Label" parent="UI/ContenedorPelotasUI" unique_id=1427273534]
+[node name="LabelAros" type="Label" parent="UI/ContenedorArosUI" unique_id=1427273534]
 layout_mode = 2
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("10_luw0m")
