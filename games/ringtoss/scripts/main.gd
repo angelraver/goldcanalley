@@ -7,6 +7,7 @@ const ALTURA_CONO_M: float = 0.279
 @export_file("*.json") var ruta_niveles_json: String = "res://games/ringtoss/data/niveles.json"
 @export_file("*.json") var ruta_valores_json: String = "res://games/ringtoss/data/valores.json"
 @export var escena_cono: PackedScene = preload("res://games/ringtoss/scenes/cone.tscn")
+@export var escena_cubo: PackedScene = preload("res://games/ringtoss/scenes/cubo.tscn")
 @export var nivel_actual: int = 1
 
 # El GLB del cono mide ~75x155x75, por eso se escala acá.
@@ -14,18 +15,30 @@ const ALTURA_CONO_M: float = 0.279
 @export var escala_cono: Vector3 = Vector3(0.0018, 0.0018, 0.0018)
 @export var rotacion_y_conos: float = 0.0
 
+@export_group("Cajas nivel")
+@export var centro_cubos: Vector3 = Vector3(0.022, 0.35, -3.9946957)
+@export var separacion_cubos: float = 0.6
+@export var lado_cubos: float = 0.6
+@export var piso_y_cubos: float = 0.05
+
 @export_group("Aro")
 @export var posicion_spawn_ring: Vector3 = Vector3(0.0, 1.0, -1.7)
 @export var fuerza_minima_ring: float = 0.8
-@export var fuerza_maxima_ring: float = 1.55
+@export var fuerza_maxima_ring: float = 1.2
 @export var multiplicador_fuerza_ring: float = 0.008
 @export var impulso_vertical_ring: float = 0.7
 @export var swipe_minimo_ring: float = 20.0
-@export var demora_siguiente_ring: float = 1.2
+@export var demora_siguiente_ring: float = 1.0
 @export var limite_ring_izquierda: float = -1.2
 @export var limite_ring_derecha: float = 1.2
-@export var sensibilidad_drag_horizontal: float = 0.0015
 @export var compensacion_perspectiva: float = 0.35
+@export var velocidad_giro_disco: float = 25.0
+
+@export_group("Aim visible")
+@export var profundidad_aim: float = 1.0
+@export var anclaje_aim: Vector2 = Vector2(0.5, 0.78)
+@export var aim_altura_min: float = 0.3
+@export var aim_altura_max: float = 1.6
 
 @export_group("Deteccion de score")
 @export var radio_embocado: float = 0.095
@@ -34,6 +47,7 @@ const ALTURA_CONO_M: float = 0.279
 @export var tiempo_maximo_tiro: float = 3.0
 @export var demora_fin_por_objetivo: float = 0.8
 
+@onready var camara: Camera3D = $Camera3D as Camera3D
 @onready var ring_spawn: Marker3D = get_node_or_null("RingSpawn") as Marker3D
 @onready var ui_puntaje: UIPuntaje = $UI/Puntaje as UIPuntaje
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
@@ -43,6 +57,7 @@ const ALTURA_CONO_M: float = 0.279
 @onready var contenedor_lanzamientos_ui: CanvasItem = get_node_or_null("UI/ContenedorPelotasUI") as CanvasItem
 
 var contenedor_conos: Node3D
+var contenedor_cubos: Node3D
 var ctrl_resultados: ControladorResultados
 var nivel_data: Dictionary = {}
 var tipos_cono: Dictionary = {}
@@ -58,16 +73,18 @@ var anillos_resueltos: int = 0
 var esperando_fin_nivel: bool = false
 
 var drag_start: Vector2 = Vector2.ZERO
-var last_drag_position: Vector2 = Vector2.ZERO
 var dragging: bool = false
 var ring_launched: bool = false
-var movio_horizontalmente: bool = false
 
 
 func _ready() -> void:
 	contenedor_conos = Node3D.new()
 	contenedor_conos.name = "ConosGenerados"
 	add_child(contenedor_conos)
+
+	contenedor_cubos = Node3D.new()
+	contenedor_cubos.name = "CajasNivel"
+	add_child(contenedor_cubos)
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
@@ -92,6 +109,39 @@ func _cargar_valores() -> void:
 	var datos: Variant = JSON.parse_string(FileAccess.get_file_as_string(ruta_valores_json))
 	if datos is Dictionary:
 		tipos_cono = datos as Dictionary
+
+
+# Cajas del nivel desde niveles.json: matriz [capa][fila][columna], 1 = caja.
+# La base del cubo mide 1m, por eso se escala a lado_cubos para mantenerlo simétrico.
+func _generar_cajas_nivel(matriz: Array) -> void:
+	if escena_cubo == null or contenedor_cubos == null:
+		return
+	for child in contenedor_cubos.get_children():
+		child.queue_free()
+	if matriz.is_empty():
+		return
+	var y_base := piso_y_cubos + lado_cubos * 0.5
+	var escala := Vector3(lado_cubos, lado_cubos, lado_cubos)
+	for capa in range(matriz.size()):
+		var filas: Array = matriz[capa] as Array
+		if filas == null:
+			continue
+		var y := y_base + float(capa) * separacion_cubos
+		for fila in range(filas.size()):
+			var columnas: Array = filas[fila] as Array
+			if columnas == null:
+				continue
+			for columna in range(columnas.size()):
+				if int(columnas[columna]) == 0:
+					continue
+				var cubo := escena_cubo.instantiate() as Node3D
+				if cubo == null:
+					continue
+				contenedor_cubos.add_child(cubo)
+				var offset_x := (float(columna) - float(columnas.size() - 1) * 0.5) * separacion_cubos
+				var offset_z := (float(fila) - float(filas.size() - 1) * 0.5) * separacion_cubos
+				cubo.position = Vector3(centro_cubos.x + offset_x, y, centro_cubos.z + offset_z)
+				cubo.scale = escala
 
 
 func _input(event: InputEvent) -> void:
@@ -124,29 +174,44 @@ func _input(event: InputEvent) -> void:
 	match fase:
 		"inicio":
 			drag_start = posicion
-			last_drag_position = posicion
 			dragging = true
-			movio_horizontalmente = false
 		"mover":
 			if not dragging:
 				return
-			var delta: Vector2 = posicion - last_drag_position
-			last_drag_position = posicion
-			if absf(delta.x) > absf(delta.y):
-				var nueva_pos: Vector3 = current_ring.global_position
-				nueva_pos.x = clampf(nueva_pos.x + delta.x * sensibilidad_drag_horizontal, limite_ring_izquierda, limite_ring_derecha)
-				current_ring.global_position = nueva_pos
-				movio_horizontalmente = true
+			# El aro sigue al dedo sobre el plano de aim hasta ser disparado.
+			_mover_aim_a(posicion)
 		"fin":
 			if not dragging:
 				return
 			dragging = false
 			var swipe: Vector2 = drag_start - posicion
-			# Gesto horizontal: solo reposiciona, no lanza.
-			if movio_horizontalmente and absf(swipe.x) > absf(swipe.y):
-				return
+			# Sin swipe claro hacia arriba el aro queda donde lo dejó el arrastre.
 			if swipe.y >= swipe_minimo_ring:
 				lanzar_aro(swipe)
+
+
+# Proyecta un punto de pantalla al plano de aim y coloca el aro ahí.
+func _mover_aim_a(punto_pantalla: Vector2) -> void:
+	if camara == null or current_ring == null:
+		return
+	var pos: Vector3 = camara.project_position(punto_pantalla, profundidad_aim)
+	pos.x = clampf(pos.x, limite_ring_izquierda, limite_ring_derecha)
+	pos.y = clampf(pos.y, aim_altura_min, aim_altura_max)
+	current_ring.global_position = pos
+
+
+# Punto de aparición: abajo-centro del encuadre, siempre visible.
+func _posicion_aim() -> Vector3:
+	if camara != null:
+		var vp: Vector2 = get_viewport().get_visible_rect().size
+		var ancla := Vector2(vp.x * anclaje_aim.x, vp.y * anclaje_aim.y)
+		var pos: Vector3 = camara.project_position(ancla, profundidad_aim)
+		pos.x = clampf(pos.x, limite_ring_izquierda, limite_ring_derecha)
+		pos.y = clampf(pos.y, aim_altura_min, aim_altura_max)
+		return pos
+	if ring_spawn != null:
+		return ring_spawn.global_position
+	return posicion_spawn_ring
 
 
 func lanzar_aro(swipe: Vector2) -> void:
@@ -158,9 +223,8 @@ func lanzar_aro(swipe: Vector2) -> void:
 		return
 
 	var fuerza: float = clampf(swipe.length() * multiplicador_fuerza_ring, fuerza_minima_ring, fuerza_maxima_ring)
+	# El centro de aim es el cero de pantalla: el offset lateral apunta el tiro.
 	var offset_x: float = current_ring.global_position.x
-	if ring_spawn:
-		offset_x -= ring_spawn.global_position.x
 	var horizontal_swipe: float = clampf(-swipe.x / maxf(absf(swipe.y), 1.0), -0.8, 0.8)
 	var direccion: Vector3 = Vector3(offset_x * compensacion_perspectiva + horizontal_swipe * 0.5, impulso_vertical_ring, -1.0).normalized()
 
@@ -169,12 +233,13 @@ func lanzar_aro(swipe: Vector2) -> void:
 	anillos_lanzados += 1
 	ring_lanzado.set_meta("resolved", false)
 	ring_lanzado.set_meta("launch_number", anillos_lanzados)
+	ring_lanzado.global_rotation = Vector3.ZERO
 	ring_lanzado.freeze = false
 	ring_lanzado.sleeping = false
-	ring_lanzado.angular_velocity = Vector3.ZERO
-	ring_lanzado.angular_damp = 8.0
+	# Vuelo de disco: sale plano y gira sobre Y para mantenerse horizontal.
+	ring_lanzado.angular_velocity = Vector3(0.0, velocidad_giro_disco, 0.0)
+	ring_lanzado.angular_damp = 0.5
 	ring_lanzado.apply_central_impulse(direccion * fuerza)
-	ring_lanzado.apply_torque_impulse(Vector3(8.0, 0.0, 0.0))
 
 	_programar_miss(ring_lanzado)
 	await get_tree().create_timer(demora_siguiente_ring).timeout
@@ -198,11 +263,8 @@ func _spawn_ring() -> void:
 	current_ring.sleeping = false
 	current_ring.linear_velocity = Vector3.ZERO
 	current_ring.angular_velocity = Vector3.ZERO
-	if ring_spawn != null:
-		current_ring.global_position = ring_spawn.global_position
-		current_ring.global_rotation = ring_spawn.global_rotation
-	else:
-		current_ring.position = posicion_spawn_ring
+	current_ring.global_position = _posicion_aim()
+	current_ring.global_rotation = Vector3.ZERO
 	current_ring.scale = Vector3(0.15, 0.15, 0.15)
 	current_ring.set_meta("resolved", false)
 	anillos_en_escena.append(current_ring)
@@ -239,6 +301,9 @@ func cargar_nivel(numero_nivel: int) -> void:
 	var conos: Array = nivel_data.get("cones", [])
 	var max_por_cono := 0
 
+	var matriz_nivel: Array = nivel_data.get("matriz", []) as Array
+	_generar_cajas_nivel(matriz_nivel)
+
 	for cone_data in conos:
 		if escena_cono == null:
 			continue
@@ -256,7 +321,10 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var escala_total := float(entry.get("size", 1.0)) * float(cone_data.get("scale", 1.0))
 		max_por_cono = max(max_por_cono, puntos)
 		contenedor_conos.add_child(cono)
-		cono.position = origen_conos + Vector3(float(cone_data.get("x", 0.0)) * separacion_x, 0.0, float(cone_data.get("z", 0.0)) * separacion_z)
+		var mundo_x := origen_conos.x + float(cone_data.get("x", 0.0)) * separacion_x
+		var mundo_z := origen_conos.z + float(cone_data.get("z", 0.0)) * separacion_z
+		# La base del cono apoya en el techo de la pila de cajas de su celda.
+		cono.position = Vector3(mundo_x, _altura_apoyo_cono(matriz_nivel, mundo_x, mundo_z), mundo_z)
 		cono.scale = escala_cono * escala_total
 		cono.rotation_degrees.y = float(cone_data.get("rot_y", rotacion_y_conos))
 		cono.set_meta("cone_id", cone_id)
@@ -284,6 +352,28 @@ func cargar_nivel(numero_nivel: int) -> void:
 func reiniciar_nivel() -> void:
 	cargar_nivel(nivel_actual)
 	_spawn_ring()
+
+
+# Altura donde apoya la base del cono: techo de la pila de cajas de su celda.
+# Si la celda está vacía, cae al origen anterior para no romper niveles viejos.
+func _altura_apoyo_cono(matriz: Array, mundo_x: float, mundo_z: float) -> float:
+	if matriz.is_empty():
+		return origen_conos.y
+	var col := int(round((mundo_x - centro_cubos.x) / separacion_cubos + 1.5))
+	var fila := int(round((mundo_z - centro_cubos.z) / separacion_cubos + 1.5))
+	var capa_max := -1
+	for capa in range(matriz.size()):
+		var filas: Array = matriz[capa] as Array
+		if filas == null or fila < 0 or fila >= filas.size():
+			continue
+		var columnas: Array = filas[fila] as Array
+		if columnas == null or col < 0 or col >= columnas.size():
+			continue
+		if int(columnas[col]) != 0:
+			capa_max = capa
+	if capa_max < 0:
+		return origen_conos.y
+	return piso_y_cubos + float(capa_max) * separacion_cubos + lado_cubos
 
 
 # Resuelve el tipo A-H del cono: campo "tipo" explícito, id de una letra,
@@ -322,6 +412,9 @@ func _aplicar_color_cono(cono: Node3D, tipo: String, color_html: String) -> void
 func _limpiar_escena() -> void:
 	if contenedor_conos:
 		for child in contenedor_conos.get_children():
+			child.queue_free()
+	if contenedor_cubos:
+		for child in contenedor_cubos.get_children():
 			child.queue_free()
 	for ring in anillos_en_escena:
 		if is_instance_valid(ring):

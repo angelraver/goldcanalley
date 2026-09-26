@@ -14,6 +14,10 @@ Ring Toss - score detection integration
 - Reaching puntaje_maximo ends the level early, matching Gold Can Alley.
 - PanelResultados handles score saving and next-level unlocking through SaveManager.
 - Restart cleans old rings and generates a new one.
+- The aiming ring spawns visible at bottom-center of the camera frame
+  (project_position with profundidad_aim), follows the finger on that
+  plane while dragging, launches on a clear upward swipe, and the next
+  ring spawns after demora_siguiente_ring if rings remain.
 
 Tunable values in the Main inspector under "Deteccion de score":
 - radio_embocado
