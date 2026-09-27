@@ -23,10 +23,11 @@ const ALTURA_CONO_M: float = 0.279
 
 @export_group("Aro")
 @export var posicion_spawn_ring: Vector3 = Vector3(0.0, 1.0, -1.7)
-@export var fuerza_minima_ring: float = 0.8
-@export var fuerza_maxima_ring: float = 1.2
-@export var multiplicador_fuerza_ring: float = 0.008
-@export var impulso_vertical_ring: float = 0.7
+@export var escala_ring: float = 0.3
+@export var fuerza_minima_ring: float = 0.5
+@export var fuerza_maxima_ring: float = 1.6
+@export var multiplicador_fuerza_ring: float = 0.01
+@export var impulso_vertical_ring: float = 0.9
 @export var swipe_minimo_ring: float = 20.0
 @export var demora_siguiente_ring: float = 1.0
 @export var limite_ring_izquierda: float = -1.2
@@ -41,10 +42,10 @@ const ALTURA_CONO_M: float = 0.279
 @export var aim_altura_max: float = 1.6
 
 @export_group("Deteccion de score")
-@export var radio_embocado: float = 0.095
+@export var radio_embocado: float = 0.22
 @export var penetracion_minima_score: float = 0.02
-@export var horizontalidad_minima_score: float = 0.6
-@export var tiempo_maximo_tiro: float = 3.0
+@export var horizontalidad_minima_score: float = 0.5
+@export var tiempo_maximo_tiro: float = 8.0
 @export var demora_fin_por_objetivo: float = 0.8
 
 @onready var camara: Camera3D = $Camera3D as Camera3D
@@ -289,7 +290,7 @@ func _spawn_ring() -> void:
 	current_ring.angular_velocity = Vector3.ZERO
 	current_ring.global_position = _posicion_aim()
 	current_ring.global_rotation = Vector3.ZERO
-	current_ring.scale = Vector3(0.15, 0.15, 0.15)
+	current_ring.scale = Vector3.ONE * escala_ring
 	current_ring.set_meta("resolved", false)
 	anillos_en_escena.append(current_ring)
 	ring_launched = false
@@ -512,7 +513,11 @@ func _es_embocado(ring: RigidBody3D, cono: Node3D) -> bool:
 	if up.y < horizontalidad_minima_score:
 		return false
 	var altura: float = float(cono.get_meta("altura_mundo", ALTURA_CONO_M))
-	var base: Vector3 = cono.global_position
+	# Eje real del cono: el GLB ocupa x 90.5..165.5 / z -165.5..-90.5
+	# (centro 128/-128) y cone.tscn lo desplaza (-123.64863, 0, 125.249016),
+	# así que el eje en local del cono es (4.35137, 0, -2.750984).
+	# Se proyecta con el basis para heredar rotación Y y escala del cono.
+	var base: Vector3 = cono.global_position + cono.global_transform.basis * Vector3(4.35137, 0.0, -2.750984)
 	var punta: Vector3 = base + Vector3(0.0, altura, 0.0)
 	var centro: Vector3 = ring.global_position
 	var y_base: float = (base - centro).dot(up)
@@ -526,7 +531,16 @@ func _es_embocado(ring: RigidBody3D, cono: Node3D) -> bool:
 	var s: float = y_base / (y_base - y_punta)
 	var inter: Vector3 = base + (punta - base) * s
 	var radial: float = (inter - centro).cross(up).length()
-	return radial <= radio_embocado
+	# Umbral físico: el hueco del aro (ring.tscn: centroide radio 1.2,
+	# semigrosor 0.08, a escala_ring) menos el radio del cono a esa altura.
+	# La base del GLB mide 75 (mitad 37.5) y afina hasta la punta; se usa el
+	# lado (apotema), que es el contacto real cara a cara en reposo.
+	var escala_total: float = altura / ALTURA_CONO_M if ALTURA_CONO_M > 0.0 else 1.0
+	var lado_base: float = 37.5 * escala_cono.x * escala_total
+	var radio_cono_h: float = lado_base * (1.0 - clampf(s, 0.0, 1.0))
+	var hueco_mundo: float = (1.2 - 0.08) * escala_ring
+	var permitido: float = minf(radio_embocado, maxf(hueco_mundo - radio_cono_h - 0.015, 0.03))
+	return radial <= permitido
 
 
 func _cobrar_punto(ring: RigidBody3D, cono: Node3D) -> void:
