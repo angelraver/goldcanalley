@@ -12,8 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_a3jnv"]
 [ext_resource type="Texture2D" uid="uid://dkenyvgkr7vmc" path="res://games/goldcanalley/assets/images/world/ball.png" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="12_7r3x3"]
+[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="14_xr17v"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="17_muem4"]
-[ext_resource type="PackedScene" path="res://games/goldcanalley/scenes/audio_manager.tscn" id="18_audio"]
+[ext_resource type="PackedScene" uid="uid://dgj64nmwi6qa4" path="res://games/goldcanalley/scenes/audio_manager.tscn" id="18_audio"]
+[ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="19_pausa"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 
@@ -58,7 +60,7 @@ environment = SubResource("Environment_8dl7b")
 [node name="table" parent="." unique_id=162402884 instance=ExtResource("2_muem4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6931398, 0.022, 0.68844604, -3.9946957)
 
-[node name="Cube_005" parent="table" index="0" unique_id=2073636747]
+[node name="Cube_005" parent="table" index="0" unique_id=1310576027]
 surface_material_override/0 = SubResource("StandardMaterial3D_yc10j")
 surface_material_override/1 = SubResource("StandardMaterial3D_jscy8")
 
@@ -171,8 +173,23 @@ text = "Texto largo para confirmar el corte de linea automático"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="BotonPausa" type="TextureButton" parent="UI" unique_id=2030670074]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 17.0
+offset_bottom = 121.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("14_xr17v")
+
+[node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("19_pausa")]
+
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=535808537]
 
-[node name="AudioJuego" parent="." instance=ExtResource("18_audio")]
+[node name="AudioJuego" parent="." unique_id=869201542 instance=ExtResource("18_audio")]
 
 [editable path="table"]
+
+[connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
