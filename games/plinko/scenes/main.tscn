@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c323blul3mu44" path="res://games/plinko/assets/images/logo.png" id="7_6v8q1"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_ever"]
 [ext_resource type="PackedScene" uid="uid://x89ydk1niw67b" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]
+[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="11_pausebtn"]
+[ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="12_pausa"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 background_mode = 2
@@ -86,6 +88,19 @@ text = "Texto largo para confirmar el corte de linea automático"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="BotonPausa" type="TextureButton" parent="UI" unique_id=2030670074]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 17.0
+offset_bottom = 121.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("11_pausebtn")
+
+[node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("12_pausa")]
+
 [node name="Fondo" type="CSGBox3D" parent="." unique_id=1807674525]
 transform = Transform3D(2.7020472e-15, 4.3711385e-08, 1.1564965, 1.4141771, -4.3711385e-08, 0, 6.181564e-08, 0.99999994, -5.0552075e-08, -0.008993864, 1.319293, -2.2378979)
 use_collision = true
@@ -98,3 +113,5 @@ mesh = SubResource("QuadMesh_8dl7b")
 surface_material_override/0 = SubResource("StandardMaterial3D_bun8v")
 
 [node name="AudioJuego" parent="." instance=ExtResource("10_audio")]
+
+[connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
