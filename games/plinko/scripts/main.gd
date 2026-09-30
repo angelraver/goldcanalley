@@ -19,6 +19,8 @@ const MAX_BALLS: int = 5
 @onready var ui_level_title: Label = $UI/LevelTitle
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var audio_juego: GameAudioBase = $AudioJuego
+@onready var boton_pausa: TextureButton = $UI/BotonPausa
+@onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
 
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
@@ -46,8 +48,11 @@ func _ready() -> void:
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	var hud: Array = [ui_puntaje, ui_level_number]
+	var hud: Array = [ui_puntaje, ui_level_number, boton_pausa]
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
+
+	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
+		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	cargar_nivel(nivel_actual)
 
@@ -217,6 +222,17 @@ func actualizar_ui_level() -> void:
 
 func mostrar_panel_resultados() -> void:
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
+func _on_boton_pausa_pressed() -> void:
+	# No abrir la pausa si ya terminó el nivel y se ven los resultados
+	if panel_resultados and panel_resultados.visible:
+		return
+	if panel_pausa == null:
+		return
+	if panel_pausa.visible:
+		return
+	audio_manager.play_ok1()
+	panel_pausa.mostrar()
 
 func reiniciar_nivel() -> void:
 	for ball in active_balls:

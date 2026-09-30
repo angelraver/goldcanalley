@@ -52,6 +52,8 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @onready var ui_level_number: UILevelNumber = $UI/LevelNumber as UILevelNumber
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var ui_level_title: Label = $UI/LevelTitle
+@onready var boton_pausa: TextureButton = $UI/BotonPausa
+@onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
 
 # Definición de colores principales
 const COLOR_AMARILLO : Color = Color("ffd700")
@@ -91,8 +93,11 @@ func _ready() -> void:
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	var hud: Array = [ui_puntaje, ui_level_number]
+	var hud: Array = [ui_puntaje, ui_level_number, boton_pausa]
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
+
+	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
+		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 	
 	_load_valores_config()
 	load_level(str(nivel_actual))
@@ -208,10 +213,28 @@ func _process(_delta: float) -> void:
 		_check_lane_spawn(lane)
 
 func _notification(what: int) -> void:
+	# La pausa es persistente y solo la cierra el jugador desde el panel.
+	# Al recuperar el foco no se reanuda solo: si la pausa estaba abierta, sigue abierta.
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		_pausar_por_perdida_foco()
+
+func _pausar_por_perdida_foco() -> void:
+	# Perder el foco en plena partida abre el panel de pausa (pone
+	# get_tree().paused = true). Si el nivel ya terminó, no se hace nada.
+	if not is_node_ready():
 		get_tree().paused = true
-	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
-		get_tree().paused = false
+		return
+	if is_game_over:
+		return
+	if ctrl_resultados and ctrl_resultados.esta_mostrado():
+		return
+	if panel_resultados and panel_resultados.visible:
+		return
+	if is_instance_valid(panel_pausa):
+		if not panel_pausa.visible:
+			panel_pausa.mostrar()
+	else:
+		get_tree().paused = true
 
 func _check_lane_spawn(lane: Dictionary) -> void:
 	if ducks_spawned >= level_total_ducks:
@@ -344,6 +367,17 @@ func mostrar_panel_resultados() -> void:
 	if audio_juego:
 		audio_juego.stop_gears()
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
+func _on_boton_pausa_pressed() -> void:
+	# No abrir la pausa si ya terminó el nivel y se ven los resultados
+	if panel_resultados and panel_resultados.visible:
+		return
+	if panel_pausa == null:
+		return
+	if panel_pausa.visible:
+		return
+	audio_manager.play_ok1()
+	panel_pausa.mostrar()
 
 func reiniciar_nivel() -> void:
 	load_level(str(nivel_actual))

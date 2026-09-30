@@ -26,6 +26,8 @@ extends Node3D
 @onready var contenedor_pelotas_ui: Control = $UI/ContenedorPelotasUI
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var audio_juego: GameAudioBase = $AudioJuego
+@onready var boton_pausa: TextureButton = $UI/BotonPausa
+@onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
 
 const CARPETA_CANS = "res://games/goldcanalley/assets/images/cans/"
 var valores_objetos: Dictionary = {}
@@ -57,8 +59,11 @@ func _ready() -> void:
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	var hud: Array = [barra_energia, ui_puntaje, ui_level_number, contenedor_pelotas_ui]
+	var hud: Array = [barra_energia, ui_puntaje, ui_level_number, contenedor_pelotas_ui, boton_pausa]
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
+
+	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
+		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	cargar_nivel(nivel_actual)
 
@@ -193,6 +198,7 @@ func animar_camara_entrada() -> void:
 	if ui_puntaje: ui_puntaje.visible = false
 	if ui_level_number: ui_level_number.visible = true
 	if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = false
+	if boton_pausa: boton_pausa.visible = false
 	controles_activos = false
 	camara.global_position = pos_inicial_camara
 	camara.global_rotation = rot_inicial_camara
@@ -212,6 +218,7 @@ func animar_camara_entrada() -> void:
 		if ui_puntaje: ui_puntaje.visible = true
 		if ui_level_number: ui_level_number.visible = true
 		if contenedor_pelotas_ui: contenedor_pelotas_ui.visible = true
+		if boton_pausa: boton_pausa.visible = true
 	)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -308,6 +315,17 @@ func actualizar_ui_level() -> void:
 
 func mostrar_panel_resultados() -> void:
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
+func _on_boton_pausa_pressed() -> void:
+	# No abrir la pausa si ya terminó el nivel y se ven los resultados
+	if panel_resultados and panel_resultados.visible:
+		return
+	if panel_pausa == null:
+		return
+	if panel_pausa.visible:
+		return
+	audio_manager.play_ok1()
+	panel_pausa.mostrar()
 
 func aplicar_material_lata(nuevo_objeto: Node3D, datos_tipo: Dictionary) -> void:
 	var mesh_instance = nuevo_objeto.get_node_or_null("MeshInstance3D") as MeshInstance3D

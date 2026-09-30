@@ -15,6 +15,8 @@ extends Node3D
 @onready var ui_timer: UITimer = $UI/Timer as UITimer
 @onready var panel_resultados: PanelResultados = $UI/PanelResultados as PanelResultados
 @onready var audio: GameAudioBase = $AudioJuego
+@onready var boton_pausa: TextureButton = $UI/BotonPausa
+@onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
 
 const ANIM_ESCONDER: StringName = &"esconder"
 const TIPOS: Array[String] = ["marron", "rojo", "verde", "azul", "naranja", "dorado"]
@@ -35,13 +37,20 @@ func _ready() -> void:
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	var hud: Array = [ui_puntaje, ui_level_number, ui_timer]
+	var hud: Array = [ui_puntaje, ui_level_number, ui_timer, boton_pausa]
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 	if ui_timer:
 		ui_timer.tiempo_agotado.connect(_on_tiempo_agotado)
+	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
+		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	cargar_nivel(nivel_actual)
-	
+
+	# HUD de juego oculto durante la intro de cámara (igual que goldcanalley)
+	if ui_puntaje: ui_puntaje.visible = false
+	if ui_timer: ui_timer.visible = false
+	if boton_pausa: boton_pausa.visible = false
+
 	anim_camara.play("inicio_camara")
 	await anim_camara.animation_finished
 	
@@ -51,7 +60,11 @@ func iniciar_partida() -> void:
 	juego_activo = true
 	var config_nivel = datos_niveles.get(str(nivel_actual), {})
 	var tiempo_limite = float(config_nivel.get("tiempo_limite", 30))
-	
+
+	if ui_puntaje:
+		ui_puntaje.visible = true
+	if boton_pausa:
+		boton_pausa.visible = true
 	if ui_timer:
 		ui_timer.visible = true
 		ui_timer.iniciar(tiempo_limite)
@@ -163,6 +176,17 @@ func actualizar_ui_puntaje() -> void:
 
 func mostrar_panel_resultados() -> void:
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
+func _on_boton_pausa_pressed() -> void:
+	# No abrir la pausa si ya terminó el nivel y se ven los resultados
+	if panel_resultados and panel_resultados.visible:
+		return
+	if panel_pausa == null:
+		return
+	if panel_pausa.visible:
+		return
+	audio_manager.play_ok1()
+	panel_pausa.mostrar()
 
 func iniciar_spawner() -> void:
 	while juego_activo:

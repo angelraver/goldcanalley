@@ -11,8 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_tndlh"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="8_uxcgu"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
-[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="9_font"]
 [ext_resource type="PackedScene" uid="uid://dwbx64orng73p" path="res://games/whackamole/scenes/audio_manager.tscn" id="9_audio"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="9_font"]
+[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="10_pausebtn"]
+[ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="11_pausa"]
 
 [sub_resource type="Environment" id="Environment_5o6qw"]
 
@@ -159,9 +161,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -66.0
-offset_top = 58.0
+offset_top = 129.0
 offset_right = -66.0
-offset_bottom = 58.0
+offset_bottom = 129.0
 grow_horizontal = 0
 
 [node name="LevelNumber" parent="UI" unique_id=695558764 instance=ExtResource("8_vxqm4")]
@@ -169,16 +171,14 @@ layout_mode = 1
 anchors_preset = 8
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -574.0
-offset_bottom = -502.0
+offset_top = -579.0
+offset_bottom = -507.0
 grow_vertical = 2
 
 [node name="Puntaje" parent="UI" unique_id=626633466 instance=ExtResource("8_tndlh")]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 144.0
-offset_bottom = 72.0
+offset_top = 60.0
+offset_bottom = 132.0
 
 [node name="LevelTitle" type="Label" parent="UI" unique_id=1507659899]
 custom_minimum_size = Vector2(600, 0)
@@ -204,4 +204,20 @@ text = "Texto largo para confirmar el corte de linea automático"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="BotonPausa" type="TextureButton" parent="UI" unique_id=2030670074]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 17.0
+offset_bottom = 121.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("10_pausebtn")
+
+[node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("11_pausa")]
+layout_mode = 1
+
 [node name="AudioJuego" parent="." unique_id=392662616 instance=ExtResource("9_audio")]
+
+[connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
