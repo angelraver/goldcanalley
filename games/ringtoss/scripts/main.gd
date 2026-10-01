@@ -58,6 +58,8 @@ const ALTURA_CONO_M: float = 0.279
 @onready var contenedor_aros_ui: CanvasItem = get_node_or_null("UI/ContenedorArosUI") as CanvasItem
 @onready var aro_ui_3d: Node3D = $UI/ContenedorArosUI/SubViewportContainer/SubViewport/AroUI as Node3D
 @onready var ui_label_aros: Label = $UI/ContenedorArosUI/LabelAros as Label
+@onready var boton_pausa: TextureButton = $UI/BotonPausa
+@onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
 
 var contenedor_conos: Node3D
 var contenedor_cubos: Node3D
@@ -92,7 +94,10 @@ func _ready() -> void:
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	ctrl_resultados.configurar(panel_resultados, [ui_puntaje, ui_level_number], ui_puntaje, ui_level_number, reiniciar_nivel)
+	ctrl_resultados.configurar(panel_resultados, [ui_puntaje, ui_level_number, contenedor_aros_ui, boton_pausa], ui_puntaje, ui_level_number, reiniciar_nivel)
+
+	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
+		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	# Resto de la escena base: se oculta hasta agregar el aro.
 	if barra_energia:
@@ -581,3 +586,15 @@ func finalizar_nivel() -> void:
 		return
 	esperando_fin_nivel = true
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
+
+
+func _on_boton_pausa_pressed() -> void:
+	# No abrir la pausa si ya terminó el nivel y se ven los resultados
+	if panel_resultados and panel_resultados.visible:
+		return
+	if panel_pausa == null:
+		return
+	if panel_pausa.visible:
+		return
+	audio_manager.play_ok1()
+	panel_pausa.mostrar()

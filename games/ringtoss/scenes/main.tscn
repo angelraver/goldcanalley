@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
 [ext_resource type="PackedScene" uid="uid://dgj64nmwi6qa4" path="res://games/goldcanalley/scenes/audio_manager.tscn" id="13_66au0"]
+[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="14_pausebtn"]
+[ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="15_pausa"]
 
 [sub_resource type="Environment" id="Environment_8vloa"]
 
@@ -129,6 +131,19 @@ text = "Texto largo para confirmar el corte de linea automático"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="BotonPausa" type="TextureButton" parent="UI" unique_id=2030670074]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 17.0
+offset_bottom = 121.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("14_pausebtn")
+
+[node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("15_pausa")]
+
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=1674815260]
 
 [node name="AudioJuego" parent="." unique_id=497255853 instance=ExtResource("13_66au0")]
@@ -137,3 +152,4 @@ autowrap_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8402618, -1.1534083)
 
 [connection signal="ready" from="." to="." method="_ready"]
+[connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
