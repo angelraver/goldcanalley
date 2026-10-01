@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bta2npruaxppi"]
 
 [ext_resource type="Script" uid="uid://bm8ikv6c8w2ib" path="res://games/ringtoss/scripts/main.gd" id="1_ib744"]
-[ext_resource type="Texture2D" uid="uid://4mcoileoa8mj" path="res://games/goldcanalley/assets/images/world/floor.png" id="3_mmmnk"]
-[ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="4_diuyt"]
+[ext_resource type="Texture2D" uid="uid://c87626756hivr" path="res://games/goldcanalley/assets/images/world/floor.png" id="3_mmmnk"]
+[ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="4_diuyt"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="7_l362f"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_yqfkt"]
-[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
+[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
-[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
 [ext_resource type="PackedScene" uid="uid://dgj64nmwi6qa4" path="res://games/goldcanalley/scenes/audio_manager.tscn" id="13_66au0"]
 
 [sub_resource type="Environment" id="Environment_8vloa"]
@@ -67,9 +67,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -239.99997
-offset_top = 66.0
+offset_top = 75.0
 offset_right = -127.0
-offset_bottom = 130.0
+offset_bottom = 139.0
 grow_horizontal = 0
 scale = Vector2(1.8, 1.933)
 theme_override_constants/separation = 0

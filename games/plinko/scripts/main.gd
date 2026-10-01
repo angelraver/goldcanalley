@@ -21,6 +21,9 @@ const MAX_BALLS: int = 5
 @onready var audio_juego: GameAudioBase = $AudioJuego
 @onready var boton_pausa: TextureButton = $UI/BotonPausa
 @onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
+@onready var bola_ui_3d: Node3D = $UI/ContenedorBolasUI/SubViewportContainer/SubViewport/BolaUI
+@onready var ui_label_bolas: Label = $UI/ContenedorBolasUI/LabelBolas
+@onready var contenedor_bolas_ui: Control = $UI/ContenedorBolasUI
 
 var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
@@ -48,7 +51,7 @@ func _ready() -> void:
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	var hud: Array = [ui_puntaje, ui_level_number, boton_pausa]
+	var hud: Array = [ui_puntaje, ui_level_number, boton_pausa, contenedor_bolas_ui]
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 
 	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
@@ -57,6 +60,8 @@ func _ready() -> void:
 	cargar_nivel(nivel_actual)
 
 func _process(delta: float) -> void:
+	if bola_ui_3d:
+		bola_ui_3d.rotate_y(delta * 1.5)
 	if game_ended:
 		return
 	# Condición 1: que no queden bolas por arrojar. Ocurre siempre antes que la 2.
@@ -107,6 +112,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
+	actualizar_ui_bolas()
 
 	if not FileAccess.file_exists(ruta_niveles_json):
 		return
@@ -122,6 +128,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	puntaje_maximo_nivel = int(level_data.get("puntaje", level_data.get("meta_puntos", 1000)))
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
+	actualizar_ui_bolas()
 
 	var peg_color_hex: String = level_data.get("color_peg", "ff00ff")
 	var board_color_hex: String = level_data.get("color_board", "ffff00")
@@ -219,6 +226,10 @@ func actualizar_ui_puntaje() -> void:
 
 func actualizar_ui_level() -> void:
 	ctrl_resultados.actualizar_nivel(nivel_actual)
+
+func actualizar_ui_bolas() -> void:
+	if ui_label_bolas:
+		ui_label_bolas.text = "x %d" % maxi(0, MAX_BALLS - balls_launched)
 
 func mostrar_panel_resultados() -> void:
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
@@ -361,6 +372,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if current_ball != null and not current_ball.is_active:
 			current_ball.release_ball()
 			balls_launched += 1
+			actualizar_ui_bolas()
 			active_balls.append(current_ball)
 			current_ball = null
 			
