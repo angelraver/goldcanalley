@@ -16,7 +16,7 @@ extends Node3D
 @export var lane_positions: Array[Vector2] = [
 	Vector2(0.03, 1.19), # Carril 1 (Abajo / Lane_1) -> [Y, Z]
 	Vector2(0.61, 0.82), # Carril 2                -> [Y, Z]
-	Vector2(1.2, 0.53), # Carril 3                -> [Y, Z]
+	Vector2(1.2, 0.50), # Carril 3                -> [Y, Z]
 	Vector2(1.8, 0.15)  # Carril 4 (Arriba / Lane_4) -> [Y, Z]
 ]
 
@@ -197,10 +197,13 @@ func load_level(level_id: String) -> void:
 				"speed": godot_speed,
 				"especial_rate": int(l_info.get("especial_rate", 10)),
 				"patos": l_info.get("patos", []),
+				"patos_pool": _normalizar_pool_patos(l_info.get("patos", [])),
 				"especial": l_info.get("especial", []),
 				"pos_y": lane_y,
 				"pos_z": lane_z,
-				"last_spawned_target": null
+				"last_spawned_target": null,
+				"last_duck_key": "",
+				"racha_tipo": 0
 			})
 	anunciar_nivel(nivel_actual)
 
@@ -255,10 +258,63 @@ func _check_lane_spawn(lane: Dictionary) -> void:
 	if can_spawn:
 		_spawn_next_target(lane)
 
+# Normaliza el campo "patos" del nivel a un pool ponderado [[tipo, peso], ...].
+# Acepta Dictionary {"A": 70, "B": 30} (recomendado: A > B > C > D)
+# o Array legacy ["A", "B"] (cada elemento cuenta como 1 voto).
+func _normalizar_pool_patos(patos_raw: Variant) -> Array:
+	var pool: Array = []
+	if patos_raw is Dictionary:
+		for k in (patos_raw as Dictionary).keys():
+			var w: float = float(patos_raw[k])
+			var tipo: String = str(k)
+			if tipo != "" and w > 0.0:
+				pool.append([tipo, w])
+	elif patos_raw is Array:
+		for e in (patos_raw as Array):
+			var tipo_e: String = str(e)
+			if tipo_e != "":
+				pool.append([tipo_e, 1.0])
+	if pool.is_empty():
+		pool = [["A", 1.0]]
+	return pool
+
+func _weighted_pick(pool: Array) -> String:
+	var total: float = 0.0
+	for e in pool:
+		total += float(e[1])
+	if total <= 0.0:
+		return str(pool[0][0])
+	var r: float = randf() * total
+	var acc: float = 0.0
+	for e in pool:
+		acc += float(e[1])
+		if r <= acc:
+			return str(e[0])
+	return str(pool[pool.size() - 1][0])
+
+# Elige el tipo de pato con sorteo ponderado + anti-racha (máx. 2 seguidos
+# del mismo tipo por lane) para romper la monotonía visual.
+func _pick_duck_type(lane: Dictionary) -> String:
+	var pool: Array = lane.get("patos_pool", [])
+	if pool.is_empty():
+		return "A"
+	var pick: String = _weighted_pick(pool)
+	var last: String = str(lane.get("last_duck_key", ""))
+	var racha: int = int(lane.get("racha_tipo", 0))
+	if pick == last and racha >= 2:
+		var alt: Array = pool.filter(func(e): return str(e[0]) != pick)
+		if not alt.is_empty():
+			pick = _weighted_pick(alt)
+	if pick == last:
+		lane["racha_tipo"] = racha + 1
+	else:
+		lane["racha_tipo"] = 1
+	lane["last_duck_key"] = pick
+	return pick
+
 func _spawn_next_target(lane: Dictionary) -> void:
 	var spawn_special = false
 	var especial_list = lane["especial"] as Array
-	var patos_list = lane["patos"] as Array
 	
 	if not especial_list.is_empty():
 		var rate = lane["especial_rate"]
@@ -268,14 +324,12 @@ func _spawn_next_target(lane: Dictionary) -> void:
 	if not spawn_special and ducks_spawned >= level_total_ducks:
 		return
 
-	# Elegir clave del ítem (ej: "A", "B", "C", "D" o "bomb", "ray", "ice")
+	# Elegir clave del ítem (ej: "A", "B", "C", "D" o "bomb", "rayo", "snow")
 	var item_key: String = ""
 	if spawn_special and not especial_list.is_empty():
 		item_key = especial_list.pick_random()
-	elif not patos_list.is_empty():
-		item_key = patos_list.pick_random()
 	else:
-		item_key = "A"
+		item_key = _pick_duck_type(lane)
 
 	# Extraer configuración de valores.json
 	var item_config: Dictionary = valores_data.get(item_key, {})
