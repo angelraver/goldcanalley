@@ -336,7 +336,7 @@ func spawn_next_ball() -> void:
 	if current_ball == null:
 		current_ball = ball_scene.instantiate()
 		
-		# Inyección de audio: patrón GameAudioBase (ver games/goldcanalley/scripts/main.gd:141 y games/goldcanalley/scripts/lata.gd:7)
+		# Inyección de audio: patrón GameAudioBase (ver games/tincanalley/scripts/main.gd:141 y games/tincanalley/scripts/lata.gd:7)
 		# Usa set() para evitar error de tipado estático (current_ball es RigidBody3D pero el script define var audio)
 		if audio_juego:
 			current_ball.set("audio", audio_juego)

@@ -39,7 +39,7 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 │  Shaders: desenfoque / chromatic_aberration / crt_effect / logo_dissolver │
 └──────────────────────────────────────────────────────────────────────────┘
               │              │               │              │
-     games/goldcanalley  games/whackamole  games/plinko  games/ringtoss   (games/duckshoot → stub, solo assets/)
+     games/tincanalley  games/whackamole  games/plinko  games/ringtoss   (games/duckshoot → stub, solo assets/)
       (can knockdown)   (whack-a-mole)   (plinko)      (ring toss)
 ```
 
@@ -56,14 +56,14 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 | `save_manager` | `core/scripts/save_manager.gd:1` | `juego_actual_seleccionado: String`, `nivel_actual_seleccionado: int`, `pagina_niveles_por_juego: Dictionary`, `premio_recien_desbloqueado: String`, `LISTA_PREMIOS: Array[String]` (18 premios). Métodos clave: `registrar_puntaje_nivel(nivel, puntaje, max, id_game) -> bool` (`save_manager.gd:73`), `obtener_puntaje_nivel`, `obtener_maximo_nivel`, `es_nivel_desbloqueado(nivel, id_game) -> bool` (desbloquea si `score_prev/max_prev >= 1/3`, `save_manager.gd:112`), `contar_ribbons_azules()`, `obtener_total_niveles_game(id)`, `obtener_total_niveles_globales()`, `calcular_cantidad_premios_desbloqueados()`, `obtener_pagina_niveles/guardar_pagina_niveles`, `obtener_opcion_audio/guardar_opcion_audio`, `obtener_idioma_guardado/guardar_idioma`. Persistencia a disco `guardar_a_disco()` (`save_manager.gd:51`). |
 | `audio_manager` | `core/scripts/audio_manager.gd:1` | `music_enabled/sfx_enabled: bool`, `bgm_player: AudioStreamPlayer` (creado en `_ready`, `audio_manager.gd:19`), `set_music_enabled(bool)`, `set_sfx_enabled(bool)`, `play_bgm(stream)`, `play_start/welldone/prize/ok1()`. Estado leído de `save_manager` (`audio_manager.gd:22`). Escena contenedora: `core/scenes/audio_manager.tscn`. |
 | `game_manager` | `core/scripts/game_manager.gd:1` | `idioma_actual: String`, `configuracion_juegos: Dictionary` (cache de `games.json`), `textos_locales: Dictionary`. `cargar_configuracion_juegos()` (`game_manager.gd:16`), `cargar_todos_los_textos()` (core `textos.json` sin prefijo + cada juego con su `prefijo_texto`, `game_manager.gd:37`), `obtener_config_juego_actual() -> Dictionary` (`game_manager.gd:57`), `obtener_texto(clave, defecto) -> String` con fallback a `es` (`game_manager.gd:60`), `obtener_titulo_nivel(id, game) -> String` resuelve `prefijo + num` (`game_manager.gd:72`), signal `idioma_cambiado`. |
-| `EfectosUI` | `core/scripts/efectos_ui.gd:1` | Singleton `EfectosUI`. `crear_efecto_puntos(posicion_3d: Vector3, valor: int)` — proyecta `pos_3d + (0,0.3,0)` con `Camera3D.unproject_position`, instancia `core/scenes/puntos_flotantes.tscn`, ubica en el `CanvasLayer` activo y anima tween flotante + fade 1.5s (`efectos_ui.gd:6`). Usado en goldcanalley `main.gd:181`, whackamole `main.gd:223`, ringtoss `main.gd:606`, plinko `main.gd:209`. |
+| `EfectosUI` | `core/scripts/efectos_ui.gd:1` | Singleton `EfectosUI`. `crear_efecto_puntos(posicion_3d: Vector3, valor: int)` — proyecta `pos_3d + (0,0.3,0)` con `Camera3D.unproject_position`, instancia `core/scenes/puntos_flotantes.tscn`, ubica en el `CanvasLayer` activo y anima tween flotante + fade 1.5s (`efectos_ui.gd:6`). Usado en tincanalley `main.gd:181`, whackamole `main.gd:223`, ringtoss `main.gd:606`, plinko `main.gd:209`. |
 
 ### 3.2 Controladores reutilizables (scripts con `class_name`)
 
 | Script | `class_name` | Para qué |
 |---|---|---|
-| `core/scripts/controlador_resultados.gd:2` | `ControladorResultados` | **Elimina boilerplate de resultados.** Gestiona `reset()/al_iniciar_nivel()`, `mostrar(nivel, puntaje, max)` (guard + ocultar HUD + `panel.mostrar()`), `actualizar_puntaje/nivel`, `esta_mostrado()`, y conecta `reiniciar_solicitado -> callback`. Uso: ver §5 skeleton. Todos los juegos actuales lo usan (goldcanalley `main.gd:58`, whackamole `main.gd:36`, plinko `main.gd:47`, ringtoss `main.gd:288`). |
-| `core/scripts/game_audio_base.gd:1` | `GameAudioBase` | Base para audio por juego. Agrupa `AudioStreamPlayer` hijos por prefijo (texto antes de dígitos en el nombre del nodo, `game_audio_base.gd:16`). `play(prefijo)`, `play_aleatorio(prefijo)`, respeta `sfx_enabled`. Inyección típica: `nueva_pelota.set("audio", audio_juego)` (plinko `main.gd:326`, goldcanalley `main.gd:141`). |
+| `core/scripts/controlador_resultados.gd:2` | `ControladorResultados` | **Elimina boilerplate de resultados.** Gestiona `reset()/al_iniciar_nivel()`, `mostrar(nivel, puntaje, max)` (guard + ocultar HUD + `panel.mostrar()`), `actualizar_puntaje/nivel`, `esta_mostrado()`, y conecta `reiniciar_solicitado -> callback`. Uso: ver §5 skeleton. Todos los juegos actuales lo usan (tincanalley `main.gd:58`, whackamole `main.gd:36`, plinko `main.gd:47`, ringtoss `main.gd:288`). |
+| `core/scripts/game_audio_base.gd:1` | `GameAudioBase` | Base para audio por juego. Agrupa `AudioStreamPlayer` hijos por prefijo (texto antes de dígitos en el nombre del nodo, `game_audio_base.gd:16`). `play(prefijo)`, `play_aleatorio(prefijo)`, respeta `sfx_enabled`. Inyección típica: `nueva_pelota.set("audio", audio_juego)` (plinko `main.gd:326`, tincanalley `main.gd:141`). |
 | `core/scripts/panel_resultados.gd:2` | `PanelResultados` | Panel fin de nivel. `mostrar(nivel_id, puntaje, max, id_game)` (`panel_resultados.gd:41`) calcula umbrales 1/3, 2/3, 3/3 → ribbons amarilla/roja/azul, llama `save_manager.registrar_puntaje_nivel()` y `audio_manager.play_welldone()`, anima desenfoque + pop. Señales `reiniciar_solicitado` / `continuar_solicitado`; botón OK navega a `premio_desbloqueado.tscn` si hay premio o a `seleccion_niveles.tscn` si no (`panel_resultados.gd:120`). |
 | `core/scripts/ui_puntaje.gd:2` | `UIPuntaje` | HUD score con `pad_zeros`. `establecer_puntaje(int)` (`ui_puntaje.gd:14`). Escena: `core/scenes/ui_puntaje.tscn`. |
 | `core/scripts/ui_timer.gd:2` | `UITimer` | Countdown `iniciar(segundos)`, `detener()`, signal `tiempo_agotado`. Colores blanco→amarillo (<10s)→rojo (<5s), parpadeo final 4×0.25s (`ui_timer.gd:60`). Escena: `core/scenes/ui_timer.tscn`. |
@@ -76,7 +76,7 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 
 | Escena | Script asociado | Reutilización |
 |---|---|---|
-| `core/scenes/title.tscn` | `core/scripts/title.gd:1` | Hub. Un `TextureButton` por juego (hoy 4 hardcodeados: `ButtonGoldCanAlley`, `ButtonWhackamole`, `ButtonPlinko`, `ButtonRingToss` en `title.tscn:66-119`). Cada handler hace `_iniciar_juego(id)` → `save_manager.juego_actual_seleccionado = id` + `change_scene_to_file(seleccion_niveles.tscn)` (`title.gd:26`). También `Prizes` → `premios.tscn` y `Options` → `options.tscn`. **Al añadir juego, tocar aquí + `games.json`.** |
+| `core/scenes/title.tscn` | `core/scripts/title.gd:1` | Hub. Un `TextureButton` por juego (hoy 4 hardcodeados: `ButtonTinCanAlley`, `ButtonWhackamole`, `ButtonPlinko`, `ButtonRingToss` en `title.tscn:66-119`). Cada handler hace `_iniciar_juego(id)` → `save_manager.juego_actual_seleccionado = id` + `change_scene_to_file(seleccion_niveles.tscn)` (`title.gd:26`). También `Prizes` → `premios.tscn` y `Options` → `options.tscn`. **Al añadir juego, tocar aquí + `games.json`.** |
 | `core/scenes/seleccion_niveles.tscn` | `core/scripts/seleccion_niveles.gd:1` | **Genérica y data-driven.** Lee `game_manager.obtener_config_juego_actual()` (`seleccion_niveles.gd:18`), carga `ruta_niveles_json` para contar niveles, pone `textura_fondo/logo` del registry, pagina de 9 (`NIVELES_POR_PAGINA=9`, `seleccion_niveles.gd:11`), restaura `save_manager.obtener_pagina_niveles()` (`seleccion_niveles.gd:44`), renderiza 9× `slot_nivel.tscn` y conecta `nivel_seleccionado -> change_scene_to_file(escena_juego_destino)` (`seleccion_niveles.gd:122`). |
 | `core/scenes/slot_nivel.tscn` | `core/scripts/slot_nivel.gd:1` | Slot individual. `configurar(nivel_id)` consulta `save_manager.es_nivel_desbloqueado` y pinta bloqueado (modulate oscuro, disabled, ribbons ocultas, `slot_nivel.gd:32`) vs desbloqueado (ribbons según `score/max`, `slot_nivel.gd:62`). Emite `nivel_seleccionado(nivel_id)`. |
 | `core/scenes/panel_resultados.tscn` | `core/scripts/panel_resultados.gd:1` | Ver §3.2. Incrustar bajo un `CanvasLayer/UI` del juego. |
@@ -126,7 +126,7 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 }
 ```
 
-Campos: `escena_juego` (main jugable), `ruta_niveles_json` (obligatorio para conteo/selector), `textos_json`, `textura_fondo/logo` (opcionales, fallback a goldcanalley/whackamole), `prefijo_texto` (namespace de `textos.json` en `game_manager`).
+Campos: `escena_juego` (main jugable), `ruta_niveles_json` (obligatorio para conteo/selector), `textos_json`, `textura_fondo/logo` (opcionales, fallback a tincanalley/whackamole), `prefijo_texto` (namespace de `textos.json` en `game_manager`).
 
 **Paso 2 — Crear estructura de carpetas.**
 
@@ -147,7 +147,7 @@ Duplicar `games/ringtoss/` o `games/plinko/` como plantilla — ambos usan `Cont
 
 **Paso 3 — Crear `data/niveles.json`.** Formato libre por juego, pero **debe ser `Dictionary` con claves `"1"`, `"2"`, ...** (el selector cuenta `keys().size()`). Cada juego define su schema:
 
-- `goldcanalley` (`games/goldcanalley/data/niveles.json:2`): `"1": [[grid_x, grid_y, grid_z, "tipo"], ...]` (tipos `A`-`J` mapeados en `valores.json`).
+- `tincanalley` (`games/tincanalley/data/niveles.json:2`): `"1": [[grid_x, grid_y, grid_z, "tipo"], ...]` (tipos `A`-`J` mapeados en `valores.json`).
 - `plinko` (`games/plinko/data/niveles.json:2`): `{"1": {"puntaje":450, "color_board":"EB051B", "pegs":[{x,y}…], "ramps":[{x,y,rot}…], "slots":[{x_start,x_end,pts,color}…]}}`
 - `ringtoss` (`games/ringtoss/data/niveles.json:2`): `{"1": {"rings":5, "puntaje_maximo":300, "separacion_x":0.18, ..., "cones":[{id,x,z,points,scale,rot_y}…]}}`
 - `whackamole`: `{"1": {"meta_puntos":300, "tiempo_limite":30, "hoyos":[{pos:[x,y], tipo:"marron"}…]}}`
@@ -156,8 +156,8 @@ Duplicar `games/ringtoss/` o `games/plinko/` como plantilla — ambos usan `Cont
 
 **Paso 4 — Crear `data/valores.json` y `data/textos.json`.**
 
-- `valores.json` (tuning): ej. goldcanalley `valores.json:2` → `{"A":{"pts":100,"masa":0.45,"ancho":1.0,"alto":1.0,"textura":"a.png"}}`. Whackamole `valores.json` → por tipo de topo con `pts`, `outch`, `risa`, etc.
-- `textos.json` — títulos por nivel, **claves sin prefijo** (el prefijo lo añade `game_manager`). Ej. goldcanalley `textos.json:2` → `{"1":{"es":"Pirámide Clásica","en":"Classic Pyramid","pt":"…"}}`. Core los carga como `duckshoot_1` si `prefijo_texto="duckshoot_"` (`game_manager.gd:54`).
+- `valores.json` (tuning): ej. tincanalley `valores.json:2` → `{"A":{"pts":100,"masa":0.45,"ancho":1.0,"alto":1.0,"textura":"a.png"}}`. Whackamole `valores.json` → por tipo de topo con `pts`, `outch`, `risa`, etc.
+- `textos.json` — títulos por nivel, **claves sin prefijo** (el prefijo lo añade `game_manager`). Ej. tincanalley `textos.json:2` → `{"1":{"es":"Pirámide Clásica","en":"Classic Pyramid","pt":"…"}}`. Core los carga como `duckshoot_1` si `prefijo_texto="duckshoot_"` (`game_manager.gd:54`).
 
 **Paso 5 — Crear `scenes/main.tscn` y `scripts/main.gd`.** Ver skeleton §5. Requisitos del contrato con el core:
 
@@ -193,7 +193,7 @@ title → pick game → save_manager.juego_actual_seleccionado = <id>
 
 ## 5) Skeleton `main.gd` — copiar/pegar y adaptar
 
-Patrón consolidado (goldcanalley `scripts/main.gd:46-62`, whackamole `main.gd:32-39`, plinko `main.gd:44-50`, ringtoss `main.gd:279-291`):
+Patrón consolidado (tincanalley `scripts/main.gd:46-62`, whackamole `main.gd:32-39`, plinko `main.gd:44-50`, ringtoss `main.gd:279-291`):
 
 ```gdscript
 extends Node3D
@@ -279,7 +279,7 @@ Notas:
 ## 7) Estructura de archivos (actual)
 
 ```
-goldcanalley/
+tincanalley/
 ├── project.godot              # autoloads, viewport 720×1280, Jolt, main_scene title
 ├── export_presets.cfg
 ├── core/
@@ -299,7 +299,7 @@ goldcanalley/
 │   ├── shaders/               # chromatic_aberration, crt_effect, desenfoque, logo_dissolver
 │   └── assets/                # fonts, images/ui, images/prizes (18), images/logo*, sounds
 └── games/
-    ├── goldcanalley/          # can knockdown — 90 niveles, 10 tipos de lata (A-J), shader latas, mesa 3D
+    ├── tincanalley/          # can knockdown — 90 niveles, 10 tipos de lata (A-J), shader latas, mesa 3D
     │   └── data/niveles.json (90 keys) / valores.json (A-J) / textos.json (90 títulos)
     ├── whackamole/            # whack-a-mole — spawner random, 6 tipos de topo, mazo 3D
     ├── plinko/                # plinko — board procedural (pegs/ramps/slots), 18 niveles, ball physics
@@ -351,4 +351,4 @@ Abrir la raíz en **Godot 4.7+** → Run (main scene = title). Export vía `Proj
 
 ---
 
-*Última actualización: 2026-09-24 — 4 juegos activos (goldcanalley, whackamole, plinko, ringtoss) + duckshoot stub. Para proponer mejoras al core (ej. hub dinámico que lea `games.json` sin tocar `title.gd`), abrir issue/PR con prefijo `[core]`.*
+*Última actualización: 2026-09-24 — 4 juegos activos (tincanalley, whackamole, plinko, ringtoss) + duckshoot stub. Para proponer mejoras al core (ej. hub dinámico que lea `games.json` sin tocar `title.gd`), abrir issue/PR con prefijo `[core]`.*

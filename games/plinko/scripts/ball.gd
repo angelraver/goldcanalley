@@ -9,7 +9,7 @@ var spawn_y: float = 1.3
 
 var time_passed: float = 0.0
 
-# --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
+# --- Audio: patrón GameAudioBase (ver games/tincanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
 var audio: GameAudioBase
 @export var umbral_velocidad: float = 0.8
 @export var tiempo_cooldown: float = 0.08

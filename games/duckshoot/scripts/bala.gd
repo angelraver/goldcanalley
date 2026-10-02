@@ -8,7 +8,7 @@ class_name Bullet
 var direction: Vector3 = Vector3.FORWARD
 var life_timer: float = 0.0
 
-# --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
+# --- Audio: patrón GameAudioBase (ver games/tincanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
 var audio: GameAudioBase
 
 @onready var ray_cast: RayCast3D = $RayCast3D

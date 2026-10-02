@@ -5,7 +5,7 @@ const ESCENA_SELECCION_NIVELES = "res://core/scenes/seleccion_niveles.tscn"
 ## Orden preferido en el carrusel. Los juegos nuevos que aparezcan en
 ## games.json y no estén aquí se agregan al final automáticamente.
 const ORDEN_JUEGOS: Array[String] = [
-	"goldcanalley",
+	"tincanalley",
 	"whackamole",
 	"plinko",
 	"ringtoss",
@@ -13,7 +13,7 @@ const ORDEN_JUEGOS: Array[String] = [
 ]
 
 const NOMBRES_JUEGOS: Dictionary = {
-	"goldcanalley": "Gold Can Alley",
+	"tincanalley": "Tin Can Alley",
 	"whackamole": "Whack-a-Mole",
 	"plinko": "Plinko",
 	"ringtoss": "Ring Toss",

@@ -1,11 +1,11 @@
 {
-	"goldcanalley": {
-		"escena_juego": "res://games/goldcanalley/scenes/main.tscn",
-		"ruta_niveles_json": "res://games/goldcanalley/data/niveles.json",
-		"textos_json": "res://games/goldcanalley/data/textos.json",
-		"textura_fondo": "res://games/goldcanalley/assets/images/fondodia.jpeg",
-		"textura_logo": "res://games/goldcanalley/assets/images/logo.png",
-		"prefijo_texto": "goldcanalley_"
+	"tincanalley": {
+		"escena_juego": "res://games/tincanalley/scenes/main.tscn",
+		"ruta_niveles_json": "res://games/tincanalley/data/niveles.json",
+		"textos_json": "res://games/tincanalley/data/textos.json",
+		"textura_fondo": "res://games/tincanalley/assets/images/fondodia.jpeg",
+		"textura_logo": "res://games/tincanalley/assets/images/logo.png",
+		"prefijo_texto": "tincanalley_"
 	},
 	"whackamole": {
 		"escena_juego": "res://games/whackamole/scenes/main.tscn",

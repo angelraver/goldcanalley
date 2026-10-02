@@ -56,7 +56,7 @@ var time_passed: float = 0.0
 
 var base_position: Vector3 = Vector3.ZERO
 
-# --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
+# --- Audio: patrón GameAudioBase (ver games/tincanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
 var audio: GameAudioBase
 
 # Límites de desplazamiento local del rifle
@@ -187,7 +187,7 @@ func shoot() -> void:
 
 	var bullet_instance = bullet_scene.instantiate()
 
-	# Inyección de audio: patrón GameAudioBase (ver games/goldcanalley/scripts/main.gd:141)
+	# Inyección de audio: patrón GameAudioBase (ver games/tincanalley/scripts/main.gd:141)
 	if audio:
 		bullet_instance.audio = audio
 	

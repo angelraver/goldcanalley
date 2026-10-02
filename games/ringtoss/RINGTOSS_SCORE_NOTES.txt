@@ -11,7 +11,7 @@ Ring Toss - score detection integration
   trap type (negative pts in valores) which always subtracts.
 - Each ring can score only once.
 - A miss is resolved automatically after tiempo_maximo_tiro.
-- Reaching puntaje_maximo ends the level early, matching Gold Can Alley.
+- Reaching puntaje_maximo ends the level early, matching Tin Can Alley.
 - PanelResultados handles score saving and next-level unlocking through SaveManager.
 - Restart cleans old rings and generates a new one.
 - The aiming ring spawns visible at bottom-center of the camera frame

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="2_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="3_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="4_panel"]
-[ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/goldcanalley/assets/images/world/fondo_interior.png" id="6_67mu3"]
+[ext_resource type="Texture2D" uid="uid://b4d767e1lsib4" path="res://games/tincanalley/assets/images/world/fondo_interior.png" id="6_67mu3"]
 [ext_resource type="Texture2D" uid="uid://c323blul3mu44" path="res://games/plinko/assets/images/logo.png" id="7_6v8q1"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_ever"]
 [ext_resource type="PackedScene" uid="uid://x89ydk1niw67b" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]

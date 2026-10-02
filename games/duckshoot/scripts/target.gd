@@ -24,7 +24,7 @@ var exit_underground_progress: float = 0.0 # Distancia recorrida bajo el escaló
 var is_hit: bool = false
 var hit_fold_angle: float = 0.0 # Progresión del ángulo de caída (0.0 a 1.0)
 
-# --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
+# --- Audio: patrón GameAudioBase (ver games/tincanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
 var audio: GameAudioBase
 
 func setup(p_speed: float, p_direction: int, p_x_limit: float, p_type: String, p_is_special: bool) -> void:

@@ -1,11 +1,11 @@
 extends Node3D
 
-@export_file("*.json") var ruta_niveles_json: String = "res://games/goldcanalley/data/niveles.json"
-@export_file("*.json") var ruta_valores_json: String = "res://games/goldcanalley/data/valores.json"
+@export_file("*.json") var ruta_niveles_json: String = "res://games/tincanalley/data/niveles.json"
+@export_file("*.json") var ruta_valores_json: String = "res://games/tincanalley/data/valores.json"
 @export var catalogo_objetos: Dictionary = {
-	"lata_aluminio": preload("res://games/goldcanalley/scenes/lata.tscn")
+	"lata_aluminio": preload("res://games/tincanalley/scenes/lata.tscn")
 }
-@export var escena_pelota: PackedScene = preload("res://games/goldcanalley/scenes/pelota.tscn")
+@export var escena_pelota: PackedScene = preload("res://games/tincanalley/scenes/pelota.tscn")
 @export var nivel_actual: int = 1
 @export var origen_mesa: Vector3 = Vector3(0.0, 0.8, -4.0)
 @export var tamano_celda: Vector3 = Vector3(0.22, 0.31, 0.22)
@@ -29,7 +29,7 @@ extends Node3D
 @onready var boton_pausa: TextureButton = $UI/BotonPausa
 @onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
 
-const CARPETA_CANS = "res://games/goldcanalley/assets/images/cans/"
+const CARPETA_CANS = "res://games/tincanalley/assets/images/cans/"
 var valores_objetos: Dictionary = {}
 var puntaje_nivel: int = 0
 var contenedor_latas: Node3D

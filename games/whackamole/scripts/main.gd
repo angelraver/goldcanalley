@@ -46,7 +46,7 @@ func _ready() -> void:
 
 	cargar_nivel(nivel_actual)
 
-	# HUD de juego oculto durante la intro de cámara (igual que goldcanalley)
+	# HUD de juego oculto durante la intro de cámara (igual que tincanalley)
 	if ui_puntaje: ui_puntaje.visible = false
 	if ui_timer: ui_timer.visible = false
 	if boton_pausa: boton_pausa.visible = false

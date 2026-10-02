@@ -4,7 +4,7 @@ extends Control
 ##
 ## Uso:
 ##   carousel.setup_carousel([
-##     {"id": "goldcanalley", "title": "Gold Can Alley", "texture": preload(...)},
+##     {"id": "tincanalley", "title": "Tin Can Alley", "texture": preload(...)},
 ##     ...
 ##   ])
 ##   carousel.item_selected.connect(_on_game_selected)
