@@ -24,6 +24,7 @@ var angle_progress: float = 0.0
 var exit_underground_progress: float = 0.0 # Distancia recorrida bajo el escalón
 var is_hit: bool = false
 var hit_fold_angle: float = 0.0 # Progresión del ángulo de caída (0.0 a 1.0)
+var frozen: bool = false # Snow: con dt = 0 se frena el desplazamiento pero la pose (tumbado, polea) sigue viva
 
 # --- Audio: patrón GameAudioBase (ver games/goldcanalley/scripts/lata.gd y core/scripts/game_audio_base.gd) ---
 var audio: GameAudioBase
@@ -66,9 +67,14 @@ func on_hit() -> void:
 	tween.tween_property(self, "hit_fold_angle", 1.0, fall_speed)
 
 func _process(delta: float) -> void:
+	# Congelado: se integra con dt = 0. La posición/ángulo no avanzan pero
+	# las funciones de pose se siguen ejecutando: el tumbado por impacto se
+	# anima y el giro de polea conserva su curvatura. Solo se frena el
+	# desplazamiento; el resto de propiedades permanece igual.
+	var dt: float = 0.0 if frozen else delta
 	match current_state:
 		State.ENTERING:
-			angle_progress -= (speed / pulley_radius) * delta
+			angle_progress -= (speed / pulley_radius) * dt
 			if angle_progress <= 0.0:
 				angle_progress = 0.0
 				current_state = State.MOVING_STRAIGHT
@@ -77,7 +83,7 @@ func _process(delta: float) -> void:
 			_update_entering_position()
 
 		State.MOVING_STRAIGHT:
-			global_position.x += speed * direction * delta
+			global_position.x += speed * direction * dt
 			global_position.y = base_y
 			_orient_base_model()
 
@@ -96,7 +102,7 @@ func _process(delta: float) -> void:
 		State.EXITING:
 			if angle_progress < PI:
 				# Etapa 1: Giro en la polea de salida
-				angle_progress += (speed / pulley_radius) * delta
+				angle_progress += (speed / pulley_radius) * dt
 				if angle_progress > PI:
 					angle_progress = PI
 				_update_exiting_position()
@@ -107,7 +113,7 @@ func _process(delta: float) -> void:
 					queue_free()
 			else:
 				# Etapa 2: Avanzar en recta de cabeza (tras bambalinas)
-				exit_underground_progress += speed * delta
+				exit_underground_progress += speed * dt
 				_update_exiting_underground_position()
 
 				if exit_underground_progress >= underground_distance:

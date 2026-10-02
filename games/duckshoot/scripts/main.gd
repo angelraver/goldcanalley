@@ -46,6 +46,7 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @export_group("Power-ups / Bomba")
 @export var blast_radius: float = 0.9 # Alcance cross-lane: cubre lanes vecinas (~0.69) y diagonales (~0.73) sin llegar a 2 lanes (~1.36)
 @export var blast_lateral_range: float = 1.2 # Misma lane: el vecino más cercano a cada lado cae aunque esté más allá del radio
+@export var freeze_duration: float = 3.0 # Segundos que snow detiene las lanes
 
 @export_group("Prefabs")
 @export var wave_z_offset: float = 0.1 # Distancia hacia adelante respecto al pato para tapar su base
@@ -84,6 +85,7 @@ var level_total_ducks: int = 0
 var ducks_spawned: int = 0
 var ducks_despawned: int = 0
 var is_game_over: bool = false
+var freeze_remaining: float = 0.0 # Snow: tiempo restante de lanes detenidas
 
 # Array para administrar el estado de cada carril
 var lanes_data: Array = []
@@ -142,6 +144,7 @@ func load_level(level_id: String) -> void:
 	level_total_ducks = int(level_config.get("total", 50))
 	ducks_spawned = 0
 	ducks_despawned = 0
+	freeze_remaining = 0.0
 	puntaje_nivel = 0
 	# Meta para ribbons: prioridad max_pts (schema duckshoot), fallback puntaje_maximo/meta_puntos
 	puntaje_maximo_nivel = int(level_config.get("max_pts", level_config.get("puntaje_maximo", level_config.get("meta_puntos", 0))))
@@ -212,6 +215,15 @@ func load_level(level_id: String) -> void:
 	anunciar_nivel(nivel_actual)
 
 func _process(_delta: float) -> void:
+	# Snow: countdown siempre activo; detenido = sin spawns ni movimiento.
+	if freeze_remaining > 0.0:
+		freeze_remaining -= _delta
+		if freeze_remaining <= 0.0:
+			freeze_remaining = 0.0
+			_aplicar_freeze(false)
+			if audio_juego:
+				audio_juego.resume_gears()
+		return
 	if is_game_over:
 		return
 	if ctrl_resultados and ctrl_resultados.esta_mostrado():
@@ -391,6 +403,14 @@ func _on_target_hit(target: Target) -> void:
 	if target.target_type == "bomb":
 		_detonar_bomba(target)
 		return
+	# El rayo tampoco puntúa: voltea a todos los targets activos de su lane.
+	if target.target_type == "rayo":
+		_descargar_rayo(target)
+		return
+	# Snow tampoco puntúa: detiene todas las lanes por freeze_duration.
+	if target.target_type == "snow":
+		_congelar_lanes()
+		return
 	var puntos: int = target.puntos
 	if puntos <= 0:
 		return
@@ -438,6 +458,39 @@ func _detonar_bomba(bomba: Target) -> void:
 		best_left.on_hit()
 	if is_instance_valid(best_right) and not best_right.is_hit:
 		best_right.on_hit()
+
+# Congelamiento de snow: los targets integran con dt = 0 (ver Target.frozen:
+# frenan desplazamiento pero tumbado, polea y señales siguen vivos) y las
+# olas pausan su _process. Balas y rifle intactos: durante el freeze se puede
+# disparar y voltear targets normalmente. Un nuevo snow refresca la duración.
+func _congelar_lanes() -> void:
+	freeze_remaining = freeze_duration
+	_aplicar_freeze(true)
+	if audio_juego:
+		audio_juego.pause_gears()
+
+func _aplicar_freeze(congelar: bool) -> void:
+	for child in get_children():
+		if child is Target:
+			(child as Target).frozen = congelar
+		elif child is WaveRow:
+			(child as Node).set_process(not congelar)
+
+# Descarga del rayo: voltea (on_hit -> puntos + efecto) a todos los targets
+# activos de su misma lane, estén donde estén del recorrido. Incluye
+# especiales: si cae una bomba, esta detona a su vez (encadenado natural);
+# los ya volteados se omiten (on_hit se autoprotege con is_hit, sin bucles).
+func _descargar_rayo(rayo: Target) -> void:
+	var lane_idx: int = rayo.lane_index
+	for child in get_children():
+		if child == rayo or not (child is Target):
+			continue
+		var cand: Target = child as Target
+		if cand.lane_index != lane_idx or cand.is_hit:
+			continue
+		if not is_instance_valid(cand) or cand.is_queued_for_deletion():
+			continue
+		cand.on_hit()
 
 func actualizar_ui_puntaje() -> void:
 	if ctrl_resultados:
