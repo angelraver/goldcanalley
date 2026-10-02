@@ -17,6 +17,7 @@ var direction: int = 1 # 1 para derecha, -1 para izquierda
 var x_start: float = 0.0
 var x_limit: float = 0.0
 var target_type: String = "A"
+var lane_index: int = -1 # Lane (0-3) donde spawneó; la fija main.gd al instanciar
 var is_special: bool = false
 var base_y: float = 0.0
 var angle_progress: float = 0.0

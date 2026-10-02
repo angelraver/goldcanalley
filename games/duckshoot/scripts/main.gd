@@ -43,6 +43,10 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @export_group("Escala de Velocidad (1 a 5)")
 @export var speed_multiplier: float = 0.5
 
+@export_group("Power-ups / Bomba")
+@export var blast_radius: float = 0.9 # Alcance cross-lane: cubre lanes vecinas (~0.69) y diagonales (~0.73) sin llegar a 2 lanes (~1.36)
+@export var blast_lateral_range: float = 1.2 # Misma lane: el vecino más cercano a cada lado cae aunque esté más allá del radio
+
 @export_group("Prefabs")
 @export var wave_z_offset: float = 0.1 # Distancia hacia adelante respecto al pato para tapar su base
 
@@ -349,6 +353,7 @@ func _spawn_next_target(lane: Dictionary) -> void:
 	var instance: Target = target_scene.instantiate() as Target
 	if not instance:
 		return
+	instance.lane_index = lane["index"]
 
 	var is_duck_item = not spawn_special
 	if is_duck_item:
@@ -382,12 +387,57 @@ func _on_target_hit(target: Target) -> void:
 		return
 	if ctrl_resultados and ctrl_resultados.esta_mostrado():
 		return
+	# La bomba no puntúa por sí misma: genera área de destrucción a su alrededor.
+	if target.target_type == "bomb":
+		_detonar_bomba(target)
+		return
 	var puntos: int = target.puntos
 	if puntos <= 0:
 		return
 	puntaje_nivel += puntos
 	actualizar_ui_puntaje()
 	EfectosUI.crear_efecto_puntos(target.global_position, puntos)
+
+# Onda de destrucción de la bomba: derriba (on_hit -> puntos + efecto) a los
+# patos no especiales en las 8 direcciones (misma lane, lanes de arriba/abajo
+# y diagonales). Dos mecanismos:
+#  1) Radio (blast_radius): barre todo lo cercano, cubre vertical/diagonales.
+#  2) Garantía lateral: en la misma lane cae el vecino más cercano a cada
+#     lado dentro de blast_lateral_range, aunque la lane esté rala y quede
+#     más allá del radio (ese era el caso que dejaba laterales vivos).
+# Los ya volteados se omiten; otros especiales (bomb/rayo/snow) no encadenan
+# la explosión. Cerca de bordes o lanes extremas hay menos vecinos: el
+# barrido por distancia / lado existente lo resuelve solo.
+func _detonar_bomba(bomba: Target) -> void:
+	var origen: Vector3 = bomba.global_position
+	var lane_idx: int = bomba.lane_index
+	var best_left: Target = null
+	var best_left_dx: float = blast_lateral_range
+	var best_right: Target = null
+	var best_right_dx: float = blast_lateral_range
+	for child in get_children():
+		if child == bomba or not (child is Target):
+			continue
+		var cand: Target = child as Target
+		if cand.is_special or cand.is_hit:
+			continue
+		if not is_instance_valid(cand) or cand.is_queued_for_deletion():
+			continue
+		if cand.global_position.distance_to(origen) <= blast_radius:
+			cand.on_hit()
+			continue
+		if cand.lane_index == lane_idx and lane_idx >= 0:
+			var dx: float = cand.global_position.x - origen.x
+			if dx < 0.0 and -dx <= best_left_dx:
+				best_left_dx = -dx
+				best_left = cand
+			elif dx > 0.0 and dx <= best_right_dx:
+				best_right_dx = dx
+				best_right = cand
+	if is_instance_valid(best_left) and not best_left.is_hit:
+		best_left.on_hit()
+	if is_instance_valid(best_right) and not best_right.is_hit:
+		best_right.on_hit()
 
 func actualizar_ui_puntaje() -> void:
 	if ctrl_resultados:
