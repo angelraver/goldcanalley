@@ -99,6 +99,11 @@ func _process(delta: float) -> void:
 				if angle_progress > PI:
 					angle_progress = PI
 				_update_exiting_position()
+				# El volteado desaparece al terminar la polea: no hace el
+				# trayecto recto subterráneo previo a la destrucción.
+				if angle_progress >= PI and is_hit:
+					target_despawned.emit(self)
+					queue_free()
 			else:
 				# Etapa 2: Avanzar en recta de cabeza (tras bambalinas)
 				exit_underground_progress += speed * delta
@@ -111,19 +116,18 @@ func _process(delta: float) -> void:
 func _update_entering_position() -> void:
 	var offset_y = -pulley_radius * (1.0 - cos(angle_progress))
 	var offset_x = 0.0
-	
-	_orient_base_model()
 
 	if direction == 1:
 		offset_x = -sin(angle_progress) * pulley_radius
 		global_position.x = x_start + offset_x
 		global_position.y = base_y + offset_y
-		rotate_object_local(Vector3.FORWARD, angle_progress)
 	else:
 		offset_x = sin(angle_progress) * pulley_radius
 		global_position.x = x_start + offset_x
 		global_position.y = base_y + offset_y
-		rotate_object_local(Vector3.FORWARD, angle_progress)
+
+	_orient_base_model()
+	rotate_object_local(Vector3.FORWARD, angle_progress)
 
 func _update_exiting_position() -> void:
 	var offset_y = -pulley_radius * (1.0 - cos(angle_progress))
@@ -154,10 +158,11 @@ func _orient_base_model() -> void:
 		var axis_dir = Vector3.RIGHT if direction == 1 else Vector3.LEFT
 
 		rotate_object_local(axis_dir, fold_radians)		
-		# Compensación Y: al rotar desde el centro, la base sube (target_height / 2.0).
-		# Se resta gradualmente a medida que se tumba (sin tocar base_y global)
+		# Compensación Y relativa: se resta sobre la posición ya calculada
+		# (recta o curva de polea) para no aplanar la trayectoria circular
+		# de entrada/salida en targets volteados.
 		var y_offset = (target_height / 2.0) * sin(fold_radians)
-		global_position.y = base_y - y_offset
+		global_position.y -= y_offset
 
 func set_target_data(p_puntos: int, p_color: Color) -> void:
 	puntos = p_puntos
