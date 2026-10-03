@@ -38,9 +38,9 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 │  HUD compartido: UIPuntaje · UITimer · UILevelNumber · PuntosFlotantes    │
 │  Shaders: desenfoque / chromatic_aberration / crt_effect / logo_dissolver │
 └──────────────────────────────────────────────────────────────────────────┘
-              │              │               │              │
-     games/tincanalley  games/whackamole  games/plinko  games/ringtoss   (games/duckshoot → stub, solo assets/)
-      (can knockdown)   (whack-a-mole)   (plinko)      (ring toss)
+               │              │               │              │               │
+      games/tincanalley  games/whackamole  games/plinko  games/ringtoss  games/duckshoot
+       (can knockdown)   (whack-a-mole)   (plinko)      (ring toss)     (rail shooter)
 ```
 
 **Regla de oro:** `core/` no importa nada de `games/`. Cada juego bajo `games/<id>/` es autocontenido (`scenes/`, `scripts/`, `data/`, `assets/`, `shaders/`) y **solo** se acopla al core por 3 puntos: `games.json`, lectura de `save_manager.juego_actual_seleccionado / nivel_actual_seleccionado`, y `PanelResultados`.
@@ -56,13 +56,13 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 | `save_manager` | `core/scripts/save_manager.gd:1` | `juego_actual_seleccionado: String`, `nivel_actual_seleccionado: int`, `pagina_niveles_por_juego: Dictionary`, `premio_recien_desbloqueado: String`, `LISTA_PREMIOS: Array[String]` (18 premios). Métodos clave: `registrar_puntaje_nivel(nivel, puntaje, max, id_game) -> bool` (`save_manager.gd:73`), `obtener_puntaje_nivel`, `obtener_maximo_nivel`, `es_nivel_desbloqueado(nivel, id_game) -> bool` (desbloquea si `score_prev/max_prev >= 1/3`, `save_manager.gd:112`), `contar_ribbons_azules()`, `obtener_total_niveles_game(id)`, `obtener_total_niveles_globales()`, `calcular_cantidad_premios_desbloqueados()`, `obtener_pagina_niveles/guardar_pagina_niveles`, `obtener_opcion_audio/guardar_opcion_audio`, `obtener_idioma_guardado/guardar_idioma`. Persistencia a disco `guardar_a_disco()` (`save_manager.gd:51`). |
 | `audio_manager` | `core/scripts/audio_manager.gd:1` | `music_enabled/sfx_enabled: bool`, `bgm_player: AudioStreamPlayer` (creado en `_ready`, `audio_manager.gd:19`, con loop vía `finished`, `audio_manager.gd:25`), `set_music_enabled(bool)`, `set_sfx_enabled(bool)`, `play_bgm(stream)`, `play_start/welldone/prize/ok1()`. BGM por escena: `ensure_title_bgm()` (`main_theme.ogg`, llamado en `title.gd`) y `ensure_game_bgm(id)` (theme de `core/assets/sounds/themes/<juego>.ogg` lazy-cacheado, llamado en `seleccion_niveles.gd` y en cada `games/*/scripts/main.gd`; no reinicia si ya suena). Estado leído de `save_manager` (`audio_manager.gd:22`). Escena contenedora: `core/scenes/audio_manager.tscn`. |
 | `game_manager` | `core/scripts/game_manager.gd:1` | `idioma_actual: String`, `configuracion_juegos: Dictionary` (cache de `games.json`), `textos_locales: Dictionary`. `cargar_configuracion_juegos()` (`game_manager.gd:16`), `cargar_todos_los_textos()` (core `textos.json` sin prefijo + cada juego con su `prefijo_texto`, `game_manager.gd:37`), `obtener_config_juego_actual() -> Dictionary` (`game_manager.gd:57`), `obtener_texto(clave, defecto) -> String` con fallback a `es` (`game_manager.gd:60`), `obtener_titulo_nivel(id, game) -> String` resuelve `prefijo + num` (`game_manager.gd:72`), signal `idioma_cambiado`. |
-| `EfectosUI` | `core/scripts/efectos_ui.gd:1` | Singleton `EfectosUI`. `crear_efecto_puntos(posicion_3d: Vector3, valor: int)` — proyecta `pos_3d + (0,0.3,0)` con `Camera3D.unproject_position`, instancia `core/scenes/puntos_flotantes.tscn`, ubica en el `CanvasLayer` activo y anima tween flotante + fade 1.5s (`efectos_ui.gd:6`). Usado en tincanalley `main.gd:181`, whackamole `main.gd:223`, ringtoss `main.gd:606`, plinko `main.gd:209`. |
+| `EfectosUI` | `core/scripts/efectos_ui.gd:1` | Singleton `EfectosUI`. `crear_efecto_puntos(posicion_3d: Vector3, valor: int)` — proyecta `pos_3d + (0,0.3,0)` con `Camera3D.unproject_position`, instancia `core/scenes/puntos_flotantes.tscn`, ubica en el `CanvasLayer` activo y anima tween flotante + fade 1.5s (`efectos_ui.gd:6`). Usado en tincanalley, whackamole, plinko, ringtoss (`main.gd:561`) y duckshoot (`main.gd:420`). |
 
 ### 3.2 Controladores reutilizables (scripts con `class_name`)
 
 | Script | `class_name` | Para qué |
 |---|---|---|
-| `core/scripts/controlador_resultados.gd:2` | `ControladorResultados` | **Elimina boilerplate de resultados.** Gestiona `reset()/al_iniciar_nivel()`, `mostrar(nivel, puntaje, max)` (guard + ocultar HUD + `panel.mostrar()`), `actualizar_puntaje/nivel`, `esta_mostrado()`, y conecta `reiniciar_solicitado -> callback`. Uso: ver §5 skeleton. Todos los juegos actuales lo usan (tincanalley `main.gd:58`, whackamole `main.gd:36`, plinko `main.gd:47`, ringtoss `main.gd:288`). |
+| `core/scripts/controlador_resultados.gd:2` | `ControladorResultados` | **Elimina boilerplate de resultados.** Gestiona `reset()/al_iniciar_nivel()`, `mostrar(nivel, puntaje, max)` (guard + ocultar HUD + `panel.mostrar()`), `actualizar_puntaje/nivel`, `esta_mostrado()`, y conecta `reiniciar_solicitado -> callback`. Uso: ver §5 skeleton. Todos los juegos actuales lo usan (tincanalley, whackamole, plinko, ringtoss, duckshoot `main.gd`). |
 | `core/scripts/game_audio_base.gd:1` | `GameAudioBase` | Base para audio por juego. Agrupa `AudioStreamPlayer` hijos por prefijo (texto antes de dígitos en el nombre del nodo, `game_audio_base.gd:16`). `play(prefijo)`, `play_aleatorio(prefijo)`, respeta `sfx_enabled`. Inyección típica: `nueva_pelota.set("audio", audio_juego)` (plinko `main.gd:326`, tincanalley `main.gd:141`). |
 | `core/scripts/panel_resultados.gd:2` | `PanelResultados` | Panel fin de nivel. `mostrar(nivel_id, puntaje, max, id_game)` (`panel_resultados.gd:41`) calcula umbrales 1/3, 2/3, 3/3 → ribbons amarilla/roja/azul, llama `save_manager.registrar_puntaje_nivel()` y `audio_manager.play_welldone()`, anima desenfoque + pop. Señales `reiniciar_solicitado` / `continuar_solicitado`; botón OK navega a `premio_desbloqueado.tscn` si hay premio o a `seleccion_niveles.tscn` si no (`panel_resultados.gd:120`). |
 | `core/scripts/ui_puntaje.gd:2` | `UIPuntaje` | HUD score con `pad_zeros`. `establecer_puntaje(int)` (`ui_puntaje.gd:14`). Escena: `core/scenes/ui_puntaje.tscn`. |
@@ -76,7 +76,7 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 
 | Escena | Script asociado | Reutilización |
 |---|---|---|
-| `core/scenes/title.tscn` | `core/scripts/title.gd:1` | Hub. Un `TextureButton` por juego (hoy 4 hardcodeados: `ButtonTinCanAlley`, `ButtonWhackamole`, `ButtonPlinko`, `ButtonRingToss` en `title.tscn:66-119`). Cada handler hace `_iniciar_juego(id)` → `save_manager.juego_actual_seleccionado = id` + `change_scene_to_file(seleccion_niveles.tscn)` (`title.gd:26`). También `Prizes` → `premios.tscn` y `Options` → `options.tscn`. **Al añadir juego, tocar aquí + `games.json`.** |
+| `core/scenes/title.tscn` | `core/scripts/title.gd:1` | Hub con **carrusel dinámico** (`CarouselMenu`): lee `game_manager.configuracion_juegos` (o sea, `games.json`), ordena según `ORDEN_JUEGOS` (`title.gd:7`, hoy los 5 juegos) y agrega automáticamente juegos nuevos no listados (`title.gd:104`). Selección → `_iniciar_juego(id)` → `save_manager.juego_actual_seleccionado = id` + `change_scene_to_file(seleccion_niveles.tscn)` (`title.gd:130`). También `Prizes` → `premios.tscn` y `Options` → `options.tscn`. **Al añadir juego: basta registrarlo en `games.json` (+ entrada opcional en `ORDEN_JUEGOS`/`NOMBRES_JUEGOS`).** |
 | `core/scenes/seleccion_niveles.tscn` | `core/scripts/seleccion_niveles.gd:1` | **Genérica y data-driven.** Lee `game_manager.obtener_config_juego_actual()` (`seleccion_niveles.gd:18`), carga `ruta_niveles_json` para contar niveles, pone `textura_fondo/logo` del registry, pagina de 9 (`NIVELES_POR_PAGINA=9`, `seleccion_niveles.gd:11`), restaura `save_manager.obtener_pagina_niveles()` (`seleccion_niveles.gd:44`), renderiza 9× `slot_nivel.tscn` y conecta `nivel_seleccionado -> change_scene_to_file(escena_juego_destino)` (`seleccion_niveles.gd:122`). |
 | `core/scenes/slot_nivel.tscn` | `core/scripts/slot_nivel.gd:1` | Slot individual. `configurar(nivel_id)` consulta `save_manager.es_nivel_desbloqueado` y pinta bloqueado (modulate oscuro, disabled, ribbons ocultas, `slot_nivel.gd:32`) vs desbloqueado (ribbons según `score/max`, `slot_nivel.gd:62`). Emite `nivel_seleccionado(nivel_id)`. |
 | `core/scenes/panel_resultados.tscn` | `core/scripts/panel_resultados.gd:1` | Ver §3.2. Incrustar bajo un `CanvasLayer/UI` del juego. |
@@ -168,14 +168,7 @@ Duplicar `games/ringtoss/` o `games/plinko/` como plantilla — ambos usan `Cont
 5. Usar `EfectosUI.crear_efecto_puntos(pos3D, pts)` para feedback flotante.
 6. Opcional: `GameAudioBase` para SFX agrupados.
 
-**Paso 6 — Añadir botón en el hub (`core/scenes/title.tscn` + `core/scripts/title.gd`).** Hoy es manual (no dinámico). Duplica un `TextureButton` existente (ej. `ButtonRingToss` `title.tscn:105`), asigna `texture_normal = tu logo`, conecta `pressed -> _on_boton_<id>_pressed` en `title.gd` y añade:
-
-```gdscript
-func _on_boton_duckshoot_pressed() -> void:
-  _press_feedback($ButtonDuckshoot, func(): _iniciar_juego("duckshoot"))
-```
-
-Sigue el patrón de `title.gd:5-56` (`_press_feedback` con vibración + tween escala, `audio_manager.play_start()` en `_iniciar_juego`).
+**Paso 6 — Registrar el juego en el hub (carrusel).** El hub es dinámico: basta el registro del Paso 1 en `games.json`. Opcionalmente añade el `id` a `ORDEN_JUEGOS` y su nombre visible a `NOMBRES_JUEGOS` en `core/scripts/title.gd:7-21` para controlar orden y título (los juegos no listados aparecen solos al final, `title.gd:104`). El logo sale de `textura_logo` del registry. No hay botones hardcodeados que duplicar.
 
 **Paso 7 — Probar flujo completo.**
 
@@ -270,6 +263,7 @@ Notas:
 
 - **Desbloqueo de nivel** (`save_manager.gd:112`): nivel `n` desbloqueado si `score(n-1)/max(n-1) >= 1/3`. Nivel 1 siempre desbloqueado. `SlotNivel` lo aplica (`slot_nivel.gd:27`).
 - **Ribbons** (`panel_resultados.gd:57`): amarilla ≥1/3, roja ≥2/3, azul = 100% (`score >= max`). `SlotNivel` replica la misma lógica (`slot_nivel.gd:66`).
+- **Calibración de la meta (convención del proyecto):** `puntaje_maximo` / `max_pts` de cada nivel ≈ **60% del puntaje perfecto** (duckshoot: `total × valor-medio-mezcla`; ringtoss: `rings × mejor-cono`). Así el oro queda al alcance con ~50% de aciertos reales en dificultad media. Aplica esta regla al crear o reequilibrar niveles.
 - **Premios globales** (`save_manager.gd:170`): `azules = contar_ribbons_azules()` across **todos** los juegos. `total_niveles = obtener_total_niveles_globales()` (suma de `niveles.json` de cada juego, mínimo 18, `save_manager.gd:168`). Para premio `i` (1-indexed): `requeridas = ceil(i * total_niveles / 18)`. `premios.gd:90` y `premio_desbloqueado.gd` usan la misma fórmula. `LISTA_PREMIOS` orden fijo (`save_manager.gd:5`).
 - **Localización** (`game_manager.gd:37`): core `textos.json` sin prefijo + cada juego con `prefijo_texto`. `obtener_texto(clave)` busca `idioma_actual`, fallback `es`, fallback `clave` (`game_manager.gd:60`). Títulos de nivel: `obtener_titulo_nivel("3")` → busca `"<prefijo>3"` (`game_manager.gd:82`).
 - **Audio prefs**: `audio_manager` persiste `music_enabled/sfx_enabled` en `save_manager` (`audio_manager.gd:22-32`). Juegos deben consultar `sfx_habilitado()` vía `GameAudioBase` o `save_manager.obtener_opcion_audio("sfx_enabled")`.
@@ -301,10 +295,18 @@ tincanalley/
 └── games/
     ├── tincanalley/          # can knockdown — 90 niveles, 10 tipos de lata (A-J), shader latas, mesa 3D
     │   └── data/niveles.json (90 keys) / valores.json (A-J) / textos.json (90 títulos)
-    ├── whackamole/            # whack-a-mole — spawner random, 6 tipos de topo, mazo 3D
-    ├── plinko/                # plinko — board procedural (pegs/ramps/slots), 18 niveles, ball physics
-    ├── ringtoss/              # ring toss — cones + Area3D score, drag/swipe, 40+ niveles
-    └── duckshoot/             # stub — solo assets/, pendiente de implementar
+    ├── whackamole/            # whack-a-mole — 27 niveles, spawner random, 6 tipos de topo, mazo 3D
+    ├── plinko/                # plinko — 18 niveles, board procedural (pegs/ramps/slots), ball physics
+    ├── ringtoss/              # ring toss — 50 niveles, detección de score geométrica (sin Area3D), drag/swipe;
+    │   # puntaje = suma de `points` del cono por aro; llegar a `puntaje_maximo` termina el nivel antes
+    └── duckshoot/             # rail shooter — 18 niveles, 4 lanes con olas, rifle + balas
+        # `scripts/target.gd` (`class_name Target`): máquina ENTERING/MOVING_STRAIGHT/EXITING sobre
+        # `lane_positions` de `main.gd`; volteo al impacto (`hit_fold_angle` → 90°).
+        # Especiales: `bomb` (área + laterales), `rayo` (limpia su lane), `snow` (freeze 3s).
+        # `scenes/`: duck/bomb/rayo/snow/wave1/wave2/wave_row/rifle/bala/bala_agujero/escalera/audio_manager.
+        # Audio propio (`audio_manager.gd` ← `GameAudioBase`): rifle/duck/gears + `play_bomb/play_rayo/
+        # play_tictac/stop_tictac/play_shotmiss1` cableados en `main.gd:_on_target_hit/_congelar_lanes`.
+        # `data/valores.json`: patos A-D (100/200/300/500) + especiales sin puntos.
 ```
 
 Cada `games/<id>/` replica: `scenes/`, `scripts/`, `data/`, `assets/`, `shaders/` (opcional).
@@ -351,4 +353,4 @@ Abrir la raíz en **Godot 4.7+** → Run (main scene = title). Export vía `Proj
 
 ---
 
-*Última actualización: 2026-09-24 — 4 juegos activos (tincanalley, whackamole, plinko, ringtoss) + duckshoot stub. Para proponer mejoras al core (ej. hub dinámico que lea `games.json` sin tocar `title.gd`), abrir issue/PR con prefijo `[core]`.*
+*Última actualización: 2026-10-03 — 5 juegos activos (tincanalley 90 niveles, whackamole 27, plinko 18, ringtoss 50, duckshoot 18). Hub carrusel dinámico desde `games.json`. Convención: metas de nivel al 60% del perfecto (§6). Para proponer mejoras al core (ej. paginación configurable del selector), abrir issue/PR con prefijo `[core]`.*
