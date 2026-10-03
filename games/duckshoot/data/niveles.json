@@ -1,14 +1,14 @@
 {
   "1": {
 	"total": 40,
-	"max_pts": 3400,
+	"max_pts": 2400,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1",
 	  "patos": {
 		"A": 100
 	  },
-	  "especial": ["snow", "rayo", "bomb"],
+	  "especial": [],
 	  "especial_rate": 0,
 	  "wave_type": "none"
 	},
@@ -45,7 +45,7 @@
   },
   "2": {
 	"total": 60,
-	"max_pts": 6800,
+	"max_pts": 4300,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1",
@@ -99,7 +99,7 @@
   },
   "3": {
 	"total": 80,
-	"max_pts": 10500,
+	"max_pts": 7000,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1",
@@ -150,7 +150,7 @@
   },
   "4": {
 	"total": 100,
-	"max_pts": 14200,
+	"max_pts": 8900,
 	"lane_1": {
 	  "direction": "izquierda",
 	  "speed": "1.1",
@@ -204,7 +204,7 @@
   },
   "5": {
 	"total": 120,
-	"max_pts": 16500,
+	"max_pts": 13900,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.2",
@@ -266,7 +266,7 @@
   },
   "6": {
 	"total": 130,
-	"max_pts": 18200,
+	"max_pts": 11400,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.2",
@@ -320,7 +320,7 @@
   },
   "7": {
 	"total": 150,
-	"max_pts": 22000,
+	"max_pts": 15000,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.3",
@@ -380,7 +380,7 @@
   },
   "8": {
 	"total": 180,
-	"max_pts": 26500,
+	"max_pts": 20100,
 	"lane_1": {
 	  "direction": "izquierda",
 	  "speed": "1.4",
@@ -443,7 +443,7 @@
   },
   "9": {
 	"total": 210,
-	"max_pts": 31000,
+	"max_pts": 25100,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.4",
@@ -507,7 +507,7 @@
   },
   "10": {
 	"total": 250,
-	"max_pts": 34500,
+	"max_pts": 31400,
 	"lane_1": {
 	  "direction": "izquierda",
 	  "speed": "1.5",
@@ -574,7 +574,7 @@
   },
   "11": {
 	"total": 270,
-	"max_pts": 38000,
+	"max_pts": 29900,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.6",
@@ -636,7 +636,7 @@
   },
   "12": {
 	"total": 300,
-	"max_pts": 43500,
+	"max_pts": 35900,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.6",
@@ -700,7 +700,7 @@
   },
   "13": {
 	"total": 340,
-	"max_pts": 49000,
+	"max_pts": 43200,
 	"lane_1": {
 	  "direction": "izquierda",
 	  "speed": "1.7",
@@ -765,7 +765,7 @@
   },
   "14": {
 	"total": 380,
-	"max_pts": 54000,
+	"max_pts": 48300,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.8",
@@ -832,7 +832,7 @@
   },
   "15": {
 	"total": 420,
-	"max_pts": 58000,
+	"max_pts": 54900,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "1.9",
@@ -902,7 +902,7 @@
   },
   "16": {
 	"total": 450,
-	"max_pts": 62000,
+	"max_pts": 53800,
 	"lane_1": {
 	  "direction": "izquierda",
 	  "speed": "2",
@@ -966,7 +966,7 @@
   },
   "17": {
 	"total": 480,
-	"max_pts": 67500,
+	"max_pts": 61400,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "2.1",
@@ -1035,7 +1035,7 @@
   },
   "18": {
 	"total": 500,
-	"max_pts": 72000,
+	"max_pts": 64500,
 	"lane_1": {
 	  "direction": "derecha",
 	  "speed": "2.2",
