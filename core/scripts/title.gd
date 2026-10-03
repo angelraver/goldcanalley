@@ -27,6 +27,8 @@ static var _intro_logo_realizada := false
 
 @onready var carousel: CarouselMenu = $CarouselMenu
 @onready var logo: TextureRect = $Logo
+@onready var boton_prizes: TextureButton = $Prizes
+@onready var boton_options: TextureButton = $Options
 
 
 func _ready() -> void:
@@ -41,6 +43,8 @@ func _ready() -> void:
 	if era_primera_vez and carousel:
 		# Giro a alta velocidad que decelera junto con la subida del logo.
 		carousel.spin_intro(DURACION_INTRO_LOGO)
+	if era_primera_vez:
+		_animar_intro_botones()
 
 
 ## El logo aparece en la mitad vertical y sube hasta su posición.
@@ -65,6 +69,27 @@ func _animar_intro_logo() -> void:
 	var tween := logo.create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(logo, "position:y", destino_y, DURACION_INTRO_LOGO)
+
+
+## En la primera vez: Options entra desde la izquierda y Prizes desde la
+## derecha, ambos hasta su posición de la escena. Solo `position:x`.
+func _animar_intro_botones() -> void:
+	var ancho_pantalla := get_viewport_rect().size.x
+	var entradas: Array = [[boton_options, -1.0], [boton_prizes, 1.0]]
+	for item in entradas:
+		var boton: Control = item[0]
+		if boton == null:
+			continue
+		var lado: float = item[1]
+		var destino_x: float = boton.position.x
+		var ancho: float = boton.offset_right - boton.offset_left
+		if lado < 0.0:
+			boton.position.x = -ancho
+		else:
+			boton.position.x = ancho_pantalla
+		var tween: Tween = boton.create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(boton, "position:x", destino_x, DURACION_INTRO_LOGO)
 
 
 func _construir_datos_carrusel() -> Array[Dictionary]:

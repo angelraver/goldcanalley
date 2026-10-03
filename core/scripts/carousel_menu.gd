@@ -84,8 +84,6 @@ func setup_carousel(data: Array[Dictionary]) -> void:
 		var tex: Texture2D = info.get("texture", null) as Texture2D
 		if tex != null:
 			btn.texture_normal = tex
-		var title: String = str(info.get("title", info.get("id", "game")))
-		btn.tooltip_text = title
 		var idx := i
 		btn.pressed.connect(_on_item_pressed.bind(idx))
 		btn.focus_entered.connect(_on_item_focus_entered.bind(idx))
