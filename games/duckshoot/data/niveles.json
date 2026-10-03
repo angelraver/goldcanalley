@@ -1,6 +1,5 @@
 {
   "1": {
-	"titulo": "Práctica de Tiro",
 	"total": 40,
 	"max_pts": 3400,
 	"lane_1": {
@@ -45,7 +44,6 @@
 	}
   },
   "2": {
-	"titulo": "Primer Marejadilla",
 	"total": 60,
 	"max_pts": 6800,
 	"lane_1": {
@@ -100,7 +98,6 @@
 	}
   },
   "3": {
-	"titulo": "Flujo Cruzado",
 	"total": 80,
 	"max_pts": 10500,
 	"lane_1": {
@@ -152,7 +149,6 @@
 	}
   },
   "4": {
-	"titulo": "Agua Picada",
 	"total": 100,
 	"max_pts": 14200,
 	"lane_1": {
@@ -207,7 +203,6 @@
 	}
   },
   "5": {
-	"titulo": "¡Tormenta Marea Viva!",
 	"total": 120,
 	"max_pts": 16500,
 	"lane_1": {
@@ -270,7 +265,6 @@
 	}
   },
   "6": {
-	"titulo": "Calma Tras la Tempestad",
 	"total": 130,
 	"max_pts": 18200,
 	"lane_1": {
@@ -325,7 +319,6 @@
 	}
   },
   "7": {
-	"titulo": "Doble Corriente",
 	"total": 150,
 	"max_pts": 22000,
 	"lane_1": {
@@ -386,7 +379,6 @@
 	}
   },
   "8": {
-	"titulo": "Visión Fragmentada",
 	"total": 180,
 	"max_pts": 26500,
 	"lane_1": {
@@ -450,7 +442,6 @@
 	}
   },
   "9": {
-	"titulo": "Corte de Oleaje",
 	"total": 210,
 	"max_pts": 31000,
 	"lane_1": {
@@ -515,7 +506,6 @@
 	}
   },
   "10": {
-	"titulo": "¡Galerna Infernal!",
 	"total": 250,
 	"max_pts": 34500,
 	"lane_1": {
@@ -583,7 +573,6 @@
 	}
   },
   "11": {
-	"titulo": "Resaca Nocturna",
 	"total": 270,
 	"max_pts": 38000,
 	"lane_1": {
@@ -646,7 +635,6 @@
 	}
   },
   "12": {
-	"titulo": "Marea en Enjambre",
 	"total": 300,
 	"max_pts": 43500,
 	"lane_1": {
@@ -711,7 +699,6 @@
 	}
   },
   "13": {
-	"titulo": "Bolsón de Corrientes",
 	"total": 340,
 	"max_pts": 49000,
 	"lane_1": {
@@ -777,7 +764,6 @@
 	}
   },
   "14": {
-	"titulo": "Barrera Oscura",
 	"total": 380,
 	"max_pts": 54000,
 	"lane_1": {
@@ -845,7 +831,6 @@
 	}
   },
   "15": {
-	"titulo": "¡Tsunami Rabioso!",
 	"total": 420,
 	"max_pts": 58000,
 	"lane_1": {
@@ -916,7 +901,6 @@
 	}
   },
   "16": {
-	"titulo": "Sombra en la Espuma",
 	"total": 450,
 	"max_pts": 62000,
 	"lane_1": {
@@ -981,7 +965,6 @@
 	}
   },
   "17": {
-	"titulo": "Huracán de Blancos",
 	"total": 480,
 	"max_pts": 67500,
 	"lane_1": {
@@ -1051,7 +1034,6 @@
 	}
   },
   "18": {
-	"titulo": "Maelstrom Absoluto",
 	"total": 500,
 	"max_pts": 72000,
 	"lane_1": {

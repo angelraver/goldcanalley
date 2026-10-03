@@ -1,3 +1,20 @@
 {
-	"1": { "es": "Primera Cacería", "en": "First Hunt", "pt": "Primeira Caçada" }
+  "1": { "es": "Práctica de Tiro", "en": "Target Practice", "pt": "Prática de Tiro" },
+  "2": { "es": "Primer Marejadilla", "en": "First Swell", "pt": "Primeira Marola" },
+  "3": { "es": "Flujo Cruzado", "en": "Crossflow", "pt": "Fluxo Cruzado" },
+  "4": { "es": "Agua Picada", "en": "Choppy Water", "pt": "Água Picada" },
+  "5": { "es": "¡Tormenta Marea Viva!", "en": "Living Tide Storm!", "pt": "Tempestade Maré Viva!" },
+  "6": { "es": "Calma Tras la Tempestad", "en": "Calm After the Storm", "pt": "Calma Após a Tempestade" },
+  "7": { "es": "Doble Corriente", "en": "Double Current", "pt": "Corrente Dupla" },
+  "8": { "es": "Visión Fragmentada", "en": "Fragmented Vision", "pt": "Visão Fragmentada" },
+  "9": { "es": "Corte de Oleaje", "en": "Wave Break", "pt": "Quebra de Ondas" },
+  "10": { "es": "¡Galerna Infernal!", "en": "Infernal Gale!", "pt": "Vendaval Infernal!" },
+  "11": { "es": "Resaca Nocturna", "en": "Night Undertow", "pt": "Ressaca Noturna" },
+  "12": { "es": "Marea en Enjambre", "en": "Swarm Tide", "pt": "Maré em Enxame" },
+  "13": { "es": "Bolsón de Corrientes", "en": "Current Pool", "pt": "Poça de Correntes" },
+  "14": { "es": "Barrera Oscura", "en": "Dark Barrier", "pt": "Barreira Escura" },
+  "15": { "es": "¡Tsunami Rabioso!", "en": "Raging Tsunami!", "pt": "Tsunami Furioso!" },
+  "16": { "es": "Sombra en la Espuma", "en": "Shadow in the Foam", "pt": "Sombra na Espuma" },
+  "17": { "es": "Huracán de Blancos", "en": "Hurricane of Targets", "pt": "Furacão de Alvos" },
+  "18": { "es": "Maelstrom Absoluto", "en": "Absolute Maelstrom", "pt": "Maelstrom Absoluto" }
 }
