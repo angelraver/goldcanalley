@@ -84,6 +84,7 @@ var ring_launched: bool = false
 
 
 func _ready() -> void:
+	audio_manager.ensure_game_bgm("ringtoss")
 	contenedor_conos = Node3D.new()
 	contenedor_conos.name = "ConosGenerados"
 	add_child(contenedor_conos)

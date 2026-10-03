@@ -46,6 +46,7 @@ var controles_activos: bool = false
 var ctrl_resultados: ControladorResultados
 
 func _ready() -> void:
+	audio_manager.ensure_game_bgm("tincanalley")
 	contenedor_latas = Node3D.new()
 	contenedor_latas.name = "ContenedorLatas"
 	add_child(contenedor_latas)

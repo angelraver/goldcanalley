@@ -47,6 +47,7 @@ const UMBRAL_QUIETUD: float = 0.1
 const TIEMPO_QUIETO_REQUERIDO: float = 0.5 # >0.4s de slot.gd para asegurar puntuación definitiva
 
 func _ready() -> void:
+	audio_manager.ensure_game_bgm("plinko")
 	nivel_actual = save_manager.nivel_actual_seleccionado
 
 	ctrl_resultados = ControladorResultados.new()

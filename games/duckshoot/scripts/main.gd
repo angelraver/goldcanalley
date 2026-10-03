@@ -91,6 +91,7 @@ var freeze_remaining: float = 0.0 # Snow: tiempo restante de lanes detenidas
 var lanes_data: Array = []
 
 func _ready() -> void:
+	audio_manager.ensure_game_bgm("duckshoot")
 	# Inyección de audio
 	if audio_juego and rifle:
 		rifle.audio = audio_juego

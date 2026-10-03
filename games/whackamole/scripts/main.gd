@@ -32,6 +32,7 @@ var juego_activo: bool = false
 var ctrl_resultados: ControladorResultados
 
 func _ready() -> void:
+	audio_manager.ensure_game_bgm("whackamole")
 	cargar_valores()
 	nivel_actual = save_manager.nivel_actual_seleccionado
 

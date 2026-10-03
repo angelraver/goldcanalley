@@ -2,10 +2,6 @@ extends Node
 
 const RUTA_GUARDADO = "user://progreso.json"
 
-# Renombrado goldcanalley -> tincanalley: conservar progreso de instalaciones antiguas.
-const ID_JUEGO_LEGADO = "goldcanalley"
-const ID_JUEGO_CANAS = "tincanalley"
-
 const LISTA_PREMIOS: Array[String] = [
 	"aros", "dino", "drum",
 	"doll", "roboto", "duck",
@@ -37,7 +33,6 @@ func cargar_progreso() -> void:
 		var resultado = JSON.parse_string(texto)
 		if resultado is Dictionary:
 			datos_progreso = resultado
-			_migrar_id_juego_legado()
 		else:
 			_inicializar_estructura_vacia()
 	else:
@@ -52,39 +47,6 @@ func _inicializar_estructura_vacia() -> void:
 		},
 		"games": {}
 	}
-
-# Migra el progreso guardado con el id antiguo ("goldcanalley") al nuevo ("tincanalley").
-# Fusiona nivel a nivel quedándose con el mejor puntaje para no perder avance.
-func _migrar_id_juego_legado() -> void:
-	if not (datos_progreso is Dictionary):
-		return
-	if not datos_progreso.has("games") or not (datos_progreso["games"] is Dictionary):
-		return
-	var games: Dictionary = datos_progreso["games"]
-	if not games.has(ID_JUEGO_LEGADO):
-		return
-	if juego_actual_seleccionado == ID_JUEGO_LEGADO:
-		juego_actual_seleccionado = ID_JUEGO_CANAS
-	if pagina_niveles_por_juego.has(ID_JUEGO_LEGADO) and not pagina_niveles_por_juego.has(ID_JUEGO_CANAS):
-		pagina_niveles_por_juego[ID_JUEGO_CANAS] = pagina_niveles_por_juego[ID_JUEGO_LEGADO]
-	var datos_viejos = games[ID_JUEGO_LEGADO]
-	if not (datos_viejos is Dictionary):
-		games.erase(ID_JUEGO_LEGADO)
-		guardar_a_disco()
-		return
-	if not games.has(ID_JUEGO_CANAS) or not (games[ID_JUEGO_CANAS] is Dictionary):
-		games[ID_JUEGO_CANAS] = {}
-	var datos_nuevos: Dictionary = games[ID_JUEGO_CANAS]
-	for clave in datos_viejos.keys():
-		if not datos_nuevos.has(clave):
-			datos_nuevos[clave] = datos_viejos[clave]
-		elif datos_nuevos[clave] is Dictionary and datos_viejos[clave] is Dictionary:
-			var score_nuevo := int(datos_nuevos[clave].get("score", 0))
-			var score_viejo := int(datos_viejos[clave].get("score", 0))
-			if score_viejo > score_nuevo:
-				datos_nuevos[clave] = datos_viejos[clave]
-	games.erase(ID_JUEGO_LEGADO)
-	guardar_a_disco()
 
 func guardar_a_disco() -> void:
 	var archivo = FileAccess.open(RUTA_GUARDADO, FileAccess.WRITE)

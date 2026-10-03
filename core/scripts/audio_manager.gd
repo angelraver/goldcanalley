@@ -13,6 +13,17 @@ var sfx_enabled: bool = true
 # Música de fondo de las escenas title/options.
 const TITLE_BGM: AudioStream = preload("res://core/assets/sounds/themes/main_theme.ogg")
 
+# Un theme por minijuego. Se cargan bajo demanda y se cachean.
+const THEME_PATHS := {
+	"tincanalley": "res://core/assets/sounds/themes/tincanalley.ogg",
+	"whackamole": "res://core/assets/sounds/themes/whackamole.ogg",
+	"plinko": "res://core/assets/sounds/themes/plinko.ogg",
+	"ringtoss": "res://core/assets/sounds/themes/ringtoss.ogg",
+	"duckshoot": "res://core/assets/sounds/themes/duckshoot.ogg",
+}
+
+var _theme_cache := {}
+
 # Player para la música de fondo (vive en este autoload, por eso
 # la música continúa sin cortes entre title <-> options).
 var bgm_player: AudioStreamPlayer
@@ -20,6 +31,10 @@ var bgm_player: AudioStreamPlayer
 func _ready() -> void:
 	# 1. Inicializamos el reproductor de música de fondo
 	bgm_player = AudioStreamPlayer.new()
+	# Música al 65% (0 dB = 100%).
+	bgm_player.volume_db = linear_to_db(0.5)
+	# La pausa del juego (árbol pausado) no debe interrumpir la música.
+	bgm_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(bgm_player)
 	# Reanudar en bucle cuando el track finaliza.
 	bgm_player.finished.connect(_on_bgm_finished)
@@ -51,10 +66,38 @@ func set_music_enabled(enabled: bool) -> void:
 ## Si ya está sonando, no lo reinicia (continuidad title <-> options).
 ## Si la música está desactivada, lo deja preparado pero pausado.
 func ensure_title_bgm() -> void:
-	if bgm_player == null:
+	_activar_bgm(TITLE_BGM)
+
+## Asegura que suene el theme del minijuego indicado (por defecto el actual).
+## Corta main_theme al entrar al juego; suena en selección de niveles y en partida.
+## Si ya está sonando, no lo reinicia. Sin theme para el id: no toca lo que suena.
+func ensure_game_bgm(id_juego: String = "") -> void:
+	if id_juego == "":
+		id_juego = save_manager.juego_actual_seleccionado
+	var theme := _obtener_theme(id_juego)
+	if theme == null:
 		return
-	if bgm_player.stream != TITLE_BGM:
-		bgm_player.stream = TITLE_BGM
+	_activar_bgm(theme)
+
+func _obtener_theme(id_juego: String) -> AudioStream:
+	if not THEME_PATHS.has(id_juego):
+		return null
+	if _theme_cache.has(id_juego):
+		return _theme_cache[id_juego] as AudioStream
+	var ruta: String = str(THEME_PATHS[id_juego])
+	if not ResourceLoader.exists(ruta):
+		push_warning("AudioManager: sin theme para juego '%s' (%s)" % [id_juego, ruta])
+		return null
+	var stream := load(ruta) as AudioStream
+	if stream != null:
+		_theme_cache[id_juego] = stream
+	return stream
+
+func _activar_bgm(stream: AudioStream) -> void:
+	if bgm_player == null or stream == null:
+		return
+	if bgm_player.stream != stream:
+		bgm_player.stream = stream
 		bgm_player.stream_paused = false
 		if music_enabled:
 			bgm_player.play()

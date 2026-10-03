@@ -1,1126 +1,1126 @@
 {
   "1": {
-    "titulo": "Práctica de Tiro",
-    "total": 40,
-    "max_pts": 3400,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1",
-      "patos": {
-        "A": 100
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "1",
-      "patos": {
-        "A": 100
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_3": {
-      "direction": "derecha",
-      "speed": "1",
-      "patos": {
-        "A": 100
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1",
-      "patos": {
-        "A": 100
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    }
+	"titulo": "Práctica de Tiro",
+	"total": 40,
+	"max_pts": 3400,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": {
+		"A": 100
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": {
+		"A": 100
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": {
+		"A": 100
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": {
+		"A": 100
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	}
   },
   "2": {
-    "titulo": "Primer Marejadilla",
-    "total": 60,
-    "max_pts": 6800,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1",
-      "patos": {
-        "A": 100
-      },
-      "especial": [
-        "bomb",
-        "snow",
+	"titulo": "Primer Marejadilla",
+	"total": 60,
+	"max_pts": 6800,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": {
+		"A": 100
+	  },
+	  "especial": [
+		"bomb",
+		"snow",
         "rayo"
-      ],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1",
-      "patos": {
-        "A": 70,
-        "B": 30
-      },
-      "especial": [
-        "bomb",
-        "snow",
+	  ],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": {
+		"A": 70,
+		"B": 30
+	  },
+	  "especial": [
+		"bomb",
+		"snow",
         "rayo"
-      ],
-      "especial_rate": 0,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1",
-      "patos": {
-        "A": 100
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1.2",
-      "patos": {
-        "A": 60,
-        "B": 40
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    }
+	  ],
+	  "especial_rate": 0,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": {
+		"A": 100
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 60,
+		"B": 40
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	}
   },
   "3": {
-    "titulo": "Flujo Cruzado",
-    "total": 80,
-    "max_pts": 10500,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1",
-      "patos": {
-        "A": 70,
-        "B": 30
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.2",
-      "patos": {
-        "A": 60,
-        "B": 40
-      },
-      "especial": [
+	"titulo": "Flujo Cruzado",
+	"total": 80,
+	"max_pts": 10500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1",
+	  "patos": {
+		"A": 70,
+		"B": 30
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 60,
+		"B": 40
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 15,
-      "wave_type": "none"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1",
-      "patos": {
-        "A": 65,
-        "B": 35
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "wave1"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "1.3",
-      "patos": {
-        "A": 50,
-        "B": 30,
-        "C": 20
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    }
+	  ],
+	  "especial_rate": 15,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1",
+	  "patos": {
+		"A": 65,
+		"B": 35
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave1"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 50,
+		"B": 30,
+		"C": 20
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	}
   },
   "4": {
-    "titulo": "Agua Picada",
-    "total": 100,
-    "max_pts": 14200,
-    "lane_1": {
-      "direction": "izquierda",
-      "speed": "1.1",
-      "patos": {
-        "A": 60,
-        "B": 40
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "1.2",
-      "patos": {
-        "A": 65,
-        "B": 35
-      },
-      "especial": [
+	"titulo": "Agua Picada",
+	"total": 100,
+	"max_pts": 14200,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "1.1",
+	  "patos": {
+		"A": 60,
+		"B": 40
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 65,
+		"B": 35
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 12,
-      "wave_type": "none"
-    },
-    "lane_3": {
-      "direction": "derecha",
-      "speed": "1.2",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "wave1"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "1.3",
-      "patos": {
-        "A": 60,
-        "B": 25,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 12,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "wave1"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 60,
+		"B": 25,
+		"C": 15
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 15,
-      "wave_type": "none"
-    }
+	  ],
+	  "especial_rate": 15,
+	  "wave_type": "none"
+	}
   },
   "5": {
-    "titulo": "¡Tormenta Marea Viva!",
-    "total": 120,
-    "max_pts": 16500,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.2",
-      "patos": {
-        "A": 50,
-        "B": 30,
-        "D": 20
-      },
-      "especial": [
+	"titulo": "¡Tormenta Marea Viva!",
+	"total": 120,
+	"max_pts": 16500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 50,
+		"B": 30,
+		"D": 20
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.3",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.2",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1.4",
-      "patos": {
-        "A": 50,
-        "B": 25,
-        "C": 15,
-        "D": 10
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1.4",
+	  "patos": {
+		"A": 50,
+		"B": 25,
+		"C": 15,
+		"D": 10
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	}
   },
   "6": {
-    "titulo": "Calma Tras la Tempestad",
-    "total": 130,
-    "max_pts": 18200,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.2",
-      "patos": {
-        "A": 65,
-        "B": 35
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "1.3",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	"titulo": "Calma Tras la Tempestad",
+	"total": 130,
+	"max_pts": 18200,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.2",
+	  "patos": {
+		"A": 65,
+		"B": 35
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 12,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.3",
-      "patos": {
-        "A": 65,
-        "B": 35
-      },
-      "especial": [],
-      "especial_rate": 0,
-      "wave_type": "none"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "1.4",
-      "patos": {
-        "A": 60,
-        "B": 25,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 12,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 65,
+		"B": 35
+	  },
+	  "especial": [],
+	  "especial_rate": 0,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "1.4",
+	  "patos": {
+		"A": 60,
+		"B": 25,
+		"C": 15
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave2"
-    }
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	}
   },
   "7": {
-    "titulo": "Doble Corriente",
-    "total": 150,
-    "max_pts": 22000,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.3",
-      "patos": {
-        "A": 60,
-        "B": 40
-      },
-      "especial": [
+	"titulo": "Doble Corriente",
+	"total": 150,
+	"max_pts": 22000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 60,
+		"B": 40
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.5",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.5",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 10,
-      "wave_type": "none"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.3",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.3",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1.6",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave1"
+	}
   },
   "8": {
-    "titulo": "Visión Fragmentada",
-    "total": 180,
-    "max_pts": 26500,
-    "lane_1": {
-      "direction": "izquierda",
-      "speed": "1.4",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	"titulo": "Visión Fragmentada",
+	"total": 180,
+	"max_pts": 26500,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "1.4",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.6",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "derecha",
-      "speed": "1.6",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 8,
-      "wave_type": "none"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1.7",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "none"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1.7",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "rayo"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	}
   },
   "9": {
-    "titulo": "Corte de Oleaje",
-    "total": 210,
-    "max_pts": 31000,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.4",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	"titulo": "Corte de Oleaje",
+	"total": 210,
+	"max_pts": 31000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.4",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.6",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.4",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.4",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1.7",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1.7",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "snow"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	}
   },
   "10": {
-    "titulo": "¡Galerna Infernal!",
-    "total": 250,
-    "max_pts": 34500,
-    "lane_1": {
-      "direction": "izquierda",
-      "speed": "1.5",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	"titulo": "¡Galerna Infernal!",
+	"total": 250,
+	"max_pts": 34500,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "1.5",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "rayo"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.7",
-      "patos": {
-        "A": 45,
-        "B": 30,
-        "C": 15,
-        "D": 10
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.7",
+	  "patos": {
+		"A": 45,
+		"B": 30,
+		"C": 15,
+		"D": 10
+	  },
+	  "especial": [
+		"bomb",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.7",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.7",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "1.8",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "rayo",
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "1.8",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
   },
   "11": {
-    "titulo": "Resaca Nocturna",
-    "total": 270,
-    "max_pts": 38000,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.6",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	"titulo": "Resaca Nocturna",
+	"total": 270,
+	"max_pts": 38000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "1.8",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "1.8",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 10,
-      "wave_type": "none"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.6",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "none"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 10,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "1.9",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 10,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "1.9",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	}
   },
   "12": {
-    "titulo": "Marea en Enjambre",
-    "total": 300,
-    "max_pts": 43500,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.6",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	"titulo": "Marea en Enjambre",
+	"total": 300,
+	"max_pts": 43500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.6",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "1.8",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "1.8",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "1.8",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "1.8",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "1.9",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "1.9",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "snow"
-      ],
-      "especial_rate": 7,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 7,
+	  "wave_type": "wave1"
+	}
   },
   "13": {
-    "titulo": "Bolsón de Corrientes",
-    "total": 340,
-    "max_pts": 49000,
-    "lane_1": {
-      "direction": "izquierda",
-      "speed": "1.7",
-      "patos": {
-        "A": 40,
-        "B": 28,
-        "C": 20,
-        "D": 12
-      },
-      "especial": [
+	"titulo": "Bolsón de Corrientes",
+	"total": 340,
+	"max_pts": 49000,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "1.7",
+	  "patos": {
+		"A": 40,
+		"B": 28,
+		"C": 20,
+		"D": 12
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 7,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "2",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 7,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 7,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "derecha",
-      "speed": "1.7",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 7,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "1.7",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 7,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "2.1",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 7,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "2.1",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "rayo"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	}
   },
   "14": {
-    "titulo": "Barrera Oscura",
-    "total": 380,
-    "max_pts": 54000,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.8",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	"titulo": "Barrera Oscura",
+	"total": 380,
+	"max_pts": 54000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.8",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "snow"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "2.1",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "rayo",
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "2.1",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "2.1",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "2.1",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "rayo"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "2.2",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "2.2",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
   },
   "15": {
-    "titulo": "¡Tsunami Rabioso!",
-    "total": 420,
-    "max_pts": 58000,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "1.9",
-      "patos": {
-        "A": 40,
-        "B": 28,
-        "C": 20,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	"titulo": "¡Tsunami Rabioso!",
+	"total": 420,
+	"max_pts": 58000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "1.9",
+	  "patos": {
+		"A": 40,
+		"B": 28,
+		"C": 20,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 4,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "2.2",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	  ],
+	  "especial_rate": 4,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "2.2",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 4,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "derecha",
-      "speed": "1.9",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	  ],
+	  "especial_rate": 4,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "1.9",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 4,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "2.3",
-      "patos": {
-        "A": 35,
-        "B": 30,
-        "C": 20,
-        "D": 15
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 4,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "2.3",
+	  "patos": {
+		"A": 35,
+		"B": 30,
+		"C": 20,
+		"D": 15
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 4,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 4,
+	  "wave_type": "wave1"
+	}
   },
   "16": {
-    "titulo": "Sombra en la Espuma",
-    "total": 450,
-    "max_pts": 62000,
-    "lane_1": {
-      "direction": "izquierda",
-      "speed": "2",
-      "patos": {
-        "A": 55,
-        "B": 30,
-        "C": 15
-      },
-      "especial": [
+	"titulo": "Sombra en la Espuma",
+	"total": 450,
+	"max_pts": 62000,
+	"lane_1": {
+	  "direction": "izquierda",
+	  "speed": "2",
+	  "patos": {
+		"A": 55,
+		"B": 30,
+		"C": 15
+	  },
+	  "especial": [
         "rayo"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "2.3",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "2.3",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "snow"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "2.3",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "2.3",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
         "bomb"
-      ],
-      "especial_rate": 8,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "derecha",
-      "speed": "2.4",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 8,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "derecha",
+	  "speed": "2.4",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "rayo"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	}
   },
   "17": {
-    "titulo": "Huracán de Blancos",
-    "total": 480,
-    "max_pts": 67500,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "2.1",
-      "patos": {
-        "A": 40,
-        "B": 28,
-        "C": 20,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	"titulo": "Huracán de Blancos",
+	"total": 480,
+	"max_pts": 67500,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "2.1",
+	  "patos": {
+		"A": 40,
+		"B": 28,
+		"C": 20,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "rayo"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "derecha",
-      "speed": "2.4",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "derecha",
+	  "speed": "2.4",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
         "snow"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "izquierda",
-      "speed": "2.1",
-      "patos": {
-        "A": 45,
-        "B": 25,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "rayo",
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "izquierda",
+	  "speed": "2.1",
+	  "patos": {
+		"A": 45,
+		"B": 25,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 6,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "2.5",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	  ],
+	  "especial_rate": 6,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "2.5",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
   },
   "18": {
-    "titulo": "Maelstrom Absoluto",
-    "total": 500,
-    "max_pts": 72000,
-    "lane_1": {
-      "direction": "derecha",
-      "speed": "2.2",
-      "patos": {
-        "A": 40,
-        "B": 28,
-        "C": 20,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	"titulo": "Maelstrom Absoluto",
+	"total": 500,
+	"max_pts": 72000,
+	"lane_1": {
+	  "direction": "derecha",
+	  "speed": "2.2",
+	  "patos": {
+		"A": 40,
+		"B": 28,
+		"C": 20,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave2"
-    },
-    "lane_2": {
-      "direction": "izquierda",
-      "speed": "2.5",
-      "patos": {
-        "A": 40,
-        "B": 28,
-        "C": 20,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_2": {
+	  "direction": "izquierda",
+	  "speed": "2.5",
+	  "patos": {
+		"A": 40,
+		"B": 28,
+		"C": 20,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave1"
-    },
-    "lane_3": {
-      "direction": "derecha",
-      "speed": "2.5",
-      "patos": {
-        "A": 40,
-        "B": 30,
-        "C": 18,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	},
+	"lane_3": {
+	  "direction": "derecha",
+	  "speed": "2.5",
+	  "patos": {
+		"A": 40,
+		"B": 30,
+		"C": 18,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave2"
-    },
-    "lane_4": {
-      "direction": "izquierda",
-      "speed": "2.6",
-      "patos": {
-        "A": 40,
-        "B": 28,
-        "C": 20,
-        "D": 12
-      },
-      "especial": [
-        "bomb",
-        "rayo",
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave2"
+	},
+	"lane_4": {
+	  "direction": "izquierda",
+	  "speed": "2.6",
+	  "patos": {
+		"A": 40,
+		"B": 28,
+		"C": 20,
+		"D": 12
+	  },
+	  "especial": [
+		"bomb",
+		"rayo",
         "snow"
-      ],
-      "especial_rate": 5,
-      "wave_type": "wave1"
-    }
+	  ],
+	  "especial_rate": 5,
+	  "wave_type": "wave1"
+	}
   }
 }

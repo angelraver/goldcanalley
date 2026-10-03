@@ -14,6 +14,9 @@ var ruta_niveles_json: String = ""
 var escena_juego_destino: String = ""
 
 func _ready() -> void:
+	# Theme del minijuego: corta main_theme y suena aquí y en partida
+	# (el player vive en el autoload, así que continúa sin cortes).
+	audio_manager.ensure_game_bgm()
 	# 1. Cargar la configuración según el juego actual seleccionado
 	var config_juego = game_manager.obtener_config_juego_actual()
 	print("juego actual seleccionado: " + save_manager.juego_actual_seleccionado)
