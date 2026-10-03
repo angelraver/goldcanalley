@@ -5,6 +5,10 @@ extends Control
 @onready var select_level: Label = $Frente/LevelSelection
 @onready var fondo: TextureRect = $Fondo # Ajusta la ruta a tu TextureRect de Fondo
 @onready var logo: TextureRect = $Logo # Ajusta la ruta a tu TextureRect de Fondo
+@onready var frente: TextureRect = $Frente
+
+## Duración de la entrada de Frente y Logo.
+const DURACION_INTRO_ENTRADA := 1.0
 
 var pagina_actual: int = 1
 var total_niveles: int = 0
@@ -60,6 +64,31 @@ func _ready() -> void:
 	if select_level:
 		select_level.text = game_manager.obtener_texto("seleccion_nivel")
 	refrescar_pantalla_niveles()
+
+	# 6. Animación de entrada: Logo baja desde arriba, Frente sube desde abajo.
+	_animar_intro_entrada()
+
+
+## Logo entra desde arriba (fuera de pantalla) y Frente desde abajo,
+## ambos hasta su posición de la escena en DURACION_INTRO_ENTRADA segundos.
+## Sin escalado: solo se anima `position:y`. El pivote se deja en el origen
+## para no alterar el render de la escena.
+func _animar_intro_entrada() -> void:
+	var alto_pantalla := get_viewport_rect().size.y
+	var entradas: Array = []
+	if logo:
+		var h_logo: float = logo.offset_bottom - logo.offset_top
+		entradas.append([logo, -h_logo])
+	if frente:
+		entradas.append([frente, alto_pantalla])
+	for item in entradas:
+		var control: Control = item[0]
+		var destino_y: float = control.position.y
+		control.pivot_offset = Vector2.ZERO
+		control.position.y = float(item[1])
+		var tween: Tween = control.create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(control, "position:y", destino_y, DURACION_INTRO_ENTRADA)
 
 func obtener_total_niveles() -> int:
 	if not FileAccess.file_exists(ruta_niveles_json):
