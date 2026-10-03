@@ -24,6 +24,9 @@ const NOMBRES_JUEGOS: Dictionary = {
 
 
 func _ready() -> void:
+	# Música de fondo de title/options: vive en el autoload audio_manager
+	# para que continúe sin cortes al ir y volver de options.
+	audio_manager.ensure_title_bgm()
 	var games_data := _construir_datos_carrusel()
 	carousel.setup_carousel(games_data)
 	carousel.item_selected.connect(_on_game_selected)

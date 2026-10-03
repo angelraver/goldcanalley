@@ -10,14 +10,20 @@ extends Node
 var music_enabled: bool = true
 var sfx_enabled: bool = true
 
-# Player para la música de fondo
+# Música de fondo de las escenas title/options.
+const TITLE_BGM: AudioStream = preload("res://core/assets/sounds/themes/main_theme.ogg")
+
+# Player para la música de fondo (vive en este autoload, por eso
+# la música continúa sin cortes entre title <-> options).
 var bgm_player: AudioStreamPlayer
 
 func _ready() -> void:
 	# 1. Inicializamos el reproductor de música de fondo
 	bgm_player = AudioStreamPlayer.new()
 	add_child(bgm_player)
-	
+	# Reanudar en bucle cuando el track finaliza.
+	bgm_player.finished.connect(_on_bgm_finished)
+
 	# 2. Leemos el estado persistente guardado en save_manager
 	music_enabled = save_manager.obtener_opcion_audio("music_enabled", true)
 	sfx_enabled = save_manager.obtener_opcion_audio("sfx_enabled", true)
@@ -30,17 +36,49 @@ func _ready() -> void:
 func set_music_enabled(enabled: bool) -> void:
 	music_enabled = enabled
 	save_manager.guardar_opcion_audio("music_enabled", enabled) # Guarda en el JSON
-	
-	if bgm_player.stream:
-		bgm_player.stream_paused = !enabled
-		if enabled and not bgm_player.playing:
+
+	if bgm_player == null or bgm_player.stream == null:
+		return
+
+	if enabled:
+		bgm_player.stream_paused = false
+		if not bgm_player.playing:
 			bgm_player.play()
+	else:
+		bgm_player.stream_paused = true
+
+## Asegura que suene el tema de title/options.
+## Si ya está sonando, no lo reinicia (continuidad title <-> options).
+## Si la música está desactivada, lo deja preparado pero pausado.
+func ensure_title_bgm() -> void:
+	if bgm_player == null:
+		return
+	if bgm_player.stream != TITLE_BGM:
+		bgm_player.stream = TITLE_BGM
+		bgm_player.stream_paused = false
+		if music_enabled:
+			bgm_player.play()
+		return
+	if music_enabled:
+		bgm_player.stream_paused = false
+		if not bgm_player.playing:
+			bgm_player.play()
+	else:
+		bgm_player.stream_paused = true
+
+func _on_bgm_finished() -> void:
+	# Bucle: al finalizar el track, comenzar otra vez (solo si la música está activada).
+	if bgm_player == null or bgm_player.stream == null:
+		return
+	if music_enabled:
+		bgm_player.play()
 
 func play_bgm(stream: AudioStream) -> void:
 	if stream == null:
 		return
-	
+
 	bgm_player.stream = stream
+	bgm_player.stream_paused = false
 	if music_enabled:
 		bgm_player.play()
 
