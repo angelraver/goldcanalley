@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://8ctdimwp03il" path="res://core/assets/images/fondodia.jpeg" id="2_4e4sy"]
 [ext_resource type="Script" uid="uid://fc21akfhascg" path="res://core/scripts/carousel_menu.gd" id="2_carousel"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_2xeeo"]
-[ext_resource type="Texture2D" uid="uid://bwp7plbrdja8d" path="res://core/assets/images/logo.png" id="4_4e4sy"]
-[ext_resource type="Texture2D" uid="uid://cnxvtolpaaljy" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
-[ext_resource type="Texture2D" uid="uid://w11w41j4jpou" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
+[ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://core/assets/images/logo.png" id="4_4e4sy"]
+[ext_resource type="Texture2D" uid="uid://beo3pfrblphcv" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
+[ext_resource type="Texture2D" uid="uid://dj80kcallsdvp" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
 shader = ExtResource("3_2xeeo")
@@ -46,8 +46,8 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 24.0
-offset_bottom = 468.0
+offset_top = 166.0
+offset_bottom = 610.0
 grow_horizontal = 2
 texture = ExtResource("4_4e4sy")
 expand_mode = 1

@@ -26,16 +26,21 @@ signal focused_item_changed(index: int, item_id: String)
 @export var scale_max: float = 1.0
 @export var alpha_min: float = 0.35
 @export var drag_sensitivity: float = 0.005
-@export var friction: float = 0.92
+@export var friction: float = 0.92 ## Retención de velocidad por frame a 60fps (menor = frena antes).
+@export var fling_max_speed: float = 12.0 ## Velocidad angular máxima al soltar (rad/s).
+@export var fling_min_speed: float = 0.35 ## Por debajo, el impulso cede al snap (rad/s).
+@export var fling_sample_ms: float = 120.0 ## Ventana para medir la velocidad al soltar.
 @export var snap_speed: float = 10.0
 @export var click_threshold: float = 14.0 ## px máximos para considerar tap (no drag).
 
 var global_angle: float = 0.0
-var velocity: float = 0.0
+var velocity: float = 0.0 ## Velocidad angular actual (rad/s).
 var is_dragging: bool = false
 var _press_pos: Vector2 = Vector2.ZERO
 var _last_pos: Vector2 = Vector2.ZERO
 var _dragged: bool = false
+## Muestras recientes [msec, x] para calcular la velocidad al soltar.
+var _drag_samples: Array = []
 var _focused_index: int = -1
 var _snap_tween: Tween = null
 
@@ -159,12 +164,9 @@ func _process(delta: float) -> void:
 	var step_angle := (PI * 2.0) / float(count)
 
 	if not is_dragging and (_snap_tween == null or not _snap_tween.is_running()):
-		if absf(velocity) > 0.0001:
-			global_angle += velocity
+		if absf(velocity) > fling_min_speed:
+			global_angle += velocity * delta
 			velocity *= pow(friction, delta * 60.0)
-			# Cortar la cola de inercia para que el snap entre antes.
-			if absf(velocity) <= 0.0015:
-				velocity = 0.0
 		else:
 			velocity = 0.0
 			var target_angle: float = round(global_angle / step_angle) * step_angle
@@ -268,6 +270,7 @@ func _begin_drag(pos: Vector2) -> void:
 	velocity = 0.0
 	_press_pos = pos
 	_last_pos = pos
+	_drag_samples = [[Time.get_ticks_msec(), pos.x]]
 	if _snap_tween and _snap_tween.is_valid():
 		_snap_tween.kill()
 
@@ -278,18 +281,33 @@ func _drag_to(pos: Vector2) -> void:
 		_dragged = true
 	var angle_delta := dx * drag_sensitivity
 	global_angle += angle_delta
-	velocity = angle_delta
 	_last_pos = pos
+	# Ventana de muestras para medir el impulso al soltar.
+	var ahora := Time.get_ticks_msec()
+	_drag_samples.append([ahora, pos.x])
+	while _drag_samples.size() > 2 and float(ahora) - float(_drag_samples[0][0]) > fling_sample_ms:
+		_drag_samples.pop_front()
 
 
 func _end_drag(pos: Vector2) -> void:
 	if not is_dragging:
 		return
 	is_dragging = false
-	# Si fue un tap (sin arrastre), el TextureButton central ya emite `pressed`.
-	# Aquí solo evitamos que un drag largo deje inercia absurda.
-	if not _dragged:
+	# El impulso se mide con el recorrido de los últimos ~120 ms, no con el
+	# último evento (que suele llegar con el dedo ya frenado).
+	if _dragged and _drag_samples.size() >= 2:
+		var primera: Array = _drag_samples[0]
+		var ultima: Array = _drag_samples[_drag_samples.size() - 1]
+		var dt_seg := (float(ultima[0]) - float(primera[0])) / 1000.0
+		if dt_seg > 0.001:
+			var v := (float(ultima[1]) - float(primera[1])) / dt_seg * drag_sensitivity
+			velocity = clampf(v, -fling_max_speed, fling_max_speed)
+		else:
+			velocity = 0.0
+	else:
+		# Si fue un tap (sin arrastre), el TextureButton central ya emite `pressed`.
 		velocity = 0.0
+	_drag_samples.clear()
 	_last_pos = pos
 
 
@@ -339,6 +357,21 @@ func _fly_to_index(idx: int) -> void:
 	_snap_tween = create_tween()
 	_snap_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	_snap_tween.tween_property(self, "global_angle", target, 0.35)
+
+
+## Giro de intro: arranca a alta velocidad y decelera hasta detenerse
+## justo al cabo de `duracion` (sincronizado con la subida del logo).
+## Da `vueltas` completas, así que termina en el ítem inicial.
+## El usuario puede interrumpirlo: arrastrar, tocar o navegar lo cancela.
+func spin_intro(duracion: float = 3.0, vueltas: float = 2.0) -> void:
+	if item_nodes.is_empty() or duracion <= 0.0:
+		return
+	if _snap_tween and _snap_tween.is_valid():
+		_snap_tween.kill()
+	velocity = 0.0
+	_snap_tween = create_tween()
+	_snap_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_snap_tween.tween_property(self, "global_angle", global_angle + TAU * vueltas, duracion)
 
 
 func _notify_focus_changed(force: bool = false) -> void:

@@ -20,16 +20,51 @@ const NOMBRES_JUEGOS: Dictionary = {
 	"duckshoot": "Duck Shoot",
 }
 
+## Duración de la subida del logo en la intro.
+const DURACION_INTRO_LOGO := 5.0
+## La intro se muestra solo la primera vez que se ve title en cada ejecución.
+static var _intro_logo_realizada := false
+
 @onready var carousel: CarouselMenu = $CarouselMenu
+@onready var logo: TextureRect = $Logo
 
 
 func _ready() -> void:
 	# Música de fondo de title/options: vive en el autoload audio_manager
 	# para que continúe sin cortes al ir y volver de options.
 	audio_manager.ensure_title_bgm()
+	var era_primera_vez := not _intro_logo_realizada
+	_animar_intro_logo()
 	var games_data := _construir_datos_carrusel()
 	carousel.setup_carousel(games_data)
 	carousel.item_selected.connect(_on_game_selected)
+	if era_primera_vez and carousel:
+		# Giro a alta velocidad que decelera junto con la subida del logo.
+		carousel.spin_intro(DURACION_INTRO_LOGO)
+
+
+## El logo aparece en la mitad vertical y sube hasta su posición.
+## Solo la primera vez; al volver a title ya está en su sitio.
+func _animar_intro_logo() -> void:
+	if _intro_logo_realizada:
+		return
+	_intro_logo_realizada = true
+	if logo == null:
+		return
+	var destino_y := logo.position.y
+	await get_tree().process_frame
+	if not is_instance_valid(logo) or not logo.is_inside_tree():
+		return
+	var contenedor := logo.get_parent() as Control
+	if contenedor == null or contenedor.size.y <= 0.0:
+		return
+	var inicio_y := (contenedor.size.y - logo.size.y) / 2.0
+	if inicio_y <= destino_y:
+		return
+	logo.position.y = inicio_y
+	var tween := logo.create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(logo, "position:y", destino_y, DURACION_INTRO_LOGO)
 
 
 func _construir_datos_carrusel() -> Array[Dictionary]:
