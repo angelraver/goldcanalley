@@ -161,6 +161,7 @@ func load_level(level_id: String) -> void:
 	actualizar_ui_level()
 	is_game_over = false
 	if audio_juego:
+		audio_juego.stop_tictac()
 		audio_juego.stop_gears()
 	lanes_data.clear()
 	
@@ -223,6 +224,7 @@ func _process(_delta: float) -> void:
 			freeze_remaining = 0.0
 			_aplicar_freeze(false)
 			if audio_juego:
+				audio_juego.stop_tictac()
 				audio_juego.resume_gears()
 		return
 	if is_game_over:
@@ -402,10 +404,14 @@ func _on_target_hit(target: Target) -> void:
 		return
 	# La bomba no puntúa por sí misma: genera área de destrucción a su alrededor.
 	if target.target_type == "bomb":
+		if audio_juego:
+			audio_juego.play_bomb()
 		_detonar_bomba(target)
 		return
 	# El rayo tampoco puntúa: voltea a todos los targets activos de su lane.
 	if target.target_type == "rayo":
+		if audio_juego:
+			audio_juego.play_rayo()
 		_descargar_rayo(target)
 		return
 	# Snow tampoco puntúa: detiene todas las lanes por freeze_duration.
@@ -468,6 +474,8 @@ func _congelar_lanes() -> void:
 	freeze_remaining = freeze_duration
 	_aplicar_freeze(true)
 	if audio_juego:
+		audio_juego.play_shotmiss1()
+		audio_juego.play_tictac()
 		audio_juego.pause_gears()
 
 func _aplicar_freeze(congelar: bool) -> void:
@@ -523,6 +531,7 @@ func mostrar_panel_resultados() -> void:
 		return
 	is_game_over = true
 	if audio_juego:
+		audio_juego.stop_tictac()
 		audio_juego.stop_gears()
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 

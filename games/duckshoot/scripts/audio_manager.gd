@@ -22,6 +22,19 @@ func play_shotmiss1() -> void:
 func play_shotmiss2() -> void:
 	_play_por_sufijo("ShotMiss", "2")
 
+func play_bomb() -> void:
+	play("Bomb")
+
+func play_rayo() -> void:
+	play("Rayo")
+
+func play_tictac() -> void:
+	play("Tictac")
+
+func stop_tictac() -> void:
+	for jugador in grupos_sonido.get("Tictac", []):
+		(jugador as AudioStreamPlayer).stop()
+
 # Selección de variante por sufijo numérico (ver games/whackamole/scripts/audio_manager.gd: _play_variante).
 # Necesario porque ShotMiss1 y ShotMiss2 comparten el grupo "ShotMiss".
 func _play_por_sufijo(prefijo: String, sufijo: String) -> void:

@@ -8,7 +8,7 @@
 	  "patos": {
 		"A": 100
 	  },
-	  "especial": [],
+	  "especial": ["snow", "rayo", "bomb"],
 	  "especial_rate": 0,
 	  "wave_type": "none"
 	},

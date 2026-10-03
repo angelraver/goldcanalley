@@ -10,8 +10,8 @@ size = Vector3(0.49981688, 0.50742187, 0.1612793)
 script = ExtResource("1_kqcde")
 
 [node name="bomb" parent="." unique_id=1548369785 instance=ExtResource("1_6eum7")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.16011895, 0.13902725, 0.014376819)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.16011895, 0.04, -0.036)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=921486170]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11668375, 0.18442756, 0.06692258)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11668375, 0.08540031, 0)
 shape = SubResource("BoxShape3D_8dl7b")
