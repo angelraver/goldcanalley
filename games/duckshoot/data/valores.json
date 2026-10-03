@@ -24,14 +24,14 @@
     "puntos": 0,
     "model": "bomb"
   },
-  "ray": {
+  "rayo": {
     "color": "amarillo",
     "puntos": 0,
-    "model": "duck"
+    "model": "rayo"
   },
-  "ice": {
+  "snow": {
     "color": "blanco",
     "puntos": 0,
-    "model": "duck"
+    "model": "snow"
   }
 }

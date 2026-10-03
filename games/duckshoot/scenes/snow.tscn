@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ud8u1e8mvm5x"]
+
+[ext_resource type="Script" uid="uid://fxtg5g0yim1v" path="res://games/duckshoot/scripts/target.gd" id="1_kqcde"]
+[ext_resource type="PackedScene" uid="uid://dfjfcnmtdwuck" path="res://games/duckshoot/assets/models/snow.glb" id="1_snow1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snow1"]
+size = Vector3(0.45147237, 0.41206405, 0.06)
+
+[node name="Snow" type="Area3D" unique_id=1627360552]
+script = ExtResource("1_kqcde")
+
+[node name="snow" parent="." unique_id=1192214344 instance=ExtResource("1_snow1")]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0.086865234, 0.031415462)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1934535317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00019262, 0.077341582, 0.00021627359)
+shape = SubResource("BoxShape3D_snow1")

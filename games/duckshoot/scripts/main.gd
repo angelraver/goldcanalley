@@ -16,7 +16,7 @@ extends Node3D
 @export var lane_positions: Array[Vector2] = [
 	Vector2(0.03, 1.19), # Carril 1 (Abajo / Lane_1) -> [Y, Z]
 	Vector2(0.61, 0.82), # Carril 2                -> [Y, Z]
-	Vector2(1.2, 0.53), # Carril 3                -> [Y, Z]
+	Vector2(1.2, 0.50), # Carril 3                -> [Y, Z]
 	Vector2(1.8, 0.15)  # Carril 4 (Arriba / Lane_4) -> [Y, Z]
 ]
 
@@ -42,6 +42,11 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 
 @export_group("Escala de Velocidad (1 a 5)")
 @export var speed_multiplier: float = 0.5
+
+@export_group("Power-ups / Bomba")
+@export var blast_radius: float = 0.9 # Alcance cross-lane: cubre lanes vecinas (~0.69) y diagonales (~0.73) sin llegar a 2 lanes (~1.36)
+@export var blast_lateral_range: float = 1.2 # Misma lane: el vecino más cercano a cada lado cae aunque esté más allá del radio
+@export var freeze_duration: float = 3.0 # Segundos que snow detiene las lanes
 
 @export_group("Prefabs")
 @export var wave_z_offset: float = 0.1 # Distancia hacia adelante respecto al pato para tapar su base
@@ -80,6 +85,7 @@ var level_total_ducks: int = 0
 var ducks_spawned: int = 0
 var ducks_despawned: int = 0
 var is_game_over: bool = false
+var freeze_remaining: float = 0.0 # Snow: tiempo restante de lanes detenidas
 
 # Array para administrar el estado de cada carril
 var lanes_data: Array = []
@@ -138,6 +144,7 @@ func load_level(level_id: String) -> void:
 	level_total_ducks = int(level_config.get("total", 50))
 	ducks_spawned = 0
 	ducks_despawned = 0
+	freeze_remaining = 0.0
 	puntaje_nivel = 0
 	# Meta para ribbons: prioridad max_pts (schema duckshoot), fallback puntaje_maximo/meta_puntos
 	puntaje_maximo_nivel = int(level_config.get("max_pts", level_config.get("puntaje_maximo", level_config.get("meta_puntos", 0))))
@@ -197,14 +204,26 @@ func load_level(level_id: String) -> void:
 				"speed": godot_speed,
 				"especial_rate": int(l_info.get("especial_rate", 10)),
 				"patos": l_info.get("patos", []),
+				"patos_pool": _normalizar_pool_patos(l_info.get("patos", [])),
 				"especial": l_info.get("especial", []),
 				"pos_y": lane_y,
 				"pos_z": lane_z,
-				"last_spawned_target": null
+				"last_spawned_target": null,
+				"last_duck_key": "",
+				"racha_tipo": 0
 			})
 	anunciar_nivel(nivel_actual)
 
 func _process(_delta: float) -> void:
+	# Snow: countdown siempre activo; detenido = sin spawns ni movimiento.
+	if freeze_remaining > 0.0:
+		freeze_remaining -= _delta
+		if freeze_remaining <= 0.0:
+			freeze_remaining = 0.0
+			_aplicar_freeze(false)
+			if audio_juego:
+				audio_juego.resume_gears()
+		return
 	if is_game_over:
 		return
 	if ctrl_resultados and ctrl_resultados.esta_mostrado():
@@ -255,10 +274,63 @@ func _check_lane_spawn(lane: Dictionary) -> void:
 	if can_spawn:
 		_spawn_next_target(lane)
 
+# Normaliza el campo "patos" del nivel a un pool ponderado [[tipo, peso], ...].
+# Acepta Dictionary {"A": 70, "B": 30} (recomendado: A > B > C > D)
+# o Array legacy ["A", "B"] (cada elemento cuenta como 1 voto).
+func _normalizar_pool_patos(patos_raw: Variant) -> Array:
+	var pool: Array = []
+	if patos_raw is Dictionary:
+		for k in (patos_raw as Dictionary).keys():
+			var w: float = float(patos_raw[k])
+			var tipo: String = str(k)
+			if tipo != "" and w > 0.0:
+				pool.append([tipo, w])
+	elif patos_raw is Array:
+		for e in (patos_raw as Array):
+			var tipo_e: String = str(e)
+			if tipo_e != "":
+				pool.append([tipo_e, 1.0])
+	if pool.is_empty():
+		pool = [["A", 1.0]]
+	return pool
+
+func _weighted_pick(pool: Array) -> String:
+	var total: float = 0.0
+	for e in pool:
+		total += float(e[1])
+	if total <= 0.0:
+		return str(pool[0][0])
+	var r: float = randf() * total
+	var acc: float = 0.0
+	for e in pool:
+		acc += float(e[1])
+		if r <= acc:
+			return str(e[0])
+	return str(pool[pool.size() - 1][0])
+
+# Elige el tipo de pato con sorteo ponderado + anti-racha (máx. 2 seguidos
+# del mismo tipo por lane) para romper la monotonía visual.
+func _pick_duck_type(lane: Dictionary) -> String:
+	var pool: Array = lane.get("patos_pool", [])
+	if pool.is_empty():
+		return "A"
+	var pick: String = _weighted_pick(pool)
+	var last: String = str(lane.get("last_duck_key", ""))
+	var racha: int = int(lane.get("racha_tipo", 0))
+	if pick == last and racha >= 2:
+		var alt: Array = pool.filter(func(e): return str(e[0]) != pick)
+		if not alt.is_empty():
+			pick = _weighted_pick(alt)
+	if pick == last:
+		lane["racha_tipo"] = racha + 1
+	else:
+		lane["racha_tipo"] = 1
+	lane["last_duck_key"] = pick
+	return pick
+
 func _spawn_next_target(lane: Dictionary) -> void:
 	var spawn_special = false
 	var especial_list = lane["especial"] as Array
-	var patos_list = lane["patos"] as Array
 	
 	if not especial_list.is_empty():
 		var rate = lane["especial_rate"]
@@ -268,14 +340,12 @@ func _spawn_next_target(lane: Dictionary) -> void:
 	if not spawn_special and ducks_spawned >= level_total_ducks:
 		return
 
-	# Elegir clave del ítem (ej: "A", "B", "C", "D" o "bomb", "ray", "ice")
+	# Elegir clave del ítem (ej: "A", "B", "C", "D" o "bomb", "rayo", "snow")
 	var item_key: String = ""
 	if spawn_special and not especial_list.is_empty():
 		item_key = especial_list.pick_random()
-	elif not patos_list.is_empty():
-		item_key = patos_list.pick_random()
 	else:
-		item_key = "A"
+		item_key = _pick_duck_type(lane)
 
 	# Extraer configuración de valores.json
 	var item_config: Dictionary = valores_data.get(item_key, {})
@@ -295,6 +365,7 @@ func _spawn_next_target(lane: Dictionary) -> void:
 	var instance: Target = target_scene.instantiate() as Target
 	if not instance:
 		return
+	instance.lane_index = lane["index"]
 
 	var is_duck_item = not spawn_special
 	if is_duck_item:
@@ -328,12 +399,98 @@ func _on_target_hit(target: Target) -> void:
 		return
 	if ctrl_resultados and ctrl_resultados.esta_mostrado():
 		return
+	# La bomba no puntúa por sí misma: genera área de destrucción a su alrededor.
+	if target.target_type == "bomb":
+		_detonar_bomba(target)
+		return
+	# El rayo tampoco puntúa: voltea a todos los targets activos de su lane.
+	if target.target_type == "rayo":
+		_descargar_rayo(target)
+		return
+	# Snow tampoco puntúa: detiene todas las lanes por freeze_duration.
+	if target.target_type == "snow":
+		_congelar_lanes()
+		return
 	var puntos: int = target.puntos
 	if puntos <= 0:
 		return
 	puntaje_nivel += puntos
 	actualizar_ui_puntaje()
 	EfectosUI.crear_efecto_puntos(target.global_position, puntos)
+
+# Onda de destrucción de la bomba: derriba (on_hit -> puntos + efecto) a los
+# patos no especiales en las 8 direcciones (misma lane, lanes de arriba/abajo
+# y diagonales). Dos mecanismos:
+#  1) Radio (blast_radius): barre todo lo cercano, cubre vertical/diagonales.
+#  2) Garantía lateral: en la misma lane cae el vecino más cercano a cada
+#     lado dentro de blast_lateral_range, aunque la lane esté rala y quede
+#     más allá del radio (ese era el caso que dejaba laterales vivos).
+# Los ya volteados se omiten; otros especiales (bomb/rayo/snow) no encadenan
+# la explosión. Cerca de bordes o lanes extremas hay menos vecinos: el
+# barrido por distancia / lado existente lo resuelve solo.
+func _detonar_bomba(bomba: Target) -> void:
+	var origen: Vector3 = bomba.global_position
+	var lane_idx: int = bomba.lane_index
+	var best_left: Target = null
+	var best_left_dx: float = blast_lateral_range
+	var best_right: Target = null
+	var best_right_dx: float = blast_lateral_range
+	for child in get_children():
+		if child == bomba or not (child is Target):
+			continue
+		var cand: Target = child as Target
+		if cand.is_special or cand.is_hit:
+			continue
+		if not is_instance_valid(cand) or cand.is_queued_for_deletion():
+			continue
+		if cand.global_position.distance_to(origen) <= blast_radius:
+			cand.on_hit()
+			continue
+		if cand.lane_index == lane_idx and lane_idx >= 0:
+			var dx: float = cand.global_position.x - origen.x
+			if dx < 0.0 and -dx <= best_left_dx:
+				best_left_dx = -dx
+				best_left = cand
+			elif dx > 0.0 and dx <= best_right_dx:
+				best_right_dx = dx
+				best_right = cand
+	if is_instance_valid(best_left) and not best_left.is_hit:
+		best_left.on_hit()
+	if is_instance_valid(best_right) and not best_right.is_hit:
+		best_right.on_hit()
+
+# Congelamiento de snow: los targets integran con dt = 0 (ver Target.frozen:
+# frenan desplazamiento pero tumbado, polea y señales siguen vivos) y las
+# olas pausan su _process. Balas y rifle intactos: durante el freeze se puede
+# disparar y voltear targets normalmente. Un nuevo snow refresca la duración.
+func _congelar_lanes() -> void:
+	freeze_remaining = freeze_duration
+	_aplicar_freeze(true)
+	if audio_juego:
+		audio_juego.pause_gears()
+
+func _aplicar_freeze(congelar: bool) -> void:
+	for child in get_children():
+		if child is Target:
+			(child as Target).frozen = congelar
+		elif child is WaveRow:
+			(child as Node).set_process(not congelar)
+
+# Descarga del rayo: voltea (on_hit -> puntos + efecto) a todos los targets
+# activos de su misma lane, estén donde estén del recorrido. Incluye
+# especiales: si cae una bomba, esta detona a su vez (encadenado natural);
+# los ya volteados se omiten (on_hit se autoprotege con is_hit, sin bucles).
+func _descargar_rayo(rayo: Target) -> void:
+	var lane_idx: int = rayo.lane_index
+	for child in get_children():
+		if child == rayo or not (child is Target):
+			continue
+		var cand: Target = child as Target
+		if cand.lane_index != lane_idx or cand.is_hit:
+			continue
+		if not is_instance_valid(cand) or cand.is_queued_for_deletion():
+			continue
+		cand.on_hit()
 
 func actualizar_ui_puntaje() -> void:
 	if ctrl_resultados:

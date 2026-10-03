@@ -57,9 +57,26 @@ func stop_gears() -> void:
 			break
 	_gears_en_bucle = false
 	for jugador in jugadores:
+		(jugador as AudioStreamPlayer).stream_paused = false
 		(jugador as AudioStreamPlayer).stop()
 	if estaba_sonando:
 		play("GearsStop")
+
+# Pausa del freeze (snow): silencia el bucle sin el remate GearsStop y sin
+# tocar _gears_en_bucle, para retomar donde quedó al descongelar.
+func pause_gears() -> void:
+	for jugador in grupos_sonido.get("Gears", []):
+		var reproductor := jugador as AudioStreamPlayer
+		if reproductor and reproductor.playing:
+			reproductor.stream_paused = true
+
+func resume_gears() -> void:
+	if not _gears_en_bucle:
+		return
+	for jugador in grupos_sonido.get("Gears", []):
+		var reproductor := jugador as AudioStreamPlayer
+		if reproductor and reproductor.stream_paused:
+			reproductor.stream_paused = false
 
 func _on_gears_finished(reproductor: AudioStreamPlayer) -> void:
 	if _gears_en_bucle and sfx_habilitado():

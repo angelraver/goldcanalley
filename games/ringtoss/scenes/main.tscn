@@ -5,10 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://c74yd6r8b1ld0" path="res://games/tincanalley/assets/images/world/fondo_interior.png" id="4_diuyt"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="7_l362f"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_yqfkt"]
-[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
+[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
 [ext_resource type="PackedScene" uid="uid://dgj64nmwi6qa4" path="res://games/tincanalley/scenes/audio_manager.tscn" id="13_66au0"]
+[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="14_pausebtn"]
+[ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="15_pausa"]
 
 [sub_resource type="Environment" id="Environment_8vloa"]
 
@@ -67,9 +69,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -239.99997
-offset_top = 66.0
+offset_top = 75.0
 offset_right = -127.0
-offset_bottom = 130.0
+offset_bottom = 139.0
 grow_horizontal = 0
 scale = Vector2(1.8, 1.933)
 theme_override_constants/separation = 0
@@ -129,6 +131,19 @@ text = "Texto largo para confirmar el corte de linea automático"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="BotonPausa" type="TextureButton" parent="UI" unique_id=2030670074]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 17.0
+offset_bottom = 121.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("14_pausebtn")
+
+[node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("15_pausa")]
+
 [node name="RayCastApuntado" type="RayCast3D" parent="." unique_id=1674815260]
 
 [node name="AudioJuego" parent="." unique_id=497255853 instance=ExtResource("13_66au0")]
@@ -137,3 +152,4 @@ autowrap_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8402618, -1.1534083)
 
 [connection signal="ready" from="." to="." method="_ready"]
+[connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
