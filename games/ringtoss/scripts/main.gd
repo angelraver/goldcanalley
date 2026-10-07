@@ -45,7 +45,7 @@ const ALTURA_CONO_M: float = 0.279
 @export var radio_embocado: float = 0.22
 @export var penetracion_minima_score: float = 0.02
 @export var horizontalidad_minima_score: float = 0.5
-@export var tiempo_maximo_tiro: float = 8.0
+@export var tiempo_maximo_tiro: float = 2.0
 @export var demora_fin_por_objetivo: float = 0.8
 
 @onready var camara: Camera3D = $Camera3D as Camera3D
