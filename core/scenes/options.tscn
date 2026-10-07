@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmx6nlfdepqkt"]
 
 [ext_resource type="Script" uid="uid://smmc3aovjttf" path="res://core/scripts/options.gd" id="1_85aq5"]
-[ext_resource type="Texture2D" uid="uid://d0bkb04vjqo73" path="res://core/assets/images/fondodia.jpg" id="2_aea3w"]
+[ext_resource type="Texture2D" uid="uid://4sdawtbd5yp4" path="res://core/assets/images/fondodia.webp" id="2_aea3w"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_gyu1t"]
 [ext_resource type="Texture2D" uid="uid://y14w5mbypeai" path="res://core/assets/images/ui/panel_options.png" id="4_g5hix"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="5_rftt1"]

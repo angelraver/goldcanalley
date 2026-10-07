@@ -7,9 +7,9 @@ extends RefCounted
 ## independientemente del formato AM/PM del sistema, así que la
 ## comparación siempre se hace en 24h (6 = 6am, 17 = 5pm, 20 = 8pm).
 
-const RUTA_DIA: String = "res://core/assets/images/fondodia.jpg"
-const RUTA_TARDE: String = "res://core/assets/images/fondotarde.jpg"
-const RUTA_NOCHE: String = "res://core/assets/images/fondonoche.jpg"
+const RUTA_DIA: String = "res://core/assets/images/fondodia.webp"
+const RUTA_TARDE: String = "res://core/assets/images/fondotarde.webp"
+const RUTA_NOCHE: String = "res://core/assets/images/fondonoche.webp"
 
 const HORA_DIA_INICIO: int = 6
 const HORA_TARDE_INICIO: int = 17

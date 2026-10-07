@@ -1,12 +1,12 @@
 {
-  "F": {"pts": 50,   "masa": 0.20, "ancho": 1.0, "alto": 1.0, "textura": "f.png" },
-  "A": {"pts": 100,  "masa": 0.45, "ancho": 1.0, "alto": 1.0, "textura": "a.png" },
-  "B": {"pts": 150,  "masa": 0.70, "ancho": 1.0, "alto": 1.0, "textura": "b.png" },
-  "C": {"pts": 180,  "masa": 0.60, "ancho": 1.0, "alto": 1.2, "textura": "c.png" },
-  "D": {"pts": 220,  "masa": 0.85, "ancho": 1.1, "alto": 0.8, "textura": "d.png" },
-  "E": {"pts": 300,  "masa": 1.30, "ancho": 1.1, "alto": 1.1, "textura": "e.png" },
-  "I": {"pts": 500,  "masa": 0.50, "ancho": 1.0, "alto": 1.0, "textura": "i.png" },
-  "G": {"pts": 450,  "masa": 2.20, "ancho": 1.0, "alto": 1.0, "textura": "g.png" },
-  "H": {"pts": 700,  "masa": 4.50, "ancho": 1.2, "alto": 1.0, "textura": "h.png" },
-  "J": {"pts": 1000, "masa": 7.50, "ancho": 1.3, "alto": 1.0, "textura": "j.png" }
+  "F": {"pts": 50,   "masa": 0.20, "ancho": 1.0, "alto": 1.0, "textura": "f.webp" },
+  "A": {"pts": 100,  "masa": 0.45, "ancho": 1.0, "alto": 1.0, "textura": "a.webp" },
+  "B": {"pts": 150,  "masa": 0.70, "ancho": 1.0, "alto": 1.0, "textura": "b.webp" },
+  "C": {"pts": 180,  "masa": 0.60, "ancho": 1.0, "alto": 1.2, "textura": "c.webp" },
+  "D": {"pts": 220,  "masa": 0.85, "ancho": 1.1, "alto": 0.8, "textura": "d.webp" },
+  "E": {"pts": 300,  "masa": 1.30, "ancho": 1.1, "alto": 1.1, "textura": "e.webp" },
+  "I": {"pts": 500,  "masa": 0.50, "ancho": 1.0, "alto": 1.0, "textura": "i.webp" },
+  "G": {"pts": 450,  "masa": 2.20, "ancho": 1.0, "alto": 1.0, "textura": "g.webp" },
+  "H": {"pts": 700,  "masa": 4.50, "ancho": 1.2, "alto": 1.0, "textura": "h.webp" },
+  "J": {"pts": 1000, "masa": 7.50, "ancho": 1.3, "alto": 1.0, "textura": "j.webp" }
 }
