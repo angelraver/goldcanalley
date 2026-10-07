@@ -27,11 +27,13 @@ static var _intro_logo_realizada := false
 
 @onready var carousel: CarouselMenu = $CarouselMenu
 @onready var logo: TextureRect = $Logo
+@onready var fondo: TextureRect = $Fondo
 @onready var boton_prizes: TextureButton = $Prizes
 @onready var boton_options: TextureButton = $Options
 
 
 func _ready() -> void:
+	FondoDinamico.aplicar(fondo)
 	# Música de fondo de title/options: vive en el autoload audio_manager
 	# para que continúe sin cortes al ir y volver de options.
 	audio_manager.ensure_title_bgm()

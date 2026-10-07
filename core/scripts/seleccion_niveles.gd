@@ -28,9 +28,9 @@ func _ready() -> void:
 	escena_juego_destino = config_juego.get("escena_juego", "")
 	print("ruta_niveles_json: " + ruta_niveles_json)
 	print("escena_juego_destino: " + escena_juego_destino)
-	var ruta_fondo = config_juego.get("textura_fondo", "")
-	if fondo and ResourceLoader.exists(ruta_fondo):
-		fondo.texture = load(ruta_fondo)
+	# Fondo dinámico según hora del dispositivo (6-17 día, 17-20 tarde, 20-6 noche).
+	# Ya no se lee "textura_fondo" de games.json: cada juego queda autocontenido.
+	FondoDinamico.aplicar(fondo)
 	
 	var ruta_logo = config_juego.get("textura_logo", "")
 	if logo and ResourceLoader.exists(ruta_logo):

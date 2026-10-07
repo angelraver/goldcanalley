@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8ysg2u5cf3sj" path="res://core/scripts/seleccion_niveles.gd" id="1_p1kcx"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="2_4r2yw"]
-[ext_resource type="Texture2D" uid="uid://8ctdimwp03il" path="res://core/assets/images/fondodia.jpeg" id="3_p1kcx"]
+[ext_resource type="Texture2D" uid="uid://d0bkb04vjqo73" path="res://core/assets/images/fondodia.jpg" id="3_p1kcx"]
 [ext_resource type="Texture2D" uid="uid://d22m5ychi8c71" path="res://core/assets/images/ui/panel_levels.png" id="4_uq1cj"]
 [ext_resource type="PackedScene" uid="uid://ov0lifr7f0e5" path="res://core/scenes/slot_nivel.tscn" id="5_4cylx"]
 [ext_resource type="Texture2D" uid="uid://qsrcy407ey01" path="res://core/assets/images/ui/button_home.png" id="6_a2uob"]

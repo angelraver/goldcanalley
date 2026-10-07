@@ -3,7 +3,6 @@
 		"escena_juego": "res://games/tincanalley/scenes/main.tscn",
 		"ruta_niveles_json": "res://games/tincanalley/data/niveles.json",
 		"textos_json": "res://games/tincanalley/data/textos.json",
-		"textura_fondo": "res://core/assets/images/fondodia.jpeg",
 		"textura_logo": "res://games/tincanalley/assets/images/logo.png",
 		"prefijo_texto": "tincanalley_"
 	},
@@ -11,7 +10,6 @@
 		"escena_juego": "res://games/whackamole/scenes/main.tscn",
 		"ruta_niveles_json": "res://games/whackamole/data/niveles.json",
 		"textos_json": "res://games/whackamole/data/textos.json",
-		"textura_fondo": "res://core/assets/images/fondodia.jpeg",
 		"textura_logo": "res://games/whackamole/assets/images/logo.png",
 		"prefijo_texto": "whackamole_"
 	},
@@ -19,7 +17,6 @@
 		"escena_juego": "res://games/plinko/scenes/main.tscn",
 		"ruta_niveles_json": "res://games/plinko/data/niveles.json",
 		"textos_json": "res://games/plinko/data/textos.json",
-		"textura_fondo": "res://core/assets/images/fondodia.jpeg",
 		"textura_logo": "res://games/plinko/assets/images/logo.png",
 		"prefijo_texto": "plinko_"
 	},
@@ -27,7 +24,6 @@
 		"escena_juego": "res://games/ringtoss/scenes/main.tscn",
 		"ruta_niveles_json": "res://games/ringtoss/data/niveles.json",
 		"textos_json": "res://games/ringtoss/data/textos.json",
-		"textura_fondo": "res://core/assets/images/fondodia.jpeg",
 		"textura_logo": "res://games/ringtoss/assets/images/logo.png",
 		"prefijo_texto": "ringtoss_"
 	},
@@ -35,7 +31,6 @@
 		"escena_juego": "res://games/duckshoot/scenes/main.tscn",
 		"ruta_niveles_json": "res://games/duckshoot/data/niveles.json",
 		"textos_json": "res://games/duckshoot/data/textos.json",
-		"textura_fondo": "res://core/assets/images/fondodia.jpeg",
 		"textura_logo": "res://games/duckshoot/assets/images/logo.png",
 		"prefijo_texto": "duckshoot_"
 	}

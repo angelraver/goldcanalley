@@ -5,6 +5,7 @@ const BTN_ON = preload("res://core/assets/images/ui/icon_check_on.png")
 const BTN_OFF = preload("res://core/assets/images/ui/icon_check_off.png")
 
 # Referencias a los TextureButton según tu árbol de escena
+@onready var fondo: TextureRect = $Fondo
 @onready var music_button: TextureButton = $Frente/Music/Button
 @onready var sfx_button: TextureButton = $Frente/SoundEffects/Button
 @onready var btn_es: TextureButton = $Frente/Idioma/Castellano/Button
@@ -12,6 +13,7 @@ const BTN_OFF = preload("res://core/assets/images/ui/icon_check_off.png")
 @onready var btn_pt: TextureButton = $Frente/Idioma/Portugues/Button
 
 func _ready() -> void:
+	FondoDinamico.aplicar(fondo)
 	# Conectamos las señales por código si no las conectaste en el editor
 	if not music_button.is_connected("pressed", _on_music_button_pressed):
 		music_button.connect("pressed", _on_music_button_pressed)
