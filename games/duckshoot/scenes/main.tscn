@@ -10,9 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="10_panel"]
-[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="11_ever"]
+[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="11_ever"]
 [ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="12_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="13_pausa"]
+[ext_resource type="Texture2D" uid="uid://vm28rcicwvch" path="res://games/duckshoot/assets/images/logo.webp" id="14_bt4sv"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -29,6 +30,12 @@ albedo_texture = ExtResource("5_mwiov")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1otfw"]
 size = Vector3(0.07138109, 0.07285309, 0.50390625)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xewj8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ds4va"]
+transparency = 1
+albedo_texture = ExtResource("14_bt4sv")
 
 [node name="Main" type="Node3D" unique_id=732211628]
 script = ExtResource("1_vnc0d")
@@ -126,5 +133,10 @@ texture_normal = ExtResource("12_pausebtn")
 [node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("13_pausa")]
 
 [node name="AudioJuego" parent="." unique_id=688448039 instance=ExtResource("7_audio")]
+
+[node name="Logo" type="MeshInstance3D" parent="." unique_id=2076696519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.277711, 0.05)
+mesh = SubResource("QuadMesh_xewj8")
+surface_material_override/0 = SubResource("StandardMaterial3D_ds4va")
 
 [connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]

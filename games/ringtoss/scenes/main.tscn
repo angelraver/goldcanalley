@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://bta2npruaxppi"]
 
 [ext_resource type="Script" uid="uid://bm8ikv6c8w2ib" path="res://games/ringtoss/scripts/main.gd" id="1_ib744"]
-[ext_resource type="Texture2D" uid="uid://r0tpapo9bsmvd" path="res://games/ringtoss/assets/images/world/floor.png" id="3_mmmnk"]
+[ext_resource type="Texture2D" uid="uid://csccmbssi42ug" path="res://games/ringtoss/assets/images/world/floor.png" id="3_mmmnk"]
 [ext_resource type="Texture2D" uid="uid://d178l2nk0ccvh" path="res://games/ringtoss/assets/images/world/fondo_interior.webp" id="4_diuyt"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="7_l362f"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_yqfkt"]
-[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
+[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="10_luw0m"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
+[ext_resource type="Texture2D" uid="uid://c3kqags107kfp" path="res://games/ringtoss/assets/images/logo.webp" id="12_jjm40"]
 [ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="14_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="15_pausa"]
 [ext_resource type="PackedScene" uid="uid://crtossaud01s1" path="res://games/ringtoss/scenes/audio_manager.tscn" id="16_audio"]
@@ -33,6 +34,12 @@ inner_radius = 1.1
 outer_radius = 1.3
 rings = 24
 ring_segments = 24
+
+[sub_resource type="QuadMesh" id="QuadMesh_r1pxh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ib744"]
+transparency = 1
+albedo_texture = ExtResource("12_jjm40")
 
 [node name="Main" type="Node3D" unique_id=662956677]
 script = ExtResource("1_ib744")
@@ -149,7 +156,12 @@ texture_normal = ExtResource("14_pausebtn")
 [node name="RingSpawn" type="Marker3D" parent="." unique_id=394817297]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8402618, -1.1534083)
 
-[node name="AudioJuego" parent="." instance=ExtResource("16_audio")]
+[node name="AudioJuego" parent="." unique_id=1224868664 instance=ExtResource("16_audio")]
+
+[node name="Logo" type="MeshInstance3D" parent="." unique_id=684599079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6252563, -5.4759855)
+mesh = SubResource("QuadMesh_r1pxh")
+surface_material_override/0 = SubResource("StandardMaterial3D_ib744")
 
 [connection signal="ready" from="." to="." method="_ready"]
 [connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]

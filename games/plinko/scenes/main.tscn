@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://cjbojfqj2p0x6"]
 
 [ext_resource type="Script" uid="uid://nqm0rjk44k85" path="res://games/plinko/scripts/main.gd" id="1_7jgrb"]
-[ext_resource type="Texture2D" uid="uid://bt76pahoi0hs4" path="res://games/plinko/assets/images/floor.jpg" id="2_cihct"]
+[ext_resource type="Texture2D" uid="uid://ba6j7n5y0of6s" path="res://games/plinko/assets/images/floor.jpg" id="2_cihct"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="2_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="3_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="4_panel"]
 [ext_resource type="Texture2D" uid="uid://ct6nxtlclcal2" path="res://games/plinko/assets/images/world/fondo_interior.webp" id="6_67mu3"]
 [ext_resource type="Texture2D" uid="uid://yw1nfdd7sldg" path="res://games/plinko/assets/images/logo.webp" id="7_6v8q1"]
-[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_ever"]
-[ext_resource type="PackedScene" uid="uid://x89ydk1niw67b" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]
+[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="8_ever"]
+[ext_resource type="PackedScene" uid="uid://2tqs8i44pxnp" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]
 [ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="11_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="12_pausa"]
-[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="13_font"]
+[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="13_font"]
 
 [sub_resource type="Environment" id="Environment_8dl7b"]
 background_mode = 2
@@ -23,15 +23,6 @@ ambient_light_energy = 0.5
 albedo_texture = ExtResource("2_cihct")
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v8q1"]
-albedo_texture = ExtResource("6_67mu3")
-
-[sub_resource type="QuadMesh" id="QuadMesh_8dl7b"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bun8v"]
-transparency = 1
-albedo_texture = ExtResource("7_6v8q1")
-
 [sub_resource type="World3D" id="World3D_bola"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bola"]
@@ -41,6 +32,15 @@ roughness = 0.25
 
 [sub_resource type="SphereMesh" id="SphereMesh_bola"]
 material = SubResource("StandardMaterial3D_bola")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v8q1"]
+albedo_texture = ExtResource("6_67mu3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8dl7b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bun8v"]
+transparency = 1
+albedo_texture = ExtResource("7_6v8q1")
 
 [node name="Main" type="Node3D" unique_id=1787419619]
 script = ExtResource("1_7jgrb")
@@ -105,7 +105,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
 
 [node name="LuzBolaUI" type="OmniLight3D" parent="UI/ContenedorBolasUI/SubViewportContainer/SubViewport" unique_id=482917361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.7, 0.9)
-light_color = Color(1, 1, 1, 1)
 light_energy = 1.2
 omni_range = 3.0
 
@@ -165,11 +164,11 @@ use_collision = true
 size = Vector3(6, 0.2, 6)
 material = SubResource("StandardMaterial3D_6v8q1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2015659154]
+[node name="Logo" type="MeshInstance3D" parent="." unique_id=2015659154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 mesh = SubResource("QuadMesh_8dl7b")
 surface_material_override/0 = SubResource("StandardMaterial3D_bun8v")
 
-[node name="AudioJuego" parent="." instance=ExtResource("10_audio")]
+[node name="AudioJuego" parent="." unique_id=776893109 instance=ExtResource("10_audio")]
 
 [connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
