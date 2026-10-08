@@ -116,7 +116,7 @@ func animar_pop_control(node: Control, scale_objetivo: Vector2) -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _on_pantalla_pressed() -> void:
-	audio_manager.play_start()
+	audio_manager.play_ok1()
 	# Consumir la alerta para que no se vuelva a mostrar
 	save_manager.premio_recien_desbloqueado = ""
 	# Ir a la selección de niveles del juego actual

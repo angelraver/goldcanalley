@@ -130,7 +130,7 @@ func _on_game_selected(game_id: String) -> void:
 
 
 func _iniciar_juego(id_juego: String) -> void:
-	audio_manager.play_start()
+	audio_manager.play_ok1()
 
 	# 1. Establecer el minijuego activo en el manager global
 	save_manager.juego_actual_seleccionado = id_juego
@@ -143,7 +143,7 @@ func _on_boton_prizes_pressed() -> void:
 	_press_feedback(
 		$Prizes,
 		func():
-			audio_manager.play_start()
+			audio_manager.play_ok1()
 			get_tree().change_scene_to_file("res://core/scenes/premios.tscn")
 	)
 
@@ -152,7 +152,7 @@ func _on_boton_options_pressed() -> void:
 	_press_feedback(
 		$Options,
 		func():
-			audio_manager.play_start()
+			audio_manager.play_ok1()
 			get_tree().change_scene_to_file("res://core/scenes/options.tscn")
 	)
 

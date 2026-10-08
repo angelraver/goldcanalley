@@ -69,7 +69,11 @@ func mostrar(nivel_id: int, puntaje: int, puntaje_maximo: int, id_juego: String 
 	# Guardado de progreso centralizado
 	save_manager.registrar_puntaje_nivel(nivel_id, puntaje, puntaje_maximo, id_juego)
 
-	audio_manager.play_welldone()
+	# Sin ribbons ganadas suena fail; con al menos una, welldone + pop por ribbon.
+	if gano_amarilla or gano_roja or gano_azul:
+		audio_manager.play_welldone()
+	else:
+		audio_manager.play_fail()
 	visible = true
 	animar_aparicion(gano_amarilla, gano_roja, gano_azul)
 
@@ -106,6 +110,7 @@ func animar_aparicion(gano_amarilla: bool, gano_roja: bool, gano_azul: bool) -> 
 func animar_pop_ribbon(ribbon: Control, escala_objetivo: Vector2) -> void:
 	ribbon.scale = Vector2.ZERO
 	ribbon.visible = true
+	audio_manager.play_pop()
 	var tween = create_tween()
 	tween.tween_property(ribbon, "scale", escala_objetivo * 1.1, 0.18)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -113,10 +118,12 @@ func animar_pop_ribbon(ribbon: Control, escala_objetivo: Vector2) -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _on_boton_reiniciar_pressed() -> void:
+	audio_manager.play_ok1()
 	visible = false
 	reiniciar_solicitado.emit()
 
 func _on_boton_ok_pressed() -> void:
+	audio_manager.play_ok1()
 	if save_manager.premio_recien_desbloqueado != "":
 		get_tree().change_scene_to_file("res://core/scenes/premio_desbloqueado.tscn")
 	else:

@@ -5,6 +5,8 @@ extends Node
 @onready var welldone: AudioStreamPlayer = $Welldone
 @onready var prize: AudioStreamPlayer = $Prize
 @onready var ok1: AudioStreamPlayer = $Ok1
+@onready var pop: AudioStreamPlayer = $Pop
+@onready var fail1: AudioStreamPlayer = $Fail1
 
 # --- CONTROL DE ESTADO GLOBAL ---
 var music_enabled: bool = true
@@ -149,3 +151,11 @@ func play_prize() -> void:
 func play_ok1() -> void:
 	if sfx_enabled and ok1:
 		ok1.play()
+
+func play_pop() -> void:
+	if sfx_enabled and pop:
+		pop.play()
+
+func play_fail() -> void:
+	if sfx_enabled and fail1:
+		fail1.play()

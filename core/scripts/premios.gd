@@ -141,6 +141,7 @@ func crear_slot_premio(nombre_png: String, desbloqueado: bool, actuales: int, re
 	return contenedor
 
 func _on_boton_home_pressed() -> void:
+	audio_manager.play_ok1()
 	get_tree().change_scene_to_file("res://core/scenes/title.tscn")
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:

@@ -36,6 +36,7 @@ func _on_music_button_pressed() -> void:
 	var nuevo_estado = !audio_manager.music_enabled
 	audio_manager.set_music_enabled(nuevo_estado)
 	_actualizar_boton_musica()
+	audio_manager.play_ok1()
 
 func _actualizar_boton_musica() -> void:
 	if audio_manager.music_enabled:
@@ -50,6 +51,7 @@ func _on_sfx_button_pressed() -> void:
 	var nuevo_estado = !audio_manager.sfx_enabled
 	audio_manager.set_sfx_enabled(nuevo_estado)
 	_actualizar_boton_sfx()
+	audio_manager.play_ok1()
 
 func _actualizar_boton_sfx() -> void:
 	if audio_manager.sfx_enabled:
@@ -65,6 +67,7 @@ func _actualizar_boton_sfx() -> void:
 func _seleccionar_idioma(nuevo_codigo: String) -> void:
 	game_manager.cambiar_idioma(nuevo_codigo)
 	_actualizar_botones_idioma()
+	audio_manager.play_ok1()
 	# Opcional: Si tienes textos traducibles en la misma pantalla de opciones, 
 	# puedes llamar aquí a una función actualizar_textos_ui()
 
@@ -83,5 +86,5 @@ func _set_texture_check(button: TextureButton, activo: bool) -> void:
 	button.texture_pressed = tex
 
 func _on_boton_options_pressed() -> void:
-	audio_manager.play_start()
+	audio_manager.play_ok1()
 	get_tree().change_scene_to_file("res://core/scenes/title.tscn")

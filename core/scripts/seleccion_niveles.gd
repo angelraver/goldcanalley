@@ -136,6 +136,7 @@ func actualizar_visibilidad_botones() -> void:
 
 func _on_boton_prev_pressed() -> void:
 	if pagina_actual > 1:
+		audio_manager.play_ok1()
 		pagina_actual -= 1
 		save_manager.guardar_pagina_niveles(pagina_actual)
 		refrescar_pantalla_niveles()
@@ -144,12 +145,14 @@ func _on_boton_next_pressed() -> void:
 	var total_paginas: int = int(ceil(float(total_niveles) / float(NIVELES_POR_PAGINA)))
 
 	if pagina_actual < total_paginas:
+		audio_manager.play_ok1()
 		pagina_actual += 1
 		save_manager.guardar_pagina_niveles(pagina_actual)
 		refrescar_pantalla_niveles()
 
 func _on_nivel_seleccionado(numero_nivel: int) -> void:
 	save_manager.nivel_actual_seleccionado = numero_nivel
+	audio_manager.play_ok1()
 	get_tree().change_scene_to_file(escena_juego_destino)
 
 func _on_boton_home_pressed() -> void:

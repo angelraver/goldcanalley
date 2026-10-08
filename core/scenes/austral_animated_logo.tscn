@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://crg0shgk80tx0" path="res://core/scripts/logo_script.gd" id="3_w34d2"]
 [ext_resource type="FontFile" uid="uid://wscybhe32177" path="res://core/fonts/PressStart2P-Regular.ttf" id="4_0pxjp"]
 [ext_resource type="Shader" uid="uid://bt6k72wxlttto" path="res://core/shaders/chromatic_aberration.gdshader" id="4_8chsa"]
-[ext_resource type="AudioStream" uid="uid://cahffoscw58qj" path="res://core/assets/sounds/848579__huglex__windhowl4.wav" id="5_kpgpv"]
+[ext_resource type="AudioStream" uid="uid://cahffoscw58qj" path="res://core/assets/sounds/penguinwind.wav" id="5_kpgpv"]
 [ext_resource type="Script" uid="uid://csqknn3oul3e4" path="res://core/scripts/label.gd" id="6_d6l6l"]
 [ext_resource type="Shader" uid="uid://ulsvls5uhuhh" path="res://core/shaders/crt_effect.gdshader" id="8_kj25x"]
 

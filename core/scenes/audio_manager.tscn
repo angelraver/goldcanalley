@@ -5,6 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://b5fbtt30n4ka7" path="res://core/assets/sounds/welldone1.wav" id="3_151wy"]
 [ext_resource type="AudioStream" uid="uid://cdry5sn0hrdax" path="res://core/assets/sounds/prize1.wav" id="4_prize"]
 [ext_resource type="AudioStream" uid="uid://cn44jskjs82e7" path="res://core/assets/sounds/ok1.wav" id="5_ok1"]
+[ext_resource type="AudioStream" uid="uid://dir438p0wdg32" path="res://core/assets/sounds/pop.wav" id="6_pop"]
+[ext_resource type="AudioStream" uid="uid://jlp7h4j1bni8" path="res://core/assets/sounds/fail1.wav" id="7_fail1"]
 
 [node name="AudioManager" type="Node" unique_id=1655563066]
 script = ExtResource("1_3dgps")
@@ -20,3 +22,9 @@ stream = ExtResource("4_prize")
 
 [node name="Ok1" type="AudioStreamPlayer" parent="." unique_id=923477162]
 stream = ExtResource("5_ok1")
+
+[node name="Pop" type="AudioStreamPlayer" parent="." unique_id=923477163]
+stream = ExtResource("6_pop")
+
+[node name="Fail1" type="AudioStreamPlayer" parent="." unique_id=923477164]
+stream = ExtResource("7_fail1")

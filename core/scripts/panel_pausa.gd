@@ -55,6 +55,7 @@ func _on_music_button_pressed() -> void:
 	var nuevo_estado = !audio_manager.music_enabled
 	audio_manager.set_music_enabled(nuevo_estado)
 	_actualizar_boton_musica()
+	audio_manager.play_ok1()
 
 func _actualizar_boton_musica() -> void:
 	if music_button == null:
@@ -71,6 +72,7 @@ func _on_sfx_button_pressed() -> void:
 	var nuevo_estado = !audio_manager.sfx_enabled
 	audio_manager.set_sfx_enabled(nuevo_estado)
 	_actualizar_boton_sfx()
+	audio_manager.play_ok1()
 
 func _actualizar_boton_sfx() -> void:
 	if sfx_button == null:
@@ -84,7 +86,7 @@ func _actualizar_boton_sfx() -> void:
 
 # --- HOME: salir del nivel a la selección de niveles del juego actual ---
 func _on_boton_home_pressed() -> void:
-	audio_manager.play_start()
+	audio_manager.play_ok1()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://core/scenes/seleccion_niveles.tscn")
 
