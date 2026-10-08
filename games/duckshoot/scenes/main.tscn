@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="10_panel"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="11_ever"]
-[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="12_pausebtn"]
+[ext_resource type="Texture2D" uid="uid://dtfxh5v7h3tyb" path="res://core/assets/images/ui/button_pause.webp" id="12_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="13_pausa"]
 [ext_resource type="Texture2D" uid="uid://vm28rcicwvch" path="res://games/duckshoot/assets/images/logo.webp" id="14_bt4sv"]
 

@@ -2,8 +2,8 @@ extends Control
 class_name PanelPausa
 
 # Texturas on/off para los toggles (igual que en options)
-const BTN_ON = preload("res://core/assets/images/ui/icon_check_on.png")
-const BTN_OFF = preload("res://core/assets/images/ui/icon_check_off.png")
+const BTN_ON = preload("res://core/assets/images/ui/icon_check_on.webp")
+const BTN_OFF = preload("res://core/assets/images/ui/icon_check_off.webp")
 
 @onready var titulo: Label = $FondoPanel/Titulo
 @onready var music_button: TextureButton = $FondoPanel/Music/Button

@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://4sdawtbd5yp4" path="res://core/assets/images/fondodia.webp" id="2_4e4sy"]
 [ext_resource type="Script" uid="uid://fc21akfhascg" path="res://core/scripts/carousel_menu.gd" id="2_carousel"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_2xeeo"]
-[ext_resource type="Texture2D" uid="uid://crko374ku7sri" path="res://core/assets/images/logo.png" id="4_4e4sy"]
-[ext_resource type="Texture2D" uid="uid://beo3pfrblphcv" path="res://core/assets/images/ui/button_prizes.png" id="6_ljifs"]
-[ext_resource type="Texture2D" uid="uid://dj80kcallsdvp" path="res://core/assets/images/ui/button_options.png" id="7_uj4fn"]
+[ext_resource type="Texture2D" uid="uid://b1ydv2fydkff8" path="res://core/assets/images/logo.webp" id="4_4e4sy"]
+[ext_resource type="Texture2D" uid="uid://dn6ainl72ncm3" path="res://core/assets/images/ui/button_prizes.webp" id="6_ljifs"]
+[ext_resource type="Texture2D" uid="uid://davnew6qw8y5b" path="res://core/assets/images/ui/button_options.webp" id="7_uj4fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tydxx"]
 shader = ExtResource("3_2xeeo")

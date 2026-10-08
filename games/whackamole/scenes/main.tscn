@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="8_vxqm4"]
 [ext_resource type="PackedScene" uid="uid://dwbx64orng73p" path="res://games/whackamole/scenes/audio_manager.tscn" id="9_audio"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="9_font"]
-[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="10_pausebtn"]
+[ext_resource type="Texture2D" uid="uid://dtfxh5v7h3tyb" path="res://core/assets/images/ui/button_pause.webp" id="10_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="11_pausa"]
 
 [sub_resource type="Environment" id="Environment_5o6qw"]

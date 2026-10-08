@@ -100,7 +100,7 @@ Convenciones: código y comentarios en **español**, `snake_case` para funciones
 ### 3.5 Assets compartidos (`core/assets/`)
 
 - **Fonts** (`core/assets/fonts/`): `carnivalee_freakshow.ttf` (títulos/HUD score, 64-80px) + `evereast.ttf` (título de nivel en panel, 32px). Preload vía `*.tscn`.
-- **UI kit** (`core/assets/images/ui/`): `panel_level.png`, `panel_prize.png`, `panel_options.png`, `panel_levels.png`, `button_ok/restart/home/gen/start/prizes/options/arrow.png`, `icon_check_on/off.png`, `icon_sound/music.png`, `ribbon_yellow/red/blue.png` + `ribbon_tiny_yellow/blue.png` y `robbon_tinty_red.png`.
+- **UI kit** (`core/assets/images/ui/`): `panel_level.png`, `panel_prize.png`, `panel_options.png`, `panel_levels.png`, `button_ok/restart/home/gen/start/prizes/options/arrow.png`, `icon_check_on/off.png`, `icon_sound/music.png`, `ribbon_yellow/red/blue.png` + `ribbon_tiny_yellow/blue.png` y `ribbon_tiny_red.png`.
 - **Premios** (`core/assets/images/prizes/`): 18 PNG (`aros`, `dino`, `drum`, `doll`, `roboto`, `duck`, `racer`, `tricep`, `horse`, `bunny`, `plane`, `train`, `rocket`, `robot`, `teddy`, `bluey`, `astro`, `rex`) — nombres = `LISTA_PREMIOS` (`save_manager.gd:5`).
 - **SFX core** (`core/assets/sounds/`): `levelcomplete.wav`, `levelcomplete1.wav`, `prize1.wav`, `triunfo1.wav`, `welldone1.wav`, `ok.wav/ok1.wav/ok2.wav`, `fail1/2.wav`, `getready.wav`, `penguinwind.wav`, `pop.wav`.
 - **Logos**: `core/assets/images/logo.png`, `logoaustral.png`.

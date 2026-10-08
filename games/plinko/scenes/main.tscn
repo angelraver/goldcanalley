@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://yw1nfdd7sldg" path="res://games/plinko/assets/images/logo.webp" id="7_6v8q1"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="8_ever"]
 [ext_resource type="PackedScene" uid="uid://2tqs8i44pxnp" path="res://games/plinko/scenes/audio_manager.tscn" id="10_audio"]
-[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="11_pausebtn"]
+[ext_resource type="Texture2D" uid="uid://dtfxh5v7h3tyb" path="res://core/assets/images/ui/button_pause.webp" id="11_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="12_pausa"]
 [ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="13_font"]
 

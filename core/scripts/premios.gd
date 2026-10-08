@@ -1,7 +1,7 @@
 extends Control
 
 const CARPETA_PREMIOS = "res://core/assets/images/prizes/"
-const RUTA_RIBBON_AZUL = "res://core/assets/images/ui/ribbon_tiny_blue.png"
+const RUTA_RIBBON_AZUL = "res://core/assets/images/ui/ribbon_tiny_blue.webp"
 
 @onready var grid_premios: GridContainer = $ScrollContainer/ContenidoEstanteria/GridPremios
 @onready var scroll_container: ScrollContainer = $ScrollContainer

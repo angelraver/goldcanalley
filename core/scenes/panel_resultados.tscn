@@ -2,12 +2,12 @@
 
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="1_diad0"]
 [ext_resource type="Script" uid="uid://u6rxejfub056" path="res://core/scripts/panel_resultados.gd" id="1_pqqu8"]
-[ext_resource type="Texture2D" uid="uid://dbmn2xf5kr2sw" path="res://core/assets/images/ui/panel_level.png" id="2_pqqu8"]
-[ext_resource type="Texture2D" uid="uid://bihe8adftliab" path="res://core/assets/images/ui/button_ok.png" id="3_shjp8"]
-[ext_resource type="Texture2D" uid="uid://uq4t6egpq8n" path="res://core/assets/images/ui/button_restart.png" id="4_3qrhc"]
-[ext_resource type="Texture2D" uid="uid://c1y8n11p5rnwo" path="res://core/assets/images/ui/ribbon_yellow.png" id="5_sxpki"]
-[ext_resource type="Texture2D" uid="uid://cf8u17s3juvfx" path="res://core/assets/images/ui/ribbon_red.png" id="6_s5fhk"]
-[ext_resource type="Texture2D" uid="uid://b8f8a3kiclq5c" path="res://core/assets/images/ui/ribbon_blue.png" id="7_g2gab"]
+[ext_resource type="Texture2D" uid="uid://b1nd223v2oh78" path="res://core/assets/images/ui/panel_level.webp" id="2_pqqu8"]
+[ext_resource type="Texture2D" uid="uid://cusn3egnh88b4" path="res://core/assets/images/ui/button_ok.webp" id="3_shjp8"]
+[ext_resource type="Texture2D" uid="uid://dch1821c0hon" path="res://core/assets/images/ui/button_restart.webp" id="4_3qrhc"]
+[ext_resource type="Texture2D" uid="uid://bp6w0eqerof2p" path="res://core/assets/images/ui/ribbon_yellow.webp" id="5_sxpki"]
+[ext_resource type="Texture2D" uid="uid://dw0bugccre2nw" path="res://core/assets/images/ui/ribbon_red.webp" id="6_s5fhk"]
+[ext_resource type="Texture2D" uid="uid://dnt0n21kh0do2" path="res://core/assets/images/ui/ribbon_blue.webp" id="7_g2gab"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="8_at4u4"]
 [ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="9_g8ea4"]
 

@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://smmc3aovjttf" path="res://core/scripts/options.gd" id="1_85aq5"]
 [ext_resource type="Texture2D" uid="uid://4sdawtbd5yp4" path="res://core/assets/images/fondodia.webp" id="2_aea3w"]
 [ext_resource type="Shader" uid="uid://8qepyr3ykt3f" path="res://core/shaders/desenfoque.gdshader" id="3_gyu1t"]
-[ext_resource type="Texture2D" uid="uid://y14w5mbypeai" path="res://core/assets/images/ui/panel_options.png" id="4_g5hix"]
+[ext_resource type="Texture2D" uid="uid://b6vectgoji2i8" path="res://core/assets/images/ui/panel_options.webp" id="4_g5hix"]
 [ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="5_rftt1"]
-[ext_resource type="Texture2D" uid="uid://btucqoyx1cnck" path="res://core/assets/images/ui/icon_music.png" id="6_0un6s"]
-[ext_resource type="Texture2D" uid="uid://cb2dpjn1dlibu" path="res://core/assets/images/ui/icon_check_off.png" id="7_kywri"]
-[ext_resource type="Texture2D" uid="uid://dxdrkbjulk8mc" path="res://core/assets/images/ui/icon_sound.png" id="8_apvty"]
-[ext_resource type="Texture2D" uid="uid://qsrcy407ey01" path="res://core/assets/images/ui/button_home.png" id="9_vhp3b"]
+[ext_resource type="Texture2D" uid="uid://dm6ypisvmk6gk" path="res://core/assets/images/ui/icon_music.webp" id="6_0un6s"]
+[ext_resource type="Texture2D" uid="uid://co6vuafvrnhyr" path="res://core/assets/images/ui/icon_check_off.webp" id="7_kywri"]
+[ext_resource type="Texture2D" uid="uid://cfuwaypycktpp" path="res://core/assets/images/ui/icon_sound.webp" id="8_apvty"]
+[ext_resource type="Texture2D" uid="uid://c0hwcw2eq8gcw" path="res://core/assets/images/ui/button_home.webp" id="9_vhp3b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qa6uu"]
 shader = ExtResource("3_gyu1t")

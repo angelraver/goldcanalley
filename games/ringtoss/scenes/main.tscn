@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="11_c722h"]
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
 [ext_resource type="Texture2D" uid="uid://c3kqags107kfp" path="res://games/ringtoss/assets/images/logo.webp" id="12_jjm40"]
-[ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="14_pausebtn"]
+[ext_resource type="Texture2D" uid="uid://dtfxh5v7h3tyb" path="res://core/assets/images/ui/button_pause.webp" id="14_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="15_pausa"]
 [ext_resource type="PackedScene" uid="uid://crtossaud01s1" path="res://games/ringtoss/scenes/audio_manager.tscn" id="16_audio"]
 

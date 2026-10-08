@@ -1,8 +1,8 @@
 extends Control
 
 # Carga de texturas para los botones (ajusta las rutas a tus archivos .png)
-const BTN_ON = preload("res://core/assets/images/ui/icon_check_on.png")
-const BTN_OFF = preload("res://core/assets/images/ui/icon_check_off.png")
+const BTN_ON = preload("res://core/assets/images/ui/icon_check_on.webp")
+const BTN_OFF = preload("res://core/assets/images/ui/icon_check_off.webp")
 
 # Referencias a los TextureButton según tu árbol de escena
 @onready var fondo: TextureRect = $Fondo
