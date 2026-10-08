@@ -32,10 +32,13 @@ signal focused_item_changed(index: int, item_id: String)
 @export var fling_sample_ms: float = 120.0 ## Ventana para medir la velocidad al soltar.
 @export var snap_speed: float = 10.0
 @export var click_threshold: float = 14.0 ## px máximos para considerar tap (no drag).
+@export var idle_timeout: float = 2.0 ## Segundos quieto antes del giro automático.
+@export var auto_rotate_speed: float = 0.35 ## Velocidad del giro automático (rad/s, lento).
 
 var global_angle: float = 0.0
 var velocity: float = 0.0 ## Velocidad angular actual (rad/s).
 var is_dragging: bool = false
+var _tiempo_inactivo: float = 0.0 ## Tiempo desde la última interacción.
 var _press_pos: Vector2 = Vector2.ZERO
 var _last_pos: Vector2 = Vector2.ZERO
 var _dragged: bool = false
@@ -65,6 +68,7 @@ func setup_carousel(data: Array[Dictionary]) -> void:
 	current_data = data.duplicate()
 	_focused_index = -1
 	velocity = 0.0
+	_tiempo_inactivo = 0.0
 	global_angle = 0.0
 
 	var count := current_data.size()
@@ -122,6 +126,7 @@ func focus_prev() -> void:
 
 
 func select_centered() -> void:
+	_registrar_actividad()
 	var idx := get_centered_index()
 	if idx < 0 or idx >= current_data.size():
 		return
@@ -141,6 +146,7 @@ func emit_selection(idx: int) -> void:
 func _rotate_steps(steps: int) -> void:
 	if item_nodes.is_empty():
 		return
+	_registrar_actividad()
 	if _snap_tween and _snap_tween.is_valid():
 		_snap_tween.kill()
 	var count := item_nodes.size()
@@ -163,12 +169,20 @@ func _process(delta: float) -> void:
 
 	if not is_dragging and (_snap_tween == null or not _snap_tween.is_running()):
 		if absf(velocity) > fling_min_speed:
+			_tiempo_inactivo = 0.0
 			global_angle += velocity * delta
 			velocity *= pow(friction, delta * 60.0)
+		elif _tiempo_inactivo >= idle_timeout:
+			# Vitrina: giro lento continuo sin snap mientras nadie toca.
+			global_angle += auto_rotate_speed * delta
 		else:
+			_tiempo_inactivo += delta
 			velocity = 0.0
 			var target_angle: float = round(global_angle / step_angle) * step_angle
 			global_angle = lerp_angle(global_angle, target_angle, clampf(snap_speed * delta, 0.0, 1.0))
+	else:
+		# Hay arrastre o animación en curso: la inactividad aún no cuenta.
+		_tiempo_inactivo = 0.0
 
 	update_carousel_layout()
 	_notify_focus_changed()
@@ -264,6 +278,7 @@ func _unhandled_key_event(event: InputEvent) -> void:
 
 func _begin_drag(pos: Vector2) -> void:
 	is_dragging = true
+	_registrar_actividad()
 	_dragged = false
 	velocity = 0.0
 	_press_pos = pos
@@ -274,6 +289,7 @@ func _begin_drag(pos: Vector2) -> void:
 
 
 func _drag_to(pos: Vector2) -> void:
+	_registrar_actividad()
 	var dx := pos.x - _last_pos.x
 	if absf(pos.x - _press_pos.x) > click_threshold:
 		_dragged = true
@@ -291,6 +307,7 @@ func _end_drag(pos: Vector2) -> void:
 	if not is_dragging:
 		return
 	is_dragging = false
+	_registrar_actividad()
 	# El impulso se mide con el recorrido de los últimos ~120 ms, no con el
 	# último evento (que suele llegar con el dedo ya frenado).
 	if _dragged and _drag_samples.size() >= 2:
@@ -309,6 +326,12 @@ func _end_drag(pos: Vector2) -> void:
 	_last_pos = pos
 
 
+## Reinicia el conteo de inactividad: cualquier toque, arrastre, tap,
+## vuelo a índice o navegación por teclado pospone el giro automático.
+func _registrar_actividad() -> void:
+	_tiempo_inactivo = 0.0
+
+
 ## Convierte una posición de viewport a coordenadas locales del carrusel.
 func _to_local_pos(viewport_pos: Vector2) -> Vector2:
 	return get_global_transform_with_canvas().affine_inverse() * viewport_pos
@@ -321,6 +344,7 @@ func _press_inside(viewport_pos: Vector2) -> bool:
 # --- Selección ---------------------------------------------------------------
 
 func _on_item_pressed(idx: int) -> void:
+	_registrar_actividad()
 	if _dragged:
 		return # Fue un drag, no un tap.
 	if idx == get_centered_index():
@@ -339,6 +363,7 @@ func _on_item_focus_entered(idx: int) -> void:
 func _fly_to_index(idx: int) -> void:
 	if item_nodes.is_empty():
 		return
+	_registrar_actividad()
 	if _snap_tween and _snap_tween.is_valid():
 		_snap_tween.kill()
 	var count := item_nodes.size()
@@ -364,6 +389,7 @@ func _fly_to_index(idx: int) -> void:
 func spin_intro(duracion: float = 3.0, vueltas: float = 2.0) -> void:
 	if item_nodes.is_empty() or duracion <= 0.0:
 		return
+	_registrar_actividad()
 	if _snap_tween and _snap_tween.is_valid():
 		_snap_tween.kill()
 	velocity = 0.0
