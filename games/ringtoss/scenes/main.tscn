@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="12_idbda"]
 [ext_resource type="Texture2D" uid="uid://38ophv16qywu" path="res://core/assets/images/ui/button_pause.png" id="14_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="15_pausa"]
+[ext_resource type="PackedScene" uid="uid://crtossaud01s1" path="res://games/ringtoss/scenes/audio_manager.tscn" id="16_audio"]
 
 [sub_resource type="Environment" id="Environment_8vloa"]
 
@@ -147,6 +148,8 @@ texture_normal = ExtResource("14_pausebtn")
 
 [node name="RingSpawn" type="Marker3D" parent="." unique_id=394817297]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8402618, -1.1534083)
+
+[node name="AudioJuego" parent="." instance=ExtResource("16_audio")]
 
 [connection signal="ready" from="." to="." method="_ready"]
 [connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]

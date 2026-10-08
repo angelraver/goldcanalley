@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://crtossaud01s1"]
+
+[ext_resource type="Script" uid="uid://crtossam01gd1" path="res://games/ringtoss/scripts/audio_manager.gd" id="1_am"]
+[ext_resource type="AudioStream" uid="uid://tog0jsfjs65n" path="res://games/ringtoss/assets/sounds/ringfly.wav" id="2_fly"]
+[ext_resource type="AudioStream" uid="uid://bpvhsuut3v0r7" path="res://games/ringtoss/assets/sounds/ringhit1.wav" id="3_hit1"]
+[ext_resource type="AudioStream" uid="uid://bhfhu6fuhbjnt" path="res://games/ringtoss/assets/sounds/ringhit2.wav" id="4_hit2"]
+[ext_resource type="AudioStream" uid="uid://csmt17sqq7ui6" path="res://games/ringtoss/assets/sounds/ringhit3.wav" id="5_hit3"]
+[ext_resource type="AudioStream" uid="uid://bpfilvarv8vtc" path="res://games/ringtoss/assets/sounds/ringwin1.wav" id="6_win1"]
+
+[node name="AudioJuego" type="Node" unique_id=892347512]
+script = ExtResource("1_am")
+
+[node name="RingFly" type="AudioStreamPlayer" parent="." unique_id=412847194]
+stream = ExtResource("2_fly")
+
+[node name="RingHit1" type="AudioStreamPlayer" parent="." unique_id=749283642]
+stream = ExtResource("3_hit1")
+
+[node name="RingHit2" type="AudioStreamPlayer" parent="." unique_id=749283643]
+stream = ExtResource("4_hit2")
+
+[node name="RingHit3" type="AudioStreamPlayer" parent="." unique_id=749283644]
+stream = ExtResource("5_hit3")
+
+[node name="RingWin1" type="AudioStreamPlayer" parent="." unique_id=749283645]
+stream = ExtResource("6_win1")

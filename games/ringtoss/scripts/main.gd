@@ -60,6 +60,7 @@ const ALTURA_CONO_M: float = 0.279
 @onready var ui_label_aros: Label = $UI/ContenedorArosUI/LabelAros as Label
 @onready var boton_pausa: TextureButton = $UI/BotonPausa
 @onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
+@onready var audio_juego: GameAudioBase = $AudioJuego
 
 var contenedor_conos: Node3D
 var contenedor_cubos: Node3D
@@ -271,6 +272,8 @@ func lanzar_aro(swipe: Vector2) -> void:
 	ring_lanzado.angular_velocity = Vector3(0.0, velocidad_giro_disco, 0.0)
 	ring_lanzado.angular_damp = 0.5
 	ring_lanzado.apply_central_impulse(direccion * fuerza)
+	if audio_juego:
+		audio_juego.play_fly()
 
 	_programar_miss(ring_lanzado)
 	await get_tree().create_timer(demora_siguiente_ring).timeout
@@ -288,6 +291,11 @@ func _spawn_ring() -> void:
 	if ring_body == null:
 		push_error("Ring Toss: el root de Ring.tscn debe ser un RigidBody3D")
 		return
+	# Inyección de audio: patrón GameAudioBase (ver games/plinko/scripts/main.gd:326
+	# y games/tincanalley/scripts/main.gd:141). Usa set() para evitar error de
+	# tipado estático (ring_body es RigidBody3D pero el script define var audio).
+	if audio_juego:
+		ring_body.set("audio", audio_juego)
 	add_child(ring_body)
 	current_ring = ring_body
 	current_ring.freeze = true
@@ -559,6 +567,8 @@ func _cobrar_punto(ring: RigidBody3D, cono: Node3D) -> void:
 	puntaje_nivel += points
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	EfectosUI.crear_efecto_puntos(cono.global_position + Vector3(0.0, float(cono.get_meta("altura_mundo", ALTURA_CONO_M)), 0.0), points)
+	if audio_juego:
+		audio_juego.play_win()
 	anillos_resueltos += 1
 	if puntaje_maximo_nivel > 0 and puntaje_nivel >= puntaje_maximo_nivel:
 		esperando_fin_nivel = true
