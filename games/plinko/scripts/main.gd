@@ -218,6 +218,8 @@ func build_slots(slots_data: Array) -> void:
 func _on_ball_scored(points_awarded: int, _ball_node: Node = null) -> void:
 	puntaje_nivel += points_awarded
 	actualizar_ui_puntaje()
+	if audio_juego:
+		audio_juego.play_points()
 	if _ball_node:
 		EfectosUI.crear_efecto_puntos((_ball_node as Node3D).global_position, points_awarded)
 	print("¡Goles/Puntos anotados!: ", points_awarded, " | Puntaje Total: ", puntaje_nivel)
