@@ -182,6 +182,8 @@ func shoot() -> void:
 	if not bullet_scene or not muzzle:
 		return
 
+	PromoLogger.event("throw", {"game": "duckshoot"})
+
 	if audio:
 		audio.play_rifle()
 

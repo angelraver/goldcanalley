@@ -67,6 +67,7 @@ func _ready() -> void:
 		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	cargar_nivel(nivel_actual)
+	PromoLogger.event("game_start", {"game": "tincanalley", "level": nivel_actual})
 
 func _physics_process(_delta: float) -> void:
 	verificar_latas_derribadas()
@@ -153,6 +154,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 		contenedor_latas.add_child(nuevo_objeto)
 		nuevo_objeto.global_position = Vector3(pos_x, pos_y, pos_z)
 
+	PromoLogger.event("level_loaded", {"game": "tincanalley", "level": nivel_actual, "balls": pelotas_restantes, "target_score": puntaje_maximo_nivel})
 	anunciar_nivel(numero_nivel)
 	animar_camara_entrada()
 
@@ -183,6 +185,7 @@ func verificar_latas_derribadas() -> void:
 			var puntos_ganados: int = int(datos_tipo.get("pts", 0))
 
 			puntaje_nivel += puntos_ganados
+			PromoLogger.event("score", {"game": "tincanalley", "level": nivel_actual, "points": puntos_ganados, "total_score": puntaje_nivel, "object_type": tipo})
 			actualizar_ui_puntaje()
 			EfectosUI.crear_efecto_puntos(obj.global_position, puntos_ganados)
 
@@ -260,6 +263,7 @@ func lanzar_nueva_pelota(posicion_pantalla: Vector2) -> void:
 		audio_juego.play_shot()
 
 	pelotas_restantes -= 1
+	PromoLogger.event("throw", {"game": "tincanalley", "level": nivel_actual, "balls_left": pelotas_restantes})
 	actualizar_ui_pelotas()
 
 	var fuerza_calculada: float = obtener_fuerza_actual()
@@ -315,6 +319,7 @@ func actualizar_ui_level() -> void:
 	ctrl_resultados.actualizar_nivel(nivel_actual)
 
 func mostrar_panel_resultados() -> void:
+	PromoLogger.event("level_complete", {"game": "tincanalley", "level": nivel_actual, "score": puntaje_nivel, "target_score": puntaje_maximo_nivel, "success": puntaje_nivel >= puntaje_maximo_nivel})
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func _on_boton_pausa_pressed() -> void:

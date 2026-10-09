@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 			if target_instance.has_method("on_hit"):
 				target_instance.on_hit()
 			else:
+				PromoLogger.event("miss", {"game": "duckshoot"})
 				if audio:
 					if _es_agua(collider):
 						audio.play_shotmiss2()

@@ -59,6 +59,7 @@ func _ready() -> void:
 		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	cargar_nivel(nivel_actual)
+	PromoLogger.event("game_start", {"game": "plinko", "level": nivel_actual})
 
 func _process(delta: float) -> void:
 	if bola_ui_3d:
@@ -176,6 +177,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	var slots_array = level_data.get("slots", [])
 	build_slots(slots_array)
 
+	PromoLogger.event("level_loaded", {"game": "plinko", "level": nivel_actual, "target_score": puntaje_maximo_nivel, "balls": MAX_BALLS})
 	anunciar_nivel(numero_nivel)
 	setup_camera()
 
@@ -217,6 +219,7 @@ func build_slots(slots_data: Array) -> void:
 
 func _on_ball_scored(points_awarded: int, _ball_node: Node = null) -> void:
 	puntaje_nivel += points_awarded
+	PromoLogger.event("score", {"game": "plinko", "level": nivel_actual, "points": points_awarded, "total_score": puntaje_nivel, "ball": balls_launched})
 	actualizar_ui_puntaje()
 	if _ball_node:
 		EfectosUI.crear_efecto_puntos((_ball_node as Node3D).global_position, points_awarded)
@@ -233,6 +236,7 @@ func actualizar_ui_bolas() -> void:
 		ui_label_bolas.text = "x %d" % maxi(0, MAX_BALLS - balls_launched)
 
 func mostrar_panel_resultados() -> void:
+	PromoLogger.event("level_complete", {"game": "plinko", "level": nivel_actual, "score": puntaje_nivel, "target_score": puntaje_maximo_nivel, "success": puntaje_nivel >= puntaje_maximo_nivel})
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func _on_boton_pausa_pressed() -> void:
@@ -373,6 +377,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if current_ball != null and not current_ball.is_active:
 			current_ball.release_ball()
 			balls_launched += 1
+			PromoLogger.event("throw", {"game": "plinko", "level": nivel_actual, "throw": balls_launched})
 			actualizar_ui_bolas()
 			active_balls.append(current_ball)
 			current_ball = null

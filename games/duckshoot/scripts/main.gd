@@ -108,6 +108,7 @@ func _ready() -> void:
 	
 	_load_valores_config()
 	load_level(str(nivel_actual))
+	PromoLogger.event("game_start", {"game": "duckshoot", "level": nivel_actual})
 
 func _load_valores_config() -> void:
 	if not FileAccess.file_exists(valores_json_path):
@@ -159,6 +160,7 @@ func load_level(level_id: String) -> void:
 		puntaje_maximo_nivel = max_pts_por_item * level_total_ducks
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
+	PromoLogger.event("level_loaded", {"game": "duckshoot", "level": nivel_actual, "target_score": puntaje_maximo_nivel, "targets": level_total_ducks})
 	is_game_over = false
 	if audio_juego:
 		audio_juego.stop_tictac()
@@ -422,6 +424,7 @@ func _on_target_hit(target: Target) -> void:
 	if puntos <= 0:
 		return
 	puntaje_nivel += puntos
+	PromoLogger.event("score", {"game": "duckshoot", "level": nivel_actual, "points": puntos, "total_score": puntaje_nivel, "target_type": target.target_type})
 	actualizar_ui_puntaje()
 	EfectosUI.crear_efecto_puntos(target.global_position, puntos)
 
@@ -533,6 +536,7 @@ func mostrar_panel_resultados() -> void:
 	if audio_juego:
 		audio_juego.stop_tictac()
 		audio_juego.stop_gears()
+	PromoLogger.event("level_complete", {"game": "duckshoot", "level": nivel_actual, "score": puntaje_nivel, "target_score": puntaje_maximo_nivel, "success": puntaje_nivel >= puntaje_maximo_nivel})
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func _on_boton_pausa_pressed() -> void:

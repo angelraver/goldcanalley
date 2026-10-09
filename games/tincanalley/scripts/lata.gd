@@ -11,7 +11,7 @@ func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 4
 	body_entered.connect(_on_body_entered)
-
+	
 func _on_body_entered(_cuerpo: Node) -> void:
 	if not puede_sonar:
 		return

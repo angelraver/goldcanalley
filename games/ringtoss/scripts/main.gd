@@ -110,6 +110,7 @@ func _ready() -> void:
 	nivel_actual = max(1, save_manager.nivel_actual_seleccionado)
 	_cargar_valores()
 	cargar_nivel(nivel_actual)
+	PromoLogger.event("game_start", {"game": "ringtoss", "level": nivel_actual})
 	_spawn_ring()
 
 
@@ -271,6 +272,7 @@ func lanzar_aro(swipe: Vector2) -> void:
 	ring_lanzado.angular_velocity = Vector3(0.0, velocidad_giro_disco, 0.0)
 	ring_lanzado.angular_damp = 0.5
 	ring_lanzado.apply_central_impulse(direccion * fuerza)
+	PromoLogger.event("throw", {"game": "ringtoss", "level": nivel_actual, "throw": anillos_lanzados, "force": fuerza, "swipe_x": swipe.x, "swipe_y": swipe.y})
 
 	_programar_miss(ring_lanzado)
 	await get_tree().create_timer(demora_siguiente_ring).timeout
@@ -371,6 +373,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	ctrl_resultados.actualizar_nivel(nivel_actual)
+	PromoLogger.event("level_loaded", {"game": "ringtoss", "level": nivel_actual, "rings": anillos_totales, "target_score": puntaje_maximo_nivel})
 	if ui_level_title:
 		ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel), "ringtoss")
 		ui_level_title.modulate.a = 1.0
@@ -560,6 +563,7 @@ func _cobrar_punto(ring: RigidBody3D, cono: Node3D) -> void:
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	EfectosUI.crear_efecto_puntos(cono.global_position + Vector3(0.0, float(cono.get_meta("altura_mundo", ALTURA_CONO_M)), 0.0), points)
 	anillos_resueltos += 1
+	PromoLogger.event("score", {"game": "ringtoss", "level": nivel_actual, "throw": int(ring.get_meta("launch_number", 0)), "points": points, "total_score": puntaje_nivel, "cone_id": str(cono.get_meta("cone_id", "")), "cone_type": str(cono.get_meta("tipo", ""))})
 	if puntaje_maximo_nivel > 0 and puntaje_nivel >= puntaje_maximo_nivel:
 		esperando_fin_nivel = true
 		await get_tree().create_timer(demora_fin_por_objetivo).timeout
@@ -578,6 +582,7 @@ func _programar_miss(ring: RigidBody3D) -> void:
 		return
 	ring.set_meta("resolved", true)
 	anillos_resueltos += 1
+	PromoLogger.event("miss", {"game": "ringtoss", "level": nivel_actual, "throw": int(ring.get_meta("launch_number", 0)), "total_score": puntaje_nivel})
 	if anillos_lanzados >= anillos_totales and anillos_resueltos >= anillos_lanzados:
 		finalizar_nivel()
 
@@ -586,6 +591,7 @@ func finalizar_nivel() -> void:
 	if ctrl_resultados.esta_mostrado():
 		return
 	esperando_fin_nivel = true
+	PromoLogger.event("level_complete", {"game": "ringtoss", "level": nivel_actual, "score": puntaje_nivel, "target_score": puntaje_maximo_nivel, "success": puntaje_maximo_nivel <= 0 or puntaje_nivel >= puntaje_maximo_nivel})
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 

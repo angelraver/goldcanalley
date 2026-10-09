@@ -46,6 +46,7 @@ func _ready() -> void:
 		boton_pausa.pressed.connect(_on_boton_pausa_pressed)
 
 	cargar_nivel(nivel_actual)
+	PromoLogger.event("game_start", {"game": "whackamole", "level": nivel_actual})
 
 	# HUD de juego oculto durante la intro de cámara (igual que tincanalley)
 	if ui_puntaje: ui_puntaje.visible = false
@@ -115,6 +116,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	var config_nivel = datos_niveles[str(numero_nivel)]
 	puntaje_maximo_nivel = int(config_nivel.get("meta_puntos", 300))
 	puntaje_nivel = 0
+	PromoLogger.event("level_loaded", {"game": "whackamole", "level": nivel_actual, "target_score": puntaje_maximo_nivel})
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
 	var lista_hoyos: Array = config_nivel.get("hoyos", [])
@@ -176,6 +178,7 @@ func actualizar_ui_puntaje() -> void:
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 
 func mostrar_panel_resultados() -> void:
+	PromoLogger.event("level_complete", {"game": "whackamole", "level": nivel_actual, "score": puntaje_nivel, "target_score": puntaje_maximo_nivel, "success": puntaje_nivel >= puntaje_maximo_nivel})
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
 
 func _on_boton_pausa_pressed() -> void:
@@ -247,11 +250,13 @@ func _on_hoyo_cliqueado(hoyo_node: Node3D, fue_acierto: bool, puntos: int) -> vo
 	if fue_acierto:
 		EfectosUI.crear_efecto_puntos(hoyo_node.global_position, puntos)
 		puntaje_nivel += puntos
+		PromoLogger.event("score", {"game": "whackamole", "level": nivel_actual, "points": puntos, "total_score": puntaje_nivel})
 		actualizar_ui_puntaje()
 		# 2. Topo golpeado: solo cuando el topo estaba afuera
 		if audio:
 			audio.play_ouch(_sonido_topo(hoyo_node, "outch"))
 	else:
+		PromoLogger.event("miss", {"game": "whackamole", "level": nivel_actual, "total_score": puntaje_nivel})
 		print("¡Golpe en falso! Sin puntos.")
 
 func _on_anim_hoyo_finalizada(anim_nombre: StringName, hoyo_node: Node3D) -> void:
