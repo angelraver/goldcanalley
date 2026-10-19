@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cjbojfqj2p0x6"]
 
 [ext_resource type="Script" uid="uid://nqm0rjk44k85" path="res://games/plinko/scripts/main.gd" id="1_7jgrb"]
-[ext_resource type="Texture2D" uid="uid://ba6j7n5y0of6s" path="res://games/plinko/assets/images/floor.jpg" id="2_cihct"]
+[ext_resource type="Texture2D" uid="uid://dgnqd0l7r3glm" path="res://games/plinko/assets/images/floor.webp" id="2_cihct"]
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="2_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="3_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="4_panel"]

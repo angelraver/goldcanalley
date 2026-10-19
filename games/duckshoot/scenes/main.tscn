@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c26yeg0pbuvkx" path="res://core/scenes/ui_puntaje.tscn" id="8_puntaje"]
 [ext_resource type="PackedScene" uid="uid://e2apr11hn7jn" path="res://core/scenes/ui_level_number.tscn" id="9_levelnum"]
 [ext_resource type="PackedScene" uid="uid://cmgyjw5107ww2" path="res://core/scenes/panel_resultados.tscn" id="10_panel"]
-[ext_resource type="FontFile" uid="uid://b3nlbqd0gqnvc" path="res://core/assets/fonts/evereast.ttf" id="11_ever"]
+[ext_resource type="FontFile" uid="uid://d1v4p465ivejs" path="res://core/assets/fonts/evereast.ttf" id="11_ever"]
 [ext_resource type="Texture2D" uid="uid://dtfxh5v7h3tyb" path="res://core/assets/images/ui/button_pause.webp" id="12_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="13_pausa"]
 [ext_resource type="Texture2D" uid="uid://vm28rcicwvch" path="res://games/duckshoot/assets/images/logo.webp" id="14_bt4sv"]
@@ -36,6 +36,9 @@ size = Vector3(0.07138109, 0.07285309, 0.50390625)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ds4va"]
 transparency = 1
 albedo_texture = ExtResource("14_bt4sv")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_logo"]
+size = Vector3(1, 1, 0.05)
 
 [node name="Main" type="Node3D" unique_id=732211628]
 script = ExtResource("1_vnc0d")
@@ -134,9 +137,14 @@ texture_normal = ExtResource("12_pausebtn")
 
 [node name="AudioJuego" parent="." unique_id=688448039 instance=ExtResource("7_audio")]
 
-[node name="Logo" type="MeshInstance3D" parent="." unique_id=2076696519]
+[node name="Logo" type="StaticBody3D" parent="." unique_id=2076696519]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.277711, 0.05)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Logo" unique_id=336863001]
 mesh = SubResource("QuadMesh_xewj8")
 surface_material_override/0 = SubResource("StandardMaterial3D_ds4va")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Logo" unique_id=461157116]
+shape = SubResource("BoxShape3D_logo")
 
 [connection signal="pressed" from="UI/BotonPausa" to="." method="_on_boton_pausa_pressed"]
