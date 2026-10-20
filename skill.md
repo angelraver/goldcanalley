@@ -266,6 +266,7 @@ Notas:
 - **Desbloqueo de nivel** (`save_manager.gd:112`): nivel `n` desbloqueado si `score(n-1)/max(n-1) >= 1/3`. Nivel 1 siempre desbloqueado. `SlotNivel` lo aplica (`slot_nivel.gd:27`).
 - **Ribbons** (`panel_resultados.gd:57`): amarilla ≥1/3, roja ≥2/3, azul = 100% (`score >= max`). `SlotNivel` replica la misma lógica (`slot_nivel.gd:66`).
 - **Calibración de la meta (convención del proyecto):** `puntaje_maximo` / `max_pts` de cada nivel ≈ **60% del puntaje perfecto** (duckshoot: `total × valor-medio-mezcla`; ringtoss: `rings × mejor-cono`). Así el oro queda al alcance con ~50% de aciertos reales en dificultad media. Aplica esta regla al crear o reequilibrar niveles.
+- **DuckShoot con munición limitada:** como el "perfecto" ahora depende de los tiros (`shoots`) y no de los patos, la fórmula se invierte para calibrar los tiros: `shoots = ceil(max_pts / (0.6 × valor-medio-mezcla))` (múltiplos de 5). Así `max_pts` sigue siendo alcanzable y la relación meta/perfecto se mantiene en 0.60.
 - **Premios globales** (`save_manager.gd:170`): `azules = contar_ribbons_azules()` across **todos** los juegos. `total_niveles = obtener_total_niveles_globales()` (suma de `niveles.json` de cada juego, mínimo 18, `save_manager.gd:168`). Para premio `i` (1-indexed): `requeridas = ceil(i * total_niveles / 18)`. `premios.gd:90` y `premio_desbloqueado.gd` usan la misma fórmula. `LISTA_PREMIOS` orden fijo (`save_manager.gd:5`).
 - **Localización** (`game_manager.gd:37`): core `textos.json` sin prefijo + cada juego con `prefijo_texto`. `obtener_texto(clave)` busca `idioma_actual`, fallback `es`, fallback `clave` (`game_manager.gd:60`). Títulos de nivel: `obtener_titulo_nivel("3")` → busca `"<prefijo>3"` (`game_manager.gd:82`).
 - **Audio prefs**: `audio_manager` persiste `music_enabled/sfx_enabled` en `save_manager` (`audio_manager.gd:22-32`). Juegos deben consultar `sfx_habilitado()` vía `GameAudioBase` o `save_manager.obtener_opcion_audio("sfx_enabled")`.
@@ -316,6 +317,11 @@ tincanalley/
         # Audio propio (`audio_manager.gd` ← `GameAudioBase`): rifle/duck/gears + `play_bomb/play_rayo/
         # play_tictac/stop_tictac/play_shotmiss1` cableados en `main.gd:_on_target_hit/_congelar_lanes`.
         # `data/valores.json`: patos A-D (100/200/300/500) + especiales sin puntos.
+        # Munición limitada por nivel: `data/niveles.json` → `"shoots"` (bajo `max_pts`) = tiros
+        # disponibles. `Rifle.max_ammo`/`municion_maxima` + `set_municion()` (fallback si falta
+        # `shoots`); al agotarse, `shoot()` reproduce `empty.wav` (`play_empty()`) y no crea bala.
+        # `shoots` se calibra para que `max_pts` (60% del perfecto) sea alcanzable:
+        # `shoots = ceil(max_pts / (0.6 × valor-medio-mezcla))`, redondeado a múltiplos de 5.
 ```
 
 Cada `games/<id>/` replica: `scenes/`, `scripts/`, `data/`, `assets/`, `shaders/` (opcional).

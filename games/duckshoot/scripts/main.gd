@@ -156,9 +156,9 @@ func load_level(level_id: String) -> void:
 	ducks_despawned = 0
 	freeze_remaining = 0.0
 	puntaje_nivel = 0
-	# Munición: cada nivel empieza con el tambor lleno (10 balas).
+	# Munición del nivel: property "shoots" (si no está, el fallback del rifle).
 	if rifle:
-		rifle.recargar()
+		rifle.set_municion(int(level_config.get("shoots", rifle.max_ammo)))
 	# Meta para ribbons: prioridad max_pts (schema duckshoot), fallback puntaje_maximo/meta_puntos
 	puntaje_maximo_nivel = int(level_config.get("max_pts", level_config.get("puntaje_maximo", level_config.get("meta_puntos", 0))))
 	if puntaje_maximo_nivel <= 0:
@@ -526,8 +526,9 @@ func actualizar_ui_balas() -> void:
 		return
 	var restantes: int = rifle.ammo if rifle else 0
 	ui_balas_valor.text = str(restantes)
-	# Aviso visual cuando quedan pocas balas (o ninguna).
-	if rifle and rifle.max_ammo > 0 and restantes <= 3:
+	# Aviso visual cuando quedan pocas balas (o ninguna). El umbral es
+	# proporcional al cargador del nivel (mínimo 3 balas).
+	if rifle and rifle.municion_maxima > 0 and restantes <= maxi(3, rifle.municion_maxima / 10):
 		ui_balas_valor.modulate = COLOR_ROJO
 	else:
 		ui_balas_valor.modulate = COLOR_BLANCO

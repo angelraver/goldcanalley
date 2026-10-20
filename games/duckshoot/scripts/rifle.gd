@@ -13,10 +13,12 @@ signal sin_balas
 @export var lock_aim_delay: float = 1.0
 
 @export_group("Munición")
-## Balas disponibles por partida
+## Munición por defecto (fallback si el nivel no define "shoots")
 @export var max_ammo: int = 10
 ## Balas que quedan en el tambor
 var ammo: int = 10
+## Balas asignadas a la partida actual (property "shoots" del nivel)
+var municion_maxima: int = 10
 
 @export_group("Efecto Respiración (Idle)")
 @export var sway_speed: float = 2.0
@@ -78,7 +80,7 @@ func _ready() -> void:
 	if not muzzle and has_node("Muzzle"):
 		muzzle = $Muzzle as Node3D
 
-	ammo = max_ammo
+	ammo = municion_maxima
 
 	base_position = Vector3(board_center.x, board_center.y, board_center.z + rifle_z_distance)
 	position = base_position
@@ -229,7 +231,12 @@ func shoot() -> bool:
 
 # Recarga el tambor para una partida nueva.
 func recargar() -> void:
-	ammo = max_ammo
+	ammo = municion_maxima
+
+# Fija la munición de la partida (property "shoots" del nivel) y recarga.
+func set_municion(cantidad: int) -> void:
+	municion_maxima = maxi(cantidad, 0)
+	recargar()
 
 func _apply_sway(delta: float, intensity: float = 1.0) -> void:
 	var offset_y = sin(time_passed * sway_speed) * sway_amount_y * intensity
