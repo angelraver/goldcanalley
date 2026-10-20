@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dtfxh5v7h3tyb" path="res://core/assets/images/ui/button_pause.webp" id="12_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://epau5a222r3y" path="res://core/scenes/panel_pausa.tscn" id="13_pausa"]
 [ext_resource type="Texture2D" uid="uid://vm28rcicwvch" path="res://games/duckshoot/assets/images/logo.webp" id="14_bt4sv"]
+[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="15_carnival"]
 
 [sub_resource type="Environment" id="Environment_7x46q"]
 background_mode = 2
@@ -133,7 +134,34 @@ grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
 texture_normal = ExtResource("12_pausebtn")
 
+[node name="Balas" type="Label" parent="UI" unique_id=510011105]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 95.0
+offset_right = -20.0
+offset_bottom = 139.0
+grow_horizontal = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("15_carnival")
+theme_override_font_sizes/font_size = 44
+text = "shots"
+horizontal_alignment = 2
+
+[node name="Valor" type="Label" parent="UI/Balas" unique_id=510011106]
+layout_mode = 0
+offset_top = 25.0
+offset_right = 75.0
+offset_bottom = 105.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("15_carnival")
+theme_override_font_sizes/font_size = 64
+text = "10"
+horizontal_alignment = 2
+
 [node name="PanelPausa" parent="UI" unique_id=307070112 instance=ExtResource("13_pausa")]
+visible = false
 
 [node name="AudioJuego" parent="." unique_id=688448039 instance=ExtResource("7_audio")]
 

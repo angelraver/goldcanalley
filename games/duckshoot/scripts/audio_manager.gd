@@ -31,6 +31,10 @@ func play_rayo() -> void:
 func play_tictac() -> void:
 	play("Tictac")
 
+# Disparo en vacío: el jugador intenta gastar una bala que ya no existe.
+func play_empty() -> void:
+	play("Empty")
+
 func stop_tictac() -> void:
 	for jugador in grupos_sonido.get("Tictac", []):
 		(jugador as AudioStreamPlayer).stop()

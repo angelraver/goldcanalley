@@ -59,6 +59,8 @@ const DISTANCIA_SPAWN: float = 0.25 # Distancia en unidades que debe avanzar el 
 @onready var ui_level_title: Label = $UI/LevelTitle
 @onready var boton_pausa: TextureButton = $UI/BotonPausa
 @onready var panel_pausa: PanelPausa = $UI/PanelPausa as PanelPausa
+@onready var ui_balas: Label = $UI/Balas
+@onready var ui_balas_valor: Label = $UI/Balas/Valor
 
 # Definición de colores principales
 const COLOR_AMARILLO : Color = Color("ffd700")
@@ -96,11 +98,18 @@ func _ready() -> void:
 	if audio_juego and rifle:
 		rifle.audio = audio_juego
 
+	# Munición: el rifle avisa de cada disparo y de cada intento en seco.
+	if rifle:
+		if not rifle.disparo_realizado.is_connected(_on_disparo_realizado):
+			rifle.disparo_realizado.connect(_on_disparo_realizado)
+		if not rifle.sin_balas.is_connected(_on_sin_balas):
+			rifle.sin_balas.connect(_on_sin_balas)
+
 	nivel_actual = save_manager.nivel_actual_seleccionado
 
 	ctrl_resultados = ControladorResultados.new()
 	add_child(ctrl_resultados)
-	var hud: Array = [ui_puntaje, ui_level_number, boton_pausa]
+	var hud: Array = [ui_puntaje, ui_level_number, boton_pausa, ui_balas]
 	ctrl_resultados.configurar(panel_resultados, hud, ui_puntaje, ui_level_number, reiniciar_nivel)
 
 	if boton_pausa and not boton_pausa.is_connected("pressed", _on_boton_pausa_pressed):
@@ -147,6 +156,9 @@ func load_level(level_id: String) -> void:
 	ducks_despawned = 0
 	freeze_remaining = 0.0
 	puntaje_nivel = 0
+	# Munición: cada nivel empieza con el tambor lleno (10 balas).
+	if rifle:
+		rifle.recargar()
 	# Meta para ribbons: prioridad max_pts (schema duckshoot), fallback puntaje_maximo/meta_puntos
 	puntaje_maximo_nivel = int(level_config.get("max_pts", level_config.get("puntaje_maximo", level_config.get("meta_puntos", 0))))
 	if puntaje_maximo_nivel <= 0:
@@ -159,6 +171,7 @@ func load_level(level_id: String) -> void:
 		puntaje_maximo_nivel = max_pts_por_item * level_total_ducks
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
+	actualizar_ui_balas()
 	is_game_over = false
 	if audio_juego:
 		audio_juego.stop_tictac()
@@ -506,6 +519,26 @@ func actualizar_ui_puntaje() -> void:
 		ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	elif ui_puntaje:
 		ui_puntaje.establecer_puntaje(puntaje_nivel)
+
+# Contador de munición del HUD (muestra las balas que quedan en el tambor).
+func actualizar_ui_balas() -> void:
+	if not ui_balas_valor:
+		return
+	var restantes: int = rifle.ammo if rifle else 0
+	ui_balas_valor.text = str(restantes)
+	# Aviso visual cuando quedan pocas balas (o ninguna).
+	if rifle and rifle.max_ammo > 0 and restantes <= 3:
+		ui_balas_valor.modulate = COLOR_ROJO
+	else:
+		ui_balas_valor.modulate = COLOR_BLANCO
+
+# El rifle ya gastó una bala: solo refresca el HUD.
+func _on_disparo_realizado() -> void:
+	actualizar_ui_balas()
+
+# El jugador intentó disparar sin balas (sonó empty.wav en el rifle).
+func _on_sin_balas() -> void:
+	actualizar_ui_balas()
 
 func actualizar_ui_level() -> void:
 	if ctrl_resultados:

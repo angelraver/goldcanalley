@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bcfpus1sn4rs6" path="res://games/duckshoot/assets/sounds/bomb.wav" id="11_bomb"]
 [ext_resource type="AudioStream" uid="uid://bk3v4se5qsayx" path="res://games/duckshoot/assets/sounds/rayo.wav" id="12_rayo"]
 [ext_resource type="AudioStream" uid="uid://bvn2bg7dvfloq" path="res://games/duckshoot/assets/sounds/tictac.wav" id="13_tictac"]
+[ext_resource type="AudioStream" uid="uid://dy02473wcgney" path="res://games/duckshoot/assets/sounds/empty.wav" id="14_empty"]
 
 [node name="AudioJuego" type="Node" unique_id=1672015537]
 script = ExtResource("1_am")
@@ -52,3 +53,6 @@ stream = ExtResource("12_rayo")
 
 [node name="Tictac" type="AudioStreamPlayer" parent="." unique_id=510011103]
 stream = ExtResource("13_tictac")
+
+[node name="Empty" type="AudioStreamPlayer" parent="." unique_id=510011104]
+stream = ExtResource("14_empty")

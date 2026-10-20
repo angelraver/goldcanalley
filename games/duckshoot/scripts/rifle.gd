@@ -1,6 +1,9 @@
 extends Node3D
 class_name Rifle
 
+signal disparo_realizado
+signal sin_balas
+
 @export_group("Prefabs & Nodos")
 @export var bullet_scene: PackedScene = preload("res://games/duckshoot/scenes/bala.tscn")
 @export var muzzle: Node3D
@@ -8,6 +11,12 @@ class_name Rifle
 @export_group("Configuración de Disparo")
 @export var double_tap_time: float = 0.3
 @export var lock_aim_delay: float = 1.0
+
+@export_group("Munición")
+## Balas disponibles por partida
+@export var max_ammo: int = 10
+## Balas que quedan en el tambor
+var ammo: int = 10
 
 @export_group("Efecto Respiración (Idle)")
 @export var sway_speed: float = 2.0
@@ -68,6 +77,8 @@ var max_rifle_y: float
 func _ready() -> void:
 	if not muzzle and has_node("Muzzle"):
 		muzzle = $Muzzle as Node3D
+
+	ammo = max_ammo
 
 	base_position = Vector3(board_center.x, board_center.y, board_center.z + rifle_z_distance)
 	position = base_position
@@ -178,9 +189,18 @@ func _update_rifle_transform() -> void:
 	rotation.y = target_yaw
 	rotation.x = target_pitch
 
-func shoot() -> void:
+func shoot() -> bool:
 	if not bullet_scene or not muzzle:
-		return
+		return false
+
+	# Sin munición: se reproduce el clic de cámara vacía y no se crea bala.
+	if ammo <= 0:
+		if audio:
+			audio.play_empty()
+		sin_balas.emit()
+		return false
+
+	ammo -= 1
 
 	if audio:
 		audio.play_rifle()
@@ -203,7 +223,14 @@ func shoot() -> void:
 	# IMPORTANTE: Llamar a setup DESPUÉS de establecer global_position y añadir a la escena
 	if bullet_instance.has_method("setup"):
 		bullet_instance.setup(real_rifle_direction)
-		
+
+	disparo_realizado.emit()
+	return true
+
+# Recarga el tambor para una partida nueva.
+func recargar() -> void:
+	ammo = max_ammo
+
 func _apply_sway(delta: float, intensity: float = 1.0) -> void:
 	var offset_y = sin(time_passed * sway_speed) * sway_amount_y * intensity
 	var offset_x = cos(time_passed * sway_speed * 0.5) * sway_amount_x * intensity
