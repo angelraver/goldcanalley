@@ -84,6 +84,12 @@ func actualizar_puntaje(puntaje: int) -> void:
 	if ui_puntaje:
 		ui_puntaje.establecer_puntaje(puntaje)
 
+## Fija el puntaje máximo del nivel (meta de la cinta azul). Se muestra en el
+## HUD como "/ max" debajo del puntaje actual.
+func actualizar_maximo(puntaje_max: int) -> void:
+	if ui_puntaje:
+		ui_puntaje.establecer_maximo(puntaje_max)
+
 func actualizar_nivel(nivel: int) -> void:
 	if ui_level_number:
 		ui_level_number.establecer_nivel(nivel)

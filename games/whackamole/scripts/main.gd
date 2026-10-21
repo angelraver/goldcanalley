@@ -116,6 +116,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	puntaje_maximo_nivel = int(config_nivel.get("meta_puntos", 300))
 	puntaje_nivel = 0
 	actualizar_ui_puntaje()
+	actualizar_ui_maximo()
 	actualizar_ui_level()
 	var lista_hoyos: Array = config_nivel.get("hoyos", [])
 
@@ -174,6 +175,9 @@ func actualizar_ui_level() -> void:
 
 func actualizar_ui_puntaje() -> void:
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
+
+func actualizar_ui_maximo() -> void:
+	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
 
 func mostrar_panel_resultados() -> void:
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)

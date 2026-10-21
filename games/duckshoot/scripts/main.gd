@@ -172,6 +172,7 @@ func load_level(level_id: String) -> void:
 	actualizar_ui_puntaje()
 	actualizar_ui_level()
 	actualizar_ui_balas()
+	actualizar_ui_maximo()
 	is_game_over = false
 	if audio_juego:
 		audio_juego.stop_tictac()
@@ -519,6 +520,12 @@ func actualizar_ui_puntaje() -> void:
 		ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	elif ui_puntaje:
 		ui_puntaje.establecer_puntaje(puntaje_nivel)
+
+func actualizar_ui_maximo() -> void:
+	if ctrl_resultados:
+		ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
+	elif ui_puntaje:
+		ui_puntaje.establecer_maximo(puntaje_maximo_nivel)
 
 # Contador de munición del HUD (muestra las balas que quedan en el tambor).
 func actualizar_ui_balas() -> void:

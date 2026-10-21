@@ -153,6 +153,10 @@ func cargar_nivel(numero_nivel: int) -> void:
 		contenedor_latas.add_child(nuevo_objeto)
 		nuevo_objeto.global_position = Vector3(pos_x, pos_y, pos_z)
 
+	# El máximo del nivel es la suma de los puntos de todas las latas:
+	# ya se conoce al terminar el bucle, así que se publica en el HUD.
+	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
+
 	anunciar_nivel(numero_nivel)
 	animar_camara_entrada()
 

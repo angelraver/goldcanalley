@@ -128,6 +128,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 	# Puntaje máximo del nivel (meta para PanelResultados). Soporta claves legacy.
 	puntaje_maximo_nivel = int(level_data.get("puntaje", level_data.get("meta_puntos", 1000)))
 	actualizar_ui_puntaje()
+	actualizar_ui_maximo()
 	actualizar_ui_level()
 	actualizar_ui_bolas()
 
@@ -226,6 +227,9 @@ func _on_ball_scored(points_awarded: int, _ball_node: Node = null) -> void:
 
 func actualizar_ui_puntaje() -> void:
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
+
+func actualizar_ui_maximo() -> void:
+	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
 
 func actualizar_ui_level() -> void:
 	ctrl_resultados.actualizar_nivel(nivel_actual)

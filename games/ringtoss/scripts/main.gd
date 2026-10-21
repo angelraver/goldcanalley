@@ -378,6 +378,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 		puntaje_maximo_nivel = max_por_cono * anillos_totales
 
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
+	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
 	ctrl_resultados.actualizar_nivel(nivel_actual)
 	if ui_level_title:
 		ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel), "ringtoss")
