@@ -1,6 +1,6 @@
 {
   "1": {
-    "puntaje": 450,
+    "puntaje": 1000,
     "color_board": "EB051B",
     "color_peg": "F2E200",
     "color_ramp": "F2E200",
@@ -54,7 +54,7 @@
     ]
   },
   "2": {
-    "puntaje": 650,
+    "puntaje": 1030,
     "color_board": "EB051B",
     "color_peg": "F2E200",
     "color_ramp": "F2E200",
@@ -113,7 +113,7 @@
     ]
   },
   "3": {
-    "puntaje": 800,
+    "puntaje": 1053,
     "color_board": "EB051B",
     "color_peg": "F2E200",
     "color_ramp": "F2E200",
@@ -165,7 +165,7 @@
     ]
   },
   "4": {
-    "puntaje": 850,
+    "puntaje": 1061,
     "color_board": "F2E200",
     "color_peg": "EB051B",
     "color_ramp": "EB051B",
@@ -228,7 +228,7 @@
     ]
   },
   "5": {
-    "puntaje": 900,
+    "puntaje": 1068,
     "color_board": "EB051B",
     "color_peg": "F2E200",
     "color_ramp": "F2E200",
@@ -286,7 +286,7 @@
     ]
   },
   "6": {
-    "puntaje": 1000,
+    "puntaje": 1083,
     "color_board": "F2E200",
     "color_peg": "EB051B",
     "color_ramp": "EB051B",
@@ -334,7 +334,7 @@
     ]
   },
   "7": {
-    "puntaje": 1100,
+    "puntaje": 1099,
     "color_board": "EB051B",
     "color_peg": "F2E200",
     "color_ramp": "F2E200",
@@ -391,7 +391,7 @@
     ]
   },
   "8": {
-    "puntaje": 1150,
+    "puntaje": 1106,
     "color_board": "030712",
     "color_peg": "38BDF8",
     "color_ramp": "F43F5E",
@@ -449,7 +449,7 @@
     ]
   },
   "9": {
-    "puntaje": 1250,
+    "puntaje": 1121,
     "color_board": "171717",
     "color_peg": "A855F7",
     "color_ramp": "EAB308",
@@ -511,7 +511,7 @@
     ]
   },
   "10": {
-    "puntaje": 1300,
+    "puntaje": 1129,
     "color_board": "090D16",
     "color_peg": "06B6D4",
     "color_ramp": "F97316",
@@ -578,7 +578,7 @@
     ]
   },
   "11": {
-    "puntaje": 1400,
+    "puntaje": 1144,
     "color_board": "1F0322",
     "color_peg": "EC4899",
     "color_ramp": "10B981",
@@ -635,7 +635,7 @@
     ]
   },
   "12": {
-    "puntaje": 1450,
+    "puntaje": 1152,
     "color_board": "090D16",
     "color_peg": "FFFFFF",
     "color_ramp": "FFFFFF",
@@ -685,7 +685,7 @@
     ]
   },
   "13": {
-    "puntaje": 1500,
+    "puntaje": 1159,
     "color_board": "030712",
     "color_peg": "FFFFFF",
     "color_ramp": "FFFFFF",
@@ -736,7 +736,7 @@
     ]
   },
   "14": {
-    "puntaje": 1600,
+    "puntaje": 1174,
     "color_board": "0F172A",
     "color_peg": "FACC15",
     "color_ramp": "A855F7",
@@ -810,7 +810,7 @@
     ]
   },
   "15": {
-    "puntaje": 1650,
+    "puntaje": 1182,
     "color_board": "1E1B4B",
     "color_peg": "4ADE80",
     "color_ramp": "FB923C",
@@ -879,7 +879,7 @@
     ]
   },
   "16": {
-    "puntaje": 1750,
+    "puntaje": 1197,
     "color_board": "111827",
     "color_peg": "F43F5E",
     "color_ramp": "38BDF8",
@@ -946,7 +946,7 @@
     ]
   },
   "17": {
-    "puntaje": 1900,
+    "puntaje": 1220,
     "color_board": "FF0000",
     "color_peg": "FFFFFF",
     "color_ramp": "FFFFFF",
@@ -1087,7 +1087,7 @@
     ]
   },
   "18": {
-    "puntaje": 2100,
+    "puntaje": 1250,
     "color_board": "#FE9A37",
     "color_peg": "#FE9A37",
     "color_ramp": "#FE9A37",
