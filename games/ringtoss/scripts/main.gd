@@ -334,7 +334,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	nivel_data = datos[str(numero_nivel)] as Dictionary
 	anillos_totales = int(nivel_data.get("rings", 3))
-	puntaje_maximo_nivel = int(nivel_data.get("puntaje_maximo", 0))
+	puntaje_maximo_nivel = int(nivel_data.get("puntaje", 0))
 	actualizar_ui_aros()
 	var separacion_x := float(nivel_data.get("separacion_x", 0.30))
 	var separacion_z := float(nivel_data.get("separacion_z", 0.30))

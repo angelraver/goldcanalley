@@ -160,7 +160,7 @@ func load_level(level_id: String) -> void:
 	if rifle:
 		rifle.set_municion(int(level_config.get("shoots", rifle.max_ammo)))
 	# Meta para ribbons: prioridad max_pts (schema duckshoot), fallback puntaje_maximo/meta_puntos
-	puntaje_maximo_nivel = int(level_config.get("max_pts", level_config.get("puntaje_maximo", level_config.get("meta_puntos", 0))))
+	puntaje_maximo_nivel = int(level_config.get("puntaje", 0))
 	if puntaje_maximo_nivel <= 0:
 		# Fallback: máximo teórico = pts más alto * total
 		var max_pts_por_item: int = 0

@@ -1,1126 +1,1126 @@
 {
   "1": {
-	"total": 40,
-	"max_pts": 2400,
-	"shoots": 40,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1",
-	  "patos": {
-		"A": 100
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "1",
-	  "patos": {
-		"A": 100
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_3": {
-	  "direction": "derecha",
-	  "speed": "1",
-	  "patos": {
-		"A": 100
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1",
-	  "patos": {
-		"A": 100
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	}
+    "total": 40,
+    "shoots": 40,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1",
+      "patos": {
+        "A": 100
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "1",
+      "patos": {
+        "A": 100
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_3": {
+      "direction": "derecha",
+      "speed": "1",
+      "patos": {
+        "A": 100
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1",
+      "patos": {
+        "A": 100
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "puntaje": 2400
   },
   "2": {
-	"total": 60,
-	"max_pts": 4300,
-	"shoots": 65,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1",
-	  "patos": {
-		"A": 100
-	  },
-	  "especial": [
-		"bomb",
-		"snow",
+    "total": 60,
+    "shoots": 65,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1",
+      "patos": {
+        "A": 100
+      },
+      "especial": [
+        "bomb",
+        "snow",
         "rayo"
-	  ],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1",
-	  "patos": {
-		"A": 70,
-		"B": 30
-	  },
-	  "especial": [
-		"bomb",
-		"snow",
+      ],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1",
+      "patos": {
+        "A": 70,
+        "B": 30
+      },
+      "especial": [
+        "bomb",
+        "snow",
         "rayo"
-	  ],
-	  "especial_rate": 0,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1",
-	  "patos": {
-		"A": 100
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 60,
-		"B": 40
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	}
+      ],
+      "especial_rate": 0,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1",
+      "patos": {
+        "A": 100
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1.2",
+      "patos": {
+        "A": 60,
+        "B": 40
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "puntaje": 4300
   },
   "3": {
-	"total": 80,
-	"max_pts": 7000,
-	"shoots": 85,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1",
-	  "patos": {
-		"A": 70,
-		"B": 30
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 60,
-		"B": 40
-	  },
-	  "especial": [
+    "total": 80,
+    "shoots": 85,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1",
+      "patos": {
+        "A": 70,
+        "B": 30
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.2",
+      "patos": {
+        "A": 60,
+        "B": 40
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 15,
-	  "wave_type": "none"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1",
-	  "patos": {
-		"A": 65,
-		"B": 35
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "wave1"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 50,
-		"B": 30,
-		"C": 20
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	}
+      ],
+      "especial_rate": 15,
+      "wave_type": "none"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1",
+      "patos": {
+        "A": 65,
+        "B": 35
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "wave1"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "1.3",
+      "patos": {
+        "A": 50,
+        "B": 30,
+        "C": 20
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "puntaje": 7000
   },
   "4": {
-	"total": 100,
-	"max_pts": 8900,
-	"shoots": 105,
-	"lane_1": {
-	  "direction": "izquierda",
-	  "speed": "1.1",
-	  "patos": {
-		"A": 60,
-		"B": 40
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 65,
-		"B": 35
-	  },
-	  "especial": [
+    "total": 100,
+    "shoots": 105,
+    "lane_1": {
+      "direction": "izquierda",
+      "speed": "1.1",
+      "patos": {
+        "A": 60,
+        "B": 40
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "1.2",
+      "patos": {
+        "A": 65,
+        "B": 35
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 12,
-	  "wave_type": "none"
-	},
-	"lane_3": {
-	  "direction": "derecha",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "wave1"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 60,
-		"B": 25,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 12,
+      "wave_type": "none"
+    },
+    "lane_3": {
+      "direction": "derecha",
+      "speed": "1.2",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "wave1"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "1.3",
+      "patos": {
+        "A": 60,
+        "B": 25,
+        "C": 15
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 15,
-	  "wave_type": "none"
-	}
+      ],
+      "especial_rate": 15,
+      "wave_type": "none"
+    },
+    "puntaje": 8900
   },
   "5": {
-	"total": 120,
-	"max_pts": 13900,
-	"shoots": 120,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 50,
-		"B": 30,
-		"D": 20
-	  },
-	  "especial": [
+    "total": 120,
+    "shoots": 120,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.2",
+      "patos": {
+        "A": 50,
+        "B": 30,
+        "D": 20
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.3",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.2",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1.4",
-	  "patos": {
-		"A": 50,
-		"B": 25,
-		"C": 15,
-		"D": 10
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1.4",
+      "patos": {
+        "A": 50,
+        "B": 25,
+        "C": 15,
+        "D": 10
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave1"
+    },
+    "puntaje": 13900
   },
   "6": {
-	"total": 130,
-	"max_pts": 11400,
-	"shoots": 130,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.2",
-	  "patos": {
-		"A": 65,
-		"B": 35
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+    "total": 130,
+    "shoots": 130,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.2",
+      "patos": {
+        "A": 65,
+        "B": 35
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "1.3",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 12,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 65,
-		"B": 35
-	  },
-	  "especial": [],
-	  "especial_rate": 0,
-	  "wave_type": "none"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "1.4",
-	  "patos": {
-		"A": 60,
-		"B": 25,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 12,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.3",
+      "patos": {
+        "A": 65,
+        "B": 35
+      },
+      "especial": [],
+      "especial_rate": 0,
+      "wave_type": "none"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "1.4",
+      "patos": {
+        "A": 60,
+        "B": 25,
+        "C": 15
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave2"
-	}
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave2"
+    },
+    "puntaje": 11400
   },
   "7": {
-	"total": 150,
-	"max_pts": 15000,
-	"shoots": 150,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 60,
-		"B": 40
-	  },
-	  "especial": [
+    "total": 150,
+    "shoots": 150,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.3",
+      "patos": {
+        "A": 60,
+        "B": 40
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.5",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.5",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "none"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.3",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "none"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.3",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1.6",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave1"
+    },
+    "puntaje": 15000
   },
   "8": {
-	"total": 180,
-	"max_pts": 20100,
-	"shoots": 185,
-	"lane_1": {
-	  "direction": "izquierda",
-	  "speed": "1.4",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+    "total": 180,
+    "shoots": 185,
+    "lane_1": {
+      "direction": "izquierda",
+      "speed": "1.4",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.6",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "derecha",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "derecha",
+      "speed": "1.6",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "none"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1.7",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 8,
+      "wave_type": "none"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1.7",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "rayo"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "puntaje": 20100
   },
   "9": {
-	"total": 210,
-	"max_pts": 25100,
-	"shoots": 215,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.4",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+    "total": 210,
+    "shoots": 215,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.4",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.6",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.4",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.4",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1.7",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1.7",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "snow"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "puntaje": 25100
   },
   "10": {
-	"total": 250,
-	"max_pts": 31400,
-	"shoots": 255,
-	"lane_1": {
-	  "direction": "izquierda",
-	  "speed": "1.5",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+    "total": 250,
+    "shoots": 255,
+    "lane_1": {
+      "direction": "izquierda",
+      "speed": "1.5",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "rayo"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.7",
-	  "patos": {
-		"A": 45,
-		"B": 30,
-		"C": 15,
-		"D": 10
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.7",
+      "patos": {
+        "A": 45,
+        "B": 30,
+        "C": 15,
+        "D": 10
+      },
+      "especial": [
+        "bomb",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.7",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.7",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "1.8",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"rayo",
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "1.8",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave1"
+    },
+    "puntaje": 31400
   },
   "11": {
-	"total": 270,
-	"max_pts": 29900,
-	"shoots": 275,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+    "total": 270,
+    "shoots": 275,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.6",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "1.8",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "1.8",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "none"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "none"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.6",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 10,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "1.9",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 10,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "1.9",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "puntaje": 29900
   },
   "12": {
-	"total": 300,
-	"max_pts": 35900,
-	"shoots": 305,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.6",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+    "total": 300,
+    "shoots": 305,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.6",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "1.8",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "1.8",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "1.8",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "1.8",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "1.9",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "1.9",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "snow"
-	  ],
-	  "especial_rate": 7,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 7,
+      "wave_type": "wave1"
+    },
+    "puntaje": 35900
   },
   "13": {
-	"total": 340,
-	"max_pts": 43200,
-	"shoots": 340,
-	"lane_1": {
-	  "direction": "izquierda",
-	  "speed": "1.7",
-	  "patos": {
-		"A": 40,
-		"B": 28,
-		"C": 20,
-		"D": 12
-	  },
-	  "especial": [
+    "total": 340,
+    "shoots": 340,
+    "lane_1": {
+      "direction": "izquierda",
+      "speed": "1.7",
+      "patos": {
+        "A": 40,
+        "B": 28,
+        "C": 20,
+        "D": 12
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 7,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "2",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 7,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "2",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 7,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "derecha",
-	  "speed": "1.7",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 7,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "derecha",
+      "speed": "1.7",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 7,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "2.1",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 7,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "2.1",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "rayo"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave1"
+    },
+    "puntaje": 43200
   },
   "14": {
-	"total": 380,
-	"max_pts": 48300,
-	"shoots": 385,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.8",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+    "total": 380,
+    "shoots": 385,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.8",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "snow"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "2.1",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"rayo",
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "2.1",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "2.1",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "2.1",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "rayo"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "2.2",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "2.2",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave1"
+    },
+    "puntaje": 48300
   },
   "15": {
-	"total": 420,
-	"max_pts": 54900,
-	"shoots": 425,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "1.9",
-	  "patos": {
-		"A": 40,
-		"B": 28,
-		"C": 20,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+    "total": 420,
+    "shoots": 425,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "1.9",
+      "patos": {
+        "A": 40,
+        "B": 28,
+        "C": 20,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 4,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "2.2",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+      ],
+      "especial_rate": 4,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "2.2",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 4,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "derecha",
-	  "speed": "1.9",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+      ],
+      "especial_rate": 4,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "derecha",
+      "speed": "1.9",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 4,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "2.3",
-	  "patos": {
-		"A": 35,
-		"B": 30,
-		"C": 20,
-		"D": 15
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 4,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "2.3",
+      "patos": {
+        "A": 35,
+        "B": 30,
+        "C": 20,
+        "D": 15
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 4,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 4,
+      "wave_type": "wave1"
+    },
+    "puntaje": 54900
   },
   "16": {
-	"total": 450,
-	"max_pts": 53800,
-	"shoots": 455,
-	"lane_1": {
-	  "direction": "izquierda",
-	  "speed": "2",
-	  "patos": {
-		"A": 55,
-		"B": 30,
-		"C": 15
-	  },
-	  "especial": [
+    "total": 450,
+    "shoots": 455,
+    "lane_1": {
+      "direction": "izquierda",
+      "speed": "2",
+      "patos": {
+        "A": 55,
+        "B": 30,
+        "C": 15
+      },
+      "especial": [
         "rayo"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "2.3",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "2.3",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "snow"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "2.3",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "2.3",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
         "bomb"
-	  ],
-	  "especial_rate": 8,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "derecha",
-	  "speed": "2.4",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 8,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "derecha",
+      "speed": "2.4",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "rayo"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave1"
+    },
+    "puntaje": 53800
   },
   "17": {
-	"total": 480,
-	"max_pts": 61400,
-	"shoots": 480,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "2.1",
-	  "patos": {
-		"A": 40,
-		"B": 28,
-		"C": 20,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+    "total": 480,
+    "shoots": 480,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "2.1",
+      "patos": {
+        "A": 40,
+        "B": 28,
+        "C": 20,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "rayo"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "derecha",
-	  "speed": "2.4",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "derecha",
+      "speed": "2.4",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
         "snow"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "izquierda",
-	  "speed": "2.1",
-	  "patos": {
-		"A": 45,
-		"B": 25,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"rayo",
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "izquierda",
+      "speed": "2.1",
+      "patos": {
+        "A": 45,
+        "B": 25,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 6,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "2.5",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+      ],
+      "especial_rate": 6,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "2.5",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave1"
+    },
+    "puntaje": 61400
   },
   "18": {
-	"total": 500,
-	"max_pts": 64500,
-	"shoots": 500,
-	"lane_1": {
-	  "direction": "derecha",
-	  "speed": "2.2",
-	  "patos": {
-		"A": 40,
-		"B": 28,
-		"C": 20,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+    "total": 500,
+    "shoots": 500,
+    "lane_1": {
+      "direction": "derecha",
+      "speed": "2.2",
+      "patos": {
+        "A": 40,
+        "B": 28,
+        "C": 20,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave2"
-	},
-	"lane_2": {
-	  "direction": "izquierda",
-	  "speed": "2.5",
-	  "patos": {
-		"A": 40,
-		"B": 28,
-		"C": 20,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave2"
+    },
+    "lane_2": {
+      "direction": "izquierda",
+      "speed": "2.5",
+      "patos": {
+        "A": 40,
+        "B": 28,
+        "C": 20,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave1"
-	},
-	"lane_3": {
-	  "direction": "derecha",
-	  "speed": "2.5",
-	  "patos": {
-		"A": 40,
-		"B": 30,
-		"C": 18,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave1"
+    },
+    "lane_3": {
+      "direction": "derecha",
+      "speed": "2.5",
+      "patos": {
+        "A": 40,
+        "B": 30,
+        "C": 18,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave2"
-	},
-	"lane_4": {
-	  "direction": "izquierda",
-	  "speed": "2.6",
-	  "patos": {
-		"A": 40,
-		"B": 28,
-		"C": 20,
-		"D": 12
-	  },
-	  "especial": [
-		"bomb",
-		"rayo",
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave2"
+    },
+    "lane_4": {
+      "direction": "izquierda",
+      "speed": "2.6",
+      "patos": {
+        "A": 40,
+        "B": 28,
+        "C": 20,
+        "D": 12
+      },
+      "especial": [
+        "bomb",
+        "rayo",
         "snow"
-	  ],
-	  "especial_rate": 5,
-	  "wave_type": "wave1"
-	}
+      ],
+      "especial_rate": 5,
+      "wave_type": "wave1"
+    },
+    "puntaje": 64500
   }
 }

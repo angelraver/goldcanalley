@@ -113,7 +113,7 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	datos_niveles = datos_niveles_tmp
 	var config_nivel = datos_niveles[str(numero_nivel)]
-	puntaje_maximo_nivel = int(config_nivel.get("meta_puntos", 300))
+	puntaje_maximo_nivel = int(config_nivel.get("puntaje", 300))
 	puntaje_nivel = 0
 	actualizar_ui_puntaje()
 	actualizar_ui_maximo()
