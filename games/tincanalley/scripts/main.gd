@@ -123,12 +123,10 @@ func cargar_nivel(numero_nivel: int) -> void:
 		var escena_objetivo: PackedScene = catalogo_objetos.get(clave_tipo, escena_por_defecto)
 		var datos_tipo: Dictionary = valores_objetos.get(clave_tipo, {})
 
-		var factor_ancho: float = float(datos_tipo.get("ancho", 1.0))
-		var factor_alto: float = float(datos_tipo.get("alto", 1.0))
 		var masa_objeto: float = float(datos_tipo.get("masa", 1.0))
 		var puntos_objeto: int = int(datos_tipo.get("pts", 100))
 
-		var escala_vector = Vector3(factor_ancho, factor_alto, factor_ancho)
+		var escala_vector = Vector3(1.0, 1.0, 1.0)
 
 		var paso_celda = Vector3(
 			tamano_celda.x * escala_vector.x,
