@@ -524,8 +524,14 @@ func actualizar_ui_puntaje() -> void:
 func actualizar_ui_maximo() -> void:
 	if ctrl_resultados:
 		ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
+		var hi_guardado = save_manager.obtener_puntaje_nivel(nivel_actual)
+		if ctrl_resultados.has_method("actualizar_hi_score"):
+			ctrl_resultados.actualizar_hi_score(hi_guardado)
 	elif ui_puntaje:
 		ui_puntaje.establecer_maximo(puntaje_maximo_nivel)
+		var hi_guardado = save_manager.obtener_puntaje_nivel(nivel_actual)
+		if ui_puntaje.has_method("establecer_hi_score"):
+			ui_puntaje.establecer_hi_score(hi_guardado)
 
 # Contador de munición del HUD (muestra las balas que quedan en el tambor).
 func actualizar_ui_balas() -> void:

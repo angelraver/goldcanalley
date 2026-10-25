@@ -154,6 +154,9 @@ func cargar_nivel(numero_nivel: int) -> void:
 	# El máximo del nivel es la suma de los puntos de todas las latas:
 	# ya se conoce al terminar el bucle, así que se publica en el HUD.
 	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
+	var hi_guardado = save_manager.obtener_puntaje_nivel(nivel_actual)
+	if ctrl_resultados.has_method("actualizar_hi_score"):
+		ctrl_resultados.actualizar_hi_score(hi_guardado)
 
 	anunciar_nivel(numero_nivel)
 	animar_camara_entrada()

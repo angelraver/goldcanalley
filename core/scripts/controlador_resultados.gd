@@ -90,6 +90,12 @@ func actualizar_maximo(puntaje_max: int) -> void:
 	if ui_puntaje:
 		ui_puntaje.establecer_maximo(puntaje_max)
 
+## Fija el hi-score guardado para este nivel (score previamente guardado).
+func actualizar_hi_score(puntaje_hi: int) -> void:
+	if ui_puntaje:
+		if ui_puntaje.has_method("establecer_hi_score"):
+			ui_puntaje.establecer_hi_score(puntaje_hi)
+
 func actualizar_nivel(nivel: int) -> void:
 	if ui_level_number:
 		ui_level_number.establecer_nivel(nivel)

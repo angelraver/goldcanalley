@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c26yeg0pbuvkx"]
 
-[ext_resource type="FontFile" uid="uid://c88bn63w71r7a" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="1_61x5w"]
+[ext_resource type="FontFile" uid="uid://dgwigp7mj2t6i" path="res://core/assets/fonts/carnivalee_freakshow.ttf" id="1_61x5w"]
 [ext_resource type="Script" uid="uid://dmh5kvbpypbd8" path="res://core/scripts/ui_puntaje.gd" id="2_mbx56"]
 
 [node name="Puntaje" type="Label" unique_id=626633466]
@@ -29,12 +29,41 @@ horizontal_alignment = 1
 
 [node name="Max" type="Label" parent="." unique_id=898559184]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 100.0
-offset_right = 121.0
-offset_bottom = 140.0
+offset_left = 116.0
+offset_top = 58.0
+offset_right = 213.0
+offset_bottom = 98.0
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("1_61x5w")
 theme_override_font_sizes/font_size = 32
 text = "/ 1000"
+horizontal_alignment = 1
+
+[node name="HiScore" type="Control" parent="." unique_id=898559185]
+anchors_preset = 0
+offset_left = 14.0
+offset_top = 99.0
+offset_right = 111.0
+offset_bottom = 139.0
+
+[node name="HiLabel" type="Label" parent="HiScore" unique_id=898559186]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_61x5w")
+theme_override_font_sizes/font_size = 33
+text = "HI"
+horizontal_alignment = 1
+
+[node name="HiNumber" type="Label" parent="HiScore" unique_id=898559187]
+layout_mode = 0
+offset_left = 59.0
+offset_top = -2.0
+offset_right = 128.0
+offset_bottom = 44.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_61x5w")
+theme_override_font_sizes/font_size = 40
+text = "0"
 horizontal_alignment = 1

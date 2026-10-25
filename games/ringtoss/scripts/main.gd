@@ -382,6 +382,9 @@ func cargar_nivel(numero_nivel: int) -> void:
 
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
+	var hi_guardado = save_manager.obtener_puntaje_nivel(nivel_actual)
+	if ctrl_resultados.has_method("actualizar_hi_score"):
+		ctrl_resultados.actualizar_hi_score(hi_guardado)
 	ctrl_resultados.actualizar_nivel(nivel_actual)
 	if ui_level_title:
 		ui_level_title.text = game_manager.obtener_titulo_nivel(str(numero_nivel), "ringtoss")

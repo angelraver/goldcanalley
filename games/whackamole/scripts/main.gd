@@ -178,6 +178,9 @@ func actualizar_ui_puntaje() -> void:
 
 func actualizar_ui_maximo() -> void:
 	ctrl_resultados.actualizar_maximo(puntaje_maximo_nivel)
+	var hi_guardado = save_manager.obtener_puntaje_nivel(nivel_actual)
+	if ctrl_resultados.has_method("actualizar_hi_score"):
+		ctrl_resultados.actualizar_hi_score(hi_guardado)
 
 func mostrar_panel_resultados() -> void:
 	ctrl_resultados.mostrar(nivel_actual, puntaje_nivel, puntaje_maximo_nivel)
