@@ -42,11 +42,15 @@ const ALTURA_CONO_M: float = 0.279
 @export var aim_altura_max: float = 1.6
 
 @export_group("Deteccion de score")
-@export var radio_embocado: float = 0.22
 @export var penetracion_minima_score: float = 0.02
 @export var horizontalidad_minima_score: float = 0.5
-@export var tiempo_maximo_tiro: float = 2.0
-@export var demora_fin_por_objetivo: float = 0.8
+
+@export_group("Fin de nivel")
+# Un aro sigue siendo puntuable mientras no se cierre el nivel, así que el
+# final espera a que todos los aros se detengan (y no a un timeout fijo).
+@export var velocidad_reposo: float = 0.05
+@export var velocidad_angular_reposo: float = 0.25
+@export var tiempo_confirmacion_fin: float = 2.0
 
 @onready var camara: Camera3D = $Camera3D as Camera3D
 @onready var ring_spawn: Marker3D = get_node_or_null("RingSpawn") as Marker3D
@@ -76,8 +80,8 @@ var puntaje_nivel: int = 0
 var puntaje_maximo_nivel: int = 0
 var anillos_totales: int = 3
 var anillos_lanzados: int = 0
-var anillos_resueltos: int = 0
 var esperando_fin_nivel: bool = false
+var _tiempo_todos_reposo: float = 0.0
 
 var drag_start: Vector2 = Vector2.ZERO
 var dragging: bool = false
@@ -263,7 +267,7 @@ func lanzar_aro(swipe: Vector2) -> void:
 	ring_launched = true
 	anillos_lanzados += 1
 	actualizar_ui_aros()
-	ring_lanzado.set_meta("resolved", false)
+	ring_lanzado.set_meta("scored", false)
 	ring_lanzado.set_meta("launch_number", anillos_lanzados)
 	ring_lanzado.global_rotation = Vector3.ZERO
 	ring_lanzado.freeze = false
@@ -275,7 +279,6 @@ func lanzar_aro(swipe: Vector2) -> void:
 	if audio_juego:
 		audio_juego.play_fly()
 
-	_programar_miss(ring_lanzado)
 	await get_tree().create_timer(demora_siguiente_ring).timeout
 	if is_inside_tree() and not esperando_fin_nivel and not ctrl_resultados.esta_mostrado() and anillos_lanzados < anillos_totales:
 		_spawn_ring()
@@ -305,7 +308,7 @@ func _spawn_ring() -> void:
 	current_ring.global_position = _posicion_aim()
 	current_ring.global_rotation = Vector3.ZERO
 	current_ring.scale = Vector3.ONE * escala_ring
-	current_ring.set_meta("resolved", false)
+	current_ring.set_meta("scored", false)
 	anillos_en_escena.append(current_ring)
 	ring_launched = false
 	dragging = false
@@ -318,8 +321,8 @@ func cargar_nivel(numero_nivel: int) -> void:
 	puntaje_nivel = 0
 	puntaje_maximo_nivel = 0
 	anillos_lanzados = 0
-	anillos_resueltos = 0
 	esperando_fin_nivel = false
+	_tiempo_todos_reposo = 0.0
 	nivel_data = {}
 	ctrl_resultados.actualizar_puntaje(0)
 	ctrl_resultados.actualizar_nivel(nivel_actual)
@@ -480,6 +483,7 @@ func _limpiar_escena() -> void:
 	current_ring = null
 	ring_launched = false
 	dragging = false
+	_tiempo_todos_reposo = 0.0
 
 
 func _process(delta: float) -> void:
@@ -492,20 +496,29 @@ func actualizar_ui_aros() -> void:
 		ui_label_aros.text = "x %d" % maxi(0, anillos_totales - anillos_lanzados)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if esperando_fin_nivel or contenedor_conos == null:
 		return
 	if ctrl_resultados and ctrl_resultados.esta_mostrado():
 		return
-	if contenedor_conos.get_child_count() == 0 or anillos_en_escena.is_empty():
+	if anillos_en_escena.is_empty():
 		return
+	if contenedor_conos.get_child_count() > 0:
+		_comprobar_embocados()
+	_actualizar_fin_por_reposo(delta)
+
+
+## Revisa todos los aros ya lanzados que todavía no puntuaron. Un aro puede
+## acomodarse mucho después del tiro, así que se sigue chequeando hasta que
+## termina el nivel (no hay un timeout que lo descarte).
+func _comprobar_embocados() -> bool:
+	var hubo_punto := false
 	for ring in anillos_en_escena:
 		if not is_instance_valid(ring):
 			continue
-		# Solo los aros ya lanzados y aún no resueltos pueden puntuar.
-		if not bool(ring.get_meta("launch_number", 0)):
+		if not int(ring.get_meta("launch_number", 0)):
 			continue
-		if bool(ring.get_meta("resolved", false)):
+		if bool(ring.get_meta("scored", false)):
 			continue
 		if ring.freeze:
 			continue
@@ -514,7 +527,53 @@ func _physics_process(_delta: float) -> void:
 				continue
 			if _es_embocado(ring, cono as Node3D):
 				_cobrar_punto(ring, cono as Node3D)
+				hubo_punto = true
 				break
+	return hubo_punto
+
+
+## Cierra el nivel cuando ya se lanzaron todos los aros y todos están en
+## reposo. El timeout fijo anterior descartaba aros que se acomodaban tarde.
+func _actualizar_fin_por_reposo(delta: float) -> void:
+	if esperando_fin_nivel:
+		return
+	if anillos_lanzados < anillos_totales:
+		_tiempo_todos_reposo = 0.0
+		return
+	for ring in anillos_en_escena:
+		if not is_instance_valid(ring):
+			continue
+		if not int(ring.get_meta("launch_number", 0)):
+			continue
+		# Si se cayó fuera del escenario no puede volver a puntuar ni bloquear
+		# el cierre del nivel.
+		if ring.global_position.y < -2.0:
+			continue
+		if not _aro_en_reposo(ring):
+			_tiempo_todos_reposo = 0.0
+			return
+	_tiempo_todos_reposo += delta
+	if _tiempo_todos_reposo < tiempo_confirmacion_fin:
+		return
+	# Último chequeo: un aro pudo entrar al hueco justo antes de detenerse.
+	if _comprobar_embocados():
+		_tiempo_todos_reposo = 0.0
+		return
+	finalizar_nivel()
+
+
+func _aro_en_reposo(ring: RigidBody3D) -> bool:
+	if ring.sleeping:
+		return true
+	if ring.linear_velocity.length() > velocidad_reposo:
+		return false
+	# El aro se lanza girando sobre su propio eje (Y del toro). Ese giro no
+	# cambia la posición ganadora, así que no debe demorar el cierre del nivel:
+	# solo se mira la componente de giro que lo inclina/voltea.
+	var up: Vector3 = ring.global_transform.basis.orthonormalized().y
+	var giro_eje: Vector3 = up * ring.angular_velocity.dot(up)
+	var giro_volteo: Vector3 = ring.angular_velocity - giro_eje
+	return giro_volteo.length() <= velocidad_angular_reposo
 
 
 # El cono puntúa solo si su eje atraviesa el hueco del aro:
@@ -550,47 +609,29 @@ func _es_embocado(ring: RigidBody3D, cono: Node3D) -> bool:
 	# semigrosor 0.08, a escala_ring) menos el radio del cono a esa altura.
 	# La base del GLB mide 75 (mitad 37.5) y afina hasta la punta; se usa el
 	# lado (apotema), que es el contacto real cara a cara en reposo.
+	# Si el eje del cono cae dentro del hueco, el aro está embocado aunque no
+	# esté perfectamente centrado (antes se recortaba a 0.22 y se perdían
+	# puntos con el cono claramente dentro del aro).
 	var escala_total: float = altura / ALTURA_CONO_M if ALTURA_CONO_M > 0.0 else 1.0
 	var lado_base: float = 37.5 * escala_cono.x * escala_total
 	var radio_cono_h: float = lado_base * (1.0 - clampf(s, 0.0, 1.0))
 	var hueco_mundo: float = (1.2 - 0.08) * escala_ring
-	var permitido: float = minf(radio_embocado, maxf(hueco_mundo - radio_cono_h - 0.015, 0.03))
+	var permitido: float = maxf(hueco_mundo - radio_cono_h - 0.015, 0.03)
 	return radial <= permitido
 
 
 func _cobrar_punto(ring: RigidBody3D, cono: Node3D) -> void:
-	if bool(ring.get_meta("resolved", false)):
+	if bool(ring.get_meta("scored", false)):
 		return
 	if esperando_fin_nivel or ctrl_resultados.esta_mostrado():
 		return
-	ring.set_meta("resolved", true)
+	ring.set_meta("scored", true)
 	var points := int(cono.get_meta("points", 100))
 	puntaje_nivel += points
 	ctrl_resultados.actualizar_puntaje(puntaje_nivel)
 	EfectosUI.crear_efecto_puntos(cono.global_position + Vector3(0.0, float(cono.get_meta("altura_mundo", ALTURA_CONO_M)), 0.0), points)
 	if audio_juego:
 		audio_juego.play_win()
-	anillos_resueltos += 1
-	if puntaje_maximo_nivel > 0 and puntaje_nivel >= puntaje_maximo_nivel:
-		esperando_fin_nivel = true
-		await get_tree().create_timer(demora_fin_por_objetivo).timeout
-		if is_inside_tree():
-			finalizar_nivel()
-	elif anillos_lanzados >= anillos_totales and anillos_resueltos >= anillos_lanzados:
-		finalizar_nivel()
-
-
-# Si el aro no emboca dentro del timeout, el tiro cuenta como fallado.
-func _programar_miss(ring: RigidBody3D) -> void:
-	await get_tree().create_timer(tiempo_maximo_tiro).timeout
-	if not is_instance_valid(ring) or bool(ring.get_meta("resolved", false)):
-		return
-	if esperando_fin_nivel or ctrl_resultados.esta_mostrado():
-		return
-	ring.set_meta("resolved", true)
-	anillos_resueltos += 1
-	if anillos_lanzados >= anillos_totales and anillos_resueltos >= anillos_lanzados:
-		finalizar_nivel()
 
 
 func finalizar_nivel() -> void:
