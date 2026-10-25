@@ -15,6 +15,12 @@ var sfx_enabled: bool = true
 # Música de fondo de las escenas title/options.
 const TITLE_BGM: AudioStream = preload("res://core/assets/sounds/themes/main_theme.ogg")
 
+# Volumen base de la música de los juegos (0.5 lineal ≈ -6 dB).
+const BGM_VOLUME_LINEAR := 0.5
+# main_theme.ogg está masterizado más fuerte que los themes de games; se
+# atenúa para que suene al mismo nivel que la música de games/*/main.tscn.
+const TITLE_BGM_ATENUACION_DB := 1.5
+
 # Un theme por minijuego. Se cargan bajo demanda y se cachean.
 const THEME_PATHS := {
 	"tincanalley": "res://core/assets/sounds/themes/tincanalley.ogg",
@@ -33,8 +39,7 @@ var bgm_player: AudioStreamPlayer
 func _ready() -> void:
 	# 1. Inicializamos el reproductor de música de fondo
 	bgm_player = AudioStreamPlayer.new()
-	# Música al 65% (0 dB = 100%).
-	bgm_player.volume_db = linear_to_db(0.5)
+	bgm_player.volume_db = linear_to_db(BGM_VOLUME_LINEAR)
 	# La pausa del juego (árbol pausado) no debe interrumpir la música.
 	bgm_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(bgm_player)
@@ -95,9 +100,16 @@ func _obtener_theme(id_juego: String) -> AudioStream:
 		_theme_cache[id_juego] = stream
 	return stream
 
+func _volumen_bgm(stream: AudioStream) -> float:
+	var db := linear_to_db(BGM_VOLUME_LINEAR)
+	if stream == TITLE_BGM:
+		db -= TITLE_BGM_ATENUACION_DB
+	return db
+
 func _activar_bgm(stream: AudioStream) -> void:
 	if bgm_player == null or stream == null:
 		return
+	bgm_player.volume_db = _volumen_bgm(stream)
 	if bgm_player.stream != stream:
 		bgm_player.stream = stream
 		bgm_player.stream_paused = false
@@ -122,6 +134,7 @@ func play_bgm(stream: AudioStream) -> void:
 	if stream == null:
 		return
 
+	bgm_player.volume_db = _volumen_bgm(stream)
 	bgm_player.stream = stream
 	bgm_player.stream_paused = false
 	if music_enabled:
