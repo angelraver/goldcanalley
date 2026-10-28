@@ -5,10 +5,14 @@ signal idioma_cambiado(nuevo_idioma: String)
 const RUTA_GAMES_JSON: String = "res://core/data/games.json"
 
 var idioma_actual: String = "es"
+var logged_in_user: String = "not logged"
 var configuracion_juegos: Dictionary = {}
 var textos_locales: Dictionary = {}
 
-func _ready() -> void:
+@onready var play_games_sign_in_client: PlayGamesSignInClient = %PlayGamesSignInClient
+@onready var players_client: PlayGamesPlayersClient = %PlayGamesPlayersClient
+
+func _ready() -> void:	
 	cargar_configuracion_juegos()
 	idioma_actual = save_manager.obtener_idioma_guardado()
 	cargar_todos_los_textos()

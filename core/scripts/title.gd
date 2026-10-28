@@ -30,9 +30,23 @@ static var _intro_logo_realizada := false
 @onready var fondo: TextureRect = $Fondo
 @onready var boton_prizes: TextureButton = $Prizes
 @onready var boton_options: TextureButton = $Options
+@onready var logged_in: Label = $LoggedIn
 
+func _enter_tree() -> void:
+	GodotPlayGameServices.initialize()
 
 func _ready() -> void:
+
+	if not GodotPlayGameServices.android_plugin:
+		logged_in.text = "Plugin Not Found!"
+	else:
+		logged_in.text = "Main Menu"
+		game_manager.play_games_sign_in_client.user_authenticated.connect(_on_authenticated)
+		game_manager.players_client.current_player_loaded.connect(_on_player_loaded)
+		game_manager.players_client.load_current_player(true)
+		game_manager.play_games_sign_in_client.is_authenticated()
+		game_manager.play_games_sign_in_client.sign_in()
+	
 	FondoDinamico.aplicar(fondo)
 	# Música de fondo de title/options: vive en el autoload audio_manager
 	# para que continúe sin cortes al ir y volver de options.
@@ -48,6 +62,20 @@ func _ready() -> void:
 	if era_primera_vez:
 		_animar_intro_botones()
 
+func _on_player_loaded(player: PlayGamesPlayer) -> void:
+	if player == null:
+		logged_in.text = "Not logged in"
+		return
+
+	logged_in.text = "Logged in as: " + player.display_name
+
+func _on_authenticated(authenticated: bool) -> void:
+	if not authenticated:
+		logged_in.text = "Authentication failed"
+		return
+
+	logged_in.text = "Authenticated! Loading player..."
+	game_manager.players_client.load_current_player(true)
 
 ## El logo aparece en la mitad vertical y sube hasta su posición.
 ## Solo la primera vez; al volver a title ya está en su sitio.
@@ -155,7 +183,6 @@ func _on_boton_options_pressed() -> void:
 			audio_manager.play_ok1()
 			get_tree().change_scene_to_file("res://core/scenes/options.tscn")
 	)
-
 
 func _press_feedback(button: Control, callback: Callable) -> void:
 	Input.vibrate_handheld(25)
