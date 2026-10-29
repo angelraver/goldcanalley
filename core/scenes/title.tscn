@@ -72,9 +72,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -307.0
-offset_top = -275.0
+offset_top = -291.0
 offset_right = -20.0
-offset_bottom = -20.0
+offset_bottom = -36.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(65, 65)
@@ -89,15 +89,23 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -267.0
+offset_top = -283.0
 offset_right = 299.0
-offset_bottom = -20.0
+offset_bottom = -36.0
 grow_vertical = 0
 pivot_offset = Vector2(65, 65)
 tooltip_text = "Opciones"
 texture_normal = ExtResource("7_uj4fn")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="LoggedIn" type="Label" parent="." unique_id=2008685666]
+visible = false
+layout_mode = 0
+offset_left = 26.0
+offset_top = 1243.0
+offset_right = 101.0
+offset_bottom = 1266.0
 
 [connection signal="pressed" from="Prizes" to="." method="_on_boton_prizes_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_boton_options_pressed"]
